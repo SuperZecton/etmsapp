@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ltcapp/screens/loginPage.dart';
 import 'package:ltcapp/screens/signupPage.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:ltcapp/utils/diagonal_clipper.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -32,6 +32,8 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  final double _imageHeight = 256.0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,6 +58,7 @@ class _MainPageState extends State<MainPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              _buildImage(),
               _title(),
               SizedBox(
                 height: 80,
@@ -155,6 +158,21 @@ class _MainPageState extends State<MainPage> {
     );
   }
 
+
+  Widget _buildImage(){
+    return ClipPath(
+      clipper: DiagonalClipper(),
+      child: Image.asset(
+        'images/frontimage.jpg',
+        fit: BoxFit.fitHeight,
+        height: _imageHeight,
+        colorBlendMode: BlendMode.srcOver,
+        ///color: new Color.fromARGB(120, 20, 10, 40) 
+    ),
+
+    );
+
+  }
 ///For future use- Don't delete!
   /* Widget _label() {
     return Container(

@@ -135,16 +135,10 @@ class _LoginPageState extends State<LoginPage> {
                     topLeft: Radius.circular(5)),
               ),
               alignment: Alignment.center,
-              child: Container(
-                width:250.0,
-                height: 250.0,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('images/singpasslogo.png'),
-                    fit: BoxFit.fill,
-                  ),
-                ),
+              child: Icon(
+                Icons.accessibility_new_rounded,
+                color: Colors.black,
+
               ),
             ),
           ),
