@@ -58,11 +58,20 @@ class _MainPageState extends State<MainPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              _buildImage(),
-              _title(),
+              _buildLogo(),
               SizedBox(
-                height: 80,
+                height:20,
               ),
+              _firstTitle(),
+              SizedBox(
+                height:10,
+              ),
+              _secondTitle(),
+              SizedBox(
+                height:20,
+              ),
+              _label(),
+
               _loginButton(),
               SizedBox(
                 height: 20,
@@ -126,7 +135,7 @@ class _MainPageState extends State<MainPage> {
           border: Border.all(color: Colors.white, width: 2),
         ),
         child: Text(
-          'Register now',
+          'Registration',
           style: TextStyle(fontSize: 20, color: Colors.white),
         ),
       ),
@@ -134,73 +143,97 @@ class _MainPageState extends State<MainPage> {
   }
 
 
-  Widget _title() {
+
+  Widget _firstTitle(){
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
-          text: 'Welcome',
-          style: GoogleFonts.portLligatSans(
+        text: 'ETMS',
+        style: GoogleFonts.josefinSans(
+          textStyle: Theme.of(context).textTheme.display1,
+          fontSize: 30,
+          fontWeight: FontWeight.w700,
+          color: Colors.white,
+        ),
+      ),
+    );
+
+  }
+  Widget _secondTitle() {
+    return RichText(
+      textAlign: TextAlign.center,
+      text: TextSpan(
+          text: 'Welcome to Light Transport Company',
+          style: GoogleFonts.lato(
             textStyle: Theme.of(context).textTheme.display1,
-            fontSize: 30,
+            fontSize: 25,
             fontWeight: FontWeight.w700,
             color: Colors.white,
           ),
-          children: [
-            TextSpan(
-              text: ' to',
-              style: TextStyle(color: Colors.black, fontSize: 30),
-            ),
-            TextSpan(
-              text: ' LTC',
-              style: TextStyle(color: Colors.white, fontSize: 30),
-            ),
-          ]),
+      ),
     );
   }
 
 
-  Widget _buildImage(){
-    return ClipPath(
-      clipper: DiagonalClipper(),
-      child: Image.asset(
-        'images/frontimage.jpg',
-        fit: BoxFit.fitHeight,
-        height: _imageHeight,
-        colorBlendMode: BlendMode.srcOver,
-        ///color: new Color.fromARGB(120, 20, 10, 40) 
+
+  Widget _buildLogo(){
+    return CircleAvatar(
+      radius: 105,
+      backgroundColor: Color(0xffC0C0C0),
+        child: CircleAvatar(
+        radius: 100,
+          backgroundImage: AssetImage('images/ltclogo.jpg'),
     ),
 
     );
 
+
   }
-///For future use- Don't delete!
-  /* Widget _label() {
+  Widget _buildImage() {
+    return Positioned(
+      top: 0.0,
+      left: 0.0,
+
+      child: new ClipPath(
+        clipper: new DiagonalClipper(),
+        child: new Image.asset(
+          'images/frontimage.jpg',
+          fit: BoxFit.fill,
+          height: _imageHeight,
+          colorBlendMode: BlendMode.srcOver,
+          //color: new Color.fromARGB(120, 20, 10, 40),
+        ),
+      ),
+    );
+  }
+
+   Widget _label() {
     return Container(
-        margin: EdgeInsets.only(top: 40, bottom: 20),
+        margin: EdgeInsets.only(top: 20, bottom: 20),
         child: Column(
           children: <Widget>[
             Text(
-              'Quick login with Touch ID',
-              style: TextStyle(color: Colors.white, fontSize: 17),
+              'Mission First, Safe Always',
+              style: TextStyle(color: Colors.white, fontSize: 20),
             ),
             SizedBox(
               height: 20,
             ),
-            Icon(Icons.fingerprint, size: 90, color: Colors.white),
+
             SizedBox(
               height: 20,
             ),
-            Text(
-              'Touch ID',
+            /*Text(
+              'Stuff here',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 15,
                 decoration: TextDecoration.underline,
               ),
-            ),
+            ),*/
           ],
         ));
   }
 
-  */
+
 }
