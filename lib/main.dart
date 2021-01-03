@@ -3,6 +3,7 @@ import 'package:ltcapp/screens/loginPage.dart';
 import 'package:ltcapp/screens/signupPage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/utils/diagonal_clipper.dart';
+import 'package:ltcapp/screens/homePage.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -13,9 +14,10 @@ class MyApp extends StatelessWidget {
       title: 'LTC App',
       initialRoute: '/',
       routes: {
-        '/': (context) => MainPage(),
+        '/': (context) => WelcomePage(),
         '/login': (context) => LoginPage(),
-        '/signup': (context) => SignUpPage()
+        '/signup': (context) => SignUpPage(),
+        '/home': (context) => HomePage(),
       },
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -24,14 +26,14 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MainPage extends StatefulWidget {
-  MainPage({Key key}) : super(key: key);
+class WelcomePage extends StatefulWidget {
+  WelcomePage({Key key}) : super(key: key);
 
   @override
-  _MainPageState createState() => _MainPageState();
+  _WelcomePageState createState() => _WelcomePageState();
 }
 
-class _MainPageState extends State<MainPage> {
+class _WelcomePageState extends State<WelcomePage> {
   final double _imageHeight = 256.0;
 
   @override

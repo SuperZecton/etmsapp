@@ -122,23 +122,14 @@ class _SignUpPageState extends State<SignUpPage> {
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
-          text: 'Welcome',
-          style: GoogleFonts.portLligatSans(
+          text: 'Welcome to LTC',
+          style: GoogleFonts.roboto(
             textStyle: Theme.of(context).textTheme.display1,
             fontSize: 30,
             fontWeight: FontWeight.w700,
-            color: Color(0xffe46b10),
+            color: Color(0xff000000),
           ),
-          children: [
-            TextSpan(
-              text: ' to',
-              style: TextStyle(color: Colors.black, fontSize: 30),
-            ),
-            TextSpan(
-              text: ' LTC',
-              style: TextStyle(color: Color(0xffe46b10), fontSize: 30),
-            ),
-          ]),
+         ),
     );
   }
 

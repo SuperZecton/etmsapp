@@ -59,7 +59,14 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _submitButton() {
-    return Container(
+    return InkWell(
+      onTap: (){
+        setState(() {
+          Navigator.pushNamed(context, '/home');
+        });
+
+      },
+        child: Container(
       width: MediaQuery.of(context).size.width,
       padding: EdgeInsets.symmetric(vertical: 15),
       alignment: Alignment.center,
@@ -80,7 +87,7 @@ class _LoginPageState extends State<LoginPage> {
         'Login',
         style: TextStyle(fontSize: 20, color: Colors.white),
       ),
-    );
+    ));
   }
 
   Widget _divider() {
@@ -138,7 +145,6 @@ class _LoginPageState extends State<LoginPage> {
               child: Icon(
                 Icons.accessibility_new_rounded,
                 color: Colors.black,
-
               ),
             ),
           ),
@@ -202,30 +208,21 @@ class _LoginPageState extends State<LoginPage> {
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
-          text: 'Welcome',
-          style: GoogleFonts.portLligatSans(
+          text: 'Welcome to LTC',
+          style: GoogleFonts.roboto(
             textStyle: Theme.of(context).textTheme.display1,
             fontSize: 30,
             fontWeight: FontWeight.w700,
-            color: Color(0xffe46b10),
+            color: Color(0xff000000),
           ),
-          children: [
-            TextSpan(
-              text: ' To',
-              style: TextStyle(color: Colors.black, fontSize: 30),
-            ),
-            TextSpan(
-              text: ' LTC',
-              style: TextStyle(color: Color(0xffe46b10), fontSize: 30),
-            ),
-          ]),
+      ),
     );
   }
 
   Widget _emailPasswordWidget() {
     return Column(
       children: <Widget>[
-        _entryField("Email id"),
+        _entryField("Email"),
         _entryField("Password", isPassword: true),
       ],
     );
@@ -236,44 +233,44 @@ class _LoginPageState extends State<LoginPage> {
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
         body: Container(
-          height: height,
-          child: Stack(
-            children: <Widget>[
-              Positioned(
-                  top: -height * .15,
-                  right: -MediaQuery.of(context).size.width * .4,
-                  child: BezierContainer()),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      SizedBox(height: height * .2),
-                      _title(),
-                      SizedBox(height: 50),
-                      _emailPasswordWidget(),
-                      SizedBox(height: 20),
-                      _submitButton(),
-                      Container(
-                        padding: EdgeInsets.symmetric(vertical: 10),
-                        alignment: Alignment.centerRight,
-                        child: Text('Forgot Password ?',
-                            style: TextStyle(
-                                fontSize: 14, fontWeight: FontWeight.w500)),
-                      ),
-                      _divider(),
-                      _singpassButton(),
-                      SizedBox(height: height * .055),
-                      _createAccountLabel(),
-                    ],
+      height: height,
+      child: Stack(
+        children: <Widget>[
+          Positioned(
+              top: -height * .15,
+              right: -MediaQuery.of(context).size.width * .4,
+              child: BezierContainer()),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  SizedBox(height: height * .2),
+                  _title(),
+                  SizedBox(height: 50),
+                  _emailPasswordWidget(),
+                  SizedBox(height: 20),
+                  _submitButton(),
+                  Container(
+                    padding: EdgeInsets.symmetric(vertical: 10),
+                    alignment: Alignment.centerRight,
+                    child: Text('Forgot Password ?',
+                        style: TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.w500)),
                   ),
-                ),
+                  _divider(),
+                  _singpassButton(),
+                  SizedBox(height: height * .055),
+                  _createAccountLabel(),
+                ],
               ),
-              Positioned(top: 40, left: 0, child: _backButton()),
-            ],
+            ),
           ),
-        ));
+          Positioned(top: 40, left: 0, child: _backButton()),
+        ],
+      ),
+    ));
   }
 }
