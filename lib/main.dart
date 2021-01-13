@@ -4,7 +4,20 @@ import 'package:ltcapp/screens/signupPage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/utils/diagonal_clipper.dart';
 import 'package:ltcapp/screens/homePage.dart';
-void main() => runApp(MyApp());
+import 'package:flutter_test/flutter_test.dart';
+import 'package:ltcapp/utils/individual_identity.dart';
+import 'package:ltcapp/utils/database_linker.dart';
+
+//void main() => runApp(MyApp());
+
+DatabaseHandler mainHandle = new DatabaseHandler(dbName: "main_personnel.db");
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  mainHandle.databaseCreation_Optimizer();
+
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
@@ -43,6 +56,7 @@ class _WelcomePageState extends State<WelcomePage> {
         child:Container(
           padding: EdgeInsets.symmetric(horizontal: 20),
           height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(5)),
               boxShadow: <BoxShadow>[
@@ -152,7 +166,7 @@ class _WelcomePageState extends State<WelcomePage> {
       text: TextSpan(
         text: 'ETMS',
         style: GoogleFonts.josefinSans(
-          textStyle: Theme.of(context).textTheme.display1,
+          textStyle: Theme.of(context).textTheme.headline4,
           fontSize: 30,
           fontWeight: FontWeight.w700,
           color: Colors.white,
@@ -167,7 +181,7 @@ class _WelcomePageState extends State<WelcomePage> {
       text: TextSpan(
           text: 'Welcome to Light Transport Company',
           style: GoogleFonts.lato(
-            textStyle: Theme.of(context).textTheme.display1,
+            textStyle: Theme.of(context).textTheme.headline4,
             fontSize: 25,
             fontWeight: FontWeight.w700,
             color: Colors.white,

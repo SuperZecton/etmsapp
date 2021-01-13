@@ -6,14 +6,22 @@
 // tree, read text, and verify that the values of widget properties are correct.
 
 import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:ltcapp/screens/homePage.dart';
+import 'package:ltcapp/screens/loginPage.dart';
+import 'package:ltcapp/screens/signupPage.dart';
+import 'package:ltcapp/utils/individual_identity.dart';
+import 'package:ltcapp/utils/database_linker.dart';
 
 import 'package:ltcapp/main.dart' as app;
 
-void main() => run(_testMain);
+void main() => run(mainApp);
 
-void _testMain() {
+DatabaseHandler mainHandle = new DatabaseHandler(dbName: "main_personnel.db");
+
+void mainApp() {
+  /*
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     app.main();
@@ -33,4 +41,7 @@ void _testMain() {
     expect(find.text('0'), findsNothing);
     expect(find.text('1'), findsOneWidget);
   });
+  */
+  app.MyApp();
+  mainHandle.databaseCreation_Optimizer();
 }
