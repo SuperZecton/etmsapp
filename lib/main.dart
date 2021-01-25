@@ -1,15 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:ltcapp/screens/educationRegPage.dart';
+
 import 'package:ltcapp/screens/loginPage.dart';
 import 'package:ltcapp/screens/signupPage.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:ltcapp/utils/diagonal_clipper.dart';
 import 'package:ltcapp/screens/homePage.dart';
-import 'package:flutter_test/flutter_test.dart';
+import 'package:ltcapp/screens/trainingRegPage.dart';
+import 'package:ltcapp/screens/educationRegPage.dart';
+
 import 'package:ltcapp/utils/individual_identity.dart';
 import 'package:ltcapp/utils/database_linker.dart';
 import 'package:ltcapp/utils/globals.dart';
-
+import 'package:ltcapp/utils/diagonal_clipper.dart';
+import 'package:flutter_test/flutter_test.dart';
 //void main() => runApp(MyApp());
 
 DatabaseHandler mainHandle = new DatabaseHandler(dbName: "main_personnel.db");
@@ -33,6 +37,8 @@ class MyApp extends StatelessWidget {
         '/login': (context) => LoginPage(),
         '/signup': (context) => SignUpPage(),
         '/home': (context) => HomePage(),
+        '/trgreg': (context) => TrainingRegistrationPage(),
+        '/edureg': (context) => EducationRegistrationPage(),
       },
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -184,7 +190,7 @@ class _WelcomePageState extends State<WelcomePage> {
       backgroundColor: Color(0xffC0C0C0),
       child: CircleAvatar(
         radius: 100,
-        backgroundImage: AssetImage('images/ltclogo.jpg'),
+        backgroundImage: AssetImage('images/ltcbluelogo2.jpg'),
       ),
     );
   }
@@ -227,7 +233,7 @@ class _WelcomePageState extends State<WelcomePage> {
                     textStyle: Theme.of(context).textTheme.headline4,
                     fontSize: 12,
                     fontWeight: FontWeight.w400,
-                    color: Color(0xff000000)),
+                    color: Colors.black),
               ),
             ),
           ),

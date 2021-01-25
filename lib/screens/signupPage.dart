@@ -4,6 +4,8 @@ import 'package:ltcapp/main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/utils/globals.dart';
 import 'package:intl/intl.dart';
+import 'package:ltcapp/widgets/registrationTextField.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SignUpPage extends StatefulWidget {
   SignUpPage({Key key, this.title}) : super(key: key);
@@ -15,11 +17,30 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
   final _formKey = GlobalKey<FormState>();
   DateTime selectedDate = DateTime.now();
+  final _nameController = TextEditingController();
+  final _nricController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _addressController = TextEditingController();
+  final _numberController = TextEditingController();
+  final _homeNumberController = TextEditingController();
+
+  final _pesController = TextEditingController();
+  final _raceController = TextEditingController();
+  final _religionController = TextEditingController();
+  final _bloodGroupController = TextEditingController();
+  final _drugAllergyController = TextEditingController();
+  final _foodAllergyController = TextEditingController();
+  final _nokController = TextEditingController();
+  final _nokAddressController = TextEditingController();
+  final _nokNumberController = TextEditingController();
+
+  final _vocationController = TextEditingController();
+  final _stayInOutController = TextEditingController();
+
 
 
   @override
   Widget build(BuildContext context) {
-
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Container(
@@ -60,29 +81,36 @@ class _SignUpPageState extends State<SignUpPage> {
                     height: 50,
                   ),
                   Row(
-
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Expanded(
-                        child: _textField("Full Name", Icons.perm_identity_rounded),
+                        child: RegistrationTextField("Full Name",
+                            Icons.perm_identity_rounded, _nameController),
                       ),
                       Expanded(
-                        child: _textField(
+                        child: RegistrationTextField(
                           "NRIC",
                           Icons.assessment,
+                          _nricController,
                           helperText: "Last 4 characters only",
                           maxLength: 4,
                         ),
                       ),
                     ],
                   ),
-                  _textField("Email Address", Icons.alternate_email),
-                  _textField("Address", Icons.home),
-                  _textField("Contact No.", Icons.phone_android),
-                  _textField("Home No.", Icons.phone),
-                  _dateField("Date of Birth", Icons.date_range),
-                  _dateField("Date of Enlistment", Icons.calendar_today_rounded),
-                  _dateField("Date of ORD.", Icons.calendar_today_outlined),
+                  RegistrationTextField("Email Address", Icons.alternate_email, _emailController),
+                  RegistrationTextField("Address", Icons.home, _addressController),
+                  RegistrationTextField("Contact No.", Icons.phone_android, _numberController),
+                  RegistrationTextField("Home No.", Icons.phone, _homeNumberController),
+                  RegistrationTextField("PES", Icons.fitness_center, _pesController),
+                  RegistrationTextField("Race", Icons.recent_actors, _raceController),
+                  RegistrationTextField("Religion", FontAwesomeIcons.cross, _religionController),
+                  RegistrationTextField("Blood group", Icons.local_hospital, _bloodGroupController),
+                  RegistrationTextField("Drug Allergy", FontAwesomeIcons.tablets, _drugAllergyController),
+                  RegistrationTextField("Food Allergy", FontAwesomeIcons.hamburger, _foodAllergyController),
+                  RegistrationTextField("Next of Kin",FontAwesomeIcons.userFriends, _nokController),
+                  RegistrationTextField("Vocation", FontAwesomeIcons.briefcase, _nokAddressController),
+                  RegistrationTextField("Stay-In/Stay-Out", FontAwesomeIcons.houseUser, _nokNumberController),
 
                   SizedBox(
                     height: 20,
@@ -113,13 +141,14 @@ class _SignUpPageState extends State<SignUpPage> {
       ),
     );
   }
+
   Widget _buildLogo() {
     return CircleAvatar(
       radius: 105,
       backgroundColor: Color(0xffC0C0C0),
       child: CircleAvatar(
         radius: 100,
-        backgroundImage: AssetImage('images/ltclogo.jpg'),
+        backgroundImage: AssetImage('images/ltcbluelogo2.jpg'),
       ),
     );
   }
@@ -137,27 +166,31 @@ class _SignUpPageState extends State<SignUpPage> {
               padding: EdgeInsets.only(left: 0, top: 10, bottom: 10),
               child: Icon(
                 Icons.keyboard_arrow_left,
-                color: Colors.black,
+                color: Colors.white,
                 size: 30,
               ),
             ),
             Text('Back',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500))
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: Colors.white,))
           ],
         ),
       ),
     );
   }
 
-  Widget _textField(String mainText, IconData _icon,
-      {bool isPassword = false, String helperText = "", int maxLength }) {
+
+  /*Widget _DOBdateField( String mainText, IconData _icon,) {
+    String formattedDate = DateFormat('DD-MM-yyyy').format(selectedDate);
+    TextEditingController _controller = TextEditingController(text: formattedDate);
     return Container(
       padding: EdgeInsets.all(10),
       margin: EdgeInsets.symmetric(vertical: 10),
       child: TextFormField(
-        obscureText: isPassword,
+        controller: _controller,
+
+        onTap: () => _selectDate(context),
+        readOnly: true,
         cursorColor: Colors.grey,
-        maxLength: maxLength,
         style: GoogleFonts.roboto(
           textStyle: Theme.of(context).textTheme.headline4,
           fontSize: 13,
@@ -175,10 +208,7 @@ class _SignUpPageState extends State<SignUpPage> {
           labelStyle: TextStyle(
             color: Colors.white,
           ),
-          helperStyle: TextStyle(
-            color: Colors.white,
-          ),
-          helperText: helperText,
+
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(color: Colors.blue),
           ),
@@ -187,9 +217,10 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
-  Widget _dateField( String mainText, IconData _icon,) {
+
+  Widget _DOEdateField( String mainText, IconData _icon,) {
     String formattedDate = DateFormat('DD-MM-yyyy').format(selectedDate);
-    TextEditingController _controller = TextEditingController();
+    TextEditingController _controller = TextEditingController(text: formattedDate);
     return Container(
       padding: EdgeInsets.all(10),
       margin: EdgeInsets.symmetric(vertical: 10),
@@ -198,7 +229,6 @@ class _SignUpPageState extends State<SignUpPage> {
         onTap: () => _selectDate(context),
         readOnly: true,
         cursorColor: Colors.grey,
-        initialValue: formattedDate,
         style: GoogleFonts.roboto(
           textStyle: Theme.of(context).textTheme.headline4,
           fontSize: 13,
@@ -224,6 +254,44 @@ class _SignUpPageState extends State<SignUpPage> {
       ),
     );
   }
+
+
+  Widget _ORDdateField( String mainText, IconData _icon,) {
+    String formattedDate = DateFormat('DD-MM-yyyy').format(selectedDate);
+    TextEditingController _controller = TextEditingController(text: formattedDate);
+    return Container(
+      padding: EdgeInsets.all(10),
+      margin: EdgeInsets.symmetric(vertical: 10),
+      child: TextFormField(
+        controller: _controller,
+        onTap: () => _selectDate(context),
+        readOnly: true,
+        cursorColor: Colors.grey,
+        style: GoogleFonts.roboto(
+          textStyle: Theme.of(context).textTheme.headline4,
+          fontSize: 13,
+          fontWeight: FontWeight.w700,
+          color: Color(0xffffffff),
+        ),
+        decoration: InputDecoration(
+          fillColor: secondaryColor,
+          filled: true,
+          prefixIcon: Icon(
+            _icon,
+            color: Colors.white,
+          ),
+          labelText: mainText,
+          labelStyle: TextStyle(
+            color: Colors.white,
+          ),
+
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.blue),
+          ),
+        ),
+      ),
+    );
+  }*/
 
   Widget _dropdownField(String title, {bool isPassword = false}) {
     return Container(
@@ -257,7 +325,9 @@ class _SignUpPageState extends State<SignUpPage> {
       child: InkWell(
         onTap: () {
           setState(() {
-            //TODO Redirect to next page
+            Navigator.pushNamed(context, '/trgreg');
+
+
           });
         },
         child: Container(
@@ -267,10 +337,9 @@ class _SignUpPageState extends State<SignUpPage> {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(5)),
             color: Colors.blue,
-
           ),
           child: Text(
-            'Registration',
+            'Next page',
             style: TextStyle(fontSize: 20, color: Colors.white),
           ),
         ),
@@ -314,7 +383,7 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 */
 
- Future <void> _selectDate(BuildContext context) async {
+  /*Future <void> _selectDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
       context: context,
       initialDate: selectedDate,
@@ -325,7 +394,6 @@ class _SignUpPageState extends State<SignUpPage> {
       setState(() {
         selectedDate = picked;
       });
-  }
-
+  }*/
 
 }

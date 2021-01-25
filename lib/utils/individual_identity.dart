@@ -38,6 +38,39 @@ enum ClothesSizeType {
   XL
 }
 
+enum BloodType {
+  A_PLUS,
+  A_MINUS,
+  B_PLUS,
+  B_MINUS,
+  AB_PLUS,
+  AB_MINUS,
+  O_PLUS,
+  O_MINUS,
+
+
+}
+
+enum RaceType {
+  Chinese,
+  Malay,
+  Indian,
+  Eurasian,
+  Other,
+
+}
+
+enum ReligionType {
+  Christianity,
+  Buddhism,
+  Islam,
+  Hindu,
+  Other,
+
+}
+
+
+
 /*-----*/
 
 class NOKDetailSet {
@@ -60,8 +93,8 @@ class PersonalDataSet {
   DateTime dateOfORD;
   DateTime dateOfPostIn;
   String pes;
-  String religionType;
-  String raceType;
+  ReligionType religion;
+  RaceType race;
   String bloodGroup;
   String drugAllergy;
   String foodAllergy;
@@ -70,7 +103,7 @@ class PersonalDataSet {
   String stayInstayOut;
   String medicalConditions;
 
-  PersonalDataSet({this.fullName, this.nricLast4Digits, this.fullHomeAddress, this.handphoneNumber, this.homephoneNumber, this.dateOfBirth, this.dateOfEnlistment, this.dateOfORD, this.dateOfPostIn, this.pes, this.religionType, this.raceType, this.bloodGroup, this.drugAllergy, this.foodAllergy, this.nokDetails, this.vocationType, this.stayInstayOut, this.medicalConditions});
+  PersonalDataSet({this.fullName, this.nricLast4Digits, this.fullHomeAddress, this.handphoneNumber, this.homephoneNumber, this.dateOfBirth, this.dateOfEnlistment, this.dateOfORD, this.dateOfPostIn, this.pes, this.religion, this.race, this.bloodGroup, this.drugAllergy, this.foodAllergy, this.nokDetails, this.vocationType, this.stayInstayOut, this.medicalConditions});
 }
 
 class TrainingDataSet {
@@ -118,9 +151,9 @@ class FullDetailSet {
 
   FullDetailSet({this.personalDataSet, this.trainingDataSet, this.educationDataSet, this.miscDataSet, this.loginCredentials});
 
-  void sortPersonalData(String name, String nric, String homeAddress, String hpNo, String homeNo, DateTime dob, DateTime doe, DateTime ord, String pes, String religion, String race, String bldGrp, String drugAlle, String foodAlle, NOKDetailSet nokDetails, VocationType vocType, String stayInOut, String medCond)
+  void sortPersonalData(String name, String nric, String homeAddress, String hpNo, String homeNo, DateTime dob, DateTime doe, DateTime ord, String pes, ReligionType religion, RaceType race, String bldGrp, String drugAlle, String foodAlle, NOKDetailSet nokDetails, VocationType vocType, String stayInOut, String medCond)
   {
-    personalDataSet = new PersonalDataSet(fullName: name, nricLast4Digits: nric, fullHomeAddress: homeAddress, handphoneNumber: hpNo, homephoneNumber: homeNo, dateOfBirth: dob, dateOfEnlistment: doe, dateOfORD: ord, pes: pes, religionType: religion, raceType: race, bloodGroup: bldGrp, drugAllergy: drugAlle, foodAllergy: foodAlle, nokDetails: nokDetails, vocationType: vocType, stayInstayOut: stayInOut, medicalConditions: medCond);
+    personalDataSet = new PersonalDataSet(fullName: name, nricLast4Digits: nric, fullHomeAddress: homeAddress, handphoneNumber: hpNo, homephoneNumber: homeNo, dateOfBirth: dob, dateOfEnlistment: doe, dateOfORD: ord, pes: pes, religion: religion, race: race, bloodGroup: bldGrp, drugAllergy: drugAlle, foodAllergy: foodAlle, nokDetails: nokDetails, vocationType: vocType, stayInstayOut: stayInOut, medicalConditions: medCond);
   }
 
   void sortTrainingData(String trngFrame, String trngPeriod, int attempts, String milLicenseNo, VehLicenseType milLicenseType, DateTime milLicenseDOI)

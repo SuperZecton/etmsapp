@@ -22,6 +22,7 @@ environment:
 
 dependencies:
   google_fonts: ^1.1.1
+  font_awesome_flutter: ^8.11.0
   flutter_staggered_grid_view: ^0.3.3
   intl: ^0.16.1
 
@@ -56,6 +57,8 @@ flutter:
     - images/ltclogo.jpg
     - images/singpasslogo.png
     - images/frontimage.jpg
+    - images/ltcbluelogo.jpg
+    - images/ltcbluelogo2.jpg
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
