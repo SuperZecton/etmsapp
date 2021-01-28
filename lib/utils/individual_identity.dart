@@ -72,7 +72,7 @@ enum ReligionType {
 
 
 /*-----*/
-
+/*
 class NOKDetailSet {
   String fullName;
   String contactNumber;
@@ -80,6 +80,7 @@ class NOKDetailSet {
 
   NOKDetailSet({this.fullName, this.contactNumber, this.fullAddress});
 }
+*/
 
 // Currently split to make things easier to read when all the data comes pouring in
 class PersonalDataSet {
@@ -98,12 +99,16 @@ class PersonalDataSet {
   String bloodGroup;
   String drugAllergy;
   String foodAllergy;
-  NOKDetailSet nokDetails;
+//  NOKDetailSet nokDetails;
+  String NOKDetailfullName;
+  String NOKDetailcontactNumber;
+  String NOKDetailfullAddress;
+
   VocationType vocationType;
   String stayInstayOut;
   String medicalConditions;
 
-  PersonalDataSet({this.fullName, this.nricLast4Digits, this.fullHomeAddress, this.handphoneNumber, this.homephoneNumber, this.dateOfBirth, this.dateOfEnlistment, this.dateOfORD, this.dateOfPostIn, this.pes, this.religion, this.race, this.bloodGroup, this.drugAllergy, this.foodAllergy, this.nokDetails, this.vocationType, this.stayInstayOut, this.medicalConditions});
+  PersonalDataSet({this.fullName, this.nricLast4Digits, this.fullHomeAddress, this.handphoneNumber, this.homephoneNumber, this.dateOfBirth, this.dateOfEnlistment, this.dateOfORD, this.dateOfPostIn, this.pes, this.religion, this.race, this.bloodGroup, this.drugAllergy, this.foodAllergy, this.NOKDetailfullName, this.NOKDetailcontactNumber, this.NOKDetailfullAddress, this.vocationType, this.stayInstayOut, this.medicalConditions});
 }
 
 class TrainingDataSet {
@@ -149,11 +154,9 @@ class FullDetailSet {
 
   LoginCredential loginCredentials;
 
-  FullDetailSet({this.personalDataSet, this.trainingDataSet, this.educationDataSet, this.miscDataSet, this.loginCredentials});
-
-  void sortPersonalData(String name, String nric, String homeAddress, String hpNo, String homeNo, DateTime dob, DateTime doe, DateTime ord, String pes, ReligionType religion, RaceType race, String bldGrp, String drugAlle, String foodAlle, NOKDetailSet nokDetails, VocationType vocType, String stayInOut, String medCond)
+  void sortPersonalData(String name, String nric, String homeAddress, String hpNo, String homeNo, DateTime dob, DateTime doe, DateTime ord, String pes, ReligionType religion, RaceType race, String bldGrp, String drugAlle, String foodAlle, String NOKname, String NOKadd, String NOKnum, VocationType vocType, String stayInOut, String medCond)
   {
-    personalDataSet = new PersonalDataSet(fullName: name, nricLast4Digits: nric, fullHomeAddress: homeAddress, handphoneNumber: hpNo, homephoneNumber: homeNo, dateOfBirth: dob, dateOfEnlistment: doe, dateOfORD: ord, pes: pes, religion: religion, race: race, bloodGroup: bldGrp, drugAllergy: drugAlle, foodAllergy: foodAlle, nokDetails: nokDetails, vocationType: vocType, stayInstayOut: stayInOut, medicalConditions: medCond);
+    personalDataSet = new PersonalDataSet(fullName: name, nricLast4Digits: nric, fullHomeAddress: homeAddress, handphoneNumber: hpNo, homephoneNumber: homeNo, dateOfBirth: dob, dateOfEnlistment: doe, dateOfORD: ord, pes: pes, religion: religion, race: race, bloodGroup: bldGrp, drugAllergy: drugAlle, foodAllergy: foodAlle, NOKDetailfullName: NOKname, NOKDetailcontactNumber: NOKnum, NOKDetailfullAddress: NOKadd, vocationType: vocType, stayInstayOut: stayInOut, medicalConditions: medCond);
   }
 
   void sortTrainingData(String trngFrame, String trngPeriod, int attempts, String milLicenseNo, VehLicenseType milLicenseType, DateTime milLicenseDOI)
@@ -171,4 +174,59 @@ class FullDetailSet {
     miscDataSet = new MiscDataSet(hobbiesInterest: hobbies, civillianLicenseType: civLicenseType, civillianLicenseNumber: civLicenseNo, civillianLicenseDateOfIssue: civLicenseDOI, hasDoneDefensiveCourse: doneDefCourse, hasPersonalVehicle: hasOwnVeh, personalVehiclePlateNumber: personalVehNo, tShirtSize: tShirtSize, no3sizeUpperTorso: upperTorsoSize, no3sizeWaist: waistSize, no3sizeShoes: shoeSize);
   }
 
+  FullDetailSet({this.personalDataSet, this.trainingDataSet, this.educationDataSet, this.miscDataSet, this.loginCredentials});
+
+  Map<String, dynamic> toMap()
+  {
+    return
+      {
+        /* Personal Section */
+        'fullName': personalDataSet.fullName,
+        'nricLast4Digits': personalDataSet.nricLast4Digits,
+        'fullHomeAddress': personalDataSet.fullHomeAddress,
+        'handphoneNumber': personalDataSet.handphoneNumber,
+        'homephoneNumber': personalDataSet.homephoneNumber,
+        'dateOfBirth': personalDataSet.dateOfBirth,
+        'dateOfEnlistment': personalDataSet.dateOfEnlistment,
+        'dateOfORD': personalDataSet.dateOfORD,
+        'dateOfPostIn': personalDataSet.dateOfPostIn,
+        'pesType': personalDataSet.pes,
+        'religion': personalDataSet.religion,
+        'race': personalDataSet.race,
+        'bloodGroup': personalDataSet.bloodGroup,
+        'drugAllergy': personalDataSet.drugAllergy,
+        'foodAllergy': personalDataSet.foodAllergy,
+        'NOKDetailfullName': personalDataSet.NOKDetailfullName,
+        'NOKDetailcontactNumber': personalDataSet.NOKDetailcontactNumber,
+        'NOKDetailfullAddress': personalDataSet.NOKDetailfullAddress,
+        'vocationType': personalDataSet.vocationType,
+        'stayInstayOut': personalDataSet.stayInstayOut,
+        'medicalConditions': personalDataSet.medicalConditions,
+        /* Training Section */
+        'trainingFrame': trainingDataSet.trainingFrame,
+        'trainingPeriod': trainingDataSet.trainingPeriod,
+        'passAttempts': trainingDataSet.passAttempts,
+        'militaryLicenseNo': trainingDataSet.militaryLicenseNo,
+        'militaryLicenseType': trainingDataSet.militaryLicenseType,
+        'milLicenseDateOfIssue': trainingDataSet.milLicenseDateOfIssue,
+        /* Education Section */
+        'educationLevel': educationDataSet.educationLevel,
+        'streamcourseName': educationDataSet.streamcourseName,
+        'ccaOptional': educationDataSet.ccaOptional,
+        /* Others Section */
+        'hobbiesInterest': miscDataSet.hobbiesInterest,
+        'civillianLicenseType': miscDataSet.civillianLicenseType,
+        'civillianLicenseNumber': miscDataSet.civillianLicenseNumber,
+        'civillianLicenseDateOfIssue': miscDataSet.civillianLicenseDateOfIssue,
+        'hasDoneDefensiveCourse': miscDataSet.hasDoneDefensiveCourse,
+        'hasPersonalVehicle': miscDataSet.hasPersonalVehicle,
+        'personalVehiclePlateNumber': miscDataSet.personalVehiclePlateNumber,
+        'tShirtSize': miscDataSet.tShirtSize,
+        'no3sizeUpperTorso': miscDataSet.no3sizeUpperTorso,
+        'no3sizeWaist': miscDataSet.no3sizeWaist,
+        'no3sizeShoes': miscDataSet.no3sizeShoes,
+
+      };
+
+  }
 }

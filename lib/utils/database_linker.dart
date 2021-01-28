@@ -4,6 +4,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'dart:typed_data';
 import 'package:flutter/services.dart';
+import 'individual_identity.dart';
 
 
 class DatabaseHandler {
@@ -44,16 +45,18 @@ class DatabaseHandler {
                     "handphoneNumber INTEGER, "
                     "homephoneNumber INTEGER, "
                     "dateOfBirth DATE, "
-                    "dateOfEnlistment DATE,"
-                    "dateOfORD DATE,"
-                    "dateOfPostIn DATE,"
-                    "pes TINYTEXT,"
-                    "religionType TEXT, "
-                    "raceType TINYTEXT, "
-                    "bloodGroup TINYTEXT, "
+                    "dateOfEnlistment DATE, "
+                    "dateOfORD DATE, "
+                    "dateOfPostIn DATE, "
+                    "pesType TEXT, "
+                    "religion TEXT, "
+                    "race TEXT, "
+                    "bloodGroup TEXT, "
                     "drugAllergy TEXT, "
                     "foodAllergy TEXT, "
-                    "nokDetails SET(nokName, nokNo, nokAddress), "
+                    "NOKDetailfullName TEXT, "
+                    "NOKDetailcontactNumber TEXT, "
+                    "NOKDetailfullAddress TEXT, "
                     "vocationType ENUM(TO, STO, TOA), "
                     "stayInstayOut TEXT, "
                     "medicalConditions TEXT, "
@@ -83,7 +86,7 @@ class DatabaseHandler {
                     ")"
               );
             },
-            version: 1,
+            version: 2,
           );
 
           db = database;
@@ -97,6 +100,18 @@ class DatabaseHandler {
   void openTheDatabase(String path) async
   {
     db = await openDatabase(path);
+  }
+
+  Future<void> insertNewData(FullDetailSet fullDetailSet) async
+  {
+    if (db == null)
+      {
+        return;
+      }
+
+      final Database database = await db;
+
+      await database.insert('LtcPersonnelInfo', fullDetailSet.toMap(), conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
   DatabaseHandler({this.dbName});
