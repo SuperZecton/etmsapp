@@ -4,6 +4,7 @@ import 'package:ltcapp/main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/utils/globals.dart';
 import 'package:intl/intl.dart';
+import 'package:ltcapp/widgets/dropDownTextField.dart';
 import 'package:ltcapp/widgets/registrationTextField.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -102,7 +103,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   RegistrationTextField("Address", Icons.home, _addressController),
                   RegistrationTextField("Contact No.", Icons.phone_android, _numberController),
                   RegistrationTextField("Home No.", Icons.phone, _homeNumberController),
-                  RegistrationTextField("PES", Icons.fitness_center, _pesController),
+                  RegistrationDropDownField(Icons.fitness_center,"PES"),
                   RegistrationTextField("Race", Icons.recent_actors, _raceController),
                   RegistrationTextField("Religion", FontAwesomeIcons.cross, _religionController),
                   RegistrationTextField("Blood group", Icons.local_hospital, _bloodGroupController),

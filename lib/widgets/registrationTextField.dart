@@ -17,7 +17,7 @@ class RegistrationTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(10),
+      padding: EdgeInsets.all(5),
       margin: EdgeInsets.symmetric(vertical: 0, horizontal: 5),
       child: TextFormField(
         controller: controller,

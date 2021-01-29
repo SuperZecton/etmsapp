@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ltcapp/screens/educationRegPage.dart';
+
 
 import 'package:ltcapp/screens/loginPage.dart';
+import 'package:ltcapp/screens/otherInfoRegPage.dart';
 import 'package:ltcapp/screens/signupPage.dart';
 import 'package:ltcapp/screens/homePage.dart';
 import 'package:ltcapp/screens/trainingRegPage.dart';
@@ -14,6 +15,7 @@ import 'package:ltcapp/utils/database_linker.dart';
 import 'package:ltcapp/utils/globals.dart';
 import 'package:ltcapp/utils/diagonal_clipper.dart';
 import 'package:flutter_test/flutter_test.dart';
+
 //void main() => runApp(MyApp());
 
 DatabaseHandler mainHandle = new DatabaseHandler(dbName: "main_personnel.db");
@@ -39,6 +41,7 @@ class MyApp extends StatelessWidget {
         '/home': (context) => HomePage(),
         '/trgreg': (context) => TrainingRegistrationPage(),
         '/edureg': (context) => EducationRegistrationPage(),
+        '/othrreg': (context) => OtherInfoRegistrationPage(),
       },
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -222,7 +225,7 @@ class _WelcomePageState extends State<WelcomePage> {
         children: [
           Icon(
             Icons.check_box,
-            color: Colors.black,
+            color: Colors.white,
           ),
           Expanded(
             child: RichText(
@@ -233,7 +236,7 @@ class _WelcomePageState extends State<WelcomePage> {
                     textStyle: Theme.of(context).textTheme.headline4,
                     fontSize: 12,
                     fontWeight: FontWeight.w400,
-                    color: Colors.black),
+                    color: Colors.white),
               ),
             ),
           ),

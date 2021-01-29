@@ -28,15 +28,15 @@ class DatabaseHandler {
     tempPath = join(dbPath, dbName);
 
     if (!(await databaseExists(tempPath)))
-      {
-        // First time launch SOP
+    {
+      // First time launch SOP
 
-        try {
-          final Future<Database> database = openDatabase(
-            tempPath,
-            onCreate: (dbref, version) {
-              return dbref.execute(
-                // The pain
+      try {
+        final Future<Database> database = openDatabase(
+          tempPath,
+          onCreate: (dbref, version) {
+            return dbref.execute(
+              // The pain
                 "CREATE TABLE LtcPersonnelInfo("
                 // Section 1: Personal Particulars
                     "fullName TEXT PRIMARY KEY, "
@@ -84,15 +84,15 @@ class DatabaseHandler {
                     "no3sizeWaist INTEGER, "
                     "no3sizeShoes INTEGER"
                     ")"
-              );
-            },
-            version: 2,
-          );
+            );
+          },
+          version: 2,
+        );
 
-          db = database;
-        } catch (_){}
+        db = database;
+      } catch (_){}
 
-  }
+    }
 
   }
 
@@ -105,13 +105,13 @@ class DatabaseHandler {
   Future<void> insertNewData(FullDetailSet fullDetailSet) async
   {
     if (db == null)
-      {
-        return;
-      }
+    {
+      return;
+    }
 
-      final Database database = await db;
+    final Database database = await db;
 
-      await database.insert('LtcPersonnelInfo', fullDetailSet.toMap(), conflictAlgorithm: ConflictAlgorithm.replace);
+    await database.insert('LtcPersonnelInfo', fullDetailSet.toMap(), conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
   DatabaseHandler({this.dbName});

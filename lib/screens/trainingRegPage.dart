@@ -6,6 +6,7 @@ import 'package:ltcapp/utils/globals.dart';
 import 'package:intl/intl.dart';
 import 'package:ltcapp/widgets/registrationTextField.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ltcapp/widgets/dropDownTextField.dart';
 
 class TrainingRegistrationPage extends StatefulWidget {
   TrainingRegistrationPage({Key key, this.title}) : super(key: key);
@@ -79,13 +80,18 @@ class _TrainingRegistrationPageState extends State<TrainingRegistrationPage> {
                       Expanded(
                         child: RegistrationTextField(
                           "Training Period",
-                          Icons.assessment,
+                          Icons.date_range,
                           _trgPeriodController,
-                          maxLength: 4,
+
                         ),
                       ),
                     ],
                   ),
+                  RegistrationTextField("No. of attempts", Icons.format_list_numbered_sharp, _noAttemptsController),
+                  RegistrationTextField("Military License", FontAwesomeIcons.idCard, _noAttemptsController),
+                  RegistrationTextField("Military License Type", FontAwesomeIcons.addressCard, _noAttemptsController),
+          
+    
                   SizedBox(
                     height: 20,
                   ),
