@@ -5,6 +5,7 @@ import 'login_data_handler.dart';
 
 /* Thought I had something with this
    I forgot enums were a thing
+   Also enums here SUCK
 class CitizenshipType {
   final singaporeanBorn;
   final singaporeanByReg;
@@ -20,9 +21,23 @@ enum VocationType {
   TOA
 }
 
+extension VocationTypeEx on VocationType{
+  String get name {
+    switch (this)
+    {
+      case VocationType.TO:
+        return 'Transport Operator';
+      case VocationType.STO:
+        return 'Storeman';
+      case VocationType.TOA:
+        return 'Transport Operator Assistant';
+      default:
+        return null;
+    }
+  }
+}
 
 enum VehLicenseType {
-  none,
   class2,
   class2A,
   class3,
@@ -30,12 +45,58 @@ enum VehLicenseType {
   class4
 }
 
+extension VehLicenseTypeEx on VehLicenseType{
+String get name {
+  switch (this)
+  {
+    case VehLicenseType.class2:
+      return 'Class 2';
+    case VehLicenseType.class2A:
+      return 'Class 2A';
+    case VehLicenseType.class3:
+      return 'Class 3';
+    case VehLicenseType.class3A:
+      return 'Class 3A';
+    case VehLicenseType.class4:
+      return 'Class 4';
+    default:
+      return "None";
+  }
+}
+}
+
 enum ClothesSizeType {
   XS,
   S,
   M,
   L,
-  XL
+  XL,
+  XXL,
+  XXXL
+}
+
+extension ClothesSizeTypeEx on ClothesSizeType{
+String get name {
+  switch (this)
+  {
+    case ClothesSizeType.XS:
+      return 'XS';
+    case ClothesSizeType.S:
+      return 'S';
+    case ClothesSizeType.M:
+      return 'M';
+    case ClothesSizeType.L:
+      return 'L';
+    case ClothesSizeType.XL:
+      return 'XL';
+    case ClothesSizeType.XXL:
+      return 'XXL';
+    case ClothesSizeType.XXXL:
+      return 'XXXL';
+    default:
+      return null;
+  }
+}
 }
 
 enum BloodType {
@@ -48,28 +109,85 @@ enum BloodType {
   O_PLUS,
   O_MINUS,
 
+}
 
+extension BloodTypeEx on BloodType{
+String get name {
+  switch (this)
+  {
+    case BloodType.A_MINUS:
+      return 'A-';
+    case BloodType.A_PLUS:
+      return 'A+';
+    case BloodType.B_PLUS:
+      return 'B+';
+    case BloodType.B_MINUS:
+      return 'B-';
+    case BloodType.AB_PLUS:
+      return 'AB+';
+    case BloodType.AB_MINUS:
+      return 'AB-';
+    case BloodType.O_PLUS:
+      return 'O+';
+    case BloodType.O_MINUS:
+      return 'O-';
+    default:
+      return 'Some kind of demon';
+  }
+}
 }
 
 enum RaceType {
   Chinese,
   Malay,
   Indian,
-  Eurasian,
-  Other,
+  Eurasian
 
+}
+
+extension RaceTypeEx on RaceType{
+  String get name {
+    switch (this)
+    {
+      case RaceType.Chinese:
+        return 'Chinese';
+      case RaceType.Malay:
+        return 'Malay';
+      case RaceType.Indian:
+        return 'Indian';
+      case RaceType.Eurasian:
+        return 'Eurasian';
+      default:
+        return 'Other';
+    }
+  }
 }
 
 enum ReligionType {
   Christianity,
   Buddhism,
   Islam,
-  Hindu,
-  Other,
+  Hindu
 
 }
 
-
+extension ReligionTypeEx on ReligionType{
+  String get name {
+    switch (this)
+    {
+      case ReligionType.Christianity:
+        return 'Christian';
+      case ReligionType.Buddhism:
+        return 'Buddhism';
+      case ReligionType.Islam:
+        return 'Islam';
+      case ReligionType.Hindu:
+        return 'Hindu';
+      default:
+        return 'Others';
+    }
+  }
+}
 
 /*-----*/
 /*

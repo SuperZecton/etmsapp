@@ -7,6 +7,8 @@ import 'package:intl/intl.dart';
 import 'package:ltcapp/widgets/dropDownTextField.dart';
 import 'package:ltcapp/widgets/registrationTextField.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ltcapp/main.dart';
+import 'package:ltcapp/utils/individual_identity.dart';
 
 class SignUpPage extends StatefulWidget {
   SignUpPage({Key key, this.title}) : super(key: key);
@@ -38,6 +40,7 @@ class _SignUpPageState extends State<SignUpPage> {
   final _vocationController = TextEditingController();
   final _stayInOutController = TextEditingController();
 
+  final FullDetailSet fdSet = new FullDetailSet();
 
 
   @override
@@ -326,6 +329,7 @@ class _SignUpPageState extends State<SignUpPage> {
       child: InkWell(
         onTap: () {
           setState(() {
+    //        fdSet.sortPersonalData(_nameController.text, _nricController.text, _addressController.text, _numberController.text, _homeNumberController.text, dob, doe, ord, _pesController.text, _religionController.text, _raceController.text, _bloodGroupController.text, _drugAllergyController.text, _foodAllergyController.text, _nokController.text, _nokAddressController.text, _nokNumberController.text, _vocationController.text, _stayInOutController.text, '');
             Navigator.pushNamed(context, '/trgreg');
 
 
