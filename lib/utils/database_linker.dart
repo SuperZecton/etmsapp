@@ -2,9 +2,12 @@ import 'dart:async';
 import 'package:async/async.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
+import 'csv_utils.dart';
+import 'package:csv/csv.dart';
 import 'dart:typed_data';
 import 'package:flutter/services.dart';
 import 'individual_identity.dart';
+import 'dart:io';
 
 
 class DatabaseHandler {
@@ -17,9 +20,9 @@ class DatabaseHandler {
 
   String dbName;
 
-  Future<bool> dataBaseChecker()
+  void setDatabasePath(String path)
   {
-    return databaseExists(dbPath);
+    tempPath = path;
   }
 
   void databaseCreation_Optimizer() async
@@ -27,7 +30,9 @@ class DatabaseHandler {
     dbPath = await getDatabasesPath();
     tempPath = join(dbPath, dbName);
 
-    if (!(await databaseExists(tempPath)))
+    bool result = await databaseExists(tempPath);
+
+    if (result != true)
     {
       // First time launch SOP
 
@@ -93,7 +98,13 @@ class DatabaseHandler {
       } catch (_){}
 
     }
+  else
+    {
+        openTheDatabase(tempPath);
+//        callConversion();
+    }
 
+    dbPath = tempPath;
   }
 
   // Func to call once app opens
@@ -112,6 +123,30 @@ class DatabaseHandler {
     final Database database = await db;
 
     await database.insert('LtcPersonnelInfo', fullDetailSet.toMap(), conflictAlgorithm: ConflictAlgorithm.replace);
+  }
+
+  void callConversion() async
+  {
+    dbPath = await getDatabasesPath();
+    tempPath = join(dbPath, dbName);
+
+    bool result = await databaseExists(tempPath);
+    if (result == true)
+      {
+        // Send database data into a string
+        // Doesn't work right now due to null db data
+        String printo = mapListToCsv(db);
+        // Create file to send db data into
+        File file = await new File(dbPath + '/test.csv');
+        file.create(recursive: true);
+        file.writeAsString(printo);
+        // Spit the data written into file out into console
+        var read = new File(dbPath + '/test.csv').readAsString();
+        String content = await read;
+        print(content);
+
+      }
+
   }
 
   DatabaseHandler({this.dbName});
