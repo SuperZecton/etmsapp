@@ -15,178 +15,84 @@ class CitizenshipType {
 }
 */
 
-enum VocationType {
-  TO,
-  STO,
-  TOA
+class VocationType {
+
+  final value;
+  const VocationType._internal(this.value);
+  toString() => 'VocationType.$value';
+
+  static const TO = const VocationType._internal('Transport Operator');
+  static const STO = const VocationType._internal('Storeman');
+  static const TOA = const VocationType._internal('Transport Operator Assistant');
 }
 
-extension VocationTypeEx on VocationType{
-  String get name {
-    switch (this)
-    {
-      case VocationType.TO:
-        return 'Transport Operator';
-      case VocationType.STO:
-        return 'Storeman';
-      case VocationType.TOA:
-        return 'Transport Operator Assistant';
-      default:
-        return null;
-    }
-  }
+class VehLicenseType {
+
+  final value;
+  const VehLicenseType._internal(this.value);
+  toString() => 'VehLicenseType.$value';
+
+  static const class2 = const VehLicenseType._internal('Class 2');
+  static const class2A = const VehLicenseType._internal('Class 2A');
+  static const class3 = const VehLicenseType._internal('Class 3');
+  static const class3A = const VehLicenseType._internal('Class 3A');
+  static const class4 = const VehLicenseType._internal('Class 4');
 }
 
-enum VehLicenseType {
-  class2,
-  class2A,
-  class3,
-  class3A,
-  class4
+class ClothesSizeType {
+  final value;
+  const ClothesSizeType._internal(this.value);
+  toString() => 'ClothesSizeType.$value';
+
+  static const XS = const ClothesSizeType._internal('XS');
+  static const S = const ClothesSizeType._internal('S');
+  static const M = const ClothesSizeType._internal('M');
+  static const L = const ClothesSizeType._internal('L');
+  static const XL =  const ClothesSizeType._internal('XL');
+  static const XXL = const ClothesSizeType._internal('XXL');
+  static const XXXL = const ClothesSizeType._internal('XXXL');
 }
 
-extension VehLicenseTypeEx on VehLicenseType{
-String get name {
-  switch (this)
-  {
-    case VehLicenseType.class2:
-      return 'Class 2';
-    case VehLicenseType.class2A:
-      return 'Class 2A';
-    case VehLicenseType.class3:
-      return 'Class 3';
-    case VehLicenseType.class3A:
-      return 'Class 3A';
-    case VehLicenseType.class4:
-      return 'Class 4';
-    default:
-      return "None";
-  }
-}
-}
+class BloodType {
+  final value;
+  const BloodType._internal(this.value);
+  toString() => 'BloodType.$value';
 
-enum ClothesSizeType {
-  XS,
-  S,
-  M,
-  L,
-  XL,
-  XXL,
-  XXXL
-}
-
-extension ClothesSizeTypeEx on ClothesSizeType{
-String get name {
-  switch (this)
-  {
-    case ClothesSizeType.XS:
-      return 'XS';
-    case ClothesSizeType.S:
-      return 'S';
-    case ClothesSizeType.M:
-      return 'M';
-    case ClothesSizeType.L:
-      return 'L';
-    case ClothesSizeType.XL:
-      return 'XL';
-    case ClothesSizeType.XXL:
-      return 'XXL';
-    case ClothesSizeType.XXXL:
-      return 'XXXL';
-    default:
-      return null;
-  }
-}
-}
-
-enum BloodType {
-  A_PLUS,
-  A_MINUS,
-  B_PLUS,
-  B_MINUS,
-  AB_PLUS,
-  AB_MINUS,
-  O_PLUS,
-  O_MINUS,
+  static const A_PLUS = const BloodType._internal('A+');
+  static const A_MINUS = const BloodType._internal('A-');
+  static const B_PLUS = const BloodType._internal('B+');
+  static const B_MINUS = const BloodType._internal('B-');
+  static const AB_PLUS = const BloodType._internal('AB+');
+  static const AB_MINUS = const BloodType._internal('AB-');
+  static const O_PLUS = const BloodType._internal('O+');
+  static const O_MINUS = const BloodType._internal('O-');
 
 }
 
-extension BloodTypeEx on BloodType{
-String get name {
-  switch (this)
-  {
-    case BloodType.A_MINUS:
-      return 'A-';
-    case BloodType.A_PLUS:
-      return 'A+';
-    case BloodType.B_PLUS:
-      return 'B+';
-    case BloodType.B_MINUS:
-      return 'B-';
-    case BloodType.AB_PLUS:
-      return 'AB+';
-    case BloodType.AB_MINUS:
-      return 'AB-';
-    case BloodType.O_PLUS:
-      return 'O+';
-    case BloodType.O_MINUS:
-      return 'O-';
-    default:
-      return 'Some kind of demon';
-  }
-}
-}
+class RaceType {
+  final value;
+  const RaceType._internal(this.value);
+  toString() => 'RaceType.$value';
 
-enum RaceType {
-  Chinese,
-  Malay,
-  Indian,
-  Eurasian
+  static const Chinese = const RaceType._internal('Chinese');
+  static const Malay = const RaceType._internal('Malay');
+  static const Indian = const RaceType._internal('Indian');
+  static const Eurasian = const RaceType._internal('Eurasian');
+  static const Others = const RaceType._internal('Others');
 
 }
 
-extension RaceTypeEx on RaceType{
-  String get name {
-    switch (this)
-    {
-      case RaceType.Chinese:
-        return 'Chinese';
-      case RaceType.Malay:
-        return 'Malay';
-      case RaceType.Indian:
-        return 'Indian';
-      case RaceType.Eurasian:
-        return 'Eurasian';
-      default:
-        return 'Other';
-    }
-  }
-}
+class ReligionType {
+  final value;
+  const ReligionType._internal(this.value);
+  toString() => 'ReligionType.$value';
 
-enum ReligionType {
-  Christianity,
-  Buddhism,
-  Islam,
-  Hindu
+  static const Christianity = const ReligionType._internal('Christian');
+  static const Buddhism = const ReligionType._internal('Buddhism');
+  static const Islam = const ReligionType._internal('Islam');
+  static const Hindu = const ReligionType._internal('Hindu');
+  static const Others = const ReligionType._internal('Others');
 
-}
-
-extension ReligionTypeEx on ReligionType{
-  String get name {
-    switch (this)
-    {
-      case ReligionType.Christianity:
-        return 'Christian';
-      case ReligionType.Buddhism:
-        return 'Buddhism';
-      case ReligionType.Islam:
-        return 'Islam';
-      case ReligionType.Hindu:
-        return 'Hindu';
-      default:
-        return 'Others';
-    }
-  }
 }
 
 /*-----*/

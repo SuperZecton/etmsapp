@@ -57,7 +57,7 @@ class DatabaseHandler {
                     "NOKDetailfullName TEXT, "
                     "NOKDetailcontactNumber TEXT, "
                     "NOKDetailfullAddress TEXT, "
-                    "vocationType ENUM(TO, STO, TOA), "
+                    "vocationType TEXT, "
                     "stayInstayOut TEXT, "
                     "medicalConditions TEXT, "
                 // Section 2: Training Information
@@ -65,7 +65,7 @@ class DatabaseHandler {
                     "trainingPeriod TEXT, "
                     "passAttempts INTEGER, "
                     "militaryLicenseNo TEXT, "
-                    "militaryLicenseType ENUM(none, class2, class2A, class3, class3A, class4), "
+                    "militaryLicenseType TEXT, "
                     "milLicenseDateOfIssue DATE, "
                 // Section 3: Education
                     "educationLevel TEXT, "
@@ -73,20 +73,20 @@ class DatabaseHandler {
                     "ccaOptional TEXT, "
                 // Section 4: Other Information
                     "hobbiesInterest TEXT, "
-                    "civillianLicenseType ENUM(none, class2, class2A, class3, class3A, class4), "
+                    "civillianLicenseType TEXT, "
                     "civillianLicenseNumber TEXT, "
                     "civillianLicenseDateOfIssue DATE, "
                     "hasDoneDefensiveCourse BOOL, "
                     "hasPersonalVehicle BOOL, "
                     "personalVehiclePlateNumber TEXT, "
-                    "tShirtSize ENUM(XS, S, M, L, XL), "
+                    "tShirtSize TEXT, "
                     "no3sizeUpperTorso INTEGER, "
                     "no3sizeWaist INTEGER, "
                     "no3sizeShoes INTEGER"
                     ")"
             );
           },
-          version: 2,
+          version: 3,
         );
 
         db = database;
