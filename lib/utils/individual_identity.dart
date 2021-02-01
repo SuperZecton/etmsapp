@@ -19,7 +19,7 @@ class VocationType {
 
   final value;
   const VocationType._internal(this.value);
-  toString() => 'VocationType.$value';
+  toString() => '$value';
 
   static const TO = const VocationType._internal('Transport Operator');
   static const STO = const VocationType._internal('Storeman');
@@ -30,7 +30,7 @@ class VehLicenseType {
 
   final value;
   const VehLicenseType._internal(this.value);
-  toString() => 'VehLicenseType.$value';
+  toString() => '$value';
 
   static const class2 = const VehLicenseType._internal('Class 2');
   static const class2A = const VehLicenseType._internal('Class 2A');
@@ -42,7 +42,7 @@ class VehLicenseType {
 class ClothesSizeType {
   final value;
   const ClothesSizeType._internal(this.value);
-  toString() => 'ClothesSizeType.$value';
+  toString() => '$value';
 
   static const XS = const ClothesSizeType._internal('XS');
   static const S = const ClothesSizeType._internal('S');
@@ -56,7 +56,7 @@ class ClothesSizeType {
 class BloodType {
   final value;
   const BloodType._internal(this.value);
-  toString() => 'BloodType.$value';
+  toString() => '$value';
 
   static const A_PLUS = const BloodType._internal('A+');
   static const A_MINUS = const BloodType._internal('A-');
@@ -72,7 +72,7 @@ class BloodType {
 class RaceType {
   final value;
   const RaceType._internal(this.value);
-  toString() => 'RaceType.$value';
+  toString() => '$value';
 
   static const Chinese = const RaceType._internal('Chinese');
   static const Malay = const RaceType._internal('Malay');
@@ -85,7 +85,7 @@ class RaceType {
 class ReligionType {
   final value;
   const ReligionType._internal(this.value);
-  toString() => 'ReligionType.$value';
+  toString() => '$value';
 
   static const Christianity = const ReligionType._internal('Christian');
   static const Buddhism = const ReligionType._internal('Buddhism');
@@ -93,6 +93,15 @@ class ReligionType {
   static const Hindu = const ReligionType._internal('Hindu');
   static const Others = const ReligionType._internal('Others');
 
+}
+
+class TrueOrFalseType {
+  final value;
+  const TrueOrFalseType._internal(this.value);
+  toString() => '$value';
+
+  static const True = const TrueOrFalseType._internal('Yes');
+  static const False = const TrueOrFalseType._internal('No');
 }
 
 /*-----*/
@@ -113,13 +122,13 @@ class PersonalDataSet {
   String fullHomeAddress;
   String handphoneNumber;
   String homephoneNumber;
-  DateTime dateOfBirth;
-  DateTime dateOfEnlistment;
-  DateTime dateOfORD;
-  DateTime dateOfPostIn;
+  String dateOfBirth;
+  String dateOfEnlistment;
+  String dateOfORD;
+  String dateOfPostIn;
   String pes;
-  ReligionType religion;
-  RaceType race;
+  String religion;
+  String race;
   String bloodGroup;
   String drugAllergy;
   String foodAllergy;
@@ -128,7 +137,7 @@ class PersonalDataSet {
   String NOKDetailcontactNumber;
   String NOKDetailfullAddress;
 
-  VocationType vocationType;
+  String vocationType;
   String stayInstayOut;
   String medicalConditions;
 
@@ -140,8 +149,8 @@ class TrainingDataSet {
   String trainingPeriod;
   int passAttempts;
   String militaryLicenseNo;
-  VehLicenseType militaryLicenseType;
-  DateTime milLicenseDateOfIssue;
+  String militaryLicenseType;
+  String milLicenseDateOfIssue;
 
   TrainingDataSet({this.trainingFrame, this.trainingPeriod, this.passAttempts, this.militaryLicenseNo, this.militaryLicenseType, this.milLicenseDateOfIssue});
 }
@@ -156,13 +165,13 @@ class EducationDataSet {
 
 class MiscDataSet {
   String hobbiesInterest;
-  VehLicenseType civillianLicenseType;
+  String civillianLicenseType;
   String civillianLicenseNumber;
-  DateTime civillianLicenseDateOfIssue;
-  bool hasDoneDefensiveCourse;
-  bool hasPersonalVehicle;
+  String civillianLicenseDateOfIssue;
+  String hasDoneDefensiveCourse;
+  String hasPersonalVehicle;
   String personalVehiclePlateNumber;
-  ClothesSizeType tShirtSize;
+  String tShirtSize;
   int no3sizeUpperTorso;
   int no3sizeWaist;
   int no3sizeShoes;
@@ -178,12 +187,12 @@ class FullDetailSet {
 
   LoginCredential loginCredentials;
 
-  void sortPersonalData(String name, String nric, String homeAddress, String hpNo, String homeNo, DateTime dob, DateTime doe, DateTime ord, String pes, ReligionType religion, RaceType race, String bldGrp, String drugAlle, String foodAlle, String NOKname, String NOKadd, String NOKnum, VocationType vocType, String stayInOut, String medCond)
+  void sortPersonalData(String name, String nric, String homeAddress, String hpNo, String homeNo, String dob, String doe, String ord, String postIn, String pes, String religion, String race, String bldGrp, String drugAlle, String foodAlle, String NOKname, String NOKadd, String NOKnum, String vocType, String stayInOut, String medCond)
   {
-    personalDataSet = new PersonalDataSet(fullName: name, nricLast4Digits: nric, fullHomeAddress: homeAddress, handphoneNumber: hpNo, homephoneNumber: homeNo, dateOfBirth: dob, dateOfEnlistment: doe, dateOfORD: ord, pes: pes, religion: religion, race: race, bloodGroup: bldGrp, drugAllergy: drugAlle, foodAllergy: foodAlle, NOKDetailfullName: NOKname, NOKDetailcontactNumber: NOKnum, NOKDetailfullAddress: NOKadd, vocationType: vocType, stayInstayOut: stayInOut, medicalConditions: medCond);
+    personalDataSet = new PersonalDataSet(fullName: name, nricLast4Digits: nric, fullHomeAddress: homeAddress, handphoneNumber: hpNo, homephoneNumber: homeNo, dateOfBirth: dob, dateOfEnlistment: doe, dateOfORD: ord, dateOfPostIn: postIn, pes: pes, religion: religion, race: race, bloodGroup: bldGrp, drugAllergy: drugAlle, foodAllergy: foodAlle, NOKDetailfullName: NOKname, NOKDetailcontactNumber: NOKnum, NOKDetailfullAddress: NOKadd, vocationType: vocType, stayInstayOut: stayInOut, medicalConditions: medCond);
   }
 
-  void sortTrainingData(String trngFrame, String trngPeriod, int attempts, String milLicenseNo, VehLicenseType milLicenseType, DateTime milLicenseDOI)
+  void sortTrainingData(String trngFrame, String trngPeriod, int attempts, String milLicenseNo, String milLicenseType, String milLicenseDOI)
   {
     trainingDataSet = new TrainingDataSet(trainingFrame: trngFrame, trainingPeriod: trngPeriod, passAttempts: attempts, militaryLicenseNo: milLicenseNo, militaryLicenseType: milLicenseType, milLicenseDateOfIssue: milLicenseDOI);
   }
@@ -193,7 +202,7 @@ class FullDetailSet {
     educationDataSet = new EducationDataSet(educationLevel: eduLvl, streamcourseName: strmCrseName, ccaOptional: cca);
   }
 
-  void sortMiscData(String hobbies, VehLicenseType civLicenseType, String civLicenseNo, DateTime civLicenseDOI, bool doneDefCourse, bool hasOwnVeh, String personalVehNo, ClothesSizeType tShirtSize, int upperTorsoSize, int waistSize, int shoeSize)
+  void sortMiscData(String hobbies, String civLicenseType, String civLicenseNo, String civLicenseDOI, String doneDefCourse, String hasOwnVeh, String personalVehNo, String tShirtSize, int upperTorsoSize, int waistSize, int shoeSize)
   {
     miscDataSet = new MiscDataSet(hobbiesInterest: hobbies, civillianLicenseType: civLicenseType, civillianLicenseNumber: civLicenseNo, civillianLicenseDateOfIssue: civLicenseDOI, hasDoneDefensiveCourse: doneDefCourse, hasPersonalVehicle: hasOwnVeh, personalVehiclePlateNumber: personalVehNo, tShirtSize: tShirtSize, no3sizeUpperTorso: upperTorsoSize, no3sizeWaist: waistSize, no3sizeShoes: shoeSize);
   }

@@ -19,6 +19,7 @@ class DatabaseHandler {
   String tempPath;
 
   String dbName;
+  final String dbTableName = 'LtcPersonnelInfo';
 
   void setDatabasePath(String path)
   {
@@ -32,7 +33,7 @@ class DatabaseHandler {
 
     bool result = await databaseExists(tempPath);
 
-    if (result != true)
+    if (result == true)
     {
       // First time launch SOP
 
@@ -42,7 +43,7 @@ class DatabaseHandler {
           onCreate: (dbref, version) {
             return dbref.execute(
               // The pain
-                "CREATE TABLE LtcPersonnelInfo("
+                "CREATE TABLE $dbTableName("
                 // Section 1: Personal Particulars
                     "fullName TEXT PRIMARY KEY, "
                     "nricLast4Digits TEXT, "
@@ -91,7 +92,7 @@ class DatabaseHandler {
                     ")"
             );
           },
-          version: 3,
+          version: 1,
         );
 
         db = database;
@@ -101,10 +102,11 @@ class DatabaseHandler {
   else
     {
         openTheDatabase(tempPath);
-//        callConversion();
     }
 
-    dbPath = tempPath;
+    buildBaseDBData();
+    // Just to check if table exists
+    callConversion();
   }
 
   // Func to call once app opens
@@ -122,7 +124,7 @@ class DatabaseHandler {
 
     final Database database = await db;
 
-    await database.insert('LtcPersonnelInfo', fullDetailSet.toMap(), conflictAlgorithm: ConflictAlgorithm.replace);
+    await database.insert(dbTableName, fullDetailSet.toMap(), conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
   void callConversion() async
@@ -135,7 +137,9 @@ class DatabaseHandler {
       {
         // Send database data into a string
         // Doesn't work right now due to null db data
-        String printo = mapListToCsv(db);
+        var dbToConvert = await db;
+        var dbConversionUnit = await dbToConvert.query(dbTableName);
+        String printo = mapListToCsv(dbConversionUnit);
         // Create file to send db data into
         File file = await new File(dbPath + '/test.csv');
         file.create(recursive: true);
@@ -147,6 +151,16 @@ class DatabaseHandler {
 
       }
 
+  }
+
+  void buildBaseDBData()
+  {
+    var fDS = new FullDetailSet();
+    fDS.sortPersonalData('Test Man', '281A', '5 Cresent Ave', '84569018', '67889231', DateTime.now().toString(), DateTime.now().toString(), DateTime.now().toString(), DateTime.now().toString(), 'A2', ReligionType.Christianity.toString(), RaceType.Chinese.toString(), BloodType.AB_PLUS.toString(), 'None', 'None', 'Testing Man', '97810781', '5 Cresent Ave', VocationType.TO.toString(), 'Stay In', 'None');
+    fDS.sortTrainingData('Basic Transport', '290121-210221', 1, 'MID46112', VehLicenseType.class3.toString(), DateTime.now().toString());
+    fDS.sortEducationData('Junior College', 'Pure Sciences', 'Soccer Club');
+    fDS.sortMiscData('Drinking, Driving, Drink Driving', VehLicenseType.class2.toString(), 'M2811345', DateTime.now().toString(), TrueOrFalseType.True.toString(), TrueOrFalseType.True.toString(), 'FAG69781023', ClothesSizeType.M.toString(), 70, 100, 9);
+    insertNewData(fDS);
   }
 
   DatabaseHandler({this.dbName});
