@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ltcapp/screens/signupPage.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ltcapp/widgets/bezierContainer.dart';
+import 'package:ltcapp/widgets/topBackButton.dart';
 import 'package:ltcapp/utils/globals.dart';
 
 class LoginPage extends StatefulWidget {
@@ -55,36 +55,13 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
           ),
-          Positioned(top: 40, left: 0, child: _backButton()),
+          Positioned(top: 40, left: 0, child: TopBackButton()),
         ],
       ),
     ));
   }
 
-  Widget _backButton() {
-    return InkWell(
-      onTap: () {
-        Navigator.pop(context);
-      },
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10),
-        child: Row(
-          children: <Widget>[
-            Container(
-              padding: EdgeInsets.only(left: 0, top: 10, bottom: 10),
-              child: Icon(
-                Icons.keyboard_arrow_left,
-                color: Colors.white,
-                size: 30,
-              ),
-            ),
-            Text('Back',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: Colors.white,))
-          ],
-        ),
-      ),
-    );
-  }
+
 
   Widget _entryField(String title, {bool isPassword = false}) {
     return Container(

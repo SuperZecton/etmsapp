@@ -3,9 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:ltcapp/main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/utils/globals.dart';
-import 'package:intl/intl.dart';
 import 'package:ltcapp/widgets/RegistrationFields/registrationTextField.dart';
+import 'package:ltcapp/widgets/circularLogo.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ltcapp/widgets/topBackButton.dart';
 
 class EducationRegistrationPage extends StatefulWidget {
   EducationRegistrationPage({Key key, this.title}) : super(key: key);
@@ -17,8 +18,9 @@ class EducationRegistrationPage extends StatefulWidget {
 class _EducationRegistrationPageState extends State<EducationRegistrationPage> {
   final _formKey = GlobalKey<FormState>();
   DateTime selectedDate = DateTime.now();
-  final _nameController = TextEditingController();
-  final _nricController = TextEditingController();
+  final _educationLevelController = TextEditingController();
+  final _streamCourseController = TextEditingController();
+  final _ccaController = TextEditingController();
 
 
   @override
@@ -44,12 +46,6 @@ class _EducationRegistrationPageState extends State<EducationRegistrationPage> {
         ),
         child: Stack(
           children: <Widget>[
-            /*Positioned(
-              top: -MediaQuery.of(context).size.height * .15,
-              right: -MediaQuery.of(context).size.width * .4,
-              child: BezierContainer(),
-            ),*/ //TODO: Make this nicer
-
             Form(
               key: _formKey,
               child: ListView(
@@ -57,7 +53,7 @@ class _EducationRegistrationPageState extends State<EducationRegistrationPage> {
                   SizedBox(
                     height: 50,
                   ),
-                  _buildLogo(),
+                  CircularLogo(),
                   SizedBox(
                     height: 30,
                   ),
@@ -65,24 +61,13 @@ class _EducationRegistrationPageState extends State<EducationRegistrationPage> {
                   SizedBox(
                     height: 50,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: RegistrationTextField("Full Name",
-                            Icons.perm_identity_rounded, _nameController),
-                      ),
-                      Expanded(
-                        child: RegistrationTextField(
-                          "NRIC",
-                          Icons.assessment,
-                          _nricController,
-                          helperText: "Last 4 characters only",
-                          maxLength: 4,
-                        ),
-                      ),
-                    ],
-                  ),
+                  RegistrationTextField("Education Level",FontAwesomeIcons.school , _educationLevelController),
+                  RegistrationTextField("Stream/Course",FontAwesomeIcons.bookOpen , _streamCourseController),
+                  RegistrationTextField("CCA",FontAwesomeIcons.quidditch , _ccaController),
+
+
+
+
 
 
                   SizedBox(
@@ -93,7 +78,7 @@ class _EducationRegistrationPageState extends State<EducationRegistrationPage> {
                 ],
               ),
             ),
-            Positioned(top: 40, left: 0, child: _backButton()),
+            Positioned(top: 40, left: 0, child: TopBackButton()),
           ],
         ),
       ),
@@ -118,44 +103,7 @@ class _EducationRegistrationPageState extends State<EducationRegistrationPage> {
     );
   }
 
-  Widget _buildLogo() {
-    return CircleAvatar(
-      radius: 105,
-      backgroundColor: Color(0xffC0C0C0),
-      child: CircleAvatar(
-        radius: 100,
-        backgroundImage: AssetImage('images/ltcbluelogo2.jpg'),
-      ),
-    );
-  }
 
-  Widget _backButton() {
-    return InkWell(
-      onTap: () {
-        Navigator.pop(context);
-      },
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10),
-        child: Row(
-          children: <Widget>[
-            Container(
-              padding: EdgeInsets.only(left: 0, top: 10, bottom: 10),
-              child: Icon(
-                Icons.keyboard_arrow_left,
-                color: Colors.white,
-                size: 30,
-              ),
-            ),
-            Text('Back',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.white,))
-          ],
-        ),
-      ),
-    );
-  }
 
 
   Widget _submitButton() {
@@ -164,7 +112,7 @@ class _EducationRegistrationPageState extends State<EducationRegistrationPage> {
       child: InkWell(
         onTap: () {
           setState(() {
-            Navigator.pushNamed(context, 'routeName');
+            Navigator.pushNamed(context, '/othrreg');
           });
         },
         child: Container(

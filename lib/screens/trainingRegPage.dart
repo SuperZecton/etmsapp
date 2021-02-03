@@ -3,12 +3,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:ltcapp/main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/utils/globals.dart';
-import 'package:intl/intl.dart';
 import 'package:ltcapp/widgets/RegistrationFields/dateTextField.dart';
 import 'package:ltcapp/widgets/RegistrationFields/registrationTextField.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:ltcapp/widgets/RegistrationFields/vocationDropDownField.dart';
+import 'package:ltcapp/widgets/circularLogo.dart';
 import 'package:ltcapp/utils/extensions.dart';
+import 'package:ltcapp/widgets/topBackButton.dart';
 class TrainingRegistrationPage extends StatefulWidget {
   TrainingRegistrationPage({Key key, this.title}) : super(key: key);
   final String title;
@@ -59,7 +59,7 @@ class _TrainingRegistrationPageState extends State<TrainingRegistrationPage> {
                   SizedBox(
                     height: 50,
                   ),
-                  _buildLogo(),
+                  CircularLogo(),
                   SizedBox(
                     height: 30,
                   ),
@@ -104,7 +104,7 @@ class _TrainingRegistrationPageState extends State<TrainingRegistrationPage> {
                 ],
               ),
             ),
-            Positioned(top: 40, left: 0, child: _backButton()),
+            Positioned(top: 40, left: 0, child: TopBackButton()),
           ],
         ),
       ),
@@ -126,45 +126,8 @@ class _TrainingRegistrationPageState extends State<TrainingRegistrationPage> {
     );
   }
 
-  Widget _buildLogo() {
-    return CircleAvatar(
-      radius: 105,
-      backgroundColor: Color(0xffC0C0C0),
-      child: CircleAvatar(
-        radius: 100,
-        backgroundImage: AssetImage('images/ltcbluelogo2.jpg'),
-      ),
-    );
-  }
 
-  Widget _backButton() {
-    return InkWell(
-      onTap: () {
-        Navigator.pop(context);
-      },
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10),
-        child: Row(
-          children: <Widget>[
-            Container(
-              padding: EdgeInsets.only(left: 0, top: 10, bottom: 10),
-              child: Icon(
-                Icons.keyboard_arrow_left,
-                color: Colors.white,
-                size: 30,
-              ),
-            ),
-            Text('Back',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.white,
-                ))
-          ],
-        ),
-      ),
-    );
-  }
+
 
   Widget _submitButton() {
     return Container(

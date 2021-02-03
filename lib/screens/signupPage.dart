@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:ltcapp/main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/utils/globals.dart';
-import 'package:intl/intl.dart';
 import 'package:ltcapp/widgets/RegistrationFields/bloodTypeDropDownField.dart';
 import 'package:ltcapp/widgets/RegistrationFields/pesDropDownField.dart';
 import 'package:ltcapp/widgets/RegistrationFields/raceDropDownField.dart';
@@ -12,9 +11,11 @@ import 'package:ltcapp/widgets/RegistrationFields/stayInStayOutDropDownField.dar
 import 'package:ltcapp/widgets/RegistrationFields/vocationDropDownField.dart';
 import 'package:ltcapp/widgets/RegistrationFields/registrationTextField.dart';
 import 'package:ltcapp/widgets/RegistrationFields/dateTextField.dart';
+import 'package:ltcapp/widgets/circularLogo.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ltcapp/utils/individual_identity.dart';
 import 'package:ltcapp/utils/extensions.dart';
+import 'package:ltcapp/widgets/topBackButton.dart';
 
 class SignUpPage extends StatefulWidget {
   SignUpPage({Key key, this.title}) : super(key: key);
@@ -79,7 +80,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   SizedBox(
                     height: 50,
                   ),
-                  _buildLogo(),
+                  CircularLogo(),
                   SizedBox(
                     height: 30,
                   ),
@@ -167,7 +168,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 ],
               ),
             ),
-            Positioned(top: 40, left: 0, child: _backButton()),
+            Positioned(top: 40, left: 0, child: TopBackButton()),
           ],
         ),
       ),
@@ -189,45 +190,6 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
-  Widget _buildLogo() {
-    return CircleAvatar(
-      radius: 105,
-      backgroundColor: Color(0xffC0C0C0),
-      child: CircleAvatar(
-        radius: 100,
-        backgroundImage: AssetImage('images/ltcbluelogo2.jpg'),
-      ),
-    );
-  }
-
-  Widget _backButton() {
-    return InkWell(
-      onTap: () {
-        Navigator.pop(context);
-      },
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10),
-        child: Row(
-          children: <Widget>[
-            Container(
-              padding: EdgeInsets.only(left: 0, top: 10, bottom: 10),
-              child: Icon(
-                Icons.keyboard_arrow_left,
-                color: Colors.white,
-                size: 30,
-              ),
-            ),
-            Text('Back',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.white,
-                ))
-          ],
-        ),
-      ),
-    );
-  }
 
   Widget _submitButton() {
     return Container(
@@ -235,7 +197,11 @@ class _SignUpPageState extends State<SignUpPage> {
       child: InkWell(
         onTap: () {
           setState(() {
-            //        fdSet.sortPersonalData(_nameController.text, _nricController.text, _addressController.text, _numberController.text, _homeNumberController.text, dob, doe, ord, _pesController.text, _religionController.text, _raceController.text, _bloodGroupController.text, _drugAllergyController.text, _foodAllergyController.text, _nokController.text, _nokAddressController.text, _nokNumberController.text, _vocationController.text, _stayInOutController.text, '');
+            if(_formKey.currentState.validate()){
+              _formKey.currentState.save();
+            //          fdSet.sortPersonalData(_nameController.text, _nricController.text, _addressController.text, _numberController.text, _homeNumberController.text, dob, doe, ord, _pesController.text, _religionController.text, _raceController.text, _bloodGroupController.text, _drugAllergyController.text, _foodAllergyController.text, _nokController.text, _nokAddressController.text, _nokNumberController.text, _vocationController.text, _stayInOutController.text, '');
+
+            }
             Navigator.pushNamed(context, '/trgreg');
           });
         },
@@ -365,7 +331,6 @@ class _SignUpPageState extends State<SignUpPage> {
 
 
 */
-
   /* Will try to slot this in somewhere in the future
   Widget _loginAccountLabel() {
     return InkWell(
