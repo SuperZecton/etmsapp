@@ -4,10 +4,11 @@ import 'package:ltcapp/main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/utils/globals.dart';
 import 'package:intl/intl.dart';
+import 'package:ltcapp/widgets/RegistrationFields/dateTextField.dart';
 import 'package:ltcapp/widgets/RegistrationFields/registrationTextField.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ltcapp/widgets/RegistrationFields/vocationDropDownField.dart';
-
+import 'package:ltcapp/utils/extensions.dart';
 class TrainingRegistrationPage extends StatefulWidget {
   TrainingRegistrationPage({Key key, this.title}) : super(key: key);
   final String title;
@@ -18,12 +19,12 @@ class TrainingRegistrationPage extends StatefulWidget {
 
 class _TrainingRegistrationPageState extends State<TrainingRegistrationPage> {
   final _formKey = GlobalKey<FormState>();
-  DateTime selectedDate = DateTime.now();
   final _trgFrameController = TextEditingController();
   final _trgPeriodController = TextEditingController();
   final _noAttemptsController = TextEditingController();
   final _militaryLicenseController = TextEditingController();
   final _militaryLicenseTypeController = TextEditingController();
+  final _doiController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -74,22 +75,25 @@ class _TrainingRegistrationPageState extends State<TrainingRegistrationPage> {
                           "Training Frame",
                           Icons.perm_identity_rounded,
                           _trgFrameController,
+                          validationAction: (String input) => input.isValidFrame() ? null: "Example: 359A",
                           maxLength: 4,
                         ),
                       ),
                       Expanded(
-                        child: RegistrationTextField(
+                        child: DateTextField(
                           "Training Period",
-                          Icons.date_range,
+                          Icons.calendar_today_sharp,
                           _trgPeriodController,
-
                         ),
                       ),
                     ],
                   ),
-                  RegistrationTextField("No. of attempts", Icons.format_list_numbered_sharp, _noAttemptsController),
-                  RegistrationTextField("Military License", FontAwesomeIcons.idCard, _noAttemptsController),
-                  RegistrationTextField("Military License Type", FontAwesomeIcons.addressCard, _noAttemptsController),
+                  RegistrationTextField("No. of attempts", Icons.format_list_numbered_sharp, _noAttemptsController, validationAction: (String input) => input.isValidAttempt() ? null: "Numbers only"),
+                  RegistrationTextField("Military License", FontAwesomeIcons.idCard, _militaryLicenseController),
+                  RegistrationTextField("Military License Type", FontAwesomeIcons.addressCard, _militaryLicenseTypeController),
+                  DateTextField("Date of Issue", Icons.calendar_today_outlined, _doiController),
+
+
           
     
                   SizedBox(

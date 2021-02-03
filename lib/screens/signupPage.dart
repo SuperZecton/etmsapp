@@ -6,11 +6,15 @@ import 'package:ltcapp/utils/globals.dart';
 import 'package:intl/intl.dart';
 import 'package:ltcapp/widgets/RegistrationFields/bloodTypeDropDownField.dart';
 import 'package:ltcapp/widgets/RegistrationFields/pesDropDownField.dart';
+import 'package:ltcapp/widgets/RegistrationFields/raceDropDownField.dart';
+import 'package:ltcapp/widgets/RegistrationFields/religionDropDownField.dart';
+import 'package:ltcapp/widgets/RegistrationFields/stayInStayOutDropDownField.dart';
 import 'package:ltcapp/widgets/RegistrationFields/vocationDropDownField.dart';
 import 'package:ltcapp/widgets/RegistrationFields/registrationTextField.dart';
+import 'package:ltcapp/widgets/RegistrationFields/dateTextField.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:ltcapp/main.dart';
 import 'package:ltcapp/utils/individual_identity.dart';
+import 'package:ltcapp/utils/extensions.dart';
 
 class SignUpPage extends StatefulWidget {
   SignUpPage({Key key, this.title}) : super(key: key);
@@ -21,29 +25,26 @@ class SignUpPage extends StatefulWidget {
 
 class _SignUpPageState extends State<SignUpPage> {
   final _formKey = GlobalKey<FormState>();
-  DateTime selectedDate = DateTime.now();
   final _nameController = TextEditingController();
   final _nricController = TextEditingController();
   final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
   final _addressController = TextEditingController();
   final _numberController = TextEditingController();
   final _homeNumberController = TextEditingController();
 
-  final _pesController = TextEditingController();
-  final _raceController = TextEditingController();
-  final _religionController = TextEditingController();
-  final _bloodGroupController = TextEditingController();
   final _drugAllergyController = TextEditingController();
   final _foodAllergyController = TextEditingController();
   final _nokController = TextEditingController();
   final _nokAddressController = TextEditingController();
   final _nokNumberController = TextEditingController();
 
-  final _vocationController = TextEditingController();
-  final _stayInOutController = TextEditingController();
+  final _medicalConditionController = TextEditingController();
+  final _doeController = TextEditingController();
+  final _dobController = TextEditingController();
+  final _ordController = TextEditingController();
 
   final FullDetailSet fdSet = new FullDetailSet();
-
 
   @override
   Widget build(BuildContext context) {
@@ -90,8 +91,15 @@ class _SignUpPageState extends State<SignUpPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Expanded(
-                        child: RegistrationTextField("Full Name",
-                            Icons.perm_identity_rounded, _nameController),
+                        child: RegistrationTextField(
+                          "Full Name",
+                          Icons.perm_identity_rounded,
+                          _nameController,
+                          validationAction: (String input) => input
+                                  .isValidName()
+                              ? null
+                              : "Name cannot have numbers or special characters",
+                        ),
                       ),
                       Expanded(
                         child: RegistrationTextField(
@@ -99,25 +107,58 @@ class _SignUpPageState extends State<SignUpPage> {
                           Icons.assessment,
                           _nricController,
                           helperText: "Last 4 characters only",
+                          validationAction: (String input) =>
+                              input.isValidNRIC()
+                                  ? null
+                                  : "Enter last 4 characters only",
                           maxLength: 4,
                         ),
                       ),
                     ],
                   ),
-                  RegistrationTextField("Email Address", Icons.alternate_email, _emailController),
-                  RegistrationTextField("Address", Icons.home, _addressController),
-                  RegistrationTextField("Contact No.", Icons.phone_android, _numberController),
-                  RegistrationTextField("Home No.", Icons.phone, _homeNumberController),
+                  RegistrationTextField(
+                    "Email Address",
+                    Icons.alternate_email,
+                    _emailController,
+                    validationAction: (String input) =>
+                        input.isValidEmail() ? null : "Enter valid email",
+                  ),
+                  RegistrationTextField(
+                    "Password",
+                    FontAwesomeIcons.key,
+                    _passwordController,
+                    isPassword: true,
+                  ),
+                  RegistrationTextField(
+                      "Address", Icons.home, _addressController, helperText: "Blk No, Street, Floor, Postal Code"),
+                  RegistrationTextField(
+                      "Contact No.", Icons.phone_android, _numberController, validationAction: (String input) => input.isValidNumber() ? null: "Enter a valid number",),
+                  RegistrationTextField(
+                      "Home No.", Icons.phone, _homeNumberController, validationAction: (String input) => input.isValidNumber() ? null: "Enter a valid number",),
+                  DateTextField("Date of Birth", FontAwesomeIcons.calendar,
+                      _dobController),
+                  DateTextField("Date of Enlistment",
+                      FontAwesomeIcons.calendarAlt, _doeController),
+                  DateTextField(
+                      "ORD Date", Icons.calendar_today, _ordController),
                   PESDropDownField(),
-                  RegistrationTextField("Race", Icons.recent_actors, _raceController),
-                  RegistrationTextField("Religion", FontAwesomeIcons.cross, _religionController),
+                  RaceDropDownField(),
+                  ReligionDropDownField(),
                   BloodTypeDropDownField(),
-                  RegistrationTextField("Drug Allergy", FontAwesomeIcons.tablets, _drugAllergyController),
-                  RegistrationTextField("Food Allergy", FontAwesomeIcons.hamburger, _foodAllergyController),
-                  RegistrationTextField("Next of Kin",FontAwesomeIcons.userFriends, _nokController),
+                  RegistrationTextField("Drug Allergy",
+                      FontAwesomeIcons.tablets, _drugAllergyController),
+                  RegistrationTextField("Food Allergy",
+                      FontAwesomeIcons.hamburger, _foodAllergyController),
+                  RegistrationTextField("Next of Kin",
+                      FontAwesomeIcons.userFriends, _nokController, validationAction: (String input) => input.isValidName() ? null: "Name cannot have numbers or special characters",),
+                  RegistrationTextField("Next of Kin Address",
+                      FontAwesomeIcons.addressBook, _nokAddressController, helperText: "Blk No, Street, Floor, Postal Code",),
+                  RegistrationTextField("Next of Kin Number",
+                      FontAwesomeIcons.phone, _nokNumberController, validationAction: (String input) => input.isValidNumber() ? null: "Enter a valid number",),
                   VocationDropDownField(),
-                  RegistrationTextField("Stay-In/Stay-Out", FontAwesomeIcons.houseUser, _nokNumberController),
-
+                  StayInStayOutDropDownField(),
+                  RegistrationTextField("Medical Condition",
+                      FontAwesomeIcons.hospitalUser, _medicalConditionController),
                   SizedBox(
                     height: 20,
                   ),
@@ -177,14 +218,75 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
             ),
             Text('Back',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: Colors.white,))
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.white,
+                ))
           ],
         ),
       ),
     );
   }
 
+  Widget _submitButton() {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 40),
+      child: InkWell(
+        onTap: () {
+          setState(() {
+            //        fdSet.sortPersonalData(_nameController.text, _nricController.text, _addressController.text, _numberController.text, _homeNumberController.text, dob, doe, ord, _pesController.text, _religionController.text, _raceController.text, _bloodGroupController.text, _drugAllergyController.text, _foodAllergyController.text, _nokController.text, _nokAddressController.text, _nokNumberController.text, _vocationController.text, _stayInOutController.text, '');
+            Navigator.pushNamed(context, '/trgreg');
+          });
+        },
+        child: Container(
+          width: MediaQuery.of(context).size.width * 0.5,
+          padding: EdgeInsets.symmetric(vertical: 13),
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(5)),
+            color: Colors.blue,
+          ),
+          child: Text(
+            'Next page',
+            style: TextStyle(fontSize: 20, color: Colors.white),
+          ),
+        ),
+      ),
+    );
+  }
 
+  /// Will delete all this stuff soon, just using it for debugging
+  /*
+
+  Widget _debugButton() {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 40, vertical:40),
+      child: InkWell(
+        onTap: () {
+          setState(() {
+            print(_doeController.text);
+          });
+        },
+        child: Container(
+          width: MediaQuery.of(context).size.width * 0.5,
+          padding: EdgeInsets.symmetric(vertical: 13),
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(5)),
+            color: Colors.blue,
+          ),
+          child: Text(
+            'Debugging Button',
+            style: TextStyle(fontSize: 20, color: Colors.white),
+          ),
+        ),
+      ),
+    );
+  }
+
+
+   */
   /*Widget _DOBdateField( String mainText, IconData _icon,) {
     String formattedDate = DateFormat('DD-MM-yyyy').format(selectedDate);
     TextEditingController _controller = TextEditingController(text: formattedDate);
@@ -262,97 +364,7 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
 
-  Widget _ORDdateField( String mainText, IconData _icon,) {
-    String formattedDate = DateFormat('DD-MM-yyyy').format(selectedDate);
-    TextEditingController _controller = TextEditingController(text: formattedDate);
-    return Container(
-      padding: EdgeInsets.all(10),
-      margin: EdgeInsets.symmetric(vertical: 10),
-      child: TextFormField(
-        controller: _controller,
-        onTap: () => _selectDate(context),
-        readOnly: true,
-        cursorColor: Colors.grey,
-        style: GoogleFonts.roboto(
-          textStyle: Theme.of(context).textTheme.headline4,
-          fontSize: 13,
-          fontWeight: FontWeight.w700,
-          color: Color(0xffffffff),
-        ),
-        decoration: InputDecoration(
-          fillColor: secondaryColor,
-          filled: true,
-          prefixIcon: Icon(
-            _icon,
-            color: Colors.white,
-          ),
-          labelText: mainText,
-          labelStyle: TextStyle(
-            color: Colors.white,
-          ),
-
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.blue),
-          ),
-        ),
-      ),
-    );
-  }*/
-
-  Widget _dropdownField(String title, {bool isPassword = false}) {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
-      child: TextFormField(
-        cursorColor: Colors.cyan,
-        initialValue: 'Input text',
-        maxLength: 20,
-        obscureText: isPassword,
-        decoration: InputDecoration(
-          icon: Icon(Icons.favorite),
-          labelText: 'Label text',
-          labelStyle: TextStyle(
-            color: Color(0xFF6200EE),
-          ),
-          helperText: 'Helper text',
-          suffixIcon: Icon(
-            Icons.check_circle,
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Color(0xFF6200EE)),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _submitButton() {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 40),
-      child: InkWell(
-        onTap: () {
-          setState(() {
-    //        fdSet.sortPersonalData(_nameController.text, _nricController.text, _addressController.text, _numberController.text, _homeNumberController.text, dob, doe, ord, _pesController.text, _religionController.text, _raceController.text, _bloodGroupController.text, _drugAllergyController.text, _foodAllergyController.text, _nokController.text, _nokAddressController.text, _nokNumberController.text, _vocationController.text, _stayInOutController.text, '');
-            Navigator.pushNamed(context, '/trgreg');
-
-
-          });
-        },
-        child: Container(
-          width: MediaQuery.of(context).size.width * 0.5,
-          padding: EdgeInsets.symmetric(vertical: 13),
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(5)),
-            color: Colors.blue,
-          ),
-          child: Text(
-            'Next page',
-            style: TextStyle(fontSize: 20, color: Colors.white),
-          ),
-        ),
-      ),
-    );
-  }
+*/
 
   /* Will try to slot this in somewhere in the future
   Widget _loginAccountLabel() {
@@ -389,18 +401,5 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 */
-
-  /*Future <void> _selectDate(BuildContext context) async {
-    final DateTime picked = await showDatePicker(
-      context: context,
-      initialDate: selectedDate,
-      firstDate: DateTime(2000),
-      lastDate: DateTime(2025),
-    );
-    if (picked != null && picked != selectedDate)
-      setState(() {
-        selectedDate = picked;
-      });
-  }*/
 
 }

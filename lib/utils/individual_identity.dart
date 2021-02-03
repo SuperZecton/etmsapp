@@ -139,6 +139,18 @@ class BloodType {
   static List<BloodType> getValues() => list;
 }
 
+
+class StayInStayOutType {
+  final value;
+  const StayInStayOutType._internal(this.value);
+  toString() => '$value';
+
+  static const STAYIN = const StayInStayOutType._internal('Stay in');
+  static const STAYOUT = const StayInStayOutType._internal('Stay out');
+  static List<StayInStayOutType> list = [STAYIN, STAYOUT];
+  static List<StayInStayOutType> getValues() => list;
+}
+
 class TrueOrFalseType {
   final value;
   const TrueOrFalseType._internal(this.value);
@@ -149,6 +161,7 @@ class TrueOrFalseType {
   static List<TrueOrFalseType> list = [True,False];
   static List<TrueOrFalseType> getValues() => list;
 }
+
 
 /*-----*/
 /*
