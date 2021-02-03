@@ -4,9 +4,9 @@ import 'package:ltcapp/main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/utils/globals.dart';
 import 'package:intl/intl.dart';
-import 'package:ltcapp/widgets/registrationTextField.dart';
+import 'package:ltcapp/widgets/RegistrationFields/registrationTextField.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:ltcapp/widgets/dropDownTextField.dart';
+import 'package:ltcapp/widgets/RegistrationFields/vocationDropDownField.dart';
 
 class OtherInfoRegistrationPage extends StatefulWidget {
   OtherInfoRegistrationPage({Key key, this.title}) : super(key: key);

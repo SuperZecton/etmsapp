@@ -4,8 +4,10 @@ import 'package:ltcapp/main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/utils/globals.dart';
 import 'package:intl/intl.dart';
-import 'package:ltcapp/widgets/dropDownTextField.dart';
-import 'package:ltcapp/widgets/registrationTextField.dart';
+import 'package:ltcapp/widgets/RegistrationFields/bloodTypeDropDownField.dart';
+import 'package:ltcapp/widgets/RegistrationFields/pesDropDownField.dart';
+import 'package:ltcapp/widgets/RegistrationFields/vocationDropDownField.dart';
+import 'package:ltcapp/widgets/RegistrationFields/registrationTextField.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ltcapp/main.dart';
 import 'package:ltcapp/utils/individual_identity.dart';
@@ -106,14 +108,14 @@ class _SignUpPageState extends State<SignUpPage> {
                   RegistrationTextField("Address", Icons.home, _addressController),
                   RegistrationTextField("Contact No.", Icons.phone_android, _numberController),
                   RegistrationTextField("Home No.", Icons.phone, _homeNumberController),
-                  RegistrationDropDownField(Icons.fitness_center,"PES"),
+                  PESDropDownField(),
                   RegistrationTextField("Race", Icons.recent_actors, _raceController),
                   RegistrationTextField("Religion", FontAwesomeIcons.cross, _religionController),
-                  RegistrationTextField("Blood group", Icons.local_hospital, _bloodGroupController),
+                  BloodTypeDropDownField(),
                   RegistrationTextField("Drug Allergy", FontAwesomeIcons.tablets, _drugAllergyController),
                   RegistrationTextField("Food Allergy", FontAwesomeIcons.hamburger, _foodAllergyController),
                   RegistrationTextField("Next of Kin",FontAwesomeIcons.userFriends, _nokController),
-                  RegistrationTextField("Vocation", FontAwesomeIcons.briefcase, _nokAddressController),
+                  VocationDropDownField(),
                   RegistrationTextField("Stay-In/Stay-Out", FontAwesomeIcons.houseUser, _nokNumberController),
 
                   SizedBox(
