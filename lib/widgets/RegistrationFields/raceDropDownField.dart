@@ -7,6 +7,9 @@ import 'package:ltcapp/utils/individual_identity.dart';
 
 class RaceDropDownField extends StatefulWidget {
   const RaceDropDownField({Key key}) : super(key: key);
+  String getValue(){
+    return _RaceDropDownFieldState()._currentSelectedValue.toString();
+  }
 
   _RaceDropDownFieldState createState() => _RaceDropDownFieldState();
 }

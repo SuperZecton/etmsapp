@@ -8,6 +8,10 @@ import 'package:ltcapp/utils/individual_identity.dart';
 class VocationDropDownField extends StatefulWidget {
   const VocationDropDownField({Key key}) : super(key: key);
 
+  String getValue(){
+    return _VocationDropDownFieldState()._currentSelectedValue.toString();
+  }
+
   _VocationDropDownFieldState createState() => _VocationDropDownFieldState();
 }
 

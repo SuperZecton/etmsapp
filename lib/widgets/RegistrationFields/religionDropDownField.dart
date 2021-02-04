@@ -8,6 +8,10 @@ import 'package:ltcapp/utils/individual_identity.dart';
 class ReligionDropDownField extends StatefulWidget {
   const ReligionDropDownField({Key key}) : super(key: key);
 
+  String getValue(){
+    return _ReligionDropDownFieldState()._currentSelectedValue.toString();
+  }
+
   _ReligionDropDownFieldState createState() => _ReligionDropDownFieldState();
 }
 

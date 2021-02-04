@@ -7,6 +7,10 @@ import 'package:ltcapp/utils/individual_identity.dart';
 class PESDropDownField extends StatefulWidget {
   const PESDropDownField({Key key}) : super(key: key);
 
+  String getValue(){
+    return _PESDropDownFieldState()._currentSelectedValue.toString();
+  }
+
   _PESDropDownFieldState createState() => _PESDropDownFieldState();
 }
 

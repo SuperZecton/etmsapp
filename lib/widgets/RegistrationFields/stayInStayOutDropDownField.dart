@@ -7,6 +7,10 @@ import 'package:ltcapp/utils/individual_identity.dart';
 
 class StayInStayOutDropDownField extends StatefulWidget {
   const StayInStayOutDropDownField({Key key}) : super(key: key);
+  String getValue(){
+    return _StayInStayOutDropDownFieldState()._currentSelectedValue.toString();
+  }
+
 
   _StayInStayOutDropDownFieldState createState() => _StayInStayOutDropDownFieldState();
 }

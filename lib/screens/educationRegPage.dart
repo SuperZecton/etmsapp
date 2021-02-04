@@ -17,7 +17,7 @@ class EducationRegistrationPage extends StatefulWidget {
 
 class _EducationRegistrationPageState extends State<EducationRegistrationPage> {
   final _formKey = GlobalKey<FormState>();
-  DateTime selectedDate = DateTime.now();
+
   final _educationLevelController = TextEditingController();
   final _streamCourseController = TextEditingController();
   final _ccaController = TextEditingController();

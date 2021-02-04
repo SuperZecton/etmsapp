@@ -7,6 +7,9 @@ import 'package:ltcapp/utils/individual_identity.dart';
 
 class BloodTypeDropDownField extends StatefulWidget {
   const BloodTypeDropDownField({Key key}) : super(key: key);
+  String getValue(){
+    return _BloodTypeDropDownFieldState()._currentSelectedValue.toString();
+  }
 
   _BloodTypeDropDownFieldState createState() => _BloodTypeDropDownFieldState();
 }

@@ -44,6 +44,14 @@ class _SignUpPageState extends State<SignUpPage> {
   final _doeController = TextEditingController();
   final _dobController = TextEditingController();
   final _ordController = TextEditingController();
+  final _dopiController = TextEditingController();
+
+  String _pesValue = PESDropDownField().getValue();
+  String _raceValue = RaceDropDownField().getValue();
+  String _religionValue = ReligionDropDownField().getValue();
+  String _bloodTypeValue = BloodTypeDropDownField().getValue();
+  String _stayInStayOutValue = StayInStayOutDropDownField().getValue();
+  String _vocationValue = VocationDropDownField().getValue();
 
   final FullDetailSet fdSet = new FullDetailSet();
 
@@ -131,17 +139,34 @@ class _SignUpPageState extends State<SignUpPage> {
                     isPassword: true,
                   ),
                   RegistrationTextField(
-                      "Address", Icons.home, _addressController, helperText: "Blk No, Street, Floor, Postal Code"),
+                      "Address", Icons.home, _addressController,
+                      helperText: "Blk No, Street, Floor, Postal Code"),
                   RegistrationTextField(
-                      "Contact No.", Icons.phone_android, _numberController, validationAction: (String input) => input.isValidNumber() ? null: "Enter a valid number",),
+                    "Contact No.",
+                    Icons.phone_android,
+                    _numberController,
+                    validationAction: (String input) =>
+                        input.isValidPhoneNumber()
+                            ? null
+                            : "Enter a valid number",
+                  ),
                   RegistrationTextField(
-                      "Home No.", Icons.phone, _homeNumberController, validationAction: (String input) => input.isValidNumber() ? null: "Enter a valid number",),
+                    "Home No.",
+                    Icons.phone,
+                    _homeNumberController,
+                    validationAction: (String input) =>
+                        input.isValidPhoneNumber()
+                            ? null
+                            : "Enter a valid number",
+                  ),
                   DateTextField("Date of Birth", FontAwesomeIcons.calendar,
                       _dobController),
                   DateTextField("Date of Enlistment",
                       FontAwesomeIcons.calendarAlt, _doeController),
                   DateTextField(
                       "ORD Date", Icons.calendar_today, _ordController),
+                  DateTextField("Date of posted in", Icons.calendar_today,
+                      _dopiController),
                   PESDropDownField(),
                   RaceDropDownField(),
                   ReligionDropDownField(),
@@ -150,16 +175,35 @@ class _SignUpPageState extends State<SignUpPage> {
                       FontAwesomeIcons.tablets, _drugAllergyController),
                   RegistrationTextField("Food Allergy",
                       FontAwesomeIcons.hamburger, _foodAllergyController),
-                  RegistrationTextField("Next of Kin",
-                      FontAwesomeIcons.userFriends, _nokController, validationAction: (String input) => input.isValidName() ? null: "Name cannot have numbers or special characters",),
-                  RegistrationTextField("Next of Kin Address",
-                      FontAwesomeIcons.addressBook, _nokAddressController, helperText: "Blk No, Street, Floor, Postal Code",),
-                  RegistrationTextField("Next of Kin Number",
-                      FontAwesomeIcons.phone, _nokNumberController, validationAction: (String input) => input.isValidNumber() ? null: "Enter a valid number",),
+                  RegistrationTextField(
+                    "Next of Kin",
+                    FontAwesomeIcons.userFriends,
+                    _nokController,
+                    validationAction: (String input) => input.isValidName()
+                        ? null
+                        : "Name cannot have numbers or special characters",
+                  ),
+                  RegistrationTextField(
+                    "Next of Kin Address",
+                    FontAwesomeIcons.addressBook,
+                    _nokAddressController,
+                    helperText: "Blk No, Street, Floor, Postal Code",
+                  ),
+                  RegistrationTextField(
+                    "Next of Kin Number",
+                    FontAwesomeIcons.phone,
+                    _nokNumberController,
+                    validationAction: (String input) =>
+                        input.isValidPhoneNumber()
+                            ? null
+                            : "Enter a valid number",
+                  ),
                   VocationDropDownField(),
                   StayInStayOutDropDownField(),
-                  RegistrationTextField("Medical Condition",
-                      FontAwesomeIcons.hospitalUser, _medicalConditionController),
+                  RegistrationTextField(
+                      "Medical Condition",
+                      FontAwesomeIcons.hospitalUser,
+                      _medicalConditionController),
                   SizedBox(
                     height: 20,
                   ),
@@ -190,19 +234,55 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
-
   Widget _submitButton() {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 40),
       child: InkWell(
         onTap: () {
           setState(() {
-            if(_formKey.currentState.validate()){
+            if (_formKey.currentState.validate()) {
               _formKey.currentState.save();
-            //          fdSet.sortPersonalData(_nameController.text, _nricController.text, _addressController.text, _numberController.text, _homeNumberController.text, dob, doe, ord, _pesController.text, _religionController.text, _raceController.text, _bloodGroupController.text, _drugAllergyController.text, _foodAllergyController.text, _nokController.text, _nokAddressController.text, _nokNumberController.text, _vocationController.text, _stayInOutController.text, '');
+              fdSet.sortPersonalData(
+                _nameController.text,
+                _nricController.text,
+                _addressController.text,
+                _numberController.text,
+                _homeNumberController.text,
+                _dobController.text,
+                _doeController.text,
+                _ordController.text,
+                _dopiController.text,
+                _pesValue,
+                _religionValue,
+                _raceValue,
+                _bloodTypeValue,
+                _drugAllergyController.text,
+                _foodAllergyController.text,
+                _nokController.text,
+                _nokNumberController.text,
+                _nokAddressController.text,
+                _vocationValue,
+                _stayInStayOutValue,
+                _medicalConditionController.text,
+              );
+              Navigator.pushNamed(context, '/trgreg');
+            } else {
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: Text("Error"),
+                      content: SingleChildScrollView(
+                        child: ListBody(
+                          children: <Widget>[
+                            Text('Please fill out all the required fields'),
 
+                          ],
+                        ),
+                      ),
+                    );
+                  });
             }
-            Navigator.pushNamed(context, '/trgreg');
           });
         },
         child: Container(
@@ -253,84 +333,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
 
    */
-  /*Widget _DOBdateField( String mainText, IconData _icon,) {
-    String formattedDate = DateFormat('DD-MM-yyyy').format(selectedDate);
-    TextEditingController _controller = TextEditingController(text: formattedDate);
-    return Container(
-      padding: EdgeInsets.all(10),
-      margin: EdgeInsets.symmetric(vertical: 10),
-      child: TextFormField(
-        controller: _controller,
 
-        onTap: () => _selectDate(context),
-        readOnly: true,
-        cursorColor: Colors.grey,
-        style: GoogleFonts.roboto(
-          textStyle: Theme.of(context).textTheme.headline4,
-          fontSize: 13,
-          fontWeight: FontWeight.w700,
-          color: Color(0xffffffff),
-        ),
-        decoration: InputDecoration(
-          fillColor: secondaryColor,
-          filled: true,
-          prefixIcon: Icon(
-            _icon,
-            color: Colors.white,
-          ),
-          labelText: mainText,
-          labelStyle: TextStyle(
-            color: Colors.white,
-          ),
-
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.blue),
-          ),
-        ),
-      ),
-    );
-  }
-
-
-  Widget _DOEdateField( String mainText, IconData _icon,) {
-    String formattedDate = DateFormat('DD-MM-yyyy').format(selectedDate);
-    TextEditingController _controller = TextEditingController(text: formattedDate);
-    return Container(
-      padding: EdgeInsets.all(10),
-      margin: EdgeInsets.symmetric(vertical: 10),
-      child: TextFormField(
-        controller: _controller,
-        onTap: () => _selectDate(context),
-        readOnly: true,
-        cursorColor: Colors.grey,
-        style: GoogleFonts.roboto(
-          textStyle: Theme.of(context).textTheme.headline4,
-          fontSize: 13,
-          fontWeight: FontWeight.w700,
-          color: Color(0xffffffff),
-        ),
-        decoration: InputDecoration(
-          fillColor: secondaryColor,
-          filled: true,
-          prefixIcon: Icon(
-            _icon,
-            color: Colors.white,
-          ),
-          labelText: mainText,
-          labelStyle: TextStyle(
-            color: Colors.white,
-          ),
-
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.blue),
-          ),
-        ),
-      ),
-    );
-  }
-
-
-*/
   /* Will try to slot this in somewhere in the future
   Widget _loginAccountLabel() {
     return InkWell(

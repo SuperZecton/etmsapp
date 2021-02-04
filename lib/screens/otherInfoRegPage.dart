@@ -19,7 +19,7 @@ class OtherInfoRegistrationPage extends StatefulWidget {
 
 class _OtherInfoRegistrationPageState extends State<OtherInfoRegistrationPage> {
   final _formKey = GlobalKey<FormState>();
-  DateTime selectedDate = DateTime.now();
+
   final _hobbiesController = TextEditingController();
   final _civilianLicenseController = TextEditingController();
   final _civilianLicenseNoController = TextEditingController();
@@ -62,6 +62,7 @@ class _OtherInfoRegistrationPageState extends State<OtherInfoRegistrationPage> {
                   SizedBox(
                     height: 50,
                   ),
+
 
                   SizedBox(
                     height: 20,

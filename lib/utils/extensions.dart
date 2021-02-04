@@ -34,8 +34,8 @@ extension FrameValidator on String {
   }
 }
 
-extension NumberValidator on String {
-  bool isValidNumber() {
+extension PhoneNumberValidator on String {
+  bool isValidPhoneNumber() {
     return RegExp(
         r"^([\+]?)([0-9]+)$")
         .hasMatch(this);
