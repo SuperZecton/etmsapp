@@ -1,21 +1,24 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ltcapp/utils/globals.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ltcapp/utils/individual_identity.dart';
 
-class RaceDropDownField extends StatefulWidget {
-  const RaceDropDownField({Key key}) : super(key: key);
-  String getValue(){
-    return _RaceDropDownFieldState()._currentSelectedValue.toString();
-  }
+class DropDownField<T> extends StatelessWidget {
+  const DropDownField(
+      {Key key,
+      this.hint,
+      this.value,
+      this.icon,
+      @required this.values,
+      this.onChanged})
+      : assert(values != null),
+        super(key: key);
 
-  _RaceDropDownFieldState createState() => _RaceDropDownFieldState();
-}
+  final String hint;
+  final T value;
+  final List<T> values;
+  final ValueChanged<T> onChanged;
+  final IconData icon;
 
-class _RaceDropDownFieldState extends State<RaceDropDownField> {
-  RaceType _currentSelectedValue;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,7 +30,7 @@ class _RaceDropDownFieldState extends State<RaceDropDownField> {
           fillColor: secondaryColor,
           filled: true,
           prefixIcon: Icon(
-            Icons.recent_actors,
+            icon,
             color: Colors.white,
           ),
           enabledBorder: OutlineInputBorder(
@@ -35,10 +38,10 @@ class _RaceDropDownFieldState extends State<RaceDropDownField> {
           ),
         ),
         child: DropdownButtonHideUnderline(
-          child: DropdownButton<RaceType>(
-            value: _currentSelectedValue,
+          child: DropdownButton<T>(
+            value: value,
             hint: Text(
-              "Race",
+              hint,
               style: GoogleFonts.roboto(
                 textStyle: Theme.of(context).textTheme.headline4,
                 fontSize: 13,
@@ -47,15 +50,11 @@ class _RaceDropDownFieldState extends State<RaceDropDownField> {
               ),
             ),
             isDense: true,
-            onChanged: (RaceType newValue) {
-              setState(() {
-                _currentSelectedValue = newValue;
-              });
-            },
+            onChanged: onChanged,
             selectedItemBuilder: (BuildContext context) {
-              return RaceType.getValues().map((RaceType raceType) {
+              return values.map((value) {
                 return Text(
-                  raceType.toString(),
+                  value.toString(),
                   style: GoogleFonts.roboto(
                     textStyle: Theme.of(context).textTheme.headline4,
                     fontSize: 13,
@@ -65,11 +64,11 @@ class _RaceDropDownFieldState extends State<RaceDropDownField> {
                 );
               }).toList();
             },
-            items: RaceType.getValues().map((RaceType raceType) {
-              return DropdownMenuItem<RaceType>(
-                value: raceType,
+            items: values.map((value) {
+              return DropdownMenuItem<T>(
+                value: value,
                 child: Text(
-                  raceType.toString(),
+                  value.toString(),
                   style: GoogleFonts.roboto(
                     textStyle: Theme.of(context).textTheme.headline4,
                     fontSize: 15,

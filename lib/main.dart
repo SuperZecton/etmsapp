@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:ltcapp/screens/bookInOutPage.dart';
+import 'package:rxdart/rxdart.dart';
 
 import 'package:ltcapp/screens/loginPage.dart';
 import 'package:ltcapp/screens/otherInfoRegPage.dart';
@@ -42,6 +43,7 @@ class MyApp extends StatelessWidget {
         '/trgreg': (context) => TrainingRegistrationPage(),
         '/edureg': (context) => EducationRegistrationPage(),
         '/othrreg': (context) => OtherInfoRegistrationPage(),
+        '/bookinout': (context) => BookInOutPage(),
       },
       theme: ThemeData(
         primarySwatch: Colors.blue,

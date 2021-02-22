@@ -3,12 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:ltcapp/main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/utils/globals.dart';
-import 'package:ltcapp/widgets/RegistrationFields/bloodTypeDropDownField.dart';
-import 'package:ltcapp/widgets/RegistrationFields/pesDropDownField.dart';
-import 'package:ltcapp/widgets/RegistrationFields/raceDropDownField.dart';
-import 'package:ltcapp/widgets/RegistrationFields/religionDropDownField.dart';
-import 'package:ltcapp/widgets/RegistrationFields/stayInStayOutDropDownField.dart';
-import 'package:ltcapp/widgets/RegistrationFields/vocationDropDownField.dart';
+
 import 'package:ltcapp/widgets/RegistrationFields/registrationTextField.dart';
 import 'package:ltcapp/widgets/RegistrationFields/dateTextField.dart';
 import 'package:ltcapp/widgets/circularLogo.dart';
@@ -16,6 +11,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ltcapp/utils/individual_identity.dart';
 import 'package:ltcapp/utils/extensions.dart';
 import 'package:ltcapp/widgets/topBackButton.dart';
+import 'package:ltcapp/widgets/RegistrationFields/dropDownField.dart';
 
 class SignUpPage extends StatefulWidget {
   SignUpPage({Key key, this.title}) : super(key: key);
@@ -46,12 +42,12 @@ class _SignUpPageState extends State<SignUpPage> {
   final _ordController = TextEditingController();
   final _dopiController = TextEditingController();
 
-  String _pesValue = PESDropDownField().getValue();
-  String _raceValue = RaceDropDownField().getValue();
-  String _religionValue = ReligionDropDownField().getValue();
-  String _bloodTypeValue = BloodTypeDropDownField().getValue();
-  String _stayInStayOutValue = StayInStayOutDropDownField().getValue();
-  String _vocationValue = VocationDropDownField().getValue();
+  PESType _currentPESValue;
+  RaceType _currentRaceValue;
+  ReligionType _currentReligionValue;
+  BloodType _currentBloodValue;
+  VocationType _currentVocationValue;
+  StayInStayOutType _currentStayInStayOutValue;
 
   final FullDetailSet fdSet = new FullDetailSet();
 
@@ -167,10 +163,30 @@ class _SignUpPageState extends State<SignUpPage> {
                       "ORD Date", Icons.calendar_today, _ordController),
                   DateTextField("Date of posted in", Icons.calendar_today,
                       _dopiController),
-                  PESDropDownField(),
-                  RaceDropDownField(),
-                  ReligionDropDownField(),
-                  BloodTypeDropDownField(),
+                  DropDownField<PESType>(
+                      hint: "PES",
+                      values: PESType.getValues(),
+                      value: _currentPESValue,
+                      icon: Icons.fitness_center,
+                      onChanged: (value) => _currentPESValue = value),
+                  DropDownField<RaceType>(
+                      hint: "Race",
+                      values: RaceType.getValues(),
+                      value: _currentRaceValue,
+                      icon: Icons.recent_actors,
+                      onChanged: (value) => _currentRaceValue = value),
+                  DropDownField<ReligionType>(
+                      hint: "Religion",
+                      values: ReligionType.getValues(),
+                      value: _currentReligionValue,
+                      icon: FontAwesomeIcons.syringe,
+                      onChanged: (value) => _currentReligionValue = value),
+                  DropDownField<BloodType>(
+                      hint: "Blood Group",
+                      values: BloodType.getValues(),
+                      value: _currentBloodValue,
+                      icon: Icons.fitness_center,
+                      onChanged: (value) => _currentBloodValue = value),
                   RegistrationTextField("Drug Allergy",
                       FontAwesomeIcons.tablets, _drugAllergyController),
                   RegistrationTextField("Food Allergy",
@@ -198,8 +214,18 @@ class _SignUpPageState extends State<SignUpPage> {
                             ? null
                             : "Enter a valid number",
                   ),
-                  VocationDropDownField(),
-                  StayInStayOutDropDownField(),
+                  DropDownField<StayInStayOutType>(
+                      hint: "Stay in/ Stay out",
+                      values: StayInStayOutType.getValues(),
+                      value: _currentStayInStayOutValue,
+                      icon: FontAwesomeIcons.houseUser,
+                      onChanged: (value) => _currentStayInStayOutValue = value),
+                  DropDownField<VocationType>(
+                      hint: "Vocation",
+                      values: VocationType.getValues(),
+                      value: _currentVocationValue,
+                      icon: FontAwesomeIcons.briefcase,
+                      onChanged: (value) => _currentVocationValue = value),
                   RegistrationTextField(
                       "Medical Condition",
                       FontAwesomeIcons.hospitalUser,
@@ -252,17 +278,17 @@ class _SignUpPageState extends State<SignUpPage> {
                 _doeController.text,
                 _ordController.text,
                 _dopiController.text,
-                _pesValue,
-                _religionValue,
-                _raceValue,
-                _bloodTypeValue,
+                _currentPESValue.toString(),
+                _currentReligionValue.toString(),
+                _currentRaceValue.toString(),
+                _currentBloodValue.toString(),
                 _drugAllergyController.text,
                 _foodAllergyController.text,
                 _nokController.text,
                 _nokNumberController.text,
                 _nokAddressController.text,
-                _vocationValue,
-                _stayInStayOutValue,
+                _currentVocationValue.toString(),
+                _currentStayInStayOutValue.toString(),
                 _medicalConditionController.text,
               );
               Navigator.pushNamed(context, '/trgreg');
@@ -276,7 +302,6 @@ class _SignUpPageState extends State<SignUpPage> {
                         child: ListBody(
                           children: <Widget>[
                             Text('Please fill out all the required fields'),
-
                           ],
                         ),
                       ),
