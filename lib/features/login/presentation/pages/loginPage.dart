@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:ltcapp/screens/signupPage.dart';
+import 'package:ltcapp/features/registration/presentation/pages/signupPage.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ltcapp/widgets/topBackButton.dart';
-import 'package:ltcapp/utils/globals.dart';
+import 'package:ltcapp/core/widgets/widgets.dart';
+import 'package:ltcapp/core/config/globals.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key, this.title}) : super(key: key);

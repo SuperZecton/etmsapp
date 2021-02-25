@@ -2,16 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:ltcapp/main.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ltcapp/utils/globals.dart';
+import 'package:ltcapp/core/config/globals.dart';
 
-import 'package:ltcapp/widgets/RegistrationFields/registrationTextField.dart';
-import 'package:ltcapp/widgets/RegistrationFields/dateTextField.dart';
-import 'package:ltcapp/widgets/circularLogo.dart';
+import 'package:ltcapp/features/registration/presentation/widgets/widgets.dart';
+
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ltcapp/utils/individual_identity.dart';
 import 'package:ltcapp/utils/extensions.dart';
-import 'package:ltcapp/widgets/topBackButton.dart';
-import 'package:ltcapp/widgets/RegistrationFields/dropDownField.dart';
+import 'package:ltcapp/core/widgets/widgets.dart';
+
 
 class SignUpPage extends StatefulWidget {
   SignUpPage({Key key, this.title}) : super(key: key);

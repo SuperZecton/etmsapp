@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:ltcapp/utils/globals.dart';
+import 'package:ltcapp/core/config/globals.dart';
 
 class BookInOutPage extends StatefulWidget {
   @override

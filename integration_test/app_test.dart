@@ -8,9 +8,8 @@
 import 'package:flutter/material.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:ltcapp/screens/homePage.dart';
-import 'package:ltcapp/screens/loginPage.dart';
-import 'package:ltcapp/screens/signupPage.dart';
+
+import 'package:ltcapp/features/registration/presentation/pages/signupPage.dart';
 import 'package:ltcapp/utils/individual_identity.dart';
 import 'package:ltcapp/utils/database_linker.dart';
 

@@ -2,33 +2,32 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:ltcapp/main.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ltcapp/utils/globals.dart';
-import 'package:ltcapp/widgets/RegistrationFields/registrationTextField.dart';
-import 'package:ltcapp/widgets/circularLogo.dart';
-import 'package:ltcapp/widgets/topBackButton.dart';
+import 'package:ltcapp/core/config/globals.dart';
+import 'package:ltcapp/features/registration/presentation/widgets/widgets.dart';
+import 'package:ltcapp/core/widgets/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-
-class OtherInfoRegistrationPage extends StatefulWidget {
-  OtherInfoRegistrationPage({Key key, this.title}) : super(key: key);
+class EducationRegistrationPage extends StatefulWidget {
+  EducationRegistrationPage({Key key, this.title}) : super(key: key);
   final String title;
   @override
-  _OtherInfoRegistrationPageState createState() =>
-      _OtherInfoRegistrationPageState();
+  _EducationRegistrationPageState createState() => _EducationRegistrationPageState();
 }
 
-class _OtherInfoRegistrationPageState extends State<OtherInfoRegistrationPage> {
+class _EducationRegistrationPageState extends State<EducationRegistrationPage> {
   final _formKey = GlobalKey<FormState>();
 
-  final _hobbiesController = TextEditingController();
-  final _civilianLicenseController = TextEditingController();
-  final _civilianLicenseNoController = TextEditingController();
-  final _civilianLicenseDOIController = TextEditingController();
-  final _personalVehicleController = TextEditingController();
+  final _educationLevelController = TextEditingController();
+  final _streamCourseController = TextEditingController();
+  final _ccaController = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
+    final height = MediaQuery
+        .of(context)
+        .size
+        .height;
     return Scaffold(
       body: Container(
         height: height,
@@ -46,7 +45,6 @@ class _OtherInfoRegistrationPageState extends State<OtherInfoRegistrationPage> {
         ),
         child: Stack(
           children: <Widget>[
-
             Form(
               key: _formKey,
               child: ListView(
@@ -62,6 +60,13 @@ class _OtherInfoRegistrationPageState extends State<OtherInfoRegistrationPage> {
                   SizedBox(
                     height: 50,
                   ),
+                  RegistrationTextField("Education Level",FontAwesomeIcons.school , _educationLevelController),
+                  RegistrationTextField("Stream/Course",FontAwesomeIcons.bookOpen , _streamCourseController),
+                  RegistrationTextField("CCA",FontAwesomeIcons.quidditch , _ccaController),
+
+
+
+
 
 
                   SizedBox(
@@ -83,9 +88,12 @@ class _OtherInfoRegistrationPageState extends State<OtherInfoRegistrationPage> {
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
-        text: 'Other Info',
+        text: 'Education Info',
         style: GoogleFonts.openSans(
-          textStyle: Theme.of(context).textTheme.headline4,
+          textStyle: Theme
+              .of(context)
+              .textTheme
+              .headline4,
           fontSize: 30,
           fontWeight: FontWeight.w700,
           color: Color(0xffffffff),
@@ -103,11 +111,14 @@ class _OtherInfoRegistrationPageState extends State<OtherInfoRegistrationPage> {
       child: InkWell(
         onTap: () {
           setState(() {
-            Navigator.pushNamed(context, '/edureg');
+            Navigator.pushNamed(context, '/othrreg');
           });
         },
         child: Container(
-          width: MediaQuery.of(context).size.width * 0.5,
+          width: MediaQuery
+              .of(context)
+              .size
+              .width * 0.5,
           padding: EdgeInsets.symmetric(vertical: 13),
           alignment: Alignment.center,
           decoration: BoxDecoration(
@@ -122,4 +133,5 @@ class _OtherInfoRegistrationPageState extends State<OtherInfoRegistrationPage> {
       ),
     );
   }
+
 }
