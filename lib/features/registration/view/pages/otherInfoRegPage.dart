@@ -6,6 +6,9 @@ import 'package:ltcapp/core/config/globals.dart';
 import 'package:ltcapp/features/registration/view/widgets/widgets.dart';
 import 'package:ltcapp/core/widgets/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../../../login/view/pages/welcomePage.dart';
+import '../../../../main.dart';
+
 
 class OtherInfoRegistrationPage extends StatefulWidget {
   OtherInfoRegistrationPage({Key key, this.title}) : super(key: key);
@@ -105,7 +108,22 @@ class _OtherInfoRegistrationPageState extends State<OtherInfoRegistrationPage> {
       child: InkWell(
         onTap: () {
           setState(() {
-            Navigator.pushNamed(context, '/edureg');
+            fDSTemp.sortMiscData(
+            _hobbiesController.text,
+            _civilianLicenseController.text,
+            _civilianLicenseNoController.text,
+            _civilianLicenseDOIController.text,
+            "No",
+            _personalVehicleController.text,
+            "Unknown",
+            "M",
+            50,
+            50,
+            9);
+
+            mainHandle.insertNewData(fDSTemp);
+
+            Navigator.pushNamed(context, '/');
           });
         },
         child: Container(

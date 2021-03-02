@@ -3,6 +3,7 @@ import 'package:ltcapp/features/registration/view/pages/signupPage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/core/widgets/widgets.dart';
 import 'package:ltcapp/core/config/globals.dart';
+import 'package:ltcapp/main.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key, this.title}) : super(key: key);
@@ -61,8 +62,6 @@ class _LoginPageState extends State<LoginPage> {
     ));
   }
 
-
-
   Widget _entryField(String title, {bool isPassword = false}) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
@@ -109,6 +108,8 @@ class _LoginPageState extends State<LoginPage> {
     return InkWell(
         onTap: () {
           setState(() {
+        //    if (mainHandle.)
+
             Navigator.pushNamed(context, '/home');
           });
         },

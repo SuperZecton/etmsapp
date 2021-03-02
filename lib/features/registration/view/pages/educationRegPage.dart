@@ -7,6 +7,7 @@ import 'package:ltcapp/core/config/globals.dart';
 
 import 'package:ltcapp/core/widgets/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../../../login/view/pages/welcomePage.dart';
 
 class EducationRegistrationPage extends StatefulWidget {
   EducationRegistrationPage({Key key, this.title}) : super(key: key);
@@ -114,7 +115,13 @@ class _EducationRegistrationPageState extends State<EducationRegistrationPage> {
       child: InkWell(
         onTap: () {
           setState(() {
+            fDSTemp.sortEducationData(
+                _educationLevelController.text,
+                _streamCourseController.text,
+                _ccaController.text,
+                _schoolController.text);
             Navigator.pushNamed(context, '/othrreg');
+
           });
         },
         child: Container(

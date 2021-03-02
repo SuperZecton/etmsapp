@@ -7,6 +7,7 @@ import 'package:ltcapp/features/registration/view/widgets/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ltcapp/utils/extensions.dart';
 import 'package:ltcapp/core/widgets/widgets.dart';
+import '../../../login/view/pages/welcomePage.dart';
 class TrainingRegistrationPage extends StatefulWidget {
   TrainingRegistrationPage({Key key, this.title}) : super(key: key);
   final String title;
@@ -133,6 +134,13 @@ class _TrainingRegistrationPageState extends State<TrainingRegistrationPage> {
       child: InkWell(
         onTap: () {
           setState(() {
+            fDSTemp.sortTrainingData(
+                _trgFrameController.text,
+                _trgPeriodController.text,
+                int.parse(_noAttemptsController.text),
+                _militaryLicenseController.text,
+                _militaryLicenseTypeController.text,
+                _doiController.text);
             Navigator.pushNamed(context, '/edureg');
           });
         },

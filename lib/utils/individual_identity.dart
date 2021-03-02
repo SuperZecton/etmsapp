@@ -220,8 +220,9 @@ class EducationDataSet {
   String educationLevel;
   String streamcourseName;
   String ccaOptional;
+  String schName;
 
-  EducationDataSet({this.educationLevel, this.streamcourseName, this.ccaOptional});
+  EducationDataSet({this.educationLevel, this.streamcourseName, this.ccaOptional, this.schName});
 }
 
 class MiscDataSet {
@@ -252,15 +253,20 @@ class FullDetailSet {
   {
     personalDataSet = new PersonalDataSet(fullName: name, nricLast4Digits: nric, fullHomeAddress: homeAddress, handphoneNumber: hpNo, homephoneNumber: homeNo, dateOfBirth: dob, dateOfEnlistment: doe, dateOfORD: ord, dateOfPostIn: postIn, pes: pes, religion: religion, race: race, bloodGroup: bldGrp, drugAllergy: drugAlle, foodAllergy: foodAlle, NOKDetailfullName: NOKname, NOKDetailcontactNumber: NOKnum, NOKDetailfullAddress: NOKadd, vocationType: vocType, stayInstayOut: stayInOut, medicalConditions: medCond);
   }
-
+ /*
+  void sortPersonalData(PersonalDataSet pDS)
+  {
+    personalDataSet = pDS;
+  }
+*/
   void sortTrainingData(String trngFrame, String trngPeriod, int attempts, String milLicenseNo, String milLicenseType, String milLicenseDOI)
   {
     trainingDataSet = new TrainingDataSet(trainingFrame: trngFrame, trainingPeriod: trngPeriod, passAttempts: attempts, militaryLicenseNo: milLicenseNo, militaryLicenseType: milLicenseType, milLicenseDateOfIssue: milLicenseDOI);
   }
 
-  void sortEducationData(String eduLvl, String strmCrseName, String cca)
+  void sortEducationData(String eduLvl, String strmCrseName, String cca, String sch)
   {
-    educationDataSet = new EducationDataSet(educationLevel: eduLvl, streamcourseName: strmCrseName, ccaOptional: cca);
+    educationDataSet = new EducationDataSet(educationLevel: eduLvl, streamcourseName: strmCrseName, ccaOptional: cca, schName: sch);
   }
 
   void sortMiscData(String hobbies, String civLicenseType, String civLicenseNo, String civLicenseDOI, String doneDefCourse, String hasOwnVeh, String personalVehNo, String tShirtSize, int upperTorsoSize, int waistSize, int shoeSize)
@@ -307,6 +313,7 @@ class FullDetailSet {
         'educationLevel': educationDataSet.educationLevel,
         'streamcourseName': educationDataSet.streamcourseName,
         'ccaOptional': educationDataSet.ccaOptional,
+        'schName': educationDataSet.schName,
         /* Others Section */
         'hobbiesInterest': miscDataSet.hobbiesInterest,
         'civillianLicenseType': miscDataSet.civillianLicenseType,
@@ -319,7 +326,9 @@ class FullDetailSet {
         'no3sizeUpperTorso': miscDataSet.no3sizeUpperTorso,
         'no3sizeWaist': miscDataSet.no3sizeWaist,
         'no3sizeShoes': miscDataSet.no3sizeShoes,
-
+        /* Login Creds Section */
+        'email': loginCredentials.username,
+        'password': loginCredentials.password
       };
 
   }

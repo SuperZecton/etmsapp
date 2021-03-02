@@ -7,6 +7,7 @@ import 'package:csv/csv.dart';
 import 'dart:typed_data';
 import 'package:flutter/services.dart';
 import 'individual_identity.dart';
+import 'login_data_handler.dart';
 import 'dart:io';
 
 
@@ -48,12 +49,12 @@ class DatabaseHandler {
                     "fullName TEXT PRIMARY KEY, "
                     "nricLast4Digits TEXT, "
                     "fullHomeAddress TEXT, "
-                    "handphoneNumber INTEGER, "
-                    "homephoneNumber INTEGER, "
-                    "dateOfBirth DATE, "
-                    "dateOfEnlistment DATE, "
-                    "dateOfORD DATE, "
-                    "dateOfPostIn DATE, "
+                    "handphoneNumber TEXT, "
+                    "homephoneNumber TEXT, "
+                    "dateOfBirth TEXT, "
+                    "dateOfEnlistment TEXT, "
+                    "dateOfORD TEXT, "
+                    "dateOfPostIn TEXT, "
                     "pesType TEXT, "
                     "religion TEXT, "
                     "race TEXT, "
@@ -72,23 +73,27 @@ class DatabaseHandler {
                     "passAttempts INTEGER, "
                     "militaryLicenseNo TEXT, "
                     "militaryLicenseType TEXT, "
-                    "milLicenseDateOfIssue DATE, "
+                    "milLicenseDateOfIssue TEXT, "
                 // Section 3: Education
                     "educationLevel TEXT, "
                     "streamcourseName TEXT, "
                     "ccaOptional TEXT, "
+                    "schName TEXT, "
                 // Section 4: Other Information
                     "hobbiesInterest TEXT, "
                     "civillianLicenseType TEXT, "
                     "civillianLicenseNumber TEXT, "
-                    "civillianLicenseDateOfIssue DATE, "
-                    "hasDoneDefensiveCourse BOOL, "
-                    "hasPersonalVehicle BOOL, "
+                    "civillianLicenseDateOfIssue TEXT, "
+                    "hasDoneDefensiveCourse TEXT, "
+                    "hasPersonalVehicle TEXT, "
                     "personalVehiclePlateNumber TEXT, "
                     "tShirtSize TEXT, "
                     "no3sizeUpperTorso INTEGER, "
                     "no3sizeWaist INTEGER, "
-                    "no3sizeShoes INTEGER"
+                    "no3sizeShoes INTEGER, "
+                // Section 5: Login Information
+                    "email TEXT, "
+                    "password TEXT"
                     ")"
             );
           },
@@ -127,6 +132,13 @@ class DatabaseHandler {
     await database.insert(dbTableName, fullDetailSet.toMap(), conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
+  Future<LoginCredential> getLoginCreds(String email) async
+  {
+    Database database = await db;
+    List<Map> result = await database.rawQuery('SELECT * FROM LtcPersonnelInfo WHERE email=?', [email]);
+    // TODO: Get password from result to return for login authorization
+  }
+
   void callConversion() async
   {
     dbPath = await getDatabasesPath();
@@ -158,9 +170,15 @@ class DatabaseHandler {
     var fDS = new FullDetailSet();
     fDS.sortPersonalData('Test Man', '281A', '5 Cresent Ave', '84569018', '67889231', DateTime.now().toString(), DateTime.now().toString(), DateTime.now().toString(), DateTime.now().toString(), 'A2', ReligionType.Christianity.toString(), RaceType.Chinese.toString(), BloodType.AB_PLUS.toString(), 'None', 'None', 'Testing Man', '97810781', '5 Cresent Ave', VocationType.TO.toString(), 'Stay In', 'None');
     fDS.sortTrainingData('Basic Transport', '290121-210221', 1, 'MID46112', VehLicenseType.class3.toString(), DateTime.now().toString());
-    fDS.sortEducationData('Junior College', 'Pure Sciences', 'Soccer Club');
-    fDS.sortMiscData('Drinking, Driving, Drink Driving', VehLicenseType.class2.toString(), 'M2811345', DateTime.now().toString(), TrueOrFalseType.True.toString(), TrueOrFalseType.True.toString(), 'FAG69781023', ClothesSizeType.M.toString(), 70, 100, 9);
+    fDS.sortEducationData('Junior College', 'Pure Sciences', 'Soccer Club', 'K.Ickers');
+    fDS.sortMiscData('Drinking; Driving; Drink Driving', VehLicenseType.class2.toString(), 'M2811345', DateTime.now().toString(), TrueOrFalseType.True.toString(), TrueOrFalseType.True.toString(), 'FAG69781023', ClothesSizeType.M.toString(), 70, 100, 9);
+    fDS.loginCredentials = new LoginCredential(username: "test@email.com", password: "123");
     insertNewData(fDS);
+  //  for (int i = 0; i < 4; i++)
+  //    {
+  //      fDS.personalDataSet.fullName = fDS.personalDataSet.fullName + i.toString();
+  //      insertNewData(fDS);
+  //    }
   }
 
   DatabaseHandler({this.dbName});

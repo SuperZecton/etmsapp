@@ -10,6 +10,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ltcapp/utils/individual_identity.dart';
 import 'package:ltcapp/utils/extensions.dart';
 import 'package:ltcapp/core/widgets/widgets.dart';
+import '../../../login/view/pages/welcomePage.dart';
 
 class SignUpPage extends StatefulWidget {
   SignUpPage({Key key, this.title}) : super(key: key);
@@ -46,8 +47,6 @@ class _SignUpPageState extends State<SignUpPage> {
   BloodType _currentBloodValue;
   VocationType _currentVocationValue;
   StayInStayOutType _currentStayInStayOutValue;
-
-  final FullDetailSet fdSet = new FullDetailSet();
 
   @override
   Widget build(BuildContext context) {
@@ -297,7 +296,7 @@ class _SignUpPageState extends State<SignUpPage> {
           setState(() {
             if (_formKey.currentState.validate()) {
               _formKey.currentState.save();
-              fdSet.sortPersonalData(
+              fDSTemp.sortPersonalData(
                 _nameController.text,
                 _nricController.text,
                 _addressController.text,
@@ -317,7 +316,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 _nokNumberController.text,
                 _nokAddressController.text,
                 _currentVocationValue.toString(),
-                _currentStayInStayOutValue.toString(),
+                "Stay In",
                 _medicalConditionController.text,
               );
               Navigator.pushNamed(context, '/trgreg');
