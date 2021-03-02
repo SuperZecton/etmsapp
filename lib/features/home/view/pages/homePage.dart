@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/core/config/globals.dart';
 
@@ -20,7 +21,6 @@ class _HomePageState extends State<HomePage> {
   static final List<String> campDropdownItems = [
     'LTC',
     'BPC',
-
   ];
   String campDropdown = campDropdownItems[0];
   int campChart = 0;
@@ -39,10 +39,8 @@ class _HomePageState extends State<HomePage> {
           child: Icon(
             Icons.arrow_back_rounded,
             color: Colors.black,
-
           ),
         ),
-
         title: Text('ETMS',
             style: GoogleFonts.montserrat(
                 color: Colors.black,
@@ -59,10 +57,10 @@ class _HomePageState extends State<HomePage> {
                     isDense: true,
                     value: campDropdown,
                     onChanged: (String value) => setState(() {
-                      campDropdown = value;
-                      campChart = campDropdownItems
-                          .indexOf(value); // Refresh the chart
-                    }),
+                          campDropdown = value;
+                          campChart = campDropdownItems
+                              .indexOf(value); // Refresh the chart
+                        }),
                     items: campDropdownItems.map((String title) {
                       return DropdownMenuItem(
                         value: title,
@@ -73,14 +71,13 @@ class _HomePageState extends State<HomePage> {
                                 fontSize: 14.0)),
                       );
                     }).toList()),
-
               ],
             ),
           )
         ],
       ),
       body: Container(
-        color: Color(0xff4682b4),
+        color: Color(0xffDCDDDB),
         child: StaggeredGridView.count(
           crossAxisCount: 2,
           crossAxisSpacing: 12.0,
@@ -98,9 +95,9 @@ class _HomePageState extends State<HomePage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text('Tasking for today',
+                          Text('Welcome',
                               style: TextStyle(color: Colors.blueAccent)),
-                          Text('NFS at 16:00',
+                          Text('PTE Aaron',
                               style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.w700,
@@ -113,7 +110,7 @@ class _HomePageState extends State<HomePage> {
                           child: Center(
                               child: Padding(
                             padding: const EdgeInsets.all(16.0),
-                            child: Icon(Icons.timeline,
+                            child: Icon(Icons.settings,
                                 color: Colors.white, size: 30.0),
                           )))
                     ]),
@@ -131,7 +128,7 @@ class _HomePageState extends State<HomePage> {
                             shape: CircleBorder(),
                             child: Padding(
                               padding: const EdgeInsets.all(16.0),
-                              child: Icon(Icons.settings_applications,
+                              child: Icon(FontAwesomeIcons.penFancy,
                                   color: Colors.white, size: 30.0),
                             )),
                         Padding(padding: EdgeInsets.only(bottom: 16.0)),
@@ -157,19 +154,18 @@ class _HomePageState extends State<HomePage> {
                           shape: CircleBorder(),
                           child: Padding(
                             padding: const EdgeInsets.all(16.0),
-                            child: Icon(Icons.insert_drive_file_outlined,
+                            child: Icon(FontAwesomeIcons.car,
                                 color: Colors.white, size: 30.0),
                           )),
                       Padding(padding: EdgeInsets.only(bottom: 16.0)),
-                      Text('RAC Form',
+                      Text('Book Out Vehicle',
                           style: TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.w700,
-                              fontSize: 24.0)),
-                      Text('Fill out before you go',
-                          style: TextStyle(color: Colors.black45)),
+                              fontSize: 22.0)),
                     ]),
               ),
+              onTap: () => Navigator.pushNamed(context, '/vehiclebookout'),
             ),
             _buildTile(
               Padding(
@@ -183,11 +179,11 @@ class _HomePageState extends State<HomePage> {
                           shape: CircleBorder(),
                           child: Padding(
                             padding: const EdgeInsets.all(16.0),
-                            child: Icon(Icons.car_rental,
+                            child: Icon(FontAwesomeIcons.listAlt,
                                 color: Colors.white, size: 30.0),
                           )),
                       Padding(padding: EdgeInsets.only(bottom: 16.0)),
-                      Text('Book out Vehicle',
+                      Text('Mileage History',
                           style: TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.w700,
@@ -207,16 +203,16 @@ class _HomePageState extends State<HomePage> {
                           shape: CircleBorder(),
                           child: Padding(
                             padding: EdgeInsets.all(16.0),
-                            child: Icon(Icons.notifications,
+                            child: Icon(FontAwesomeIcons.clipboard,
                                 color: Colors.white, size: 30.0),
                           )),
                       Padding(padding: EdgeInsets.only(bottom: 16.0)),
-                      Text('Empty Icon',
+                      Text('DTL Report',
                           style: TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.w700,
                               fontSize: 24.0)),
-                      Text('Placeholder ',
+                      Text('For DTL/ ADTL',
                           style: TextStyle(color: Colors.black45)),
                     ]),
               ),
@@ -280,13 +276,14 @@ class _HomePageState extends State<HomePage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Text('Placeholder',
+                            Text('Maintenance Section',
                                 style: TextStyle(color: Colors.redAccent)),
-                            Text('Placeholder',
+                            Text('ODD, Fuel Receipts'
+                                ,
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.w700,
-                                    fontSize: 34.0))
+                                    fontSize: 26.0))
                           ],
                         ),
                         Material(
@@ -324,7 +321,7 @@ class _HomePageState extends State<HomePage> {
         child: Container(
           decoration: BoxDecoration(
               border: Border.all(
-                color: Colors.blue,
+                color: Colors.black,
                 width: 2,
               ),
               borderRadius: BorderRadius.circular(12.0)),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ltcapp/core/config/globals.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
 class WelcomePage extends StatefulWidget {
   WelcomePage({Key key}) : super(key: key);
 
@@ -67,7 +68,7 @@ class _WelcomePageState extends State<WelcomePage> {
     return InkWell(
       onTap: () {
         setState(() {
-          Navigator.pushNamed(context, '/login');
+          Navigator.pushNamed(context, '/login', );
         });
       },
       child: Container(
@@ -89,7 +90,7 @@ class _WelcomePageState extends State<WelcomePage> {
     return InkWell(
       onTap: () {
         setState(() {
-          Navigator.pushNamed(context, '/signup');
+          Navigator.pushNamed(context, '/signup',);
         });
       },
       child: Container(

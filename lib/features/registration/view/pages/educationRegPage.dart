@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:ltcapp/features/registration/view/widgets/registrationTextField.dart';
 import 'package:ltcapp/main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/core/config/globals.dart';
-import 'package:ltcapp/features/registration/presentation/widgets/widgets.dart';
+
 import 'package:ltcapp/core/widgets/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -20,6 +21,7 @@ class _EducationRegistrationPageState extends State<EducationRegistrationPage> {
   final _educationLevelController = TextEditingController();
   final _streamCourseController = TextEditingController();
   final _ccaController = TextEditingController();
+  final _schoolController = TextEditingController();
 
 
   @override
@@ -60,7 +62,8 @@ class _EducationRegistrationPageState extends State<EducationRegistrationPage> {
                   SizedBox(
                     height: 50,
                   ),
-                  RegistrationTextField("Education Level",FontAwesomeIcons.school , _educationLevelController),
+                  RegistrationTextField("Education Level",FontAwesomeIcons.bookReader , _educationLevelController),
+                  RegistrationTextField("Name of School ",FontAwesomeIcons.school , _schoolController),
                   RegistrationTextField("Stream/Course",FontAwesomeIcons.bookOpen , _streamCourseController),
                   RegistrationTextField("CCA",FontAwesomeIcons.quidditch , _ccaController),
 

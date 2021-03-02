@@ -4,13 +4,12 @@ import 'package:ltcapp/main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/core/config/globals.dart';
 
-import 'package:ltcapp/features/registration/presentation/widgets/widgets.dart';
+import 'package:ltcapp/features/registration/view/widgets/widgets.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ltcapp/utils/individual_identity.dart';
 import 'package:ltcapp/utils/extensions.dart';
 import 'package:ltcapp/core/widgets/widgets.dart';
-
 
 class SignUpPage extends StatefulWidget {
   SignUpPage({Key key, this.title}) : super(key: key);
@@ -91,6 +90,10 @@ class _SignUpPageState extends State<SignUpPage> {
                   SizedBox(
                     height: 50,
                   ),
+                  _personalDataTitle(),
+                  SizedBox(
+                    height: 20,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -134,10 +137,10 @@ class _SignUpPageState extends State<SignUpPage> {
                     isPassword: true,
                   ),
                   RegistrationTextField(
-                      "Address", Icons.home, _addressController,
+                      "Home Address", Icons.home, _addressController,
                       helperText: "Blk No, Street, Floor, Postal Code"),
                   RegistrationTextField(
-                    "Contact No.",
+                    "Phone Number",
                     Icons.phone_android,
                     _numberController,
                     validationAction: (String input) =>
@@ -146,7 +149,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             : "Enter a valid number",
                   ),
                   RegistrationTextField(
-                    "Home No.",
+                    "Home Number",
                     Icons.phone,
                     _homeNumberController,
                     validationAction: (String input) =>
@@ -190,8 +193,21 @@ class _SignUpPageState extends State<SignUpPage> {
                       FontAwesomeIcons.tablets, _drugAllergyController),
                   RegistrationTextField("Food Allergy",
                       FontAwesomeIcons.hamburger, _foodAllergyController),
+                  DropDownField<VocationType>(
+                      hint: "Vocation",
+                      values: VocationType.getValues(),
+                      value: _currentVocationValue,
+                      icon: FontAwesomeIcons.briefcase,
+                      onChanged: (value) => _currentVocationValue = value),
                   RegistrationTextField(
-                    "Next of Kin",
+                      "Medical Condition",
+                      FontAwesomeIcons.hospitalUser,
+                      _medicalConditionController),
+                  SizedBox(height: 20),
+                  _nokTitle(),
+                  SizedBox(height: 20),
+                  RegistrationTextField(
+                    "Next of Kin Name",
                     FontAwesomeIcons.userFriends,
                     _nokController,
                     validationAction: (String input) => input.isValidName()
@@ -213,22 +229,6 @@ class _SignUpPageState extends State<SignUpPage> {
                             ? null
                             : "Enter a valid number",
                   ),
-                  DropDownField<StayInStayOutType>(
-                      hint: "Stay in/ Stay out",
-                      values: StayInStayOutType.getValues(),
-                      value: _currentStayInStayOutValue,
-                      icon: FontAwesomeIcons.houseUser,
-                      onChanged: (value) => _currentStayInStayOutValue = value),
-                  DropDownField<VocationType>(
-                      hint: "Vocation",
-                      values: VocationType.getValues(),
-                      value: _currentVocationValue,
-                      icon: FontAwesomeIcons.briefcase,
-                      onChanged: (value) => _currentVocationValue = value),
-                  RegistrationTextField(
-                      "Medical Condition",
-                      FontAwesomeIcons.hospitalUser,
-                      _medicalConditionController),
                   SizedBox(
                     height: 20,
                   ),
@@ -252,6 +252,36 @@ class _SignUpPageState extends State<SignUpPage> {
         style: GoogleFonts.openSans(
           textStyle: Theme.of(context).textTheme.headline4,
           fontSize: 30,
+          fontWeight: FontWeight.w700,
+          color: Color(0xffffffff),
+        ),
+      ),
+    );
+  }
+
+  Widget _personalDataTitle() {
+    return RichText(
+      textAlign: TextAlign.center,
+      text: TextSpan(
+        text: 'Personal Data',
+        style: GoogleFonts.roboto(
+          textStyle: Theme.of(context).textTheme.headline4,
+          fontSize: 24,
+          fontWeight: FontWeight.w700,
+          color: Color(0xffffffff),
+        ),
+      ),
+    );
+  }
+
+  Widget _nokTitle() {
+    return RichText(
+      textAlign: TextAlign.center,
+      text: TextSpan(
+        text: 'Next of Kin',
+        style: GoogleFonts.roboto(
+          textStyle: Theme.of(context).textTheme.headline4,
+          fontSize: 24,
           fontWeight: FontWeight.w700,
           color: Color(0xffffffff),
         ),
@@ -325,73 +355,4 @@ class _SignUpPageState extends State<SignUpPage> {
       ),
     );
   }
-
-  /// Will delete all this stuff soon, just using it for debugging
-  /*
-
-  Widget _debugButton() {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 40, vertical:40),
-      child: InkWell(
-        onTap: () {
-          setState(() {
-            print(_doeController.text);
-          });
-        },
-        child: Container(
-          width: MediaQuery.of(context).size.width * 0.5,
-          padding: EdgeInsets.symmetric(vertical: 13),
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(5)),
-            color: Colors.blue,
-          ),
-          child: Text(
-            'Debugging Button',
-            style: TextStyle(fontSize: 20, color: Colors.white),
-          ),
-        ),
-      ),
-    );
-  }
-
-
-   */
-
-  /* Will try to slot this in somewhere in the future
-  Widget _loginAccountLabel() {
-    return InkWell(
-      onTap: () {
-        setState(() {
-          Navigator.pushNamed(context, '/login');
-        });
-      },
-      child: Container(
-        margin: EdgeInsets.symmetric(vertical: 20),
-        padding: EdgeInsets.all(15),
-        alignment: Alignment.bottomCenter,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'Already have an account ?',
-              style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
-            ),
-            SizedBox(
-              width: 10,
-            ),
-            Text(
-              'Login',
-              style: TextStyle(
-                  color: Color(0xfff79c4f),
-                  fontSize: 13,
-                  fontWeight: FontWeight.w600),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-*/
-
 }

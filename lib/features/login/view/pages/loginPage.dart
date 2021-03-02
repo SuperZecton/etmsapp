@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ltcapp/features/registration/presentation/pages/signupPage.dart';
+import 'package:ltcapp/features/registration/view/pages/signupPage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/core/widgets/widgets.dart';
 import 'package:ltcapp/core/config/globals.dart';

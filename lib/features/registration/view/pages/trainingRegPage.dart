@@ -3,27 +3,26 @@ import 'package:flutter/cupertino.dart';
 import 'package:ltcapp/main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/core/config/globals.dart';
-import 'package:ltcapp/features/registration/presentation/widgets/widgets.dart';
-import 'package:ltcapp/core/widgets/widgets.dart';
+import 'package:ltcapp/features/registration/view/widgets/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
-
-class OtherInfoRegistrationPage extends StatefulWidget {
-  OtherInfoRegistrationPage({Key key, this.title}) : super(key: key);
+import 'package:ltcapp/utils/extensions.dart';
+import 'package:ltcapp/core/widgets/widgets.dart';
+class TrainingRegistrationPage extends StatefulWidget {
+  TrainingRegistrationPage({Key key, this.title}) : super(key: key);
   final String title;
   @override
-  _OtherInfoRegistrationPageState createState() =>
-      _OtherInfoRegistrationPageState();
+  _TrainingRegistrationPageState createState() =>
+      _TrainingRegistrationPageState();
 }
 
-class _OtherInfoRegistrationPageState extends State<OtherInfoRegistrationPage> {
+class _TrainingRegistrationPageState extends State<TrainingRegistrationPage> {
   final _formKey = GlobalKey<FormState>();
-
-  final _hobbiesController = TextEditingController();
-  final _civilianLicenseController = TextEditingController();
-  final _civilianLicenseNoController = TextEditingController();
-  final _civilianLicenseDOIController = TextEditingController();
-  final _personalVehicleController = TextEditingController();
+  final _trgFrameController = TextEditingController();
+  final _trgPeriodController = TextEditingController();
+  final _noAttemptsController = TextEditingController();
+  final _militaryLicenseController = TextEditingController();
+  final _militaryLicenseTypeController = TextEditingController();
+  final _doiController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +44,11 @@ class _OtherInfoRegistrationPageState extends State<OtherInfoRegistrationPage> {
         ),
         child: Stack(
           children: <Widget>[
+            /*Positioned(
+              top: -MediaQuery.of(context).size.height * .15,
+              right: -MediaQuery.of(context).size.width * .4,
+              child: BezierContainer(),
+            ),*/ //TODO: Make this nicer
 
             Form(
               key: _formKey,
@@ -61,8 +65,35 @@ class _OtherInfoRegistrationPageState extends State<OtherInfoRegistrationPage> {
                   SizedBox(
                     height: 50,
                   ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: RegistrationTextField(
+                          "Training Frame",
+                          Icons.perm_identity_rounded,
+                          _trgFrameController,
+                          validationAction: (String input) => input.isValidFrame() ? null: "Example: 359A",
+                          maxLength: 4,
+                        ),
+                      ),
+                      Expanded(
+                        child: DateTextField(
+                          "Training Period",
+                          Icons.calendar_today_sharp,
+                          _trgPeriodController,
+                        ),
+                      ),
+                    ],
+                  ),
+                  RegistrationTextField("No. of attempts", Icons.format_list_numbered_sharp, _noAttemptsController, validationAction: (String input) => input.isValidAttempt() ? null: "Numbers only"),
+                  RegistrationTextField("Military License", FontAwesomeIcons.idCard, _militaryLicenseController),
+                  RegistrationTextField("Military License Type", FontAwesomeIcons.addressCard, _militaryLicenseTypeController),
+                  DateTextField("Date of Issue", Icons.calendar_today_outlined, _doiController),
 
 
+          
+    
                   SizedBox(
                     height: 20,
                   ),
@@ -82,7 +113,7 @@ class _OtherInfoRegistrationPageState extends State<OtherInfoRegistrationPage> {
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
-        text: 'Other Info',
+        text: 'Training Info',
         style: GoogleFonts.openSans(
           textStyle: Theme.of(context).textTheme.headline4,
           fontSize: 30,

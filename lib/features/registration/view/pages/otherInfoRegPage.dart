@@ -3,26 +3,26 @@ import 'package:flutter/cupertino.dart';
 import 'package:ltcapp/main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/core/config/globals.dart';
-import 'package:ltcapp/features/registration/presentation/widgets/widgets.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:ltcapp/utils/extensions.dart';
+import 'package:ltcapp/features/registration/view/widgets/widgets.dart';
 import 'package:ltcapp/core/widgets/widgets.dart';
-class TrainingRegistrationPage extends StatefulWidget {
-  TrainingRegistrationPage({Key key, this.title}) : super(key: key);
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+class OtherInfoRegistrationPage extends StatefulWidget {
+  OtherInfoRegistrationPage({Key key, this.title}) : super(key: key);
   final String title;
   @override
-  _TrainingRegistrationPageState createState() =>
-      _TrainingRegistrationPageState();
+  _OtherInfoRegistrationPageState createState() =>
+      _OtherInfoRegistrationPageState();
 }
 
-class _TrainingRegistrationPageState extends State<TrainingRegistrationPage> {
+class _OtherInfoRegistrationPageState extends State<OtherInfoRegistrationPage> {
   final _formKey = GlobalKey<FormState>();
-  final _trgFrameController = TextEditingController();
-  final _trgPeriodController = TextEditingController();
-  final _noAttemptsController = TextEditingController();
-  final _militaryLicenseController = TextEditingController();
-  final _militaryLicenseTypeController = TextEditingController();
-  final _doiController = TextEditingController();
+
+  final _hobbiesController = TextEditingController();
+  final _civilianLicenseController = TextEditingController();
+  final _civilianLicenseNoController = TextEditingController();
+  final _civilianLicenseDOIController = TextEditingController();
+  final _personalVehicleController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -44,12 +44,6 @@ class _TrainingRegistrationPageState extends State<TrainingRegistrationPage> {
         ),
         child: Stack(
           children: <Widget>[
-            /*Positioned(
-              top: -MediaQuery.of(context).size.height * .15,
-              right: -MediaQuery.of(context).size.width * .4,
-              child: BezierContainer(),
-            ),*/ //TODO: Make this nicer
-
             Form(
               key: _formKey,
               child: ListView(
@@ -65,35 +59,16 @@ class _TrainingRegistrationPageState extends State<TrainingRegistrationPage> {
                   SizedBox(
                     height: 50,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: RegistrationTextField(
-                          "Training Frame",
-                          Icons.perm_identity_rounded,
-                          _trgFrameController,
-                          validationAction: (String input) => input.isValidFrame() ? null: "Example: 359A",
-                          maxLength: 4,
-                        ),
-                      ),
-                      Expanded(
-                        child: DateTextField(
-                          "Training Period",
-                          Icons.calendar_today_sharp,
-                          _trgPeriodController,
-                        ),
-                      ),
-                    ],
-                  ),
-                  RegistrationTextField("No. of attempts", Icons.format_list_numbered_sharp, _noAttemptsController, validationAction: (String input) => input.isValidAttempt() ? null: "Numbers only"),
-                  RegistrationTextField("Military License", FontAwesomeIcons.idCard, _militaryLicenseController),
-                  RegistrationTextField("Military License Type", FontAwesomeIcons.addressCard, _militaryLicenseTypeController),
-                  DateTextField("Date of Issue", Icons.calendar_today_outlined, _doiController),
-
-
-          
-    
+                  RegistrationTextField("Hobbies", FontAwesomeIcons.paintBrush,
+                      _hobbiesController),
+                  RegistrationTextField("Civilian License",
+                      FontAwesomeIcons.idCardAlt, _civilianLicenseController),
+                  RegistrationTextField("License No.",
+                      FontAwesomeIcons.idCard, _civilianLicenseNoController),
+                  DateTextField(
+                      "License Date of Issue",
+                      FontAwesomeIcons.calendarAlt,
+                      _civilianLicenseDOIController),
                   SizedBox(
                     height: 20,
                   ),
@@ -113,7 +88,7 @@ class _TrainingRegistrationPageState extends State<TrainingRegistrationPage> {
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
-        text: 'Training Info',
+        text: 'Other Info',
         style: GoogleFonts.openSans(
           textStyle: Theme.of(context).textTheme.headline4,
           fontSize: 30,
@@ -123,9 +98,6 @@ class _TrainingRegistrationPageState extends State<TrainingRegistrationPage> {
       ),
     );
   }
-
-
-
 
   Widget _submitButton() {
     return Container(
