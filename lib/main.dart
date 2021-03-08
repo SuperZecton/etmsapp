@@ -12,6 +12,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   mainHandle.databaseCreation_Optimizer();
   runApp(MyApp());
+
 }
 
 class MyApp extends StatelessWidget {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ltcapp/features/registration/view/pages/signupPage.dart';
+import 'package:ltcapp/features/registration/view/pages/SignupPage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/core/widgets/widgets.dart';
 import 'package:ltcapp/core/config/globals.dart';
@@ -81,23 +81,24 @@ class _LoginPageState extends State<LoginPage> {
           ),
           Container(
             child: TextField(
-                style: GoogleFonts.lato(
-                    textStyle: Theme.of(context).textTheme.headline4,
-                    fontSize: 15,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.white),
-                obscureText: isPassword,
-                decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Colors.blue, width: 1.0),
-                        borderRadius: BorderRadius.all(Radius.circular(5))),
-                    focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Colors.white, width: 1.5),
-                        borderRadius: BorderRadius.all(Radius.circular(5))),
-
-
-                    fillColor: secondaryColor,
-                    filled: true),),
+              style: GoogleFonts.lato(
+                  textStyle: Theme.of(context).textTheme.headline4,
+                  fontSize: 15,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white),
+              obscureText: isPassword,
+              decoration: InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                      borderSide:
+                          const BorderSide(color: Colors.blue, width: 1.0),
+                      borderRadius: BorderRadius.all(Radius.circular(5))),
+                  focusedBorder: OutlineInputBorder(
+                      borderSide:
+                          const BorderSide(color: Colors.white, width: 1.5),
+                      borderRadius: BorderRadius.all(Radius.circular(5))),
+                  fillColor: secondaryColor,
+                  filled: true),
+            ),
           )
         ],
       ),
@@ -108,8 +109,7 @@ class _LoginPageState extends State<LoginPage> {
     return InkWell(
         onTap: () {
           setState(() {
-        //    if (mainHandle.)
-
+            //    if (mainHandle.)
             Navigator.pushNamed(context, '/home');
           });
         },

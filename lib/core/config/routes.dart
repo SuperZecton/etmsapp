@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:ltcapp/features/bibo/view/pages/bookInOutPage.dart';
-import 'package:ltcapp/features/home/view/pages/homePage.dart';
-import 'package:ltcapp/features/login/view/pages/loginPage.dart';
-import 'package:ltcapp/features/login/view/pages/welcomePage.dart';
+import 'package:ltcapp/features/bibo/view/pages/BookInOutPage.dart';
+import 'package:ltcapp/features/home/view/pages/HomePage.dart';
+import 'package:ltcapp/features/login/view/pages/LoginPage.dart';
+import 'package:ltcapp/features/login/view/pages/WelcomePage.dart';
 
-import 'package:ltcapp/features/registration/view/pages/educationRegPage.dart';
-import 'package:ltcapp/features/registration/view/pages/otherInfoRegPage.dart';
-import 'package:ltcapp/features/registration/view/pages/signupPage.dart';
-import 'package:ltcapp/features/registration/view/pages/trainingRegPage.dart';
-import 'package:ltcapp/features/vehiclebookout/view/pages/vehicleBookOutPage.dart';
+import 'package:ltcapp/features/registration/view/pages/EducationRegPage.dart';
+import 'package:ltcapp/features/registration/view/pages/OtherInfoRegPage.dart';
+import 'package:ltcapp/features/registration/view/pages/SignupPage.dart';
+import 'package:ltcapp/features/registration/view/pages/TrainingRegPage.dart';
+import 'package:ltcapp/features/vehiclebookout/view/pages/VehicleBookOutPage.dart';
 
 final Map<String, WidgetBuilder> routes = <String, WidgetBuilder>{
   '/': (BuildContext context) => WelcomePage(),

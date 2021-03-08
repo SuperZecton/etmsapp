@@ -1,35 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:ltcapp/features/registration/view/widgets/registrationTextField.dart';
 import 'package:ltcapp/main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/core/config/globals.dart';
-import 'package:ltcapp/features/registration/view/widgets/widgets.dart';
+
 import 'package:ltcapp/core/widgets/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../../../login/view/pages/welcomePage.dart';
-import '../../../../main.dart';
+import '../../../login/view/pages/WelcomePage.dart';
 
-
-class OtherInfoRegistrationPage extends StatefulWidget {
-  OtherInfoRegistrationPage({Key key, this.title}) : super(key: key);
+class EducationRegistrationPage extends StatefulWidget {
+  EducationRegistrationPage({Key key, this.title}) : super(key: key);
   final String title;
   @override
-  _OtherInfoRegistrationPageState createState() =>
-      _OtherInfoRegistrationPageState();
+  _EducationRegistrationPageState createState() => _EducationRegistrationPageState();
 }
 
-class _OtherInfoRegistrationPageState extends State<OtherInfoRegistrationPage> {
+class _EducationRegistrationPageState extends State<EducationRegistrationPage> {
   final _formKey = GlobalKey<FormState>();
 
-  final _hobbiesController = TextEditingController();
-  final _civilianLicenseController = TextEditingController();
-  final _civilianLicenseNoController = TextEditingController();
-  final _civilianLicenseDOIController = TextEditingController();
-  final _personalVehicleController = TextEditingController();
+  final _educationLevelController = TextEditingController();
+  final _streamCourseController = TextEditingController();
+  final _ccaController = TextEditingController();
+  final _schoolController = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
+    final height = MediaQuery
+        .of(context)
+        .size
+        .height;
     return Scaffold(
       body: Container(
         height: height,
@@ -62,16 +63,16 @@ class _OtherInfoRegistrationPageState extends State<OtherInfoRegistrationPage> {
                   SizedBox(
                     height: 50,
                   ),
-                  RegistrationTextField("Hobbies", FontAwesomeIcons.paintBrush,
-                      _hobbiesController),
-                  RegistrationTextField("Civilian License",
-                      FontAwesomeIcons.idCardAlt, _civilianLicenseController),
-                  RegistrationTextField("License No.",
-                      FontAwesomeIcons.idCard, _civilianLicenseNoController),
-                  DateTextField(
-                      "License Date of Issue",
-                      FontAwesomeIcons.calendarAlt,
-                      _civilianLicenseDOIController),
+                  RegistrationTextField("Education Level",FontAwesomeIcons.bookReader , _educationLevelController),
+                  RegistrationTextField("Name of School ",FontAwesomeIcons.school , _schoolController),
+                  RegistrationTextField("Stream/Course",FontAwesomeIcons.bookOpen , _streamCourseController),
+                  RegistrationTextField("CCA",FontAwesomeIcons.quidditch , _ccaController),
+
+
+
+
+
+
                   SizedBox(
                     height: 20,
                   ),
@@ -91,9 +92,12 @@ class _OtherInfoRegistrationPageState extends State<OtherInfoRegistrationPage> {
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
-        text: 'Other Info',
+        text: 'Education Info',
         style: GoogleFonts.openSans(
-          textStyle: Theme.of(context).textTheme.headline4,
+          textStyle: Theme
+              .of(context)
+              .textTheme
+              .headline4,
           fontSize: 30,
           fontWeight: FontWeight.w700,
           color: Color(0xffffffff),
@@ -102,32 +106,29 @@ class _OtherInfoRegistrationPageState extends State<OtherInfoRegistrationPage> {
     );
   }
 
+
+
+
   Widget _submitButton() {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 40),
       child: InkWell(
         onTap: () {
           setState(() {
-            fDSTemp.sortMiscData(
-            _hobbiesController.text,
-            _civilianLicenseController.text,
-            _civilianLicenseNoController.text,
-            _civilianLicenseDOIController.text,
-            "No",
-            _personalVehicleController.text,
-            "Unknown",
-            "M",
-            50,
-            50,
-            9);
+            fDSTemp.sortEducationData(
+                _educationLevelController.text,
+                _streamCourseController.text,
+                _ccaController.text,
+                _schoolController.text);
+            Navigator.pushNamed(context, '/othrreg');
 
-            mainHandle.insertNewData(fDSTemp);
-
-            Navigator.pushNamed(context, '/');
           });
         },
         child: Container(
-          width: MediaQuery.of(context).size.width * 0.5,
+          width: MediaQuery
+              .of(context)
+              .size
+              .width * 0.5,
           padding: EdgeInsets.symmetric(vertical: 13),
           alignment: Alignment.center,
           decoration: BoxDecoration(
@@ -142,4 +143,5 @@ class _OtherInfoRegistrationPageState extends State<OtherInfoRegistrationPage> {
       ),
     );
   }
+
 }
