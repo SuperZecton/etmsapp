@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:ltcapp/features/login/viewmodel/LoginPageVM.dart';
 import 'package:ltcapp/features/registration/view/pages/SignupPage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/core/widgets/widgets.dart';
 import 'package:ltcapp/core/config/globals.dart';
 import 'package:ltcapp/main.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key, this.title}) : super(key: key);
@@ -17,49 +19,56 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
+    final vm = Provider.of<LoginPageViewModel>(context, listen: false);
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
-        body: Container(
-      height: height,
-      decoration: BoxDecoration(
-        color: primaryColor,
-      ),
-      child: Stack(
-        children: <Widget>[
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  SizedBox(height: height * .2),
-                  _title(),
-                  SizedBox(height: 50),
-                  _emailPasswordWidget(),
-                  SizedBox(height: 20),
-                  _submitButton(),
-                  Container(
-                    padding: EdgeInsets.symmetric(vertical: 10),
-                    alignment: Alignment.centerRight,
-                    child: Text('Forgot Password ?',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500)),
-                  ),
-                  _divider(),
-                  _singpassButton(),
-                  SizedBox(height: height * .055),
-                  _createAccountLabel(),
-                ],
+      body: Container(
+        height: height,
+        decoration: BoxDecoration(
+          color: primaryColor,
+        ),
+        child: Stack(
+          children: <Widget>[
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(height: height * .2),
+                    _title(),
+                    SizedBox(height: 50),
+                    Column(
+                      children: <Widget>[
+                        _entryField("Email"),
+                        _entryField("Password", isPassword: true),
+                      ],
+                    ),
+                    SizedBox(height: 20),
+                    _submitButton(),
+                    Container(
+                      padding: EdgeInsets.symmetric(vertical: 10),
+                      alignment: Alignment.centerRight,
+                      child: Text('Forgot Password ?',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500)),
+                    ),
+                    _divider(),
+                    _singpassButton(),
+                    SizedBox(height: height * .055),
+                    _createAccountLabel(),
+                  ],
+                ),
               ),
             ),
-          ),
-          Positioned(top: 40, left: 0, child: TopBackButton()),
-        ],
+            Positioned(top: 40, left: 0, child: TopBackButton()),
+          ],
+        ),
       ),
-    ));
+    );
   }
 
   Widget _entryField(String title, {bool isPassword = false}) {
@@ -265,15 +274,6 @@ class _LoginPageState extends State<LoginPage> {
           color: Colors.white,
         ),
       ),
-    );
-  }
-
-  Widget _emailPasswordWidget() {
-    return Column(
-      children: <Widget>[
-        _entryField("Email"),
-        _entryField("Password", isPassword: true),
-      ],
     );
   }
 }

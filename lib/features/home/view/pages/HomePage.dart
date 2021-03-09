@@ -3,6 +3,8 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/core/config/globals.dart';
+import 'package:ltcapp/features/home/viewmodel/HomePageViewModel.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -18,15 +20,9 @@ class _HomePageState extends State<HomePage> {
   String actualDropdown = chartDropdownItems[0];
   int actualChart = 0;
 
-  static final List<String> campDropdownItems = [
-    'LTC',
-    'BPC',
-  ];
-  String campDropdown = campDropdownItems[0];
-  int campChart = 0;
-
   @override
   Widget build(BuildContext context) {
+    final vm = Provider.of<HomePageViewModel>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         elevation: 2.0,
@@ -53,24 +49,23 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                DropdownButton(
-                    isDense: true,
-                    value: campDropdown,
-                    onChanged: (String value) => setState(() {
-                          campDropdown = value;
-                          campChart = campDropdownItems
-                              .indexOf(value); // Refresh the chart
-                        }),
-                    items: campDropdownItems.map((String title) {
-                      return DropdownMenuItem(
-                        value: title,
-                        child: Text(title,
-                            style: TextStyle(
-                                color: Colors.blue,
-                                fontWeight: FontWeight.w400,
-                                fontSize: 14.0)),
-                      );
-                    }).toList()),
+                Consumer<HomePageViewModel>(
+                  builder: (context, vm, child) => DropdownButton(
+                      isDense: true,
+                      value: vm.campDropdown,
+                      onChanged: (String value) => vm.campDropdownUpdate(value),
+                      items: HomePageViewModel.campDropdownItems
+                          .map((String title) {
+                        return DropdownMenuItem(
+                          value: title,
+                          child: Text(title,
+                              style: TextStyle(
+                                  color: Colors.blue,
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 14.0)),
+                        );
+                      }).toList()),
+                ),
               ],
             ),
           )
@@ -278,8 +273,7 @@ class _HomePageState extends State<HomePage> {
                           children: <Widget>[
                             Text('Maintenance Section',
                                 style: TextStyle(color: Colors.redAccent)),
-                            Text('ODD, Fuel Receipts'
-                                ,
+                            Text('ODD, Fuel Receipts',
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.w700,
