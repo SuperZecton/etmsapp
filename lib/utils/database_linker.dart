@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:async/async.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
@@ -9,6 +10,8 @@ import 'package:flutter/services.dart';
 import 'individual_identity.dart';
 import 'login_data_handler.dart';
 import 'dart:io';
+import 'DateAndTimeGetter.dart';
+import 'package:http/http.dart' as http;
 
 
 class DatabaseHandler {
@@ -22,6 +25,20 @@ class DatabaseHandler {
   String dbName;
   final String dbTableName = 'LtcPersonnelInfo';
 
+  List fetchedData = [];
+
+  DateAndTime dtGetter = DateAndTime();
+
+  void fetchDatabaseFromServer(String url) async
+  {
+    final response = await http.get(url);
+
+    if (response.statusCode == 200)
+      {
+          fetchedData = json.decode(response.body);
+      }
+  }
+
   void setDatabasePath(String path)
   {
     tempPath = path;
@@ -32,14 +49,11 @@ class DatabaseHandler {
     dbPath = await getDatabasesPath();
     tempPath = join(dbPath, dbName);
 
-    bool result = await databaseExists(tempPath);
+    bool result = false;
 
-    if (result == true)
-    {
       // First time launch SOP
-
       try {
-        final Future<Database> database = openDatabase(
+      final Future<Database> database = openDatabase(
           tempPath,
           onCreate: (dbref, version) {
             return dbref.execute(
@@ -94,20 +108,26 @@ class DatabaseHandler {
                 // Section 5: Login Information
                     "email TEXT, "
                     "password TEXT"
-                    ")"
+                    ")",
             );
           },
           version: 1,
         );
 
-        db = database;
-      } catch (_){}
+        if (db != null)
+          {
+            result = true;
+          }
 
-    }
-  else
-    {
-        openTheDatabase(tempPath);
-    }
+        db = database;
+      } catch (result)
+      {
+        if (result == false)
+        {
+          return databaseCreation_Optimizer();
+        }
+      }
+
 
     buildBaseDBData();
     // Just to check if table exists
@@ -137,12 +157,17 @@ class DatabaseHandler {
     Database database = await db;
     List<Map> result = await database.rawQuery('SELECT * FROM LtcPersonnelInfo WHERE email=?', [email]);
     // TODO: Get password from result to return for login authorization
+    String checker = result.toString();
+    if (checker.contains("password"))
+      {
+
+      }
   }
 
   void callConversion() async
   {
-    dbPath = await getDatabasesPath();
-    tempPath = join(dbPath, dbName);
+//    dbPath = await getDatabasesPath();
+//   tempPath = join(dbPath, dbName);
 
     bool result = await databaseExists(tempPath);
     if (result == true)
@@ -151,7 +176,9 @@ class DatabaseHandler {
         // Doesn't work right now due to null db data
         var dbToConvert = await db;
         var dbConversionUnit = await dbToConvert.query(dbTableName);
+        // TODO; Fix character limit to properly print out
         String printo = mapListToCsv(dbConversionUnit);
+ //       print(printo);
         // Create file to send db data into
         File file = await new File(dbPath + '/test.csv');
         file.create(recursive: true);
@@ -168,10 +195,10 @@ class DatabaseHandler {
   void buildBaseDBData()
   {
     var fDS = new FullDetailSet();
-    fDS.sortPersonalData('Test Man', '281A', '5 Cresent Ave', '84569018', '67889231', DateTime.now().toString(), DateTime.now().toString(), DateTime.now().toString(), DateTime.now().toString(), 'A2', ReligionType.Christianity.toString(), RaceType.Chinese.toString(), BloodType.AB_PLUS.toString(), 'None', 'None', 'Testing Man', '97810781', '5 Cresent Ave', VocationType.TO.toString(), 'Stay In', 'None');
-    fDS.sortTrainingData('Basic Transport', '290121-210221', 1, 'MID46112', VehLicenseType.class3.toString(), DateTime.now().toString());
+    fDS.sortPersonalData('Test Man', '281A', '5 Cresent Ave', '84569018', '67889231', dtGetter.Date(DateTime.now()), dtGetter.Date(DateTime.now()), dtGetter.Date(DateTime.now()), dtGetter.Date(DateTime.now()), 'A2', ReligionType.Christianity.toString(), RaceType.Chinese.toString(), BloodType.AB_PLUS.toString(), 'None', 'None', 'Testing Man', '97810781', '5 Cresent Ave', VocationType.TO.toString(), 'Stay In', 'None');
+    fDS.sortTrainingData('Basic Transport', '290121-210221', 1, 'MID46112', VehLicenseType.class3.toString(), dtGetter.Date(DateTime.now()));
     fDS.sortEducationData('Junior College', 'Pure Sciences', 'Soccer Club', 'K.Ickers');
-    fDS.sortMiscData('Drinking; Driving; Drink Driving', VehLicenseType.class2.toString(), 'M2811345', DateTime.now().toString(), TrueOrFalseType.True.toString(), TrueOrFalseType.True.toString(), 'FAG69781023', ClothesSizeType.M.toString(), 70, 100, 9);
+    fDS.sortMiscData('Drinking; Driving; Drink Driving', VehLicenseType.class2.toString(), 'M2811345', dtGetter.Date(DateTime.now()), TrueOrFalseType.True.toString(), TrueOrFalseType.True.toString(), 'FAG69781023', ClothesSizeType.M.toString(), 70, 100, 9);
     fDS.loginCredentials = new LoginCredential(username: "test@email.com", password: "123");
     insertNewData(fDS);
   //  for (int i = 0; i < 4; i++)
