@@ -12,7 +12,7 @@ class _VehicleBookOutPageState extends State<VehicleBookOutPage> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: Text(
-          "Vehicle Bookout",
+          "Vehicle Book Out",
           style: TextStyle(color: Colors.black),
         ),
         centerTitle: true,

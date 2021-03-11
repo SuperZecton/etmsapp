@@ -141,7 +141,7 @@ class _TrainingRegistrationPageState extends State<TrainingRegistrationPage> {
                 _militaryLicenseController.text,
                 _militaryLicenseTypeController.text,
                 _doiController.text);
-            Navigator.pushNamed(context, '/edureg');
+            Navigator.pushNamed(context, '/educationReg');
           });
         },
         child: Container(

@@ -2,7 +2,7 @@
 import 'dart:async';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:ltcapp/utils/login_data_handler.dart';
+import 'package:ltcapp/features/login/model/login_credentials.dart';
 
 
 /* Thought I had something with this

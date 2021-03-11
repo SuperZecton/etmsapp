@@ -136,7 +136,7 @@ class _HomePageState extends State<HomePage> {
                             style: TextStyle(color: Colors.black45)),
                       ]),
                 ),
-                onTap: () => Navigator.pushNamed(context, '/bookinout')),
+                onTap: () => Navigator.pushNamed(context, '/bookInOut')),
             _buildTile(
               Padding(
                 padding: const EdgeInsets.all(24.0),
@@ -160,7 +160,7 @@ class _HomePageState extends State<HomePage> {
                               fontSize: 22.0)),
                     ]),
               ),
-              onTap: () => Navigator.pushNamed(context, '/vehiclebookout'),
+              onTap: () => Navigator.pushNamed(context, '/vehicleManagement'),
             ),
             _buildTile(
               Padding(
@@ -313,12 +313,12 @@ class _HomePageState extends State<HomePage> {
         borderRadius: BorderRadius.circular(12.0),
         shadowColor: Color(0x802196F3),
         child: Container(
-          decoration: BoxDecoration(
+          /*decoration: BoxDecoration(
               border: Border.all(
                 color: Colors.black,
                 width: 2,
               ),
-              borderRadius: BorderRadius.circular(12.0)),
+              borderRadius: BorderRadius.circular(12.0)),*/
           child: InkWell(
               // Do onTap() if it isn't null, otherwise do print()
               onTap: onTap != null

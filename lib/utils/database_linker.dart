@@ -8,7 +8,7 @@ import 'package:csv/csv.dart';
 import 'dart:typed_data';
 import 'package:flutter/services.dart';
 import 'individual_identity.dart';
-import 'login_data_handler.dart';
+import 'package:ltcapp/features/login/model/login_credentials.dart';
 import 'dart:io';
 import 'DateAndTimeGetter.dart';
 import 'package:http/http.dart' as http;
@@ -199,7 +199,7 @@ class DatabaseHandler {
     fDS.sortTrainingData('Basic Transport', '290121-210221', 1, 'MID46112', VehLicenseType.class3.toString(), dtGetter.Date(DateTime.now()));
     fDS.sortEducationData('Junior College', 'Pure Sciences', 'Soccer Club', 'K.Ickers');
     fDS.sortMiscData('Drinking; Driving; Drink Driving', VehLicenseType.class2.toString(), 'M2811345', dtGetter.Date(DateTime.now()), TrueOrFalseType.True.toString(), TrueOrFalseType.True.toString(), 'FAG69781023', ClothesSizeType.M.toString(), 70, 100, 9);
-    fDS.loginCredentials = new LoginCredential(username: "test@email.com", password: "123");
+    fDS.loginCredentials = LoginCredential(username: "test@email.com", password: "123");
     insertNewData(fDS);
   //  for (int i = 0; i < 4; i++)
   //    {

@@ -320,7 +320,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 "Stay In",
                 _medicalConditionController.text,
               );
-              Navigator.pushNamed(context, '/trgreg');
+              Navigator.pushNamed(context, '/trainingReg');
             } else {
               showDialog(
                   context: context,

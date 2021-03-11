@@ -97,7 +97,7 @@ class _WelcomePageState extends State<WelcomePage> {
       onTap: () {
         setState(() {
           fDSTemp = new FullDetailSet();
-          Navigator.pushNamed(context, '/signup',);
+          Navigator.pushNamed(context, '/signUp',);
         });
       },
       child: Container(

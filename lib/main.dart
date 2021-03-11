@@ -6,6 +6,7 @@ import 'package:ltcapp/features/login/viewmodel/LoginPageVM.dart';
 import 'package:ltcapp/utils/database_linker.dart';
 import 'package:ltcapp/core/config/routes.dart';
 import 'package:provider/provider.dart';
+import 'package:ltcapp/core/config/router.dart';
 
 //void main() => runApp(MyApp());
 
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'LTC App',
         initialRoute: '/',
-        routes: routes,
+        onGenerateRoute: Routers.generateRoute,
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),

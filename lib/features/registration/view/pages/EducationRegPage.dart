@@ -120,7 +120,7 @@ class _EducationRegistrationPageState extends State<EducationRegistrationPage> {
                 _streamCourseController.text,
                 _ccaController.text,
                 _schoolController.text);
-            Navigator.pushNamed(context, '/othrreg');
+            Navigator.pushNamed(context, '/otherReg');
 
           });
         },
