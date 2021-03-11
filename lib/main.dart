@@ -10,11 +10,11 @@ import 'package:ltcapp/core/config/router.dart';
 
 //void main() => runApp(MyApp());
 
-DatabaseHandler mainHandle = new DatabaseHandler(dbName: "main_personnel.db");
+DatabaseHandler personnelDBHandle = new DatabaseHandler(dbName: "main_personnel.db", dbTableName: "LtcPersonnelInfo");
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  mainHandle.databaseCreation_Optimizer();
+  personnelDBHandle.databaseCreation_Optimizer();
   runApp(MyApp());
 
 }

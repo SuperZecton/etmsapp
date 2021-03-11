@@ -8,6 +8,7 @@ import 'package:csv/csv.dart';
 import 'dart:typed_data';
 import 'package:flutter/services.dart';
 import 'individual_identity.dart';
+import 'individual_vehicle.dart';
 import 'package:ltcapp/features/login/model/login_credentials.dart';
 import 'dart:io';
 import 'DateAndTimeGetter.dart';
@@ -23,7 +24,7 @@ class DatabaseHandler {
   String tempPath;
 
   String dbName;
-  final String dbTableName = 'LtcPersonnelInfo';
+  String dbTableName;
 
   List fetchedData = [];
 
@@ -31,12 +32,14 @@ class DatabaseHandler {
 
   void fetchDatabaseFromServer(String url) async
   {
+
     final response = await http.get(url);
 
     if (response.statusCode == 200)
-      {
-          fetchedData = json.decode(response.body);
-      }
+    {
+      fetchedData = json.decode(response.body);
+      // TODO; Created auto data importer for db populating
+    }
   }
 
   void setDatabasePath(String path)
@@ -49,15 +52,24 @@ class DatabaseHandler {
     dbPath = await getDatabasesPath();
     tempPath = join(dbPath, dbName);
 
-    bool result = false;
+    bool result = await databaseExists(tempPath);
 
-      // First time launch SOP
-      try {
-      final Future<Database> database = openDatabase(
-          tempPath,
-          onCreate: (dbref, version) {
-            return dbref.execute(
-              // The pain
+    if (result == true)
+    {
+      deleteDatabase(tempPath);
+      result = false;
+    }
+
+    // First time launch SOP
+    switch (dbTableName)
+        {
+      case 'LtcPersonnelInfo':
+        try {
+          final Future<Database> database = openDatabase(
+            tempPath,
+            onCreate: (dbref, version) {
+              return dbref.execute(
+                // The pain
                 "CREATE TABLE $dbTableName("
                 // Section 1: Personal Particulars
                     "fullName TEXT PRIMARY KEY, "
@@ -109,24 +121,87 @@ class DatabaseHandler {
                     "email TEXT, "
                     "password TEXT"
                     ")",
-            );
-          },
-          version: 1,
-        );
+              );
+            },
+            version: 1,
+          );
 
-        if (db != null)
+          if (db != null)
           {
             result = true;
           }
 
-        db = database;
-      } catch (result)
-      {
-        if (result == false)
+          db = database;
+        } catch (result)
         {
-          return databaseCreation_Optimizer();
+          if (result == false)
+          {
+            return databaseCreation_Optimizer();
+          }
         }
-      }
+        break;
+      case 'LtcVehInfo':
+        try {
+          final Future<Database> database = openDatabase(
+            tempPath,
+            onCreate: (dbref, version) {
+              return dbref.execute(
+                "CREATE TABLE $dbTableName("
+                // Veh Info Columns
+                    "midPlate TEXT PRIMARY KEY, "
+                    "vehType TEXT, "
+                    "classType TEXT, "
+                    "currentOdo TEXT"
+                    ")",
+              );
+            },
+            version: 1,
+          );
+
+          if (db != null)
+          {
+            result = true;
+          }
+
+          db = database;
+        } catch (result)
+        {
+          if (result == false)
+          {
+            return databaseCreation_Optimizer();
+          }
+        }
+        break;
+      case 'LtcVehTripsInfo':
+        try {
+          final Future<Database> database = openDatabase(
+            tempPath,
+            onCreate: (dbref, version) {
+              return dbref.execute(
+                "CREATE TABLE $dbTableName("
+                // Veh Trips Info Columns
+                    ""
+                    ")",
+              );
+            },
+            version: 1,
+          );
+
+          if (db != null)
+          {
+            result = true;
+          }
+
+          db = database;
+        } catch (result)
+        {
+          if (result == false)
+          {
+            return databaseCreation_Optimizer();
+          }
+        }
+        break;
+    }
 
 
     buildBaseDBData();
@@ -140,16 +215,35 @@ class DatabaseHandler {
     db = await openDatabase(path);
   }
 
-  Future<void> insertNewData(FullDetailSet fullDetailSet) async
+  Future<void> insertNewData(var theData) async
   {
+
     if (db == null)
     {
       return;
     }
 
-    final Database database = await db;
+    if (theData is FullDetailSet)
+    {
+      FullDetailSet fDS = theData;
 
-    await database.insert(dbTableName, fullDetailSet.toMap(), conflictAlgorithm: ConflictAlgorithm.replace);
+      final Database database = await db;
+
+      await database.insert(dbTableName, fDS.toMap(), conflictAlgorithm: ConflictAlgorithm.replace);
+    }
+
+    else if (theData is FullVehicleDetailSet)
+    {
+      FullVehicleDetailSet fVDS = theData;
+
+      final Database database = await db;
+
+      await database.insert(dbTableName, fVDS.toMap(), conflictAlgorithm: ConflictAlgorithm.replace);
+    }
+
+
+
+
   }
 
   Future<LoginCredential> getLoginCreds(String email) async
@@ -159,9 +253,9 @@ class DatabaseHandler {
     // TODO: Get password from result to return for login authorization
     String checker = result.toString();
     if (checker.contains("password"))
-      {
+    {
 
-      }
+    }
   }
 
   void callConversion() async
@@ -171,42 +265,56 @@ class DatabaseHandler {
 
     bool result = await databaseExists(tempPath);
     if (result == true)
-      {
-        // Send database data into a string
-        // Doesn't work right now due to null db data
-        var dbToConvert = await db;
-        var dbConversionUnit = await dbToConvert.query(dbTableName);
-        // TODO; Fix character limit to properly print out
-        String printo = mapListToCsv(dbConversionUnit);
- //       print(printo);
-        // Create file to send db data into
-        File file = await new File(dbPath + '/test.csv');
-        file.create(recursive: true);
-        file.writeAsString(printo);
-        // Spit the data written into file out into console
-        var read = new File(dbPath + '/test.csv').readAsString();
-        String content = await read;
-        print(content);
+    {
+      // Send database data into a string
+      // Doesn't work right now due to null db data
+      var dbToConvert = await db;
+      var dbConversionUnit = await dbToConvert.query(dbTableName);
+      // TODO; Fix character limit to properly print out
+      String printo = mapListToCsv(dbConversionUnit);
+      //       print(printo);
+      // Create file to send db data into
+      File file = await new File(dbPath + '/test.csv');
+      file.create(recursive: true);
+      file.writeAsString(printo);
+      // Spit the data written into file out into console
+      var read = new File(dbPath + '/test.csv').readAsString();
+      String content = await read;
+      print(content);
 
-      }
+    }
 
   }
 
   void buildBaseDBData()
   {
-    var fDS = new FullDetailSet();
-    fDS.sortPersonalData('Test Man', '281A', '5 Cresent Ave', '84569018', '67889231', dtGetter.Date(DateTime.now()), dtGetter.Date(DateTime.now()), dtGetter.Date(DateTime.now()), dtGetter.Date(DateTime.now()), 'A2', ReligionType.Christianity.toString(), RaceType.Chinese.toString(), BloodType.AB_PLUS.toString(), 'None', 'None', 'Testing Man', '97810781', '5 Cresent Ave', VocationType.TO.toString(), 'Stay In', 'None');
-    fDS.sortTrainingData('Basic Transport', '290121-210221', 1, 'MID46112', VehLicenseType.class3.toString(), dtGetter.Date(DateTime.now()));
-    fDS.sortEducationData('Junior College', 'Pure Sciences', 'Soccer Club', 'K.Ickers');
-    fDS.sortMiscData('Drinking; Driving; Drink Driving', VehLicenseType.class2.toString(), 'M2811345', dtGetter.Date(DateTime.now()), TrueOrFalseType.True.toString(), TrueOrFalseType.True.toString(), 'FAG69781023', ClothesSizeType.M.toString(), 70, 100, 9);
-    fDS.loginCredentials = LoginCredential(username: "test@email.com", password: "123");
-    insertNewData(fDS);
-  //  for (int i = 0; i < 4; i++)
-  //    {
-  //      fDS.personalDataSet.fullName = fDS.personalDataSet.fullName + i.toString();
-  //      insertNewData(fDS);
-  //    }
+    switch (dbTableName)
+    {
+      case 'LtcPersonnelInfo':
+        var fDS = new FullDetailSet();
+        fDS.sortPersonalData('Test Man', '281A', '5 Cresent Ave', '84569018', '67889231', dtGetter.Date(DateTime.now()), dtGetter.Date(DateTime.now()), dtGetter.Date(DateTime.now()), dtGetter.Date(DateTime.now()), 'A2', ReligionType.Christianity.toString(), RaceType.Chinese.toString(), BloodType.AB_PLUS.toString(), 'None', 'None', 'Testing Man', '97810781', '5 Cresent Ave', VocationType.TO.toString(), 'Stay In', 'None');
+        fDS.sortTrainingData('Basic Transport', '290121-210221', 1, 'MID46112', VehLicenseType.class3.toString(), dtGetter.Date(DateTime.now()));
+        fDS.sortEducationData('Junior College', 'Pure Sciences', 'Soccer Club', 'K.Ickers');
+        fDS.sortMiscData('Drinking; Driving; Drink Driving', VehLicenseType.class2.toString(), 'M2811345', dtGetter.Date(DateTime.now()), TrueOrFalseType.True.toString(), TrueOrFalseType.True.toString(), 'FAG69781023', ClothesSizeType.M.toString(), 70, 100, 9);
+        fDS.loginCredentials = new LoginCredential(username: "test@email.com", password: "123");
+        insertNewData(fDS);
+        break;
+      case 'LtcVehInfo':
+        var fVDS = new FullVehicleDetailSet();
+        fVDS.sortData('S69420', VehType.AType.toString(), VehClassType.BType.toString(), '696969');
+        insertNewData(fVDS);
+        break;
+      case 'LtcVehTripsInfo':
+        break;
+    }
+
+    //  for (int i = 0; i < 4; i++)
+    //    {
+    //      fDS.personalDataSet.fullName = fDS.personalDataSet.fullName + i.toString();
+    //      insertNewData(fDS);
+    //    }
+
   }
 
-  DatabaseHandler({this.dbName});
+  DatabaseHandler({this.dbName, this.dbTableName});
 }
