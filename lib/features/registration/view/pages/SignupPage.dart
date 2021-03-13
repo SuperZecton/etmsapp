@@ -320,6 +320,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 "Stay In",
                 _medicalConditionController.text,
               );
+              fDSTemp.sortLoginData(_emailController.text, _passwordController.text);
               Navigator.pushNamed(context, '/trainingReg');
             } else {
               showDialog(

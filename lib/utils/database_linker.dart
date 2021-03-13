@@ -53,158 +53,165 @@ class DatabaseHandler {
     tempPath = join(dbPath, dbName);
 
     bool result = await databaseExists(tempPath);
-
-    if (result == true)
+    var tempDB = await openDatabase(tempPath);
+    int count = 0;
+    try {
+      count = Sqflite.firstIntValue(
+          await tempDB.rawQuery('SELECT COUNT(*) FROM $dbTableName'));
+    }catch(count)
+  {
+    deleteDatabase(tempPath);
+  }
+    if (count == 1)
     {
+      print(count.toString());
+      print("Less than or exactly 1 element detected. Resetting.");
       deleteDatabase(tempPath);
       result = false;
+      return databaseCreation_Optimizer();
     }
+    else
+      {
+      // First time launch SOP
+      switch (dbTableName) {
+        case 'LtcPersonnelInfo':
+          try {
+            final Future<Database> database = openDatabase(
+              tempPath,
+              onCreate: (dbref, version) {
+                return dbref.execute(
+                  // The pain
+                  "CREATE TABLE $dbTableName("
+                  // Section 1: Personal Particulars
+                      "fullName TEXT PRIMARY KEY, "
+                      "nricLast4Digits TEXT, "
+                      "fullHomeAddress TEXT, "
+                      "handphoneNumber TEXT, "
+                      "homephoneNumber TEXT, "
+                      "dateOfBirth TEXT, "
+                      "dateOfEnlistment TEXT, "
+                      "dateOfORD TEXT, "
+                      "dateOfPostIn TEXT, "
+                      "pesType TEXT, "
+                      "religion TEXT, "
+                      "race TEXT, "
+                      "bloodGroup TEXT, "
+                      "drugAllergy TEXT, "
+                      "foodAllergy TEXT, "
+                      "NOKDetailfullName TEXT, "
+                      "NOKDetailcontactNumber TEXT, "
+                      "NOKDetailfullAddress TEXT, "
+                      "vocationType TEXT, "
+                      "stayInstayOut TEXT, "
+                      "medicalConditions TEXT, "
+                  // Section 2: Training Information
+                      "trainingFrame TEXT, "
+                      "trainingPeriod TEXT, "
+                      "passAttempts INTEGER, "
+                      "militaryLicenseNo TEXT, "
+                      "militaryLicenseType TEXT, "
+                      "milLicenseDateOfIssue TEXT, "
+                  // Section 3: Education
+                      "educationLevel TEXT, "
+                      "streamcourseName TEXT, "
+                      "ccaOptional TEXT, "
+                      "schName TEXT, "
+                  // Section 4: Other Information
+                      "hobbiesInterest TEXT, "
+                      "civillianLicenseType TEXT, "
+                      "civillianLicenseNumber TEXT, "
+                      "civillianLicenseDateOfIssue TEXT, "
+                      "hasDoneDefensiveCourse TEXT, "
+                      "hasPersonalVehicle TEXT, "
+                      "personalVehiclePlateNumber TEXT, "
+                      "tShirtSize TEXT, "
+                      "no3sizeUpperTorso INTEGER, "
+                      "no3sizeWaist INTEGER, "
+                      "no3sizeShoes INTEGER, "
+                  // Section 5: Login Information
+                      "email TEXT, "
+                      "password TEXT"
+                      ")",
+                );
+              },
+              version: 1,
+            );
 
-    // First time launch SOP
-    switch (dbTableName)
-        {
-      case 'LtcPersonnelInfo':
-        try {
-          final Future<Database> database = openDatabase(
-            tempPath,
-            onCreate: (dbref, version) {
-              return dbref.execute(
-                // The pain
-                "CREATE TABLE $dbTableName("
-                // Section 1: Personal Particulars
-                    "fullName TEXT PRIMARY KEY, "
-                    "nricLast4Digits TEXT, "
-                    "fullHomeAddress TEXT, "
-                    "handphoneNumber TEXT, "
-                    "homephoneNumber TEXT, "
-                    "dateOfBirth TEXT, "
-                    "dateOfEnlistment TEXT, "
-                    "dateOfORD TEXT, "
-                    "dateOfPostIn TEXT, "
-                    "pesType TEXT, "
-                    "religion TEXT, "
-                    "race TEXT, "
-                    "bloodGroup TEXT, "
-                    "drugAllergy TEXT, "
-                    "foodAllergy TEXT, "
-                    "NOKDetailfullName TEXT, "
-                    "NOKDetailcontactNumber TEXT, "
-                    "NOKDetailfullAddress TEXT, "
-                    "vocationType TEXT, "
-                    "stayInstayOut TEXT, "
-                    "medicalConditions TEXT, "
-                // Section 2: Training Information
-                    "trainingFrame TEXT, "
-                    "trainingPeriod TEXT, "
-                    "passAttempts INTEGER, "
-                    "militaryLicenseNo TEXT, "
-                    "militaryLicenseType TEXT, "
-                    "milLicenseDateOfIssue TEXT, "
-                // Section 3: Education
-                    "educationLevel TEXT, "
-                    "streamcourseName TEXT, "
-                    "ccaOptional TEXT, "
-                    "schName TEXT, "
-                // Section 4: Other Information
-                    "hobbiesInterest TEXT, "
-                    "civillianLicenseType TEXT, "
-                    "civillianLicenseNumber TEXT, "
-                    "civillianLicenseDateOfIssue TEXT, "
-                    "hasDoneDefensiveCourse TEXT, "
-                    "hasPersonalVehicle TEXT, "
-                    "personalVehiclePlateNumber TEXT, "
-                    "tShirtSize TEXT, "
-                    "no3sizeUpperTorso INTEGER, "
-                    "no3sizeWaist INTEGER, "
-                    "no3sizeShoes INTEGER, "
-                // Section 5: Login Information
-                    "email TEXT, "
-                    "password TEXT"
-                    ")",
-              );
-            },
-            version: 1,
-          );
+            if (db != null) {
+              result = true;
+            }
 
-          if (db != null)
-          {
-            result = true;
+            db = database;
+          } catch (result) {
+            if (result == false) {
+              return databaseCreation_Optimizer();
+            }
           }
+          break;
+        case 'LtcVehInfo':
+          try {
+            final Future<Database> database = openDatabase(
+              tempPath,
+              onCreate: (dbref, version) {
+                return dbref.execute(
+                  "CREATE TABLE $dbTableName("
+                  // Veh Info Columns
+                      "midPlate TEXT PRIMARY KEY, "
+                      "vehType TEXT, "
+                      "classType TEXT, "
+                      "currentOdo TEXT"
+                      ")",
+                );
+              },
+              version: 1,
+            );
 
-          db = database;
-        } catch (result)
-        {
-          if (result == false)
-          {
-            return databaseCreation_Optimizer();
-          }
-        }
-        break;
-      case 'LtcVehInfo':
-        try {
-          final Future<Database> database = openDatabase(
-            tempPath,
-            onCreate: (dbref, version) {
-              return dbref.execute(
-                "CREATE TABLE $dbTableName("
-                // Veh Info Columns
-                    "midPlate TEXT PRIMARY KEY, "
-                    "vehType TEXT, "
-                    "classType TEXT, "
-                    "currentOdo TEXT"
-                    ")",
-              );
-            },
-            version: 1,
-          );
+            if (db != null) {
+              result = true;
+            }
 
-          if (db != null)
-          {
-            result = true;
+            db = database;
+          } catch (result) {
+            if (result == false) {
+              return databaseCreation_Optimizer();
+            }
           }
+          break;
+        case 'LtcVehTripsInfo':
+          try {
+            final Future<Database> database = openDatabase(
+              tempPath,
+              onCreate: (dbref, version) {
+                return dbref.execute(
+                  "CREATE TABLE $dbTableName("
+                  // Veh Trips Info Columns
+                      ""
+                      ")",
+                );
+              },
+              version: 1,
+            );
 
-          db = database;
-        } catch (result)
-        {
-          if (result == false)
-          {
-            return databaseCreation_Optimizer();
-          }
-        }
-        break;
-      case 'LtcVehTripsInfo':
-        try {
-          final Future<Database> database = openDatabase(
-            tempPath,
-            onCreate: (dbref, version) {
-              return dbref.execute(
-                "CREATE TABLE $dbTableName("
-                // Veh Trips Info Columns
-                    ""
-                    ")",
-              );
-            },
-            version: 1,
-          );
+            if (db != null) {
+              result = true;
+            }
 
-          if (db != null)
-          {
-            result = true;
+            db = database;
+          } catch (result) {
+            if (result == false) {
+              return databaseCreation_Optimizer();
+            }
           }
-
-          db = database;
-        } catch (result)
-        {
-          if (result == false)
-          {
-            return databaseCreation_Optimizer();
-          }
-        }
-        break;
+          break;
+      }
+      if (count == 0)
+      {
+        buildBaseDBData();
+      }
     }
 
 
-    buildBaseDBData();
+
     // Just to check if table exists
     callConversion();
   }
@@ -230,6 +237,7 @@ class DatabaseHandler {
       final Database database = await db;
 
       await database.insert(dbTableName, fDS.toMap(), conflictAlgorithm: ConflictAlgorithm.replace);
+
     }
 
     else if (theData is FullVehicleDetailSet)
@@ -239,10 +247,11 @@ class DatabaseHandler {
       final Database database = await db;
 
       await database.insert(dbTableName, fVDS.toMap(), conflictAlgorithm: ConflictAlgorithm.replace);
+
     }
 
 
-
+  callConversion();
 
   }
 
@@ -270,15 +279,16 @@ class DatabaseHandler {
       // Doesn't work right now due to null db data
       var dbToConvert = await db;
       var dbConversionUnit = await dbToConvert.query(dbTableName);
+      print((Sqflite.firstIntValue(await dbToConvert.rawQuery('SELECT COUNT(*) FROM $dbTableName'))).toString() + 'Rows');
       // TODO; Fix character limit to properly print out
       String printo = mapListToCsv(dbConversionUnit);
       //       print(printo);
       // Create file to send db data into
-      File file = await new File(dbPath + '/test.csv');
+      File file = await new File(dbPath + '/$dbTableName.csv');
       file.create(recursive: true);
       file.writeAsString(printo);
       // Spit the data written into file out into console
-      var read = new File(dbPath + '/test.csv').readAsString();
+      var read = new File(dbPath + '/$dbTableName.csv').readAsString();
       String content = await read;
       print(content);
 
