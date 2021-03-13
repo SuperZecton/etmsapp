@@ -21,10 +21,10 @@ class VehClassType
   const VehClassType._internal(this.value);
   toString() => '$value';
   // TODO; Fill in with correct values
-  static const AType = const VehClassType._internal("A Type");
-  static const BType = const VehClassType._internal("B Type");
+  static const Class3 = const VehClassType._internal("Class 3");
+  static const Class4 = const VehClassType._internal("Class 4");
 
-  static List<VehClassType> list = [AType, BType];
+  static List<VehClassType> list = [Class3, Class4];
   static List<VehClassType> getValues() => list;
 }
 

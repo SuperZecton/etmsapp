@@ -2,9 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ltcapp/features/home/viewmodel/HomePageViewModel.dart';
 import 'package:ltcapp/features/login/viewmodel/LoginPageVM.dart';
+import 'package:ltcapp/features/registration/viewmodel/RegistrationViewModel.dart';
 
 import 'package:ltcapp/utils/database_linker.dart';
-import 'package:ltcapp/core/config/routes.dart';
+
 import 'package:provider/provider.dart';
 import 'package:ltcapp/core/config/router.dart';
 
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<LoginPageViewModel>(create: (context) =>LoginPageViewModel()),
         ChangeNotifierProvider<HomePageViewModel>(create: (context) => HomePageViewModel()),
+        ChangeNotifierProvider<RegistrationViewModel>(create: (context) => RegistrationViewModel()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

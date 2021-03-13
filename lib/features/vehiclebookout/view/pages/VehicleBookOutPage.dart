@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ltcapp/features/vehiclebookout/view/widgets/vehicleBookOutCard.dart';
 
 class VehicleBookOutPage extends StatefulWidget {
   @override
@@ -17,7 +18,19 @@ class _VehicleBookOutPageState extends State<VehicleBookOutPage> {
         ),
         centerTitle: true,
       ),
-      body: Container(),
+      body: Container(
+        width: MediaQuery.of(context).size.width,
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              VehicleBookOutCard(),
+
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

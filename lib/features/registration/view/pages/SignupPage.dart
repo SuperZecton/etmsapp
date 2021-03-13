@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:ltcapp/features/registration/viewmodel/RegistrationViewModel.dart';
 import 'package:ltcapp/main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/core/config/globals.dart';
@@ -10,6 +11,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ltcapp/utils/individual_identity.dart';
 import 'package:ltcapp/utils/extensions.dart';
 import 'package:ltcapp/core/widgets/widgets.dart';
+import 'package:provider/provider.dart';
 import '../../../login/view/pages/WelcomePage.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -19,38 +21,10 @@ class SignUpPage extends StatefulWidget {
   _SignUpPageState createState() => _SignUpPageState();
 }
 
-
 class _SignUpPageState extends State<SignUpPage> {
-  final _formKey = GlobalKey<FormState>();
-  final _nameController = TextEditingController();
-  final _nricController = TextEditingController();
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
-  final _addressController = TextEditingController();
-  final _numberController = TextEditingController();
-  final _homeNumberController = TextEditingController();
-
-  final _drugAllergyController = TextEditingController();
-  final _foodAllergyController = TextEditingController();
-  final _nokController = TextEditingController();
-  final _nokAddressController = TextEditingController();
-  final _nokNumberController = TextEditingController();
-
-  final _medicalConditionController = TextEditingController();
-  final _doeController = TextEditingController();
-  final _dobController = TextEditingController();
-  final _ordController = TextEditingController();
-  final _dopiController = TextEditingController();
-
-  PESType _currentPESValue;
-  RaceType _currentRaceValue;
-  ReligionType _currentReligionValue;
-  BloodType _currentBloodValue;
-  VocationType _currentVocationValue;
-  StayInStayOutType _currentStayInStayOutValue;
-
   @override
   Widget build(BuildContext context) {
+    final vm = Provider.of<RegistrationViewModel>(context, listen: false);
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Container(
@@ -69,14 +43,8 @@ class _SignUpPageState extends State<SignUpPage> {
         ),
         child: Stack(
           children: <Widget>[
-            /*Positioned(
-              top: -MediaQuery.of(context).size.height * .15,
-              right: -MediaQuery.of(context).size.width * .4,
-              child: BezierContainer(),
-            ),*/ //TODO: Make this nicer
-
             Form(
-              key: _formKey,
+              key: vm.signUpFormKey,
               child: ListView(
                 children: <Widget>[
                   SizedBox(
@@ -101,7 +69,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         child: RegistrationTextField(
                           "Full Name",
                           Icons.perm_identity_rounded,
-                          _nameController,
+                          vm.nameController,
                           validationAction: (String input) => input
                                   .isValidName()
                               ? null
@@ -112,7 +80,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         child: RegistrationTextField(
                           "NRIC",
                           Icons.assessment,
-                          _nricController,
+                          vm.nricController,
                           helperText: "Last 4 characters only",
                           validationAction: (String input) =>
                               input.isValidNRIC()
@@ -126,23 +94,23 @@ class _SignUpPageState extends State<SignUpPage> {
                   RegistrationTextField(
                     "Email Address",
                     Icons.alternate_email,
-                    _emailController,
+                    vm.emailController,
                     validationAction: (String input) =>
                         input.isValidEmail() ? null : "Enter valid email",
                   ),
                   RegistrationTextField(
                     "Password",
                     FontAwesomeIcons.key,
-                    _passwordController,
+                    vm.passwordController,
                     isPassword: true,
                   ),
                   RegistrationTextField(
-                      "Home Address", Icons.home, _addressController,
+                      "Home Address", Icons.home, vm.addressController,
                       helperText: "Blk No, Street, Floor, Postal Code"),
                   RegistrationTextField(
                     "Phone Number",
                     Icons.phone_android,
-                    _numberController,
+                    vm.numberController,
                     validationAction: (String input) =>
                         input.isValidPhoneNumber()
                             ? null
@@ -151,65 +119,65 @@ class _SignUpPageState extends State<SignUpPage> {
                   RegistrationTextField(
                     "Home Number",
                     Icons.phone,
-                    _homeNumberController,
+                    vm.homeNumberController,
                     validationAction: (String input) =>
                         input.isValidPhoneNumber()
                             ? null
                             : "Enter a valid number",
                   ),
                   DateTextField("Date of Birth", FontAwesomeIcons.calendar,
-                      _dobController),
+                      vm.dobController),
                   DateTextField("Date of Enlistment",
-                      FontAwesomeIcons.calendarAlt, _doeController),
+                      FontAwesomeIcons.calendarAlt, vm.doeController),
                   DateTextField(
-                      "ORD Date", Icons.calendar_today, _ordController),
-                  DateTextField("Date of posted in", Icons.calendar_today,
-                      _dopiController),
+                      "ORD Date", Icons.calendar_today, vm.ordController),
+                  DateTextField("Date of posting", Icons.calendar_today,
+                      vm.dopController),
                   DropDownField<PESType>(
                       hint: "PES",
                       values: PESType.getValues(),
-                      value: _currentPESValue,
+                      value: vm.currentPESValue,
                       icon: Icons.fitness_center,
-                      onChanged: (value) => _currentPESValue = value),
+                      onChanged: (value) => vm.currentPESValue = value),
                   DropDownField<RaceType>(
                       hint: "Race",
                       values: RaceType.getValues(),
-                      value: _currentRaceValue,
+                      value: vm.currentRaceValue,
                       icon: Icons.recent_actors,
-                      onChanged: (value) => _currentRaceValue = value),
+                      onChanged: (value) => vm.currentRaceValue = value),
                   DropDownField<ReligionType>(
                       hint: "Religion",
                       values: ReligionType.getValues(),
-                      value: _currentReligionValue,
+                      value: vm.currentReligionValue,
                       icon: FontAwesomeIcons.syringe,
-                      onChanged: (value) => _currentReligionValue = value),
+                      onChanged: (value) => vm.currentReligionValue = value),
                   DropDownField<BloodType>(
                       hint: "Blood Group",
                       values: BloodType.getValues(),
-                      value: _currentBloodValue,
+                      value: vm.currentBloodValue,
                       icon: Icons.fitness_center,
-                      onChanged: (value) => _currentBloodValue = value),
+                      onChanged: (value) => vm.currentBloodValue = value),
                   RegistrationTextField("Drug Allergy",
-                      FontAwesomeIcons.tablets, _drugAllergyController),
+                      FontAwesomeIcons.tablets, vm.drugAllergyController),
                   RegistrationTextField("Food Allergy",
-                      FontAwesomeIcons.hamburger, _foodAllergyController),
+                      FontAwesomeIcons.hamburger, vm.foodAllergyController),
                   DropDownField<VocationType>(
                       hint: "Vocation",
                       values: VocationType.getValues(),
-                      value: _currentVocationValue,
+                      value: vm.currentVocationValue,
                       icon: FontAwesomeIcons.briefcase,
-                      onChanged: (value) => _currentVocationValue = value),
+                      onChanged: (value) => vm.currentVocationValue = value),
                   RegistrationTextField(
                       "Medical Condition",
                       FontAwesomeIcons.hospitalUser,
-                      _medicalConditionController),
+                      vm.medicalConditionController),
                   SizedBox(height: 20),
                   _nokTitle(),
                   SizedBox(height: 20),
                   RegistrationTextField(
                     "Next of Kin Name",
                     FontAwesomeIcons.userFriends,
-                    _nokController,
+                    vm.nokController,
                     validationAction: (String input) => input.isValidName()
                         ? null
                         : "Name cannot have numbers or special characters",
@@ -217,13 +185,13 @@ class _SignUpPageState extends State<SignUpPage> {
                   RegistrationTextField(
                     "Next of Kin Address",
                     FontAwesomeIcons.addressBook,
-                    _nokAddressController,
+                    vm.nokAddressController,
                     helperText: "Blk No, Street, Floor, Postal Code",
                   ),
                   RegistrationTextField(
                     "Next of Kin Number",
                     FontAwesomeIcons.phone,
-                    _nokNumberController,
+                    vm.nokNumberController,
                     validationAction: (String input) =>
                         input.isValidPhoneNumber()
                             ? null
@@ -290,37 +258,37 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   Widget _submitButton() {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 40),
-      child: InkWell(
-        onTap: () {
-          setState(() {
-            if (_formKey.currentState.validate()) {
-              _formKey.currentState.save();
+    return Consumer<RegistrationViewModel>(
+      builder: (context, vm, child) => Container(
+        padding: EdgeInsets.symmetric(horizontal: 40),
+        child: InkWell(
+          onTap: () {
+            if (vm.signUpFormKey.currentState.validate()) {
+              vm.signUpFormKey.currentState.save();
               fDSTemp.sortPersonalData(
-                _nameController.text,
-                _nricController.text,
-                _addressController.text,
-                _numberController.text,
-                _homeNumberController.text,
-                _dobController.text,
-                _doeController.text,
-                _ordController.text,
-                _dopiController.text,
-                _currentPESValue.toString(),
-                _currentReligionValue.toString(),
-                _currentRaceValue.toString(),
-                _currentBloodValue.toString(),
-                _drugAllergyController.text,
-                _foodAllergyController.text,
-                _nokController.text,
-                _nokNumberController.text,
-                _nokAddressController.text,
-                _currentVocationValue.toString(),
+                vm.nameController.text,
+                vm.nricController.text,
+                vm.addressController.text,
+                vm.numberController.text,
+                vm.homeNumberController.text,
+                vm.dobController.text,
+                vm.doeController.text,
+                vm.ordController.text,
+                vm.dopController.text,
+                vm.currentPESValue.toString(),
+                vm.currentReligionValue.toString(),
+                vm.currentRaceValue.toString(),
+                vm.currentBloodValue.toString(),
+                vm.drugAllergyController.text,
+                vm.foodAllergyController.text,
+                vm.nokController.text,
+                vm.nokNumberController.text,
+                vm.nokAddressController.text,
+                vm.currentVocationValue.toString(),
                 "Stay In",
-                _medicalConditionController.text,
+                vm.medicalConditionController.text,
               );
-              fDSTemp.sortLoginData(_emailController.text, _passwordController.text);
+              fDSTemp.sortLoginData(vm.emailController.text, vm.passwordController.text);
               Navigator.pushNamed(context, '/trainingReg');
             } else {
               showDialog(
@@ -338,19 +306,19 @@ class _SignUpPageState extends State<SignUpPage> {
                     );
                   });
             }
-          });
-        },
-        child: Container(
-          width: MediaQuery.of(context).size.width * 0.5,
-          padding: EdgeInsets.symmetric(vertical: 13),
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(5)),
-            color: Colors.blue,
-          ),
-          child: Text(
-            'Next page',
-            style: TextStyle(fontSize: 20, color: Colors.white),
+          },
+          child: Container(
+            width: MediaQuery.of(context).size.width * 0.5,
+            padding: EdgeInsets.symmetric(vertical: 13),
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(5)),
+              color: Colors.blue,
+            ),
+            child: Text(
+              'Next page',
+              style: TextStyle(fontSize: 20, color: Colors.white),
+            ),
           ),
         ),
       ),

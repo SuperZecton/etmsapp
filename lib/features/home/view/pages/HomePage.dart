@@ -13,9 +13,11 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   static final List<String> chartDropdownItems = [
-    'Last 7 days',
-    'Last month',
-    'Last year'
+    'Total',
+    'January',
+    'February',
+    'March',
+    'April',
   ];
   String actualDropdown = chartDropdownItems[0];
   int actualChart = 0;
@@ -28,15 +30,6 @@ class _HomePageState extends State<HomePage> {
         elevation: 2.0,
         backgroundColor: Colors.white,
         centerTitle: true,
-        leading: GestureDetector(
-          onTap: () => {
-            Navigator.pop(context),
-          },
-          child: Icon(
-            Icons.arrow_back_rounded,
-            color: Colors.black,
-          ),
-        ),
         title: Text('ETMS',
             style: GoogleFonts.montserrat(
                 color: Colors.black,
@@ -110,6 +103,55 @@ class _HomePageState extends State<HomePage> {
                           )))
                     ]),
               ),
+            ),
+            _buildTile(
+              Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text('Mileage',
+                                  style: TextStyle(
+                                      color: Colors.green, fontSize: 20.0)),
+                              Text('3012Km',
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 34.0)),
+                            ],
+                          ),
+                          DropdownButton(
+                              isDense: true,
+                              value: actualDropdown,
+                              onChanged: (String value) => setState(() {
+                                    actualDropdown = value;
+                                    actualChart = chartDropdownItems
+                                        .indexOf(value); // Refresh the chart
+                                  }),
+                              items: chartDropdownItems.map((String title) {
+                                return DropdownMenuItem(
+                                  value: title,
+                                  child: Text(title,
+                                      style: TextStyle(
+                                          color: Colors.blue,
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 14.0)),
+                                );
+                              }).toList())
+                        ],
+                      ),
+                      Padding(padding: EdgeInsets.only(bottom: 4.0)),
+                    ],
+                  )),
             ),
             _buildTile(
                 Padding(
@@ -213,54 +255,6 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             _buildTile(
-              Padding(
-                  padding: const EdgeInsets.all(24.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Text('Total Mileage',
-                                  style: TextStyle(color: Colors.green)),
-                              Text('3012Km',
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 34.0)),
-                            ],
-                          ),
-                          DropdownButton(
-                              isDense: true,
-                              value: actualDropdown,
-                              onChanged: (String value) => setState(() {
-                                    actualDropdown = value;
-                                    actualChart = chartDropdownItems
-                                        .indexOf(value); // Refresh the chart
-                                  }),
-                              items: chartDropdownItems.map((String title) {
-                                return DropdownMenuItem(
-                                  value: title,
-                                  child: Text(title,
-                                      style: TextStyle(
-                                          color: Colors.blue,
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 14.0)),
-                                );
-                              }).toList())
-                        ],
-                      ),
-                      Padding(padding: EdgeInsets.only(bottom: 4.0)),
-                    ],
-                  )),
-            ),
-            _buildTile(
                 Padding(
                   padding: const EdgeInsets.all(24.0),
                   child: Row(
@@ -295,11 +289,11 @@ class _HomePageState extends State<HomePage> {
           ],
           staggeredTiles: [
             StaggeredTile.extent(2, 110.0),
+            StaggeredTile.extent(2, 150.0),
             StaggeredTile.extent(1, 190.0),
             StaggeredTile.extent(1, 190.0),
             StaggeredTile.extent(1, 190.0),
             StaggeredTile.extent(1, 190.0),
-            StaggeredTile.extent(2, 220.0),
             StaggeredTile.extent(2, 110.0),
           ],
         ),
@@ -311,11 +305,11 @@ class _HomePageState extends State<HomePage> {
     return Material(
         elevation: 14.0,
         borderRadius: BorderRadius.circular(12.0),
-        shadowColor: Color(0x802196F3),
+        //shadowColor: Color(0x802196F3),
         child: Container(
           /*decoration: BoxDecoration(
               border: Border.all(
-                color: Colors.black,
+                color: Colors.black=
                 width: 2,
               ),
               borderRadius: BorderRadius.circular(12.0)),*/

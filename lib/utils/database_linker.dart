@@ -8,7 +8,7 @@ import 'package:csv/csv.dart';
 import 'dart:typed_data';
 import 'package:flutter/services.dart';
 import 'individual_identity.dart';
-import 'individual_vehicle.dart';
+import '../features/vehiclebookout/model/individual_vehicle.dart';
 import 'package:ltcapp/features/login/model/login_credentials.dart';
 import 'dart:io';
 import 'DateAndTimeGetter.dart';
@@ -311,7 +311,7 @@ class DatabaseHandler {
         break;
       case 'LtcVehInfo':
         var fVDS = new FullVehicleDetailSet();
-        fVDS.sortData('S69420', VehType.AType.toString(), VehClassType.BType.toString(), '696969');
+        fVDS.sortData('MID50', VehType.AType.toString(), VehClassType.Class3.toString(), '696969');
         insertNewData(fVDS);
         break;
       case 'LtcVehTripsInfo':
