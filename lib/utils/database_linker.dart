@@ -29,6 +29,8 @@ class DatabaseHandler {
   List fetchedData = [];
 
   DateAndTime dtGetter = DateAndTime();
+  // Nehmind; Replace this with a Listener func in the LoginPageVM file!!!
+//  bool tempPassChecker = false;
 
   void fetchDatabaseFromServer(String url) async
   {
@@ -38,7 +40,7 @@ class DatabaseHandler {
     if (response.statusCode == 200)
     {
       fetchedData = json.decode(response.body);
-      // TODO; Created auto data importer for db populating
+      // TODO; Create auto data importer for db populating
     }
   }
 
@@ -255,16 +257,29 @@ class DatabaseHandler {
 
   }
 
-  Future<LoginCredential> getLoginCreds(String email) async
+  Future<bool> getLoginCreds(String email, String pass) async
   {
-    Database database = await db;
-    List<Map> result = await database.rawQuery('SELECT * FROM LtcPersonnelInfo WHERE email=?', [email]);
-    // TODO: Get password from result to return for login authorization
-    String checker = result.toString();
-    if (checker.contains("password"))
-    {
 
-    }
+    if (db == null)
+      {
+        print("Error: Database was not created.");
+        return false;
+      }
+
+      if (dbTableName == 'LtcPersonnelInfo')
+      {
+        Database database = await db;
+        List<Map> result = await database.rawQuery(
+            'SELECT password FROM LtcPersonnelInfo WHERE email=?', [email]);
+        // TODO: Get password from result to return for login authorization
+        String checker = result.toString();
+        print("This is the current response from the password query: " + checker);
+
+
+        return checker.contains(pass);
+      }
+
+      return false;
   }
 
   void callConversion() async
