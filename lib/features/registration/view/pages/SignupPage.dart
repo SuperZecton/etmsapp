@@ -263,6 +263,7 @@ class _SignUpPageState extends State<SignUpPage> {
         padding: EdgeInsets.symmetric(horizontal: 40),
         child: InkWell(
           onTap: () {
+
             if (vm.signUpFormKey.currentState.validate()) {
               vm.signUpFormKey.currentState.save();
               fDSTemp.sortPersonalData(
@@ -290,6 +291,7 @@ class _SignUpPageState extends State<SignUpPage> {
               );
               fDSTemp.sortLoginData(vm.emailController.text, vm.passwordController.text);
               Navigator.pushNamed(context, '/trainingReg');
+
             } else {
               showDialog(
                   context: context,

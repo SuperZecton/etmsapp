@@ -34,4 +34,6 @@ class RegistrationViewModel with ChangeNotifier {
   VocationType currentVocationValue;
   StayInStayOutType currentStayInStayOutValue;
 
+
+
 }

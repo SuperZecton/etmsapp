@@ -7,33 +7,35 @@ class VehicleBookOutCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 300,
+      height: 175,
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
         ),
-        color: Colors.blue,
+        color: Colors.white,
         elevation: 10,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             const ListTile(
-              leading: Icon(Icons.album, size: 70),
+
               title:
-                  Text('Heart Shaker', style: TextStyle(color: Colors.white)),
-              subtitle: Text('TWICE', style: TextStyle(color: Colors.white)),
+                  Text('Current Trip', style: TextStyle(color: Colors.black)),
+              subtitle: Text('Time started', style: TextStyle(color: Colors.black)),
             ),
             ButtonBarTheme(
               data: ButtonBarThemeData(),
               child: ButtonBar(
+                alignment: MainAxisAlignment.center,
                 children: <Widget>[
                   TextButton(
-                    child: const Text('Edit',
-                        style: TextStyle(color: Colors.white)),
+                    child: const Text('Cancel',
+                        style: TextStyle(color: Colors.black)),
                     onPressed: () {},
                   ),
                   TextButton(
-                    child: const Text('Delete',
-                        style: TextStyle(color: Colors.white)),
+                    child: const Text('End Trip',
+                        style: TextStyle(color: Colors.black)),
                     onPressed: () {},
                   ),
                 ],

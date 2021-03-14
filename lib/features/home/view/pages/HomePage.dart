@@ -3,6 +3,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/core/config/globals.dart';
+import 'package:ltcapp/features/home/view/widgets/dropDownList.dart';
 import 'package:ltcapp/features/home/viewmodel/HomePageViewModel.dart';
 import 'package:provider/provider.dart';
 
@@ -28,40 +29,14 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         elevation: 2.0,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.lightBlue,
         centerTitle: true,
-        title: Text('ETMS',
+        title: Text('',
             style: GoogleFonts.montserrat(
                 color: Colors.black,
                 fontWeight: FontWeight.w500,
                 fontSize: 30.0)),
         actions: <Widget>[
-          Container(
-            margin: EdgeInsets.only(right: 8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Consumer<HomePageViewModel>(
-                  builder: (context, vm, child) => DropdownButton(
-                      isDense: true,
-                      value: vm.campDropdown,
-                      onChanged: (String value) => vm.campDropdownUpdate(value),
-                      items: HomePageViewModel.campDropdownItems
-                          .map((String title) {
-                        return DropdownMenuItem(
-                          value: title,
-                          child: Text(title,
-                              style: TextStyle(
-                                  color: Colors.blue,
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 14.0)),
-                        );
-                      }).toList()),
-                ),
-              ],
-            ),
-          )
         ],
       ),
       body: Container(
@@ -122,7 +97,7 @@ class _HomePageState extends State<HomePage> {
                               Text('Mileage',
                                   style: TextStyle(
                                       color: Colors.green, fontSize: 20.0)),
-                              Text('3012Km',
+                              Text('0 Km',
                                   style: TextStyle(
                                       color: Colors.black,
                                       fontWeight: FontWeight.w700,

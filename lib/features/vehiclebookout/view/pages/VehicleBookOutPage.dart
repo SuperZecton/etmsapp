@@ -11,15 +11,14 @@ class _VehicleBookOutPageState extends State<VehicleBookOutPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: Text(
-          "Vehicle Book Out",
-          style: TextStyle(color: Colors.black),
-        ),
+        backgroundColor: Colors.lightBlue,
+
         centerTitle: true,
       ),
       body: Container(
+        color: Color(0xffDCDDDB),
         width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
