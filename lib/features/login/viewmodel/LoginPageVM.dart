@@ -11,6 +11,10 @@ class LoginPageViewModel extends ChangeNotifier{
 
 } */
 
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
+
   void authenticateUserCredentials() {
     bool canLogin;
 
