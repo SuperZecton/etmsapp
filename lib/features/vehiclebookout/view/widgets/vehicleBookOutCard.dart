@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/core/config/globals.dart';
 
 class VehicleBookOutCard extends StatelessWidget {
@@ -15,15 +16,34 @@ class VehicleBookOutCard extends StatelessWidget {
         color: Colors.white,
         elevation: 10,
         child: Column(
-          mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            const ListTile(
-
-              title:
-                  Text('Current Trip', style: TextStyle(color: Colors.black)),
-              subtitle: Text('Time started', style: TextStyle(color: Colors.black)),
+            Container(
+              padding: EdgeInsets.all(15.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        'Vehicle: ',
+                        style: GoogleFonts.montserrat(fontSize: 20),
+                      )),
+                  Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        'Odometer:',
+                        style: GoogleFonts.montserrat(fontSize: 20),
+                      )),
+                  Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        'Time started:',
+                        style: GoogleFonts.montserrat(fontSize: 20),
+                      )),
+                ],
+              ),
             ),
-            ButtonBarTheme(
+            /* ButtonBarTheme(
               data: ButtonBarThemeData(),
               child: ButtonBar(
                 alignment: MainAxisAlignment.center,
@@ -40,7 +60,7 @@ class VehicleBookOutCard extends StatelessWidget {
                   ),
                 ],
               ),
-            ),
+            ),*/
           ],
         ),
       ),

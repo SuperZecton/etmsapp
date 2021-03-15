@@ -1,20 +1,22 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:ltcapp/features/vehiclebookout/view/widgets/VehicleButton.dart';
 import 'package:ltcapp/features/vehiclebookout/view/widgets/VehicleEntryField.dart';
 import 'package:ltcapp/features/vehiclebookout/view/widgets/vehicleBookOutCard.dart';
 
-class VehicleBookOutPage extends StatefulWidget {
+class VehicleBookOutFormPage extends StatefulWidget {
   @override
-  _VehicleBookOutPageState createState() => _VehicleBookOutPageState();
+  _VehicleBookOutFormPageState createState() => _VehicleBookOutFormPageState();
 }
 
-class _VehicleBookOutPageState extends State<VehicleBookOutPage> {
+class _VehicleBookOutFormPageState extends State<VehicleBookOutFormPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.lightBlue,
+        title: Text("Start Trip"),
+
         centerTitle: true,
       ),
       body: Container(
@@ -27,15 +29,19 @@ class _VehicleBookOutPageState extends State<VehicleBookOutPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              VehicleBookOutCard(),
-              SizedBox(
-                height: 30,
-              ),
-              VehicleButton("Start Trip",
-                  onPressed: () =>
-                      Navigator.pushNamed(context, '/vehicleManagementForm')),
               SizedBox(height: 30,),
-              VehicleButton("End Trip", onPressed: () => Navigator.pushNamed(context, '/vehicleManagementFormIn'),),
+              VehicleEntryField("Vehicle number"),
+              VehicleEntryField("Type of Vehicle"),
+              VehicleEntryField("Starting Odometer"),
+              VehicleEntryField("Purpose of Trip"),
+              VehicleEntryField("Time started"),
+              SizedBox(height: 30,),
+              VehicleButton("Submit"),
+
+
+
+
+
             ],
           ),
         ),

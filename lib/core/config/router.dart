@@ -8,6 +8,8 @@ import 'package:ltcapp/features/registration/view/pages/EducationRegPage.dart';
 import 'package:ltcapp/features/registration/view/pages/OtherInfoRegPage.dart';
 import 'package:ltcapp/features/registration/view/pages/SignupPage.dart';
 import 'package:ltcapp/features/registration/view/pages/TrainingRegPage.dart';
+import 'package:ltcapp/features/vehiclebookout/view/pages/VehicleBookInFormPage.dart';
+import 'package:ltcapp/features/vehiclebookout/view/pages/VehicleBookOutFormPage.dart';
 import 'package:ltcapp/features/vehiclebookout/view/pages/VehicleBookOutPage.dart';
 
 class Routers {
@@ -31,6 +33,10 @@ class Routers {
         return MaterialPageRoute(builder: (_) => BookInOutPage());
       case '/vehicleManagement':
         return MaterialPageRoute(builder: (_) => VehicleBookOutPage());
+      case '/vehicleManagementForm':
+        return MaterialPageRoute(builder: (_) => VehicleBookOutFormPage());
+      case '/vehicleManagementFormIn':
+        return MaterialPageRoute(builder: (_) => VehicleBookInFormPage());
 
       default:
         return MaterialPageRoute(

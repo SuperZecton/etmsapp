@@ -88,15 +88,14 @@ class _BookInOutPageState extends State<BookInOutPage> {
                           ),
                           Container(
                             padding:
-                                EdgeInsets.only(left: 64, right: 64, top: 24),
+                                EdgeInsets.only(left: 16, right: 16, top: 24),
                             child: InputDecorator(
                               decoration: InputDecoration(
+                                enabled: false,
                                 prefixIcon: Icon(
                                   FontAwesomeIcons.penNib,
+                                  size: 15.0,
                                   color: Colors.black,
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.blue),
                                 ),
                               ),
                               child: DropdownButtonHideUnderline(
@@ -109,8 +108,7 @@ class _BookInOutPageState extends State<BookInOutPage> {
                                               chartDropdownItems.indexOf(
                                                   value); // Refresh the chart
                                         }),
-                                    items:
-                                        chartDropdownItems.map((String title) {
+                                    items: chartDropdownItems.map((String title) {
                                       return DropdownMenuItem(
                                         value: title,
                                         child: Text(title,
@@ -159,7 +157,7 @@ class _BookInOutPageState extends State<BookInOutPage> {
             color: Colors.blue,
           ),
           child: Text(
-            actualDropdown,
+            'Submit',
             style: TextStyle(fontSize: 20, color: Colors.white),
           ),
         ),
