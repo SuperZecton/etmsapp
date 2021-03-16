@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ltcapp/features/login/viewmodel/LoginPageVM.dart';
+import 'package:ltcapp/features/login/viewmodel/authentication.dart';
 import 'package:ltcapp/features/registration/view/pages/SignupPage.dart';
 import 'package:ltcapp/features/login/model/login_credentials.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -43,12 +44,12 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(height: 50),
                     Column(
                       children: <Widget>[
-                        _entryField(vm, "Email"),
-                        _entryField(vm, "Password", isPassword: true),
+                        _emailEntryField(),
+                        _passwordEntryField(),
                       ],
                     ),
                     SizedBox(height: 20),
-                    _submitButton(loginCheck, vm),
+                    _submitButton(loginCheck),
                     Container(
                       padding: EdgeInsets.symmetric(vertical: 10),
                       alignment: Alignment.centerRight,
@@ -59,7 +60,7 @@ class _LoginPageState extends State<LoginPage> {
                               fontWeight: FontWeight.w500)),
                     ),
                     _divider(),
-                    _singpassButton(),
+                    _singPassButton(),
                     SizedBox(height: height * .055),
                     _createAccountLabel(),
                   ],
@@ -73,115 +74,104 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _entryField(LoginPageViewModel theVM, String title, {bool isPassword = false}) {
-    switch (isPassword)
-    {
-      case true:
-        return Container(
-          margin: EdgeInsets.symmetric(vertical: 10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(
-                title,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 15,
-                  color: Colors.white,
-                ),
+  Widget _emailEntryField() {
+    return Consumer<LoginPageViewModel>(
+      builder: (context, vm, child) => Container(
+        margin: EdgeInsets.symmetric(vertical: 10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              "Email",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 15,
+                color: Colors.white,
               ),
-              SizedBox(
-                height: 10,
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Container(
+              child: TextField(
+                style: GoogleFonts.lato(
+                    textStyle: Theme.of(context).textTheme.headline4,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white),
+                obscureText: false,
+                controller: vm.emailController,
+                decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                        borderSide:
+                            const BorderSide(color: Colors.blue, width: 1.0),
+                        borderRadius: BorderRadius.all(Radius.circular(5))),
+                    focusedBorder: OutlineInputBorder(
+                        borderSide:
+                            const BorderSide(color: Colors.white, width: 1.5),
+                        borderRadius: BorderRadius.all(Radius.circular(5))),
+                    fillColor: secondaryColor,
+                    filled: true),
               ),
-              Container(
-                child: TextField(
-                  style: GoogleFonts.lato(
-                      textStyle: Theme.of(context).textTheme.headline4,
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.white),
-                  obscureText: isPassword,
-                  controller: theVM.passwordController,
-                  decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                          borderSide:
-                          const BorderSide(color: Colors.blue, width: 1.0),
-                          borderRadius: BorderRadius.all(Radius.circular(5))),
-                      focusedBorder: OutlineInputBorder(
-                          borderSide:
-                          const BorderSide(color: Colors.white, width: 1.5),
-                          borderRadius: BorderRadius.all(Radius.circular(5))),
-                      fillColor: secondaryColor,
-                      filled: true),
-                ),
-              )
-            ],
-          ),
-        );
-        break;
-      case false:
-        return Container(
-          margin: EdgeInsets.symmetric(vertical: 10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(
-                title,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 15,
-                  color: Colors.white,
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Container(
-                child: TextField(
-                  style: GoogleFonts.lato(
-                      textStyle: Theme.of(context).textTheme.headline4,
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.white),
-                  obscureText: isPassword,
-                  controller: theVM.emailController,
-                  decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                          borderSide:
-                          const BorderSide(color: Colors.blue, width: 1.0),
-                          borderRadius: BorderRadius.all(Radius.circular(5))),
-                      focusedBorder: OutlineInputBorder(
-                          borderSide:
-                          const BorderSide(color: Colors.white, width: 1.5),
-                          borderRadius: BorderRadius.all(Radius.circular(5))),
-                      fillColor: secondaryColor,
-                      filled: true),
-                ),
-              )
-            ],
-          ),
-        );
-        break;
-    }
-
-
+            )
+          ],
+        ),
+      ),
+    );
   }
 
-  Future verifyLoginData(bool lC, LoginPageViewModel theVM) async
-  {
-    lC = await personnelDBHandle.getLoginCreds(theVM.emailController.text, theVM.passwordController.text);
-    await new Future.delayed(const Duration(seconds: 5));
-    if (lC == true)
-    {
-      Navigator.pushNamed(context, '/home');
-    }
+  Widget _passwordEntryField() {
+    return Consumer<LoginPageViewModel>(
+      builder: (context, vm, child) => Container(
+        margin: EdgeInsets.symmetric(vertical: 10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              "Password",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 15,
+                color: Colors.white,
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Container(
+              child: TextField(
+                style: GoogleFonts.lato(
+                    textStyle: Theme.of(context).textTheme.headline4,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white),
+                obscureText: true,
+                controller: vm.passwordController,
+                decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                        borderSide:
+                            const BorderSide(color: Colors.blue, width: 1.0),
+                        borderRadius: BorderRadius.all(Radius.circular(5))),
+                    focusedBorder: OutlineInputBorder(
+                        borderSide:
+                            const BorderSide(color: Colors.white, width: 1.5),
+                        borderRadius: BorderRadius.all(Radius.circular(5))),
+                    fillColor: secondaryColor,
+                    filled: true),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 
-  Widget _submitButton(bool lC ,LoginPageViewModel theVM) {
+  Widget _submitButton(bool lC,) {
+    final auth = Provider.of<Authentication>(context, listen: false);
     return InkWell(
         onTap: () {
           setState(() {
-            verifyLoginData(lC, theVM);
+            auth.verifyLoginData(lC, context);
           });
         },
         child: Container(
@@ -239,7 +229,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _singpassButton() {
+  Widget _singPassButton() {
     return Container(
       height: 50,
       margin: EdgeInsets.symmetric(vertical: 20),

@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:ltcapp/core/config/globals.dart';
 
 class VehicleBookOutCard extends StatelessWidget {
+  String time = DateFormat("jm").format(DateTime.now().toLocal());
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -37,7 +39,7 @@ class VehicleBookOutCard extends StatelessWidget {
                   Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        'Time started:',
+                        'Time started: $time',
                         style: GoogleFonts.montserrat(fontSize: 20),
                       )),
                 ],
