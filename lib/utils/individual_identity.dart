@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:ltcapp/features/login/model/login_credentials.dart';
+import 'package:meta/meta.dart';
 
 
 /* Thought I had something with this
@@ -178,67 +179,67 @@ class NOKDetailSet {
 
 // Currently split to make things easier to read when all the data comes pouring in
 class PersonalDataSet {
-  String fullName;
-  String nricLast4Digits;
-  String fullHomeAddress;
-  String handphoneNumber;
-  String homephoneNumber;
-  String dateOfBirth;
-  String dateOfEnlistment;
-  String dateOfORD;
-  String dateOfPostIn;
-  String pes;
-  String religion;
-  String race;
-  String bloodGroup;
-  String drugAllergy;
-  String foodAllergy;
+  String fullName = "NIL";
+  String nricLast4Digits = "000X";
+  String fullHomeAddress = "";
+  String handphoneNumber = "";
+  String homephoneNumber = "";
+  String dateOfBirth = "00000000";
+  String dateOfEnlistment = "00000000";
+  String dateOfORD = "00000000";
+  String dateOfPostIn = "00000000";
+  String pes = "F";
+  String religion = "Agnostic";
+  String race = "Martian";
+  String bloodGroup = "";
+  String drugAllergy = "";
+  String foodAllergy = "";
 //  NOKDetailSet nokDetails;
-  String NOKDetailfullName;
-  String NOKDetailcontactNumber;
-  String NOKDetailfullAddress;
+  String NOKDetailfullName = "";
+  String NOKDetailcontactNumber = "";
+  String NOKDetailfullAddress = "";
 
-  String vocationType;
-  String stayInstayOut;
-  String medicalConditions;
+  String vocationType = "";
+  String stayInstayOut = "";
+  String medicalConditions = "";
 
   PersonalDataSet({this.fullName, this.nricLast4Digits, this.fullHomeAddress, this.handphoneNumber, this.homephoneNumber, this.dateOfBirth, this.dateOfEnlistment, this.dateOfORD, this.dateOfPostIn, this.pes, this.religion, this.race, this.bloodGroup, this.drugAllergy, this.foodAllergy, this.NOKDetailfullName, this.NOKDetailcontactNumber, this.NOKDetailfullAddress, this.vocationType, this.stayInstayOut, this.medicalConditions});
 }
 
 class TrainingDataSet {
-  String trainingFrame;
-  String trainingPeriod;
-  int passAttempts;
-  String militaryLicenseNo;
-  String militaryLicenseType;
-  String milLicenseDateOfIssue;
+  String trainingFrame = "";
+  String trainingPeriod = "";
+  int passAttempts = 0;
+  String militaryLicenseNo = "";
+  String militaryLicenseType = "";
+  String milLicenseDateOfIssue = "";
 
   TrainingDataSet({this.trainingFrame, this.trainingPeriod, this.passAttempts, this.militaryLicenseNo, this.militaryLicenseType, this.milLicenseDateOfIssue});
 }
 
 class EducationDataSet {
-  String educationLevel;
-  String streamcourseName;
-  String ccaOptional;
-  String schName;
+  String educationLevel = "";
+  String streamcourseName = "";
+  String ccaOptional = "";
+  String schName = "";
 
   EducationDataSet({this.educationLevel, this.streamcourseName, this.ccaOptional, this.schName});
 }
 
 class MiscDataSet {
-  String hobbiesInterest;
-  String civillianLicenseType;
-  String civillianLicenseNumber;
-  String civillianLicenseDateOfIssue;
-  String hasDoneDefensiveCourse;
-  String hasPersonalVehicle;
-  String personalVehiclePlateNumber;
-  String tShirtSize;
-  int no3sizeUpperTorso;
-  int no3sizeWaist;
-  int no3sizeShoes;
+  String hobbiesInterest = "";
+  String civillianLicenseType = "";
+  String civillianLicenseNumber = "";
+  String civillianLicenseDateOfIssue = "";
+  String hasDoneDefensiveCourse = "";
+  String hasPersonalVehicle = "";
+  String personalVehiclePlateNumber = "";
+  String tShirtSize = "";
+  int no3sizeUpperTorso = 100;
+  int no3sizeWaist = 100;
+  int no3sizeShoes = 100;
 
-  MiscDataSet({this.hobbiesInterest, this.civillianLicenseType, this.civillianLicenseNumber, this.civillianLicenseDateOfIssue, this.hasDoneDefensiveCourse, this.hasPersonalVehicle, this.personalVehiclePlateNumber, this.tShirtSize, this.no3sizeUpperTorso, this.no3sizeWaist, this.no3sizeShoes});
+  MiscDataSet({ @required this.hobbiesInterest, this.civillianLicenseType, this.civillianLicenseNumber, this.civillianLicenseDateOfIssue, this.hasDoneDefensiveCourse, this.hasPersonalVehicle, this.personalVehiclePlateNumber, this.tShirtSize, this.no3sizeUpperTorso, this.no3sizeWaist, this.no3sizeShoes});
 }
 
 class FullDetailSet {

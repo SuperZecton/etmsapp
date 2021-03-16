@@ -121,7 +121,7 @@ class _OtherInfoRegistrationPageState extends State<OtherInfoRegistrationPage> {
             50,
             9);
 
-            personnelDBHandle.insertNewData(fDSTemp);
+            personnelDBHandle.insertNewRow(fDSTemp);
 
             Navigator.pushNamed(context, '/');
           });

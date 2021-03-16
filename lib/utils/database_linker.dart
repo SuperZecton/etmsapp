@@ -21,7 +21,6 @@ class DatabaseHandler {
 
 
   String dbPath;
-  String tempPath;
 
   String dbName;
   String dbTableName;
@@ -46,114 +45,43 @@ class DatabaseHandler {
 
   void setDatabasePath(String path)
   {
-    tempPath = path;
+    dbPath = path;
   }
 
-  void databaseCreation_Optimizer() async
+  Future<void> databaseCreationOptimizer() async
   {
     dbPath = await getDatabasesPath();
-    tempPath = join(dbPath, dbName);
+    dbPath = join(dbPath, dbName);
 
-    bool result = await databaseExists(tempPath);
-    var tempDB = await openDatabase(tempPath);
+    bool result = await databaseExists(dbPath);
+    var tempDB = await openDatabase(dbPath);
     int count = 0;
     try {
       count = Sqflite.firstIntValue(
           await tempDB.rawQuery('SELECT COUNT(*) FROM $dbTableName'));
     }catch(count)
   {
-    deleteDatabase(tempPath);
+    deleteDatabase(dbPath);
   }
     if (count == 1)
     {
       print(count.toString());
       print("Less than or exactly 1 element detected. Resetting.");
-      deleteDatabase(tempPath);
+      deleteDatabase(dbPath);
       result = false;
-      return databaseCreation_Optimizer();
+      return databaseCreationOptimizer();
     }
     else
       {
       // First time launch SOP
       switch (dbTableName) {
         case 'LtcPersonnelInfo':
-          try {
-            final Future<Database> database = openDatabase(
-              tempPath,
-              onCreate: (dbref, version) {
-                return dbref.execute(
-                  // The pain
-                  "CREATE TABLE $dbTableName("
-                  // Section 1: Personal Particulars
-                      "fullName TEXT PRIMARY KEY, "
-                      "nricLast4Digits TEXT, "
-                      "fullHomeAddress TEXT, "
-                      "handphoneNumber TEXT, "
-                      "homephoneNumber TEXT, "
-                      "dateOfBirth TEXT, "
-                      "dateOfEnlistment TEXT, "
-                      "dateOfORD TEXT, "
-                      "dateOfPostIn TEXT, "
-                      "pesType TEXT, "
-                      "religion TEXT, "
-                      "race TEXT, "
-                      "bloodGroup TEXT, "
-                      "drugAllergy TEXT, "
-                      "foodAllergy TEXT, "
-                      "NOKDetailfullName TEXT, "
-                      "NOKDetailcontactNumber TEXT, "
-                      "NOKDetailfullAddress TEXT, "
-                      "vocationType TEXT, "
-                      "stayInstayOut TEXT, "
-                      "medicalConditions TEXT, "
-                  // Section 2: Training Information
-                      "trainingFrame TEXT, "
-                      "trainingPeriod TEXT, "
-                      "passAttempts INTEGER, "
-                      "militaryLicenseNo TEXT, "
-                      "militaryLicenseType TEXT, "
-                      "milLicenseDateOfIssue TEXT, "
-                  // Section 3: Education
-                      "educationLevel TEXT, "
-                      "streamcourseName TEXT, "
-                      "ccaOptional TEXT, "
-                      "schName TEXT, "
-                  // Section 4: Other Information
-                      "hobbiesInterest TEXT, "
-                      "civillianLicenseType TEXT, "
-                      "civillianLicenseNumber TEXT, "
-                      "civillianLicenseDateOfIssue TEXT, "
-                      "hasDoneDefensiveCourse TEXT, "
-                      "hasPersonalVehicle TEXT, "
-                      "personalVehiclePlateNumber TEXT, "
-                      "tShirtSize TEXT, "
-                      "no3sizeUpperTorso INTEGER, "
-                      "no3sizeWaist INTEGER, "
-                      "no3sizeShoes INTEGER, "
-                  // Section 5: Login Information
-                      "email TEXT, "
-                      "password TEXT"
-                      ")",
-                );
-              },
-              version: 1,
-            );
 
-            if (db != null) {
-              result = true;
-            }
-
-            db = database;
-          } catch (result) {
-            if (result == false) {
-              return databaseCreation_Optimizer();
-            }
-          }
           break;
         case 'LtcVehInfo':
           try {
             final Future<Database> database = openDatabase(
-              tempPath,
+              dbPath,
               onCreate: (dbref, version) {
                 return dbref.execute(
                   "CREATE TABLE $dbTableName("
@@ -175,14 +103,14 @@ class DatabaseHandler {
             db = database;
           } catch (result) {
             if (result == false) {
-              return databaseCreation_Optimizer();
+              return databaseCreationOptimizer();
             }
           }
           break;
         case 'LtcVehTripsInfo':
           try {
             final Future<Database> database = openDatabase(
-              tempPath,
+              dbPath,
               onCreate: (dbref, version) {
                 return dbref.execute(
                   "CREATE TABLE $dbTableName("
@@ -201,7 +129,7 @@ class DatabaseHandler {
             db = database;
           } catch (result) {
             if (result == false) {
-              return databaseCreation_Optimizer();
+              return databaseCreationOptimizer();
             }
           }
           break;
@@ -218,11 +146,17 @@ class DatabaseHandler {
     callConversion();
   }
 
+  Future<void> resetDB() async
+  {
+    await deleteDatabase(dbPath);
+  }
+
   // Func to call once app opens
   void openTheDatabase(String path) async
   {
     db = await openDatabase(path);
   }
+  // Redundant
 
   Future<void> insertNewData(var theData) async
   {
@@ -257,58 +191,54 @@ class DatabaseHandler {
 
   }
 
-  Future<bool> getLoginCreds(String email, String pass) async
-  {
-
-    if (db == null)
-      {
-        print("Error: Database was not created.");
-        return false;
-      }
-
-      if (dbTableName == 'LtcPersonnelInfo')
-      {
-        Database database = await db;
-        List<Map> result = await database.rawQuery(
-            'SELECT password FROM LtcPersonnelInfo WHERE email=?', [email]);
-        // TODO: Get password from result to return for login authorization
-        String checker = result.toString();
-        print("This is the current response from the password query: " + checker);
-
-
-        return checker.contains(pass);
-      }
-
-      return false;
-  }
 
   void callConversion() async
   {
 //    dbPath = await getDatabasesPath();
 //   tempPath = join(dbPath, dbName);
 
-    bool result = await databaseExists(tempPath);
+    bool result = await databaseExists(dbPath);
     if (result == true)
     {
       // Send database data into a string
       // Doesn't work right now due to null db data
       var dbToConvert = await db;
       var dbConversionUnit = await dbToConvert.query(dbTableName);
-      print((Sqflite.firstIntValue(await dbToConvert.rawQuery('SELECT COUNT(*) FROM $dbTableName'))).toString() + 'Rows');
+      print((Sqflite.firstIntValue(await dbToConvert.rawQuery('SELECT COUNT(*) FROM $dbTableName'))).toString() + ' Rows');
       // TODO; Fix character limit to properly print out
-      String printo = mapListToCsv(dbConversionUnit);
+  //    String printo = mapListToCsv(dbConversionUnit);
       //       print(printo);
       // Create file to send db data into
-      File file = await new File(dbPath + '/$dbTableName.csv');
-      file.create(recursive: true);
-      file.writeAsString(printo);
+ //     File file = await new File(dbPath + '/$dbTableName.csv');
+ //     file.create(recursive: true);
+ //     file.writeAsString(printo);
       // Spit the data written into file out into console
-      var read = new File(dbPath + '/$dbTableName.csv').readAsString();
-      String content = await read;
-      print(content);
+ //     var read = new File(dbPath + '/$dbTableName.csv').readAsString();
+ //     String content = await read;
+ //     print(content);
 
     }
 
+  }
+
+  Future<List<Map>> getTableAsWhole() async
+  {
+    if (db == null)
+    {
+      return null;
+    }
+
+    try
+        {
+          var cachedDB = await db;
+          List<Map> cachedDBPointer = await cachedDB.query(dbTableName);
+          return cachedDBPointer;
+
+        }
+        catch(_)
+    {
+      return null;
+    }
   }
 
   void buildBaseDBData()
@@ -322,7 +252,7 @@ class DatabaseHandler {
         fDS.sortEducationData('Junior College', 'Pure Sciences', 'Soccer Club', 'K.Ickers');
         fDS.sortMiscData('Drinking; Driving; Drink Driving', VehLicenseType.class2.toString(), 'M2811345', dtGetter.Date(DateTime.now()), TrueOrFalseType.True.toString(), TrueOrFalseType.True.toString(), 'FAG69781023', ClothesSizeType.M.toString(), 70, 100, 9);
         fDS.loginCredentials = new LoginCredential(username: "test@email.com", password: "123");
-        insertNewData(fDS);
+   //     insertNewData(fDS);
         break;
       case 'LtcVehInfo':
         var fVDS = new FullVehicleDetailSet();
@@ -332,13 +262,6 @@ class DatabaseHandler {
       case 'LtcVehTripsInfo':
         break;
     }
-
-    //  for (int i = 0; i < 4; i++)
-    //    {
-    //      fDS.personalDataSet.fullName = fDS.personalDataSet.fullName + i.toString();
-    //      insertNewData(fDS);
-    //    }
-
   }
 
   DatabaseHandler({this.dbName, this.dbTableName});

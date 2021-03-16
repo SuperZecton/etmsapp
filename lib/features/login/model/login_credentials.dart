@@ -4,8 +4,8 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 class LoginCredential {
-  final String username;
-  final String password;
+  String username = "default";
+  String password = "default";
 
   LoginCredential({ @required this.username, @required this.password});
 }

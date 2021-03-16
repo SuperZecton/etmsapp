@@ -6,17 +6,18 @@ import 'package:ltcapp/features/login/viewmodel/authentication.dart';
 import 'package:ltcapp/features/registration/viewmodel/RegistrationViewModel.dart';
 
 import 'package:ltcapp/utils/database_linker.dart';
+import 'package:ltcapp/utils/personnel_database_linker.dart';
 
 import 'package:provider/provider.dart';
 import 'package:ltcapp/core/config/router.dart';
 
 //void main() => runApp(MyApp());
 
-DatabaseHandler personnelDBHandle = new DatabaseHandler(dbName: "main_personnel.db", dbTableName: "LtcPersonnelInfo");
+PersonnelDatabaseHandler personnelDBHandle = new PersonnelDatabaseHandler("main_personnel.db", "LtcPersonnelInfo");
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  personnelDBHandle.databaseCreation_Optimizer();
+  await personnelDBHandle.databaseCreationOptimizer();
   runApp(MyApp());
 
 }
