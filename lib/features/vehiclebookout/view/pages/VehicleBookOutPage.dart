@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:ltcapp/features/vehiclebookout/view/widgets/VehicleButton.dart';
 import 'package:ltcapp/features/vehiclebookout/view/widgets/VehicleEntryField.dart';
 import 'package:ltcapp/features/vehiclebookout/view/widgets/vehicleBookOutCard.dart';
+import 'package:ltcapp/features/vehiclebookout/viewmodel/VehicleBookOutViewModel.dart';
+import 'package:provider/provider.dart';
 
 class VehicleBookOutPage extends StatefulWidget {
   @override
@@ -12,6 +14,7 @@ class VehicleBookOutPage extends StatefulWidget {
 class _VehicleBookOutPageState extends State<VehicleBookOutPage> {
   @override
   Widget build(BuildContext context) {
+    final vm = Provider.of<VehicleBookOutViewModel>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.lightBlue,

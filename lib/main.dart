@@ -4,6 +4,7 @@ import 'package:ltcapp/features/home/viewmodel/HomePageViewModel.dart';
 import 'package:ltcapp/features/login/viewmodel/LoginPageVM.dart';
 import 'package:ltcapp/features/login/viewmodel/authentication.dart';
 import 'package:ltcapp/features/registration/viewmodel/RegistrationViewModel.dart';
+import 'package:ltcapp/features/vehiclebookout/viewmodel/VehicleBookOutViewModel.dart';
 
 import 'package:ltcapp/utils/database_linker.dart';
 import 'package:ltcapp/utils/personnel_database_linker.dart';
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<LoginPageViewModel>(create: (context) =>LoginPageViewModel()),
         ChangeNotifierProvider<HomePageViewModel>(create: (context) => HomePageViewModel()),
         ChangeNotifierProvider<RegistrationViewModel>(create: (context) => RegistrationViewModel()),
+        ChangeNotifierProvider<VehicleBookOutViewModel>(create: (context) =>VehicleBookOutViewModel()),
         ChangeNotifierProvider<LoginPageViewModel>(create: (context) => LoginPageViewModel()),
         ChangeNotifierProvider<Authentication>(create: (context) => Authentication()),
       ],

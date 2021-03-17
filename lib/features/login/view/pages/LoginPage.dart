@@ -166,13 +166,11 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _submitButton(bool lC,) {
+  Widget _submitButton(bool loginCreds) {
     final auth = Provider.of<Authentication>(context, listen: false);
     return InkWell(
         onTap: () {
-          setState(() {
-            auth.verifyLoginData(lC, context);
-          });
+            auth.verifyLoginData(context, loginCreds);
         },
         child: Container(
           width: MediaQuery.of(context).size.width,
@@ -256,19 +254,22 @@ class _LoginPageState extends State<LoginPage> {
           ),
           Expanded(
             flex: 5,
-            child: Container(
-              decoration: BoxDecoration(
-                color: Color(0xffA9A9A9),
-                borderRadius: BorderRadius.only(
-                    bottomRight: Radius.circular(5),
-                    topRight: Radius.circular(5)),
+            child: InkWell(
+              onTap: () => Navigator.pushNamed(context, '/home'),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Color(0xffA9A9A9),
+                  borderRadius: BorderRadius.only(
+                      bottomRight: Radius.circular(5),
+                      topRight: Radius.circular(5)),
+                ),
+                alignment: Alignment.center,
+                child: Text('Log in with Singpass',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w400)),
               ),
-              alignment: Alignment.center,
-              child: Text('Log in with Singpass',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w400)),
             ),
           ),
         ],
@@ -279,9 +280,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget _createAccountLabel() {
     return InkWell(
       onTap: () {
-        setState(() {
           Navigator.pushNamed(context, '/signup');
-        });
       },
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 20),

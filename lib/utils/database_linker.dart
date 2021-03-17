@@ -29,7 +29,7 @@ class DatabaseHandler {
 
   DateAndTime dtGetter = DateAndTime();
   // Nehmind; Replace this with a Listener func in the LoginPageVM file!!!
-//  bool tempPassChecker = false;
+  //  bool tempPassChecker = false;
 
   void fetchDatabaseFromServer(String url) async
   {
