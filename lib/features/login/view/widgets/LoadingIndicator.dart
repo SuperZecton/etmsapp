@@ -20,7 +20,6 @@ class _LoadingIndicatorState extends State<LoadingIndicator> {
 }
 
 
-
 final spinKit = SpinKitSquareCircle(
   color: Colors.white,
   size: 50.0,

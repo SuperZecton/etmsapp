@@ -317,7 +317,7 @@ class _LoginPageState extends State<LoginPage> {
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
-        text: 'Welcome back',
+        text: 'Login',
         style: GoogleFonts.lato(
           textStyle: Theme.of(context).textTheme.headline4,
           fontSize: 30,

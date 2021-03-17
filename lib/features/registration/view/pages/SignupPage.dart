@@ -14,6 +14,8 @@ import 'package:ltcapp/core/widgets/widgets.dart';
 import 'package:provider/provider.dart';
 import '../../../login/view/pages/WelcomePage.dart';
 
+
+//TODO Validate all fields, implement viewmodel for all signup pages, and clean up code
 class SignUpPage extends StatefulWidget {
   SignUpPage({Key key, this.title}) : super(key: key);
   final String title;
@@ -133,40 +135,54 @@ class _SignUpPageState extends State<SignUpPage> {
                       "ORD Date", Icons.calendar_today, vm.ordController),
                   DateTextField("Date of posting", Icons.calendar_today,
                       vm.dopController),
-                  DropDownField<PESType>(
-                      hint: "PES",
-                      values: PESType.getValues(),
-                      value: vm.currentPESValue,
-                      icon: Icons.fitness_center,
-                      onChanged: (value) => vm.currentPESValue = value),
-                  DropDownField<RaceType>(
-                      hint: "Race",
-                      values: RaceType.getValues(),
-                      value: vm.currentRaceValue,
-                      icon: Icons.recent_actors,
-                      onChanged: (value) => vm.currentRaceValue = value),
-                  DropDownField<ReligionType>(
-                      hint: "Religion",
-                      values: ReligionType.getValues(),
-                      value: vm.currentReligionValue,
-                      icon: FontAwesomeIcons.syringe,
-                      onChanged: (value) => vm.currentReligionValue = value),
-                  DropDownField<BloodType>(
-                      hint: "Blood Group",
-                      values: BloodType.getValues(),
-                      value: vm.currentBloodValue,
-                      icon: Icons.fitness_center,
-                      onChanged: (value) => vm.currentBloodValue = value),
+                  Consumer<RegistrationViewModel>(
+                    builder: (context, vm, child) => DropDownField<PESType>(
+                        hint: "PES",
+                        values: PESType.getValues(),
+                        value: vm.currentPESValue,
+                        icon: Icons.fitness_center,
+                        onChanged: (value) => vm.pesDropDownOnChanged(value)),
+                  ),
+                  Consumer<RegistrationViewModel>(
+                    builder: (context, vm, child) => DropDownField<RaceType>(
+                        hint: "Race",
+                        values: RaceType.getValues(),
+                        value: vm.currentRaceValue,
+                        icon: Icons.recent_actors,
+                        onChanged: (value) => vm.raceDropDownOnChanged(value)),
+                  ),
+                  Consumer<RegistrationViewModel>(
+                    builder: (context, vm, child) =>
+                        DropDownField<ReligionType>(
+                            hint: "Religion",
+                            values: ReligionType.getValues(),
+                            value: vm.currentReligionValue,
+                            icon: FontAwesomeIcons.syringe,
+                            onChanged: (value) =>
+                                vm.religionDropDownOnChanged(value)),
+                  ),
+                  Consumer<RegistrationViewModel>(
+                    builder: (context, vm, child) => DropDownField<BloodType>(
+                        hint: "Blood Group",
+                        values: BloodType.getValues(),
+                        value: vm.currentBloodValue,
+                        icon: Icons.fitness_center,
+                        onChanged: (value) => vm.bloodDropDownOnChanged(value)),
+                  ),
                   RegistrationTextField("Drug Allergy",
                       FontAwesomeIcons.tablets, vm.drugAllergyController),
                   RegistrationTextField("Food Allergy",
                       FontAwesomeIcons.hamburger, vm.foodAllergyController),
-                  DropDownField<VocationType>(
-                      hint: "Vocation",
-                      values: VocationType.getValues(),
-                      value: vm.currentVocationValue,
-                      icon: FontAwesomeIcons.briefcase,
-                      onChanged: (value) => vm.currentVocationValue = value),
+                  Consumer<RegistrationViewModel>(
+                    builder: (context, vm, child) =>
+                        DropDownField<VocationType>(
+                            hint: "Vocation",
+                            values: VocationType.getValues(),
+                            value: vm.currentVocationValue,
+                            icon: FontAwesomeIcons.briefcase,
+                            onChanged: (value) =>
+                                vm.vocationDropDownOnChanged(value)),
+                  ),
                   RegistrationTextField(
                       "Medical Condition",
                       FontAwesomeIcons.hospitalUser,
@@ -201,6 +217,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     height: 20,
                   ),
                   _submitButton(),
+
                   SizedBox(height: height * .14),
                 ],
               ),
@@ -226,6 +243,8 @@ class _SignUpPageState extends State<SignUpPage> {
       ),
     );
   }
+
+
 
   Widget _personalDataTitle() {
     return RichText(
@@ -263,7 +282,6 @@ class _SignUpPageState extends State<SignUpPage> {
         padding: EdgeInsets.symmetric(horizontal: 40),
         child: InkWell(
           onTap: () {
-
             if (vm.signUpFormKey.currentState.validate()) {
               vm.signUpFormKey.currentState.save();
               fDSTemp.sortPersonalData(
@@ -289,9 +307,9 @@ class _SignUpPageState extends State<SignUpPage> {
                 "Stay In",
                 vm.medicalConditionController.text,
               );
-              fDSTemp.sortLoginData(vm.emailController.text, vm.passwordController.text);
+              fDSTemp.sortLoginData(
+                  vm.emailController.text, vm.passwordController.text);
               Navigator.pushNamed(context, '/trainingReg');
-
             } else {
               showDialog(
                   context: context,

@@ -21,7 +21,6 @@ class RegistrationTextField extends StatelessWidget {
   final String helperText;
   final int maxLength;
   final Function validationAction;
-
   @override
   Widget build(BuildContext context) {
     return Container(
