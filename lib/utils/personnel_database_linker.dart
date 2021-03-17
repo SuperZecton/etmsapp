@@ -16,11 +16,13 @@ class PersonnelDatabaseHandler extends DatabaseHandler
 
     bool result = await databaseExists(dbPath);
 
-    if (result == true)
+ /*   if (result == true)
       {
         this.db = await openDatabase(dbPath);
       }
-      else {
+      else
+        {
+        */
       try {
         final Future<Database> database = openDatabase(
           dbPath,
@@ -83,7 +85,7 @@ class PersonnelDatabaseHandler extends DatabaseHandler
           version: 1,
         );
 
-        db = await database;
+        db = database;
 
         if (db != null) {
           result = true;
@@ -95,9 +97,9 @@ class PersonnelDatabaseHandler extends DatabaseHandler
           return databaseCreationOptimizer();
         }
       }
-    }
 
-    await super.getTableAsWhole();
+
+    await getTableAsWhole();
 
     callConversion();
   }
@@ -129,9 +131,17 @@ class PersonnelDatabaseHandler extends DatabaseHandler
       return false;
     }
 
-    try {
-      Database database = await db;
-      List<Map> result = await database.rawQuery(
+    // Weak-ass stopgap to prevent empty logins
+    if (email == "")
+      {
+        return false;
+      }
+
+    Database database = await db;
+    List<Map> result;
+    try
+    {
+       result = await database.rawQuery(
           'SELECT password FROM $dbTableName WHERE email=?', [email]);
       // TODO: Get password from result to return for login authorization
       String checker = result.toString();
@@ -140,15 +150,17 @@ class PersonnelDatabaseHandler extends DatabaseHandler
 
       return checker.contains(pass);
     }
-    catch (result)
+    catch (_)
     {
       print("Table name invalid. $dbTableName not found.");
       return false;
     }
+
+
   }
 
   @override
-  Future<void> buildDBData() async
+  Future<void> buildBaseDBData() async
   {
     var fDS = new FullDetailSet();
     fDS.sortPersonalData('Test Man', '281A', '5 Cresent Ave', '84569018', '67889231', dtGetter.Date(DateTime.now()), dtGetter.Date(DateTime.now()), dtGetter.Date(DateTime.now()), dtGetter.Date(DateTime.now()), 'A2', ReligionType.Christianity.toString(), RaceType.Chinese.toString(), BloodType.AB_PLUS.toString(), 'None', 'None', 'Testing Man', '97810781', '5 Cresent Ave', VocationType.TO.toString(), 'Stay In', 'None');
@@ -160,5 +172,4 @@ class PersonnelDatabaseHandler extends DatabaseHandler
     insertNewRow(fDS);
   }
 
-  PersonnelDatabaseHandler(dbName, dbTableName) : super(dbName : dbName, dbTableName : dbTableName);
 }

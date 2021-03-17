@@ -31,6 +31,12 @@ class DatabaseHandler {
   // Nehmind; Replace this with a Listener func in the LoginPageVM file!!!
   //  bool tempPassChecker = false;
 
+  Future<void> setDBInitParams(String name, String tableName) async
+  {
+    dbName = name;
+    dbTableName = tableName;
+  }
+
   void fetchDatabaseFromServer(String url) async
   {
 

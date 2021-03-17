@@ -14,10 +14,11 @@ import 'package:ltcapp/core/config/router.dart';
 
 //void main() => runApp(MyApp());
 
-PersonnelDatabaseHandler personnelDBHandle = new PersonnelDatabaseHandler("main_personnel.db", "LtcPersonnelInfo");
+PersonnelDatabaseHandler personnelDBHandle = new PersonnelDatabaseHandler();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await personnelDBHandle.setDBInitParams("main_personnel.db", "LtcPersonnelInfo");
   await personnelDBHandle.databaseCreationOptimizer();
   runApp(MyApp());
 
