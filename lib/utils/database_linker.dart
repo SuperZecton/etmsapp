@@ -85,33 +85,7 @@ class DatabaseHandler {
 
           break;
         case 'LtcVehInfo':
-          try {
-            final Future<Database> database = openDatabase(
-              dbPath,
-              onCreate: (dbref, version) {
-                return dbref.execute(
-                  "CREATE TABLE $dbTableName("
-                  // Veh Info Columns
-                      "midPlate TEXT PRIMARY KEY, "
-                      "vehType TEXT, "
-                      "classType TEXT, "
-                      "currentOdo TEXT"
-                      ")",
-                );
-              },
-              version: 1,
-            );
 
-            if (db != null) {
-              result = true;
-            }
-
-            db = database;
-          } catch (result) {
-            if (result == false) {
-              return databaseCreationOptimizer();
-            }
-          }
           break;
         case 'LtcVehTripsInfo':
           try {
@@ -249,7 +223,7 @@ class DatabaseHandler {
 
   void buildBaseDBData()
   {
-    switch (dbTableName)
+ /*   switch (dbTableName)
     {
       case 'LtcPersonnelInfo':
         var fDS = new FullDetailSet();
@@ -267,7 +241,7 @@ class DatabaseHandler {
         break;
       case 'LtcVehTripsInfo':
         break;
-    }
+    }*/
   }
 
   DatabaseHandler({this.dbName, this.dbTableName});
