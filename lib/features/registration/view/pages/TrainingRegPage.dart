@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:ltcapp/features/registration/viewmodel/RegistrationViewModel.dart';
 import 'package:ltcapp/main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/core/config/globals.dart';
@@ -7,6 +8,7 @@ import 'package:ltcapp/features/registration/view/widgets/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ltcapp/utils/extensions.dart';
 import 'package:ltcapp/core/widgets/widgets.dart';
+import 'package:provider/provider.dart';
 import '../../../login/view/pages/WelcomePage.dart';
 class TrainingRegistrationPage extends StatefulWidget {
   TrainingRegistrationPage({Key key, this.title}) : super(key: key);
@@ -17,16 +19,10 @@ class TrainingRegistrationPage extends StatefulWidget {
 }
 
 class _TrainingRegistrationPageState extends State<TrainingRegistrationPage> {
-  final _formKey = GlobalKey<FormState>();
-  final _trgFrameController = TextEditingController();
-  final _trgPeriodController = TextEditingController();
-  final _noAttemptsController = TextEditingController();
-  final _militaryLicenseController = TextEditingController();
-  final _militaryLicenseTypeController = TextEditingController();
-  final _doiController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    final vm = Provider.of<RegistrationViewModel>(context, listen: false);
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Container(
@@ -52,7 +48,7 @@ class _TrainingRegistrationPageState extends State<TrainingRegistrationPage> {
             ),*/ //TODO: Make this nicer
 
             Form(
-              key: _formKey,
+              key: vm.trainingRegFormKey,
               child: ListView(
                 children: <Widget>[
                   SizedBox(
@@ -73,7 +69,7 @@ class _TrainingRegistrationPageState extends State<TrainingRegistrationPage> {
                         child: RegistrationTextField(
                           "Training Frame",
                           Icons.perm_identity_rounded,
-                          _trgFrameController,
+                          vm.trgFrameController,
                           validationAction: (String input) => input.isValidFrame() ? null: "Example: 359A",
                           maxLength: 4,
                         ),
@@ -82,15 +78,15 @@ class _TrainingRegistrationPageState extends State<TrainingRegistrationPage> {
                         child: DateTextField(
                           "Training Period",
                           Icons.calendar_today_sharp,
-                          _trgPeriodController,
+                          vm.trgPeriodController,
                         ),
                       ),
                     ],
                   ),
-                  RegistrationTextField("No. of attempts", Icons.format_list_numbered_sharp, _noAttemptsController, validationAction: (String input) => input.isValidAttempt() ? null: "Numbers only"),
-                  RegistrationTextField("Military License", FontAwesomeIcons.idCard, _militaryLicenseController),
-                  RegistrationTextField("Military License Type", FontAwesomeIcons.addressCard, _militaryLicenseTypeController),
-                  DateTextField("Date of Issue", Icons.calendar_today_outlined, _doiController),
+                  RegistrationTextField("No. of attempts", Icons.format_list_numbered_sharp, vm.noAttemptsController, validationAction: (String input) => input.isValidAttempt() ? null: "Numbers only"),
+                  RegistrationTextField("Military License", FontAwesomeIcons.idCard, vm.militaryLicenseController),
+                  RegistrationTextField("Military License Type", FontAwesomeIcons.addressCard, vm.militaryLicenseTypeController),
+                  DateTextField("Date of Issue", Icons.calendar_today_outlined, vm.doiController),
 
 
           
@@ -129,32 +125,24 @@ class _TrainingRegistrationPageState extends State<TrainingRegistrationPage> {
 
 
   Widget _submitButton() {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 40),
-      child: InkWell(
-        onTap: () {
-          setState(() {
-            fDSTemp.sortTrainingData(
-                _trgFrameController.text,
-                _trgPeriodController.text,
-                int.parse(_noAttemptsController.text),
-                _militaryLicenseController.text,
-                _militaryLicenseTypeController.text,
-                _doiController.text);
-            Navigator.pushNamed(context, '/educationReg');
-          });
-        },
-        child: Container(
-          width: MediaQuery.of(context).size.width * 0.5,
-          padding: EdgeInsets.symmetric(vertical: 13),
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(5)),
-            color: Colors.blue,
-          ),
-          child: Text(
-            'Next page',
-            style: TextStyle(fontSize: 20, color: Colors.white),
+    final viewModel = Provider.of<RegistrationViewModel>(context, listen: false);
+    return Consumer<RegistrationViewModel>(
+      builder: (context, vm, child) => Container(
+        padding: EdgeInsets.symmetric(horizontal: 40),
+        child: InkWell(
+          onTap: () => viewModel.trainingSignUpValidation(context),
+          child: Container(
+            width: MediaQuery.of(context).size.width * 0.5,
+            padding: EdgeInsets.symmetric(vertical: 13),
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(5)),
+              color: Colors.blue,
+            ),
+            child: Text(
+              'Next page',
+              style: TextStyle(fontSize: 20, color: Colors.white),
+            ),
           ),
         ),
       ),

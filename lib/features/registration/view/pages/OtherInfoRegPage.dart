@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:ltcapp/features/registration/viewmodel/RegistrationViewModel.dart';
 import 'package:ltcapp/main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/core/config/globals.dart';
 import 'package:ltcapp/features/registration/view/widgets/widgets.dart';
 import 'package:ltcapp/core/widgets/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import '../../../login/view/pages/WelcomePage.dart';
 import '../../../../main.dart';
 
@@ -19,16 +21,10 @@ class OtherInfoRegistrationPage extends StatefulWidget {
 }
 
 class _OtherInfoRegistrationPageState extends State<OtherInfoRegistrationPage> {
-  final _formKey = GlobalKey<FormState>();
-
-  final _hobbiesController = TextEditingController();
-  final _civilianLicenseController = TextEditingController();
-  final _civilianLicenseNoController = TextEditingController();
-  final _civilianLicenseDOIController = TextEditingController();
-  final _personalVehicleController = TextEditingController();
-
+  
   @override
   Widget build(BuildContext context) {
+    final vm = Provider.of<RegistrationViewModel>(context, listen: false);
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Container(
@@ -48,7 +44,7 @@ class _OtherInfoRegistrationPageState extends State<OtherInfoRegistrationPage> {
         child: Stack(
           children: <Widget>[
             Form(
-              key: _formKey,
+              key: vm.otherRegFormKey,
               child: ListView(
                 children: <Widget>[
                   SizedBox(
@@ -63,15 +59,15 @@ class _OtherInfoRegistrationPageState extends State<OtherInfoRegistrationPage> {
                     height: 50,
                   ),
                   RegistrationTextField("Hobbies", FontAwesomeIcons.paintBrush,
-                      _hobbiesController),
+                      vm.hobbiesController),
                   RegistrationTextField("Civilian License",
-                      FontAwesomeIcons.idCardAlt, _civilianLicenseController),
+                      FontAwesomeIcons.idCardAlt, vm.civilianLicenseController),
                   RegistrationTextField("License No.",
-                      FontAwesomeIcons.idCard, _civilianLicenseNoController),
+                      FontAwesomeIcons.idCard, vm.civilianLicenseNoController),
                   DateTextField(
                       "License Date of Issue",
                       FontAwesomeIcons.calendarAlt,
-                      _civilianLicenseDOIController),
+                      vm.civilianLicenseDOIController),
                   SizedBox(
                     height: 20,
                   ),
@@ -103,29 +99,11 @@ class _OtherInfoRegistrationPageState extends State<OtherInfoRegistrationPage> {
   }
 
   Widget _submitButton() {
+    final viewModel = Provider.of<RegistrationViewModel>(context, listen: false);
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 40),
       child: InkWell(
-        onTap: () {
-          setState(() {
-            fDSTemp.sortMiscData(
-            _hobbiesController.text,
-            _civilianLicenseController.text,
-            _civilianLicenseNoController.text,
-            _civilianLicenseDOIController.text,
-            "No",
-            _personalVehicleController.text,
-            "Unknown",
-            "M",
-            50,
-            50,
-            9);
-
-            personnelDBHandle.insertNewRow(fDSTemp);
-
-            Navigator.pushNamed(context, '/');
-          });
-        },
+        onTap: () => viewModel.otherSignUpValidation(context),
         child: Container(
           width: MediaQuery.of(context).size.width * 0.5,
           padding: EdgeInsets.symmetric(vertical: 13),

@@ -43,7 +43,7 @@ class _EducationRegistrationPageState extends State<EducationRegistrationPage> {
         child: Stack(
           children: <Widget>[
             Form(
-              key: vm.trainingRegFormKey,
+              key: vm.educationRegFormKey,
               child: ListView(
                 children: <Widget>[
                   SizedBox(
@@ -104,34 +104,27 @@ class _EducationRegistrationPageState extends State<EducationRegistrationPage> {
 
 
   Widget _submitButton() {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 40),
-      child: InkWell(
-        onTap: () {
-          setState(() {
-            fDSTemp.sortEducationData(
-                _educationLevelController.text,
-                _streamCourseController.text,
-                _ccaController.text,
-                _schoolController.text);
-            Navigator.pushNamed(context, '/otherReg');
-
-          });
-        },
-        child: Container(
-          width: MediaQuery
-              .of(context)
-              .size
-              .width * 0.5,
-          padding: EdgeInsets.symmetric(vertical: 13),
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(5)),
-            color: Colors.blue,
-          ),
-          child: Text(
-            'Next page',
-            style: TextStyle(fontSize: 20, color: Colors.white),
+    final viewModel = Provider.of<RegistrationViewModel>(context, listen: false);
+    return Consumer<RegistrationViewModel>(
+      builder:(context, vm, child) => Container(
+        padding: EdgeInsets.symmetric(horizontal: 40),
+        child: InkWell(
+          onTap: () => viewModel.educationSignUpValidation(context),
+          child: Container(
+            width: MediaQuery
+                .of(context)
+                .size
+                .width * 0.5,
+            padding: EdgeInsets.symmetric(vertical: 13),
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(5)),
+              color: Colors.blue,
+            ),
+            child: Text(
+              'Next page',
+              style: TextStyle(fontSize: 20, color: Colors.white),
+            ),
           ),
         ),
       ),
