@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:ltcapp/features/registration/view/widgets/registrationTextField.dart';
+import 'package:ltcapp/features/registration/viewmodel/RegistrationViewModel.dart';
 import 'package:ltcapp/main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/core/config/globals.dart';
 
 import 'package:ltcapp/core/widgets/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import '../../../login/view/pages/WelcomePage.dart';
 
 class EducationRegistrationPage extends StatefulWidget {
@@ -17,20 +19,12 @@ class EducationRegistrationPage extends StatefulWidget {
 }
 
 class _EducationRegistrationPageState extends State<EducationRegistrationPage> {
-  final _formKey = GlobalKey<FormState>();
-
-  final _educationLevelController = TextEditingController();
-  final _streamCourseController = TextEditingController();
-  final _ccaController = TextEditingController();
-  final _schoolController = TextEditingController();
-
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery
-        .of(context)
-        .size
-        .height;
+    final vm = Provider.of<RegistrationViewModel>(context, listen:false );
+    final height = MediaQuery.of(context).size.height;
+
     return Scaffold(
       body: Container(
         height: height,
@@ -49,7 +43,7 @@ class _EducationRegistrationPageState extends State<EducationRegistrationPage> {
         child: Stack(
           children: <Widget>[
             Form(
-              key: _formKey,
+              key: vm.trainingRegFormKey,
               child: ListView(
                 children: <Widget>[
                   SizedBox(
@@ -63,10 +57,10 @@ class _EducationRegistrationPageState extends State<EducationRegistrationPage> {
                   SizedBox(
                     height: 50,
                   ),
-                  RegistrationTextField("Education Level",FontAwesomeIcons.bookReader , _educationLevelController),
-                  RegistrationTextField("Name of School ",FontAwesomeIcons.school , _schoolController),
-                  RegistrationTextField("Stream/Course",FontAwesomeIcons.bookOpen , _streamCourseController),
-                  RegistrationTextField("CCA",FontAwesomeIcons.quidditch , _ccaController),
+                  RegistrationTextField("Education Level",FontAwesomeIcons.bookReader , vm.educationLevelController),
+                  RegistrationTextField("Name of School ",FontAwesomeIcons.school , vm.schoolController),
+                  RegistrationTextField("Stream/Course",FontAwesomeIcons.bookOpen , vm.streamCourseController),
+                  RegistrationTextField("CCA",FontAwesomeIcons.quidditch , vm.ccaController),
 
 
 

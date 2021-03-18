@@ -7,6 +7,7 @@ import 'package:ltcapp/features/registration/viewmodel/RegistrationViewModel.dar
 import 'package:ltcapp/features/vehiclebookout/viewmodel/VehicleBookOutViewModel.dart';
 
 import 'package:ltcapp/utils/database_linker.dart';
+import 'package:ltcapp/utils/individual_identity.dart';
 import 'package:ltcapp/utils/personnel_database_linker.dart';
 
 import 'package:provider/provider.dart';
@@ -15,6 +16,7 @@ import 'package:ltcapp/core/config/router.dart';
 //void main() => runApp(MyApp());
 
 PersonnelDatabaseHandler personnelDBHandle = new PersonnelDatabaseHandler();
+FullDetailSet fDSTemp;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

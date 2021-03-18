@@ -3,6 +3,7 @@ import 'package:ltcapp/core/config/globals.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 import '../../../../utils/individual_identity.dart';
+import 'package:ltcapp/main.dart';
 
 class WelcomePage extends StatefulWidget {
   WelcomePage({Key key}) : super(key: key);
@@ -11,7 +12,7 @@ class WelcomePage extends StatefulWidget {
   _WelcomePageState createState() => _WelcomePageState();
 }
 
-FullDetailSet fDSTemp;
+
 
 class _WelcomePageState extends State<WelcomePage> {
   final double _imageHeight = 256.0;

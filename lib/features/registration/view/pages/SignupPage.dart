@@ -14,7 +14,6 @@ import 'package:ltcapp/core/widgets/widgets.dart';
 import 'package:provider/provider.dart';
 import '../../../login/view/pages/WelcomePage.dart';
 
-
 //TODO Validate all fields, implement viewmodel for all signup pages, and clean up code
 class SignUpPage extends StatefulWidget {
   SignUpPage({Key key, this.title}) : super(key: key);
@@ -217,7 +216,6 @@ class _SignUpPageState extends State<SignUpPage> {
                     height: 20,
                   ),
                   _submitButton(),
-
                   SizedBox(height: height * .14),
                 ],
               ),
@@ -243,8 +241,6 @@ class _SignUpPageState extends State<SignUpPage> {
       ),
     );
   }
-
-
 
   Widget _personalDataTitle() {
     return RichText(
@@ -277,56 +273,12 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   Widget _submitButton() {
+    final viewModel = Provider.of<RegistrationViewModel>(context, listen: false);
     return Consumer<RegistrationViewModel>(
       builder: (context, vm, child) => Container(
         padding: EdgeInsets.symmetric(horizontal: 40),
         child: InkWell(
-          onTap: () {
-            if (vm.signUpFormKey.currentState.validate()) {
-              vm.signUpFormKey.currentState.save();
-              fDSTemp.sortPersonalData(
-                vm.nameController.text,
-                vm.nricController.text,
-                vm.addressController.text,
-                vm.numberController.text,
-                vm.homeNumberController.text,
-                vm.dobController.text,
-                vm.doeController.text,
-                vm.ordController.text,
-                vm.dopController.text,
-                vm.currentPESValue.toString(),
-                vm.currentReligionValue.toString(),
-                vm.currentRaceValue.toString(),
-                vm.currentBloodValue.toString(),
-                vm.drugAllergyController.text,
-                vm.foodAllergyController.text,
-                vm.nokController.text,
-                vm.nokNumberController.text,
-                vm.nokAddressController.text,
-                vm.currentVocationValue.toString(),
-                "Stay In",
-                vm.medicalConditionController.text,
-              );
-              fDSTemp.sortLoginData(
-                  vm.emailController.text, vm.passwordController.text);
-              Navigator.pushNamed(context, '/trainingReg');
-            } else {
-              showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: Text("Error"),
-                      content: SingleChildScrollView(
-                        child: ListBody(
-                          children: <Widget>[
-                            Text('Please fill out all the required fields'),
-                          ],
-                        ),
-                      ),
-                    );
-                  });
-            }
-          },
+          onTap: () => viewModel.signUpValidation(context),
           child: Container(
             width: MediaQuery.of(context).size.width * 0.5,
             padding: EdgeInsets.symmetric(vertical: 13),

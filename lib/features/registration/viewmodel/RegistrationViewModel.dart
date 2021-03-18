@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:ltcapp/utils/individual_identity.dart';
+import 'package:ltcapp/main.dart';
 
 class RegistrationViewModel with ChangeNotifier {
   ///Sign Up Page Controllers
@@ -57,4 +59,65 @@ class RegistrationViewModel with ChangeNotifier {
     currentVocationValue = value;
     notifyListeners();
   }
+
+  signUpValidation(BuildContext context){
+    if (signUpFormKey.currentState.validate()) {
+      signUpFormKey.currentState.save();
+      fDSTemp.sortPersonalData(
+        nameController.text,
+        nricController.text,
+        addressController.text,
+        numberController.text,
+        homeNumberController.text,
+        dobController.text,
+        doeController.text,
+        ordController.text,
+        dopController.text,
+        currentPESValue.toString(),
+        currentReligionValue.toString(),
+        currentRaceValue.toString(),
+        currentBloodValue.toString(),
+        drugAllergyController.text,
+        foodAllergyController.text,
+        nokController.text,
+        nokNumberController.text,
+        nokAddressController.text,
+        currentVocationValue.toString(),
+        "Stay In",
+        medicalConditionController.text,
+      );
+      fDSTemp.sortLoginData(
+          emailController.text, passwordController.text);
+      Navigator.pushNamed(context, '/trainingReg');
+
+    } else {
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text("Error"),
+              content: SingleChildScrollView(
+                child: ListBody(
+                  children: <Widget>[
+                    Text('Please fill out all the required fields'),
+                  ],
+                ),
+              ),
+            );
+          });
+    }
+
+
+
+  }
+
+  ///Training Page Controllers
+  final trainingRegFormKey = GlobalKey<FormState>();
+
+  final educationLevelController = TextEditingController();
+  final streamCourseController = TextEditingController();
+  final ccaController = TextEditingController();
+  final schoolController = TextEditingController();
+
+
 }
