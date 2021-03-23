@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ltcapp/core/config/globals.dart';
+import 'package:ltcapp/core/widgets/topBackButton.dart';
+import 'package:ltcapp/features/home/view/widgets/topContainer.dart';
 import 'package:ltcapp/features/vehiclebookout/view/widgets/VehicleButton.dart';
 import 'package:ltcapp/features/vehiclebookout/view/widgets/VehicleEntryField.dart';
 import 'package:ltcapp/features/vehiclebookout/view/widgets/vehicleBookOutCard.dart';
@@ -16,31 +19,47 @@ class _VehicleBookOutPageState extends State<VehicleBookOutPage> {
   Widget build(BuildContext context) {
     final vm = Provider.of<VehicleBookOutViewModel>(context, listen: false);
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.lightBlue,
-        centerTitle: true,
-      ),
       body: Container(
-        color: Color(0xffDCDDDB),
-        padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 0.0),
+        color: kWhite,
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              VehicleBookOutCard(),
-              SizedBox(
-                height: 30,
+        child: ListView(
+          shrinkWrap: true,
+          padding: const EdgeInsets.all(0.0),
+          children: [
+            TopContainer(
+              height: 100,
+              width: MediaQuery.of(context).size.width,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      TopBackButton(),
+                    ],
+                  )
+                ],
               ),
-              VehicleButton("Start Trip",
-                  onPressed: () =>
-                      Navigator.pushNamed(context, '/vehicleManagementForm')),
-              SizedBox(height: 30,),
-              VehicleButton("End Trip", onPressed: () => Navigator.pushNamed(context, '/vehicleManagementFormIn'),),
-            ],
-          ),
+            ),
+
+            SizedBox(height:40),
+            VehicleBookOutCard(),
+            SizedBox(
+              height: 30,
+            ),
+            VehicleButton("Start Trip",
+                onPressed: () =>
+                    Navigator.pushNamed(context, '/vehicleManagementForm')),
+            SizedBox(
+              height: 30,
+            ),
+            VehicleButton(
+              "End Trip",
+              onPressed: () =>
+                  Navigator.pushNamed(context, '/vehicleManagementFormIn'),
+            ),
+          ],
         ),
       ),
     );

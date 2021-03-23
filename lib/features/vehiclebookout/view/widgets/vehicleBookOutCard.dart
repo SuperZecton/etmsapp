@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:ltcapp/core/config/globals.dart';
 
 class VehicleBookOutCard extends StatelessWidget {
-  String time = DateFormat("jm").format(DateTime.now().toLocal());
+  final String time = DateFormat("jm").format(DateTime.now().toLocal());
   @override
   Widget build(BuildContext context) {
     return Container(

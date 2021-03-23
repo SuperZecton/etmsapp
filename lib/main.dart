@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:ltcapp/features/home/viewmodel/HomePageViewModel.dart';
 import 'package:ltcapp/features/login/viewmodel/LoginPageVM.dart';
 import 'package:ltcapp/features/login/viewmodel/authentication.dart';
@@ -20,10 +21,10 @@ FullDetailSet fDSTemp;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await personnelDBHandle.setDBInitParams("main_personnel.db", "LtcPersonnelInfo");
+  await personnelDBHandle.setDBInitParams(
+      "main_personnel.db", "LtcPersonnelInfo");
   await personnelDBHandle.databaseCreationOptimizer();
   runApp(MyApp());
-
 }
 
 class MyApp extends StatelessWidget {
@@ -31,12 +32,18 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<LoginPageViewModel>(create: (context) =>LoginPageViewModel()),
-        ChangeNotifierProvider<HomePageViewModel>(create: (context) => HomePageViewModel()),
-        ChangeNotifierProvider<RegistrationViewModel>(create: (context) => RegistrationViewModel()),
-        ChangeNotifierProvider<VehicleBookOutViewModel>(create: (context) =>VehicleBookOutViewModel()),
-        ChangeNotifierProvider<LoginPageViewModel>(create: (context) => LoginPageViewModel()),
-        ChangeNotifierProvider<Authentication>(create: (context) => Authentication()),
+        ChangeNotifierProvider<LoginPageViewModel>(
+            create: (context) => LoginPageViewModel()),
+        ChangeNotifierProvider<HomePageViewModel>(
+            create: (context) => HomePageViewModel()),
+        ChangeNotifierProvider<RegistrationViewModel>(
+            create: (context) => RegistrationViewModel()),
+        ChangeNotifierProvider<VehicleBookOutViewModel>(
+            create: (context) => VehicleBookOutViewModel()),
+        ChangeNotifierProvider<LoginPageViewModel>(
+            create: (context) => LoginPageViewModel()),
+        ChangeNotifierProvider<Authentication>(
+            create: (context) => Authentication()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -50,4 +57,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-

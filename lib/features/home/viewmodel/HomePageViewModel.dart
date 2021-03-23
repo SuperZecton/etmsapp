@@ -3,8 +3,8 @@ import 'package:ltcapp/features/home/view/pages/HomePage.dart';
 import 'package:provider/provider.dart';
 
 class HomePageViewModel extends ChangeNotifier {
-  //TODO
 
+  /// CampDropDown
   static final List<String> campDropdownItems = [
     'LTC',
     'BPC',
@@ -12,10 +12,37 @@ class HomePageViewModel extends ChangeNotifier {
   String campDropdown = campDropdownItems[0];
   int campChartNo = 0;
 
-  void campDropdownUpdate(String value) {
+  void campDropDownUpdate(String value) {
     campDropdown = value;
     campChartNo = campDropdownItems.indexOf(value);
 
     notifyListeners();
   }
+
+  static final List<String> dateDropdownItems = [
+    'Total',
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
+  String dateDropdown = dateDropdownItems[0];
+  int dateChartNo = 0;
+
+  void dateDropDownUpdate(String value) {
+    dateDropdown = value;
+    dateChartNo = dateDropdownItems.indexOf(value);
+    notifyListeners();
+  }
+
+
+
 }

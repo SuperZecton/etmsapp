@@ -8,6 +8,9 @@ final Color secondaryColor = Color(0xff232c51);
 final Color buttonPrimaryColor = Colors.blue;
 final Color buttonSecondaryColor = Color(0xff808080);
 
+final Color kSilver = Color(0xFFDCDDDB);
+final Color kWhite = Color(0xFFf1f2f5);
+
 
 
 

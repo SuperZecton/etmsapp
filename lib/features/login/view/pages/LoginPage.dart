@@ -67,7 +67,13 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
             ),
-            Positioned(top: 40, left: 0, child: TopBackButton()),
+            Positioned(
+                top: 40,
+                left: 0,
+                child: TopBackButton(
+                    padding: EdgeInsets.symmetric(
+                  horizontal: 10,
+                ))),
           ],
         ),
       ),
@@ -170,7 +176,7 @@ class _LoginPageState extends State<LoginPage> {
     final auth = Provider.of<Authentication>(context, listen: false);
     return InkWell(
         onTap: () {
-            auth.verifyLoginData(context, loginCreds);
+          auth.verifyLoginData(context, loginCreds);
         },
         child: Container(
           width: MediaQuery.of(context).size.width,
@@ -280,7 +286,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget _createAccountLabel() {
     return InkWell(
       onTap: () {
-          Navigator.pushNamed(context, '/signup');
+        Navigator.pushNamed(context, '/signup');
       },
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 20),

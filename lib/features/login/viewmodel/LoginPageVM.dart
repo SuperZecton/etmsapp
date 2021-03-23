@@ -1,11 +1,8 @@
-
-
 import 'package:flutter/cupertino.dart';
 
-class LoginPageViewModel extends ChangeNotifier{
+class LoginPageViewModel extends ChangeNotifier {
   String get email => emailController.text;
   String get password => passwordController.text;
-
 
 /* Future<void> fetchUserCredentials() async{
   final userCredentials = await ...
@@ -17,16 +14,13 @@ class LoginPageViewModel extends ChangeNotifier{
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
-
   void authenticateUserCredentials() {
     bool canLogin;
-
   }
-@override
+
+  @override
   void notifyListeners() {
     // TODO: implement notifyListeners
     super.notifyListeners();
   }
-
 }
-

@@ -6,6 +6,7 @@ import 'package:ltcapp/main.dart';
 import 'package:provider/provider.dart';
 
 class Authentication with ChangeNotifier {
+  
   String email = LoginPageViewModel().email;
   String password = LoginPageViewModel().password;
 

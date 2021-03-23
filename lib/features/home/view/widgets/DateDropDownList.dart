@@ -1,10 +1,9 @@
 
-
 import 'package:flutter/material.dart';
 import 'package:ltcapp/features/home/viewmodel/HomePageViewModel.dart';
 import 'package:provider/provider.dart';
 
-class DropDownList extends StatelessWidget {
+class DateDropDownList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -16,9 +15,9 @@ class DropDownList extends StatelessWidget {
           Consumer<HomePageViewModel>(
             builder: (context, vm, child) => DropdownButton(
                 isDense: true,
-                value: vm.campDropdown,
-                onChanged: (String value) => vm.campDropdownUpdate(value),
-                items: HomePageViewModel.campDropdownItems
+                value: vm.dateDropdown,
+                onChanged: (String value) => vm.dateDropDownUpdate(value),
+                items: HomePageViewModel.dateDropdownItems
                     .map((String title) {
                   return DropdownMenuItem(
                     value: title,
