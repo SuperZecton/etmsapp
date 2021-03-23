@@ -77,7 +77,7 @@ class PersonnelDatabaseHandler extends DatabaseHandler
                   "no3sizeWaist INTEGER, "
                   "no3sizeShoes INTEGER, "
               // Section 5: Login Information
-                  "email TEXT, "
+                  "username TEXT, "
                   "password TEXT"
                   ")",
             );
@@ -157,6 +157,25 @@ class PersonnelDatabaseHandler extends DatabaseHandler
     }
 
 
+  }
+
+  Future<List<Map>> getFullRowFromEmail(String email) async
+  {
+    final Database database = await db;
+
+    try {
+      var result = await database.rawQuery(""
+          "SELECT * "
+          "FROM $dbTableName "
+          "WHERE email=? "
+          "", [email]);
+      return result;
+    }
+    catch (_) {
+
+    }
+
+    return null;
   }
 
   @override

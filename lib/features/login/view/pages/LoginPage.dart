@@ -174,8 +174,13 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _submitButton(bool loginCreds) {
     final auth = Provider.of<Authentication>(context, listen: false);
+    final vm = Provider.of<LoginPageViewModel>(context, listen: false);
     return InkWell(
         onTap: () {
+          // TODO: Implement better ChangeNotifier for vm so vm does not need to be redefined in this widget
+          auth.email = vm.emailController.text;
+          auth.password = vm.passwordController.text;
+
           auth.verifyLoginData(context, loginCreds);
         },
         child: Container(

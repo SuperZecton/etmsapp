@@ -5,8 +5,7 @@ import 'package:path/path.dart';
 import 'dart:convert';
 import 'package:sqflite/sqflite.dart';
 
-class VehInfoDatabaseHandler extends DatabaseHandler
-{
+class VehInfoDatabaseHandler extends DatabaseHandler {
   @override
   Future<void> databaseCreationOptimizer() async
   {
@@ -53,25 +52,26 @@ class VehInfoDatabaseHandler extends DatabaseHandler
 
   Future<void> insertNewRow(FullVehicleDetailSet dataSet) async
   {
-    if (db == null)
-    {
+    if (db == null) {
       return null;
     }
 
-    if (dataSet == null)
-    {
+    if (dataSet == null) {
       return null;
     }
 
     final Database cachedDB = await db;
 
-    await cachedDB.insert(dbTableName, dataSet.toMap(), conflictAlgorithm: ConflictAlgorithm.ignore);
+    await cachedDB.insert(dbTableName, dataSet.toMap(),
+        conflictAlgorithm: ConflictAlgorithm.ignore);
   }
 
   Future<void> buildBaseDBData() async
   {
     var fVDS = new FullVehicleDetailSet();
-    fVDS.sortData('MID50', VehType.AType.toString(), VehClassType.Class3.toString(), '696969');
+    fVDS.sortData(
+        'MID50', VehType.AType.toString(), VehClassType.Class3.toString(),
+        '696969');
     insertNewRow(fVDS);
   }
 }

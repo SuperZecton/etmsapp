@@ -15,17 +15,45 @@ class VehLogInfoDatabaseHandler extends DatabaseHandler
 
     bool result = await databaseExists(dbPath);
 
-    try
-        {
-
-        }
+    try {
+      final Future<Database> database = openDatabase(
+        dbPath,
+        onCreate: (dbref, version) {
+          return dbref.execute(
+              "CREATE TABLE $dbTableName("
+                  "dateOfMovement TEXT PRIMARY KEY, "
+                  "midPlate TEXT, "
+                  "vehType TEXT, "
+                  "classType TEXT, "
+                  "startingOdo TEXT, "
+                  "endingOdo TEXT, "
+                  "startingTime TEXT, "
+                  "endingTime TEXT, "
+                  "distanceCovered TEXT,"
+                  "vehOperator TEXT,"
+                  "vehCommander TEXT,"
+                  "vehAuth TEXT"
+                  ")"
+          );
+        },
+        version: 1,
+      );
+    }
         catch(_)
     {
 
     }
 
+
+
     await getTableAsWhole();
 
     callConversion();
+  }
+
+  @override
+  Future<void> buildBaseDBData() async
+  {
+
   }
 }

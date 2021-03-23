@@ -3,15 +3,15 @@ import 'dart:convert';
 import 'package:async/async.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
-import 'csv_utils.dart';
+import 'package:ltcapp/utils/csv_utils.dart';
 import 'package:csv/csv.dart';
 import 'dart:typed_data';
 import 'package:flutter/services.dart';
-import 'individual_identity.dart';
-import '../features/vehiclebookout/model/individual_vehicle.dart';
+import 'package:ltcapp/utils/individual_identity.dart';
+import 'package:ltcapp/features/vehiclebookout/model/individual_vehicle.dart';
 import 'package:ltcapp/features/login/model/login_credentials.dart';
 import 'dart:io';
-import 'DateAndTimeGetter.dart';
+import 'package:ltcapp/utils/DateAndTimeGetter.dart';
 import 'package:http/http.dart' as http;
 
 
@@ -28,6 +28,7 @@ class DatabaseHandler {
   List fetchedData = [];
 
   DateAndTime dtGetter = DateAndTime();
+
   // Nehmind; Replace this with a Listener func in the LoginPageVM file!!!
   //  bool tempPassChecker = false;
 
@@ -39,18 +40,15 @@ class DatabaseHandler {
 
   void fetchDatabaseFromServer(String url) async
   {
-
     final response = await http.get(url);
 
-    if (response.statusCode == 200)
-    {
+    if (response.statusCode == 200) {
       fetchedData = json.decode(response.body);
       // TODO; Create auto data importer for db populating
     }
   }
 
-  void setDatabasePath(String path)
-  {
+  void setDatabasePath(String path) {
     dbPath = path;
   }
 
@@ -65,27 +63,22 @@ class DatabaseHandler {
     try {
       count = Sqflite.firstIntValue(
           await tempDB.rawQuery('SELECT COUNT(*) FROM $dbTableName'));
-    }catch(count)
-  {
-    deleteDatabase(dbPath);
-  }
-    if (count == 1)
-    {
+    } catch (count) {
+      deleteDatabase(dbPath);
+    }
+    if (count == 1) {
       print(count.toString());
       print("Less than or exactly 1 element detected. Resetting.");
       deleteDatabase(dbPath);
       result = false;
       return databaseCreationOptimizer();
     }
-    else
-      {
+    else {
       // First time launch SOP
       switch (dbTableName) {
         case 'LtcPersonnelInfo':
-
           break;
         case 'LtcVehInfo':
-
           break;
         case 'LtcVehTripsInfo':
           try {
@@ -114,12 +107,10 @@ class DatabaseHandler {
           }
           break;
       }
-      if (count == 0)
-      {
+      if (count == 0) {
         buildBaseDBData();
       }
     }
-
 
 
     // Just to check if table exists
@@ -136,94 +127,150 @@ class DatabaseHandler {
   {
     db = await openDatabase(path);
   }
+
   // Redundant
 
   Future<void> insertNewData(var theData) async
   {
-
-    if (db == null)
-    {
+    // TODO: Already a legacy function. Not to be called.
+    if (db == null) {
       return;
     }
 
-    if (theData is FullDetailSet)
-    {
+    if (theData is FullDetailSet) {
       FullDetailSet fDS = theData;
 
       final Database database = await db;
 
-      await database.insert(dbTableName, fDS.toMap(), conflictAlgorithm: ConflictAlgorithm.replace);
-
+      await database.insert(dbTableName, fDS.toMap(),
+          conflictAlgorithm: ConflictAlgorithm.replace);
     }
 
-    else if (theData is FullVehicleDetailSet)
-    {
+    else if (theData is FullVehicleDetailSet) {
       FullVehicleDetailSet fVDS = theData;
 
       final Database database = await db;
 
-      await database.insert(dbTableName, fVDS.toMap(), conflictAlgorithm: ConflictAlgorithm.replace);
-
+      await database.insert(dbTableName, fVDS.toMap(),
+          conflictAlgorithm: ConflictAlgorithm.replace);
     }
 
 
-  callConversion();
+    callConversion();
+  }
 
+  Future<bool> ifDataRowExists(String key) async
+  {
+    final Database database = await db;
+
+    try {
+      var result = await database.rawQuery(""
+          "SELECT COUNT (1)"
+          "FROM $dbTableName"
+          "WHERE $key = value;"
+          "");
+
+      if (result != null) {
+
+      }
+      else {
+        print("Error: Row does not exist");
+        return false;
+      }
+    }
+    catch (_) {
+
+    }
+
+    return false;
+  }
+
+  Future<List<Map>> getRowFromColumnData(String columnName, String columnKey) async
+  {
+    final Database database = await db;
+
+    try {
+      var result = await database.rawQuery(""
+          "SELECT * "
+          "FROM $dbTableName "
+          "WHERE $columnName=? "
+          "", [columnKey]);
+      return result;
+    }
+    catch (_) {
+
+    }
+
+    return null;
+  }
+
+  Future<List<Map>> getColumnInRowData(String column) async
+  {
+    final Database database = await db;
+
+    try {
+      var result = await database.rawQuery(""
+          ""
+          "");
+    }
+    catch (_)
+    {
+
+    }
+    return null;
   }
 
 
-  void callConversion() async
+  Future<void> callConversion() async
   {
 //    dbPath = await getDatabasesPath();
 //   tempPath = join(dbPath, dbName);
 
     bool result = await databaseExists(dbPath);
-    if (result == true)
-    {
+    if (result == true) {
       // Send database data into a string
       // Doesn't work right now due to null db data
       var dbToConvert = await db;
       var dbConversionUnit = await dbToConvert.query(dbTableName);
-      print((Sqflite.firstIntValue(await dbToConvert.rawQuery('SELECT COUNT(*) FROM $dbTableName'))).toString() + ' Rows');
+      print((Sqflite.firstIntValue(
+          await dbToConvert.rawQuery('SELECT COUNT(*) FROM $dbTableName')))
+          .toString() + ' Rows');
       // TODO; Fix character limit to properly print out
-  //    String printo = mapListToCsv(dbConversionUnit);
+      //    String printo = mapListToCsv(dbConversionUnit);
       //       print(printo);
       // Create file to send db data into
- //     File file = await new File(dbPath + '/$dbTableName.csv');
- //     file.create(recursive: true);
- //     file.writeAsString(printo);
+      //     File file = await new File(dbPath + '/$dbTableName.csv');
+      //     file.create(recursive: true);
+      //     file.writeAsString(printo);
       // Spit the data written into file out into console
- //     var read = new File(dbPath + '/$dbTableName.csv').readAsString();
- //     String content = await read;
- //     print(content);
+      //     var read = new File(dbPath + '/$dbTableName.csv').readAsString();
+      //     String content = await read;
+      //     print(content);
 
     }
-
   }
 
   Future<List<Map>> getTableAsWhole() async
   {
-    if (db == null)
-    {
+    if (db == null) {
       return null;
     }
 
-    try
-        {
-          var cachedDB = await db;
-          List<Map> cachedDBPointer = await cachedDB.query(dbTableName);
-          return cachedDBPointer;
-
-        }
-        catch(_)
-    {
+    try {
+      var cachedDB = await db;
+      List<Map> cachedDBPointer = await cachedDB.query(dbTableName);
+      return cachedDBPointer;
+    }
+    catch (_) {
       return null;
     }
   }
 
+
+
   void buildBaseDBData()
   {
- /*   switch (dbTableName)
+    /*   switch (dbTableName)
     {
       case 'LtcPersonnelInfo':
         var fDS = new FullDetailSet();

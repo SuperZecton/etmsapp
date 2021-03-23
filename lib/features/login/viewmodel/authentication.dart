@@ -17,6 +17,7 @@ class Authentication with ChangeNotifier {
     await new Future.delayed(const Duration(seconds: 2),);
     if (loginCreds == true) {
       Navigator.pushNamed(context, '/home');
+      print((await personnelDBHandle.getFullRowFromEmail(email)).toString());
     }
   }
 }

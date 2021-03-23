@@ -250,29 +250,73 @@ class FullDetailSet {
 
   LoginCredential loginCredentials;
 
-  void sortPersonalData(String name, String nric, String homeAddress, String hpNo, String homeNo, String dob, String doe, String ord, String postIn, String pes, String religion, String race, String bldGrp, String drugAlle, String foodAlle, String NOKname, String NOKadd, String NOKnum, String vocType, String stayInOut, String medCond)
-  {
-    personalDataSet = new PersonalDataSet(fullName: name, nricLast4Digits: nric, fullHomeAddress: homeAddress, handphoneNumber: hpNo, homephoneNumber: homeNo, dateOfBirth: dob, dateOfEnlistment: doe, dateOfORD: ord, dateOfPostIn: postIn, pes: pes, religion: religion, race: race, bloodGroup: bldGrp, drugAllergy: drugAlle, foodAllergy: foodAlle, NOKDetailfullName: NOKname, NOKDetailcontactNumber: NOKnum, NOKDetailfullAddress: NOKadd, vocationType: vocType, stayInstayOut: stayInOut, medicalConditions: medCond);
+  void sortPersonalData(String name, String nric, String homeAddress,
+      String hpNo, String homeNo, String dob, String doe, String ord,
+      String postIn, String pes, String religion, String race, String bldGrp,
+      String drugAlle, String foodAlle, String NOKname, String NOKadd,
+      String NOKnum, String vocType, String stayInOut, String medCond) {
+    personalDataSet = new PersonalDataSet(fullName: name,
+        nricLast4Digits: nric,
+        fullHomeAddress: homeAddress,
+        handphoneNumber: hpNo,
+        homephoneNumber: homeNo,
+        dateOfBirth: dob,
+        dateOfEnlistment: doe,
+        dateOfORD: ord,
+        dateOfPostIn: postIn,
+        pes: pes,
+        religion: religion,
+        race: race,
+        bloodGroup: bldGrp,
+        drugAllergy: drugAlle,
+        foodAllergy: foodAlle,
+        NOKDetailfullName: NOKname,
+        NOKDetailcontactNumber: NOKnum,
+        NOKDetailfullAddress: NOKadd,
+        vocationType: vocType,
+        stayInstayOut: stayInOut,
+        medicalConditions: medCond);
   }
- /*
+
+  /*
   void sortPersonalData(PersonalDataSet pDS)
   {
     personalDataSet = pDS;
   }
 */
-  void sortTrainingData(String trngFrame, String trngPeriod, int attempts, String milLicenseNo, String milLicenseType, String milLicenseDOI)
-  {
-    trainingDataSet = new TrainingDataSet(trainingFrame: trngFrame, trainingPeriod: trngPeriod, passAttempts: attempts, militaryLicenseNo: milLicenseNo, militaryLicenseType: milLicenseType, milLicenseDateOfIssue: milLicenseDOI);
+  void sortTrainingData(String trngFrame, String trngPeriod, int attempts,
+      String milLicenseNo, String milLicenseType, String milLicenseDOI) {
+    trainingDataSet = new TrainingDataSet(trainingFrame: trngFrame,
+        trainingPeriod: trngPeriod,
+        passAttempts: attempts,
+        militaryLicenseNo: milLicenseNo,
+        militaryLicenseType: milLicenseType,
+        milLicenseDateOfIssue: milLicenseDOI);
   }
 
-  void sortEducationData(String eduLvl, String strmCrseName, String cca, String sch)
-  {
-    educationDataSet = new EducationDataSet(educationLevel: eduLvl, streamcourseName: strmCrseName, ccaOptional: cca, schName: sch);
+  void sortEducationData(String eduLvl, String strmCrseName, String cca,
+      String sch) {
+    educationDataSet = new EducationDataSet(educationLevel: eduLvl,
+        streamcourseName: strmCrseName,
+        ccaOptional: cca,
+        schName: sch);
   }
 
-  void sortMiscData(String hobbies, String civLicenseType, String civLicenseNo, String civLicenseDOI, String doneDefCourse, String hasOwnVeh, String personalVehNo, String tShirtSize, int upperTorsoSize, int waistSize, int shoeSize)
-  {
-    miscDataSet = new MiscDataSet(hobbiesInterest: hobbies, civillianLicenseType: civLicenseType, civillianLicenseNumber: civLicenseNo, civillianLicenseDateOfIssue: civLicenseDOI, hasDoneDefensiveCourse: doneDefCourse, hasPersonalVehicle: hasOwnVeh, personalVehiclePlateNumber: personalVehNo, tShirtSize: tShirtSize, no3sizeUpperTorso: upperTorsoSize, no3sizeWaist: waistSize, no3sizeShoes: shoeSize);
+  void sortMiscData(String hobbies, String civLicenseType, String civLicenseNo,
+      String civLicenseDOI, String doneDefCourse, String hasOwnVeh,
+      String personalVehNo, String tShirtSize, int upperTorsoSize,
+      int waistSize, int shoeSize) {
+    miscDataSet = new MiscDataSet(hobbiesInterest: hobbies,
+        civillianLicenseType: civLicenseType,
+        civillianLicenseNumber: civLicenseNo,
+        civillianLicenseDateOfIssue: civLicenseDOI,
+        hasDoneDefensiveCourse: doneDefCourse,
+        hasPersonalVehicle: hasOwnVeh,
+        personalVehiclePlateNumber: personalVehNo,
+        tShirtSize: tShirtSize,
+        no3sizeUpperTorso: upperTorsoSize,
+        no3sizeWaist: waistSize,
+        no3sizeShoes: shoeSize);
   }
 
   void sortLoginData(String email, String pass)
@@ -280,7 +324,8 @@ class FullDetailSet {
     loginCredentials = new LoginCredential(username: email, password: pass);
   }
 
-  FullDetailSet({this.personalDataSet, this.trainingDataSet, this.educationDataSet, this.miscDataSet, this.loginCredentials});
+  FullDetailSet(
+      {this.personalDataSet, this.trainingDataSet, this.educationDataSet, this.miscDataSet, this.loginCredentials});
 
   Map<String, dynamic> toMap()
   {
@@ -336,6 +381,5 @@ class FullDetailSet {
         'email': loginCredentials.username,
         'password': loginCredentials.password
       };
-
   }
 }
