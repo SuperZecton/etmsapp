@@ -21,8 +21,8 @@ class VehLogInfoDatabaseHandler extends DatabaseHandler
         onCreate: (dbref, version) {
           return dbref.execute(
               "CREATE TABLE $dbTableName("
-                  "dateOfMovement TEXT PRIMARY KEY, "
-                  "midPlate TEXT, "
+                  "midPlate TEXT PRIMARY KEY, "
+                  "dateOfMovement TEXT, "
                   "vehType TEXT, "
                   "classType TEXT, "
                   "startingOdo TEXT, "
@@ -32,7 +32,8 @@ class VehLogInfoDatabaseHandler extends DatabaseHandler
                   "distanceCovered TEXT,"
                   "vehOperator TEXT,"
                   "vehCommander TEXT,"
-                  "vehAuth TEXT"
+                  "vehAuth TEXT, "
+                  "destinationList TEXT"
                   ")"
           );
         },
@@ -56,4 +57,8 @@ class VehLogInfoDatabaseHandler extends DatabaseHandler
   {
 
   }
+
+  // TODO: Green File records to be used as calculator bonuses and more
+  // TODO: Manual input for green file style logging
+  // TODO: Checkpoint System for bonuses accrued across 2 years of cock service
 }
