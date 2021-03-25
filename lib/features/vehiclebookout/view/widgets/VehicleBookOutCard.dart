@@ -9,13 +9,14 @@ class VehicleBookOutCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 300,
+      width: MediaQuery.of(context).size.width,
       height: 175,
+      margin: EdgeInsets.symmetric(horizontal: 40),
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
         ),
-        color: Colors.white,
+        color: kBackgroundColor,
         elevation: 10,
         child: Column(
           children: <Widget>[

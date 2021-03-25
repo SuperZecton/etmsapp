@@ -21,13 +21,13 @@ class _HomePageState extends State<HomePage> {
     final vm = Provider.of<HomePageViewModel>(context, listen: false);
     return Scaffold(
       body: Container(
-        color: kWhite,
+        color: kBackgroundColor,
         child: ListView(
           padding: const EdgeInsets.all(0.0),
           shrinkWrap: true,
           children: [
             TopContainer(
-              height: 200,
+              height: 250,
               width: width,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -37,12 +37,12 @@ class _HomePageState extends State<HomePage> {
                     children: <Widget>[
                       Icon(
                         Icons.menu,
-                        color: Colors.black54,
+                        color: Colors.white,
                         size: 30.0,
                       ),
                       Icon(
                         Icons.settings,
-                        color: Colors.black,
+                        color: Colors.white,
                         size: 25.0,
                       ),
                     ],
@@ -63,7 +63,7 @@ class _HomePageState extends State<HomePage> {
                                 textAlign: TextAlign.left,
                                 style: TextStyle(
                                   fontSize: 22.0,
-                                  color: Colors.black54,
+                                  color: Colors.white,
                                   fontWeight: FontWeight.w800,
                                 ),
                               ),
@@ -78,7 +78,7 @@ class _HomePageState extends State<HomePage> {
                                     textAlign: TextAlign.left,
                                     style: TextStyle(
                                       fontSize: 16.0,
-                                      color: Colors.black45,
+                                      color: Colors.white,
                                       fontWeight: FontWeight.w400,
                                     ),
                                   ),
@@ -90,7 +90,7 @@ class _HomePageState extends State<HomePage> {
                                     textAlign: TextAlign.left,
                                     style: TextStyle(
                                       fontSize: 16.0,
-                                      color: Colors.black45,
+                                      color: Colors.white,
                                       fontWeight: FontWeight.w400,
                                     ),
                                   ),
@@ -108,6 +108,8 @@ class _HomePageState extends State<HomePage> {
             SizedBox(
               height: 40,
             ),
+
+
             StaggeredGridView.count(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,

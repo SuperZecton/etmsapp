@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:ltcapp/features/vehiclebookout/view/widgets/VehicleButton.dart';
 import 'package:ltcapp/features/vehiclebookout/view/widgets/VehicleEntryField.dart';
-import 'package:ltcapp/features/vehiclebookout/view/widgets/vehicleBookOutCard.dart';
+import 'package:ltcapp/features/vehiclebookout/view/widgets/VehicleBookOutCard.dart';
 
 class VehicleBookInFormPage extends StatefulWidget {
   @override

@@ -3,6 +3,11 @@ import 'package:ltcapp/features/home/view/pages/HomePage.dart';
 import 'package:provider/provider.dart';
 
 class HomePageViewModel extends ChangeNotifier {
+  ///TODO implement database getters here thx aaron <3
+  final name = '';
+  final nric = '';
+
+
 
   /// CampDropDown
   static final List<String> campDropdownItems = [
