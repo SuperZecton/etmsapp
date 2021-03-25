@@ -138,14 +138,16 @@ class PersonnelDatabaseHandler extends DatabaseHandler
       }
 
     Database database = await db;
+    String targetColumn = 'password';
     List<Map> result;
     try
     {
        result = await database.rawQuery(
-          'SELECT password FROM $dbTableName WHERE email=?', [email]);
+          'SELECT $targetColumn FROM $dbTableName WHERE email=?', [email]);
       // TODO: Get password from result to return for login authorization
       String checker = result.toString();
       print("This is the current response from the password query: " + checker);
+      print ((await isolateChar(targetColumn ,checker)).toString());
 
 
       return checker.contains(pass);

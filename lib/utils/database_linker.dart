@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:async/async.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'package:ltcapp/utils/csv_utils.dart';
@@ -264,6 +265,16 @@ class DatabaseHandler {
     catch (_) {
       return null;
     }
+  }
+
+  Future<String> isolateChar(String charColumn, String charToIsolate) async
+  {
+    int indexOfColon = charToIsolate.lastIndexOf(":");
+    //for (int i = indexOfColon; i > 0; i--)
+    charToIsolate = charToIsolate.replaceRange(0, indexOfColon, '');
+    charToIsolate = charToIsolate.replaceFirst(' ', "");
+    charToIsolate = charToIsolate.replaceAll(RegExp(r"[^\s\w]"), '');
+    return(charToIsolate);
   }
 
 
