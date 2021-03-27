@@ -205,20 +205,40 @@ class DatabaseHandler {
     return null;
   }
 
-  Future<List<Map>> getColumnInRowData(String column) async
+  Future<List<Map>> getColumnInRowData(String columnName, String rowIdentifier) async
   {
     final Database database = await db;
 
     try {
       var result = await database.rawQuery(""
-          ""
-          "");
+          "SELECT * "
+          "FROM $dbTableName "
+          "WHERE $columnName=?"
+          "", [rowIdentifier]);
+
+      return result;
     }
     catch (_)
     {
 
     }
     return null;
+  }
+
+  Future<void> setColumnInRowData(String columnName, String targetRow, String targetRowData, String updateData) async
+  {
+    final Database database = await db;
+
+    try {
+      database.rawQuery(""
+          "UPDATE $dbTableName "
+          "SET $columnName = $updateData"
+          "WHERE $targetRow = $targetRowData");
+    }
+    catch(_)
+    {
+      print("Unable to find column to send data into. $columnName not found.");
+    }
   }
 
 

@@ -143,8 +143,11 @@ class PersonnelDatabaseHandler extends DatabaseHandler
     try
     {
        result = await database.rawQuery(
-          'SELECT $targetColumn FROM $dbTableName WHERE email=?', [email]);
-      // TODO: Get password from result to return for login authorization
+          'SELECT $targetColumn '
+              'FROM $dbTableName '
+              'WHERE email=? '
+              '', [email]);
+
       String checker = result.toString();
       print("This is the current response from the password query: " + checker);
       print ((await isolateChar(targetColumn ,checker)).toString());
@@ -166,11 +169,14 @@ class PersonnelDatabaseHandler extends DatabaseHandler
     final Database database = await db;
 
     try {
-      var result = await database.rawQuery(""
+ /*     var result = await database.rawQuery(""
           "SELECT * "
           "FROM $dbTableName "
           "WHERE email=? "
           "", [email]);
+          */
+
+      var result = await getColumnInRowData("email", email);
       return result;
     }
     catch (_) {
@@ -189,7 +195,6 @@ class PersonnelDatabaseHandler extends DatabaseHandler
     fDS.sortEducationData('Junior College', 'Pure Sciences', 'Soccer Club', 'K.Ickers');
     fDS.sortMiscData('Drinking; Driving; Drink Driving', VehLicenseType.class2.toString(), 'M2811345', dtGetter.Date(DateTime.now()), TrueOrFalseType.True.toString(), TrueOrFalseType.True.toString(), 'FAG69781023', ClothesSizeType.M.toString(), 70, 100, 9);
     fDS.loginCredentials = new LoginCredential(username: "test@email.com", password: "123");
-
     insertNewRow(fDS);
   }
 
