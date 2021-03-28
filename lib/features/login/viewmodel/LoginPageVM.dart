@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/features/login/view/widgets/LoadingIndicator.dart';
 
 class LoginPageViewModel extends ChangeNotifier {
@@ -12,15 +14,20 @@ class LoginPageViewModel extends ChangeNotifier {
     bool canLogin;
   }
 
-  void _onLoading(BuildContext context) {
+  void onLoading(BuildContext context) {
     showDialog(
         context: context,
         barrierDismissible: false,
         builder: (BuildContext context) {
           return Dialog(
-            child: new Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [LoadingIndicator(), Text("Loading..")],
+            child: Container(
+              height: 200,
+              width: 200,
+              padding: EdgeInsets.all(40.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [LoadingIndicator(), Text("Loading..", style: GoogleFonts.roboto(color: Colors.black, fontSize: 24.0))],
+              ),
             ),
           );
         });

@@ -11,17 +11,11 @@ class LoadingIndicator extends StatefulWidget {
 class _LoadingIndicatorState extends State<LoadingIndicator> {
   @override
   Widget build(BuildContext context) {
-    return SpinKitSquareCircle(
-      color: Colors.white,
+    return SpinKitRing(
+      color: Colors.blue,
       size: 50.0,
 
     );
   }
 }
 
-
-final spinKit = SpinKitSquareCircle(
-  color: Colors.white,
-  size: 50.0,
-
-);
