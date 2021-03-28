@@ -14,7 +14,7 @@ class VehicleBookOutCard extends StatelessWidget {
       margin: EdgeInsets.symmetric(horizontal: 40),
       child: Card(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15.0),
+          borderRadius: BorderRadius.circular(12.0),
         ),
         color: kBackgroundColor,
         elevation: 10,
@@ -29,19 +29,22 @@ class VehicleBookOutCard extends StatelessWidget {
                       alignment: Alignment.centerLeft,
                       child: Text(
                         'Vehicle: ',
-                        style: GoogleFonts.montserrat(fontSize: 20),
+                        style: GoogleFonts.lato(
+                            color: Colors.black, fontSize: 20.0),
                       )),
                   Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
                         'Odometer:',
-                        style: GoogleFonts.montserrat(fontSize: 20),
+                        style: GoogleFonts.lato(
+                            color: Colors.black, fontSize: 20.0),
                       )),
                   Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
                         'Time started: $time',
-                        style: GoogleFonts.montserrat(fontSize: 20),
+                        style: GoogleFonts.lato(
+                            color: Colors.black, fontSize: 20.0),
                       )),
                 ],
               ),

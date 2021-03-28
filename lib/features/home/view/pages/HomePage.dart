@@ -27,7 +27,7 @@ class _HomePageState extends State<HomePage> {
           shrinkWrap: true,
           children: [
             TopContainer(
-              height: 250,
+              height: 200,
               width: width,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -108,8 +108,6 @@ class _HomePageState extends State<HomePage> {
             SizedBox(
               height: 40,
             ),
-
-
             StaggeredGridView.count(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
@@ -118,6 +116,38 @@ class _HomePageState extends State<HomePage> {
               mainAxisSpacing: 12.0,
               padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
               children: <Widget>[
+                _buildTile(
+                    Padding(
+                      padding: const EdgeInsets.all(24.0),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text('Maintenance Section',
+                                    style: TextStyle(color: Colors.redAccent)),
+                                Text('ODD, Fuel Receipts',
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 26.0))
+                              ],
+                            ),
+                            Material(
+                                color: Colors.red,
+                                borderRadius: BorderRadius.circular(24.0),
+                                child: Center(
+                                    child: Padding(
+                                  padding: EdgeInsets.all(16.0),
+                                  child: Icon(Icons.credit_card,
+                                      color: Colors.white, size: 30.0),
+                                )))
+                          ]),
+                    ),
+                    onTap: () {}),
                 _buildTile(
                   Padding(
                       padding: const EdgeInsets.all(24.0),
@@ -252,46 +282,14 @@ class _HomePageState extends State<HomePage> {
                         ]),
                   ),
                 ),
-                _buildTile(
-                    Padding(
-                      padding: const EdgeInsets.all(24.0),
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Text('Maintenance Section',
-                                    style: TextStyle(color: Colors.redAccent)),
-                                Text('ODD, Fuel Receipts',
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 26.0))
-                              ],
-                            ),
-                            Material(
-                                color: Colors.red,
-                                borderRadius: BorderRadius.circular(24.0),
-                                child: Center(
-                                    child: Padding(
-                                  padding: EdgeInsets.all(16.0),
-                                  child: Icon(Icons.credit_card,
-                                      color: Colors.white, size: 30.0),
-                                )))
-                          ]),
-                    ),
-                    onTap: () {})
               ],
               staggeredTiles: [
+                StaggeredTile.extent(2, 150.0),
                 StaggeredTile.extent(2, 150.0),
                 StaggeredTile.extent(1, 190.0),
                 StaggeredTile.extent(1, 190.0),
                 StaggeredTile.extent(1, 190.0),
                 StaggeredTile.extent(1, 190.0),
-                StaggeredTile.extent(2, 110.0),
               ],
             ),
           ],
