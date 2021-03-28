@@ -177,6 +177,7 @@ class PersonnelDatabaseHandler extends DatabaseHandler
           */
 
       var result = await getColumnInRowData("email", email);
+     // await setColumnInRowData("fullName", targetRow, targetRowData, updateData)
       return result;
     }
     catch (_) {

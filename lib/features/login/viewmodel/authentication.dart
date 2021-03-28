@@ -14,6 +14,7 @@ class Authentication with ChangeNotifier {
   Future verifyLoginData(BuildContext context, bool loginCreds) async {
     loginCreds = await personnelDBHandle.verifyLoginCreds(
         email, password);
+    LoginPageViewModel().onLoading(context);
     await new Future.delayed(const Duration(seconds: 2),);
     if (loginCreds == true) {
       Navigator.pushNamed(context, '/home');
