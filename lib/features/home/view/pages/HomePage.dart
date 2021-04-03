@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/core/config/globals.dart';
 import 'package:ltcapp/features/home/view/widgets/CampDropDownList.dart';
 import 'package:ltcapp/features/home/view/widgets/DateDropDownList.dart';
+import 'package:ltcapp/features/home/view/widgets/TripInfoCard.dart';
 import 'package:ltcapp/features/home/view/widgets/topContainer.dart';
 import 'package:ltcapp/features/home/viewmodel/HomePageViewModel.dart';
 import 'package:provider/provider.dart';
@@ -72,7 +73,7 @@ class _HomePageState extends State<HomePage> {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 Container(
-                                  padding: EdgeInsets.only(right: 20.0),
+                                  padding: EdgeInsets.only(right: 10.0),
                                   child: Text(
                                     '123A',
                                     textAlign: TextAlign.left,
@@ -84,7 +85,7 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                 ),
                                 Container(
-                                  padding: EdgeInsets.only(right: 20.0),
+                                  padding: EdgeInsets.only(right: 10.0),
                                   child: Text(
                                     'TOA',
                                     textAlign: TextAlign.left,
@@ -108,6 +109,60 @@ class _HomePageState extends State<HomePage> {
             SizedBox(
               height: 40,
             ),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 22.0),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "E-Mileage",
+                        style: TextStyle(
+                          fontSize: 24.0,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      Text(
+                        "Select Month",
+                        style: TextStyle(
+                          fontSize: 19.0,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Class 3: ",
+                              style: TextStyle(
+                                  fontSize: 19.0, color: Colors.black),
+                            ),
+                            SizedBox(height: 10),
+                            Text("Class 4: ",
+                                style: TextStyle(
+                                    fontSize: 19.0, color: Colors.black)),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 40,
+            ),
+            TripInfoCard(),
+            SizedBox(height: 40,),
             StaggeredGridView.count(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
@@ -116,7 +171,7 @@ class _HomePageState extends State<HomePage> {
               mainAxisSpacing: 12.0,
               padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
               children: <Widget>[
-                _buildTile(
+                /*_buildTile(
                     Padding(
                       padding: const EdgeInsets.all(24.0),
                       child: Row(
@@ -127,9 +182,9 @@ class _HomePageState extends State<HomePage> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                Text('Maintenance Section',
+                                Text('Book Out Vehicle',
                                     style: TextStyle(color: Colors.redAccent)),
-                                Text('ODD, Fuel Receipts',
+                                Text('VEHICLE INFO HERE',
                                     style: TextStyle(
                                         color: Colors.black,
                                         fontWeight: FontWeight.w700,
@@ -142,44 +197,13 @@ class _HomePageState extends State<HomePage> {
                                 child: Center(
                                     child: Padding(
                                   padding: EdgeInsets.all(16.0),
-                                  child: Icon(Icons.credit_card,
+                                  child: Icon(FontAwesomeIcons.caravan,
                                       color: Colors.white, size: 30.0),
                                 )))
                           ]),
                     ),
-                    onTap: () {}),
-                _buildTile(
-                  Padding(
-                      padding: const EdgeInsets.all(24.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Text('Mileage',
-                                      style: TextStyle(
-                                          color: Colors.green, fontSize: 20.0)),
-                                  Text('0 Km',
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w700,
-                                          fontSize: 34.0)),
-                                ],
-                              ),
-                              DateDropDownList(),
-                            ],
-                          ),
-                          Padding(padding: EdgeInsets.only(bottom: 4.0)),
-                        ],
-                      )),
-                ),
+                    onTap: () {}),*/
+
                 _buildTile(
                     Padding(
                       padding: const EdgeInsets.all(24.0),
@@ -284,8 +308,6 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
               staggeredTiles: [
-                StaggeredTile.extent(2, 150.0),
-                StaggeredTile.extent(2, 150.0),
                 StaggeredTile.extent(1, 190.0),
                 StaggeredTile.extent(1, 190.0),
                 StaggeredTile.extent(1, 190.0),
@@ -300,7 +322,8 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildTile(Widget child, {Function() onTap}) {
     return Material(
-        elevation: 14.0,
+      
+        elevation: 12.0,
         borderRadius: BorderRadius.circular(12.0),
         //shadowColor: Color(0x802196F3),
         child: Container(
