@@ -1,13 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:ltcapp/features/home/view/pages/HomePage.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomePageViewModel extends ChangeNotifier {
   ///TODO implement database getters here thx aaron <3
   final name = '';
   final nric = '';
-
-
 
   /// CampDropDown
   static final List<String> campDropdownItems = [
@@ -48,6 +47,12 @@ class HomePageViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-
-
+  racFormURLPush() async {
+    const url = "https://mtrac.ado.sg/login";
+    if (await canLaunch(url)) {
+      launch(url, forceWebView: true, enableJavaScript: true);
+    } else {
+      throw "Could not launch $url";
+    }
+  }
 }

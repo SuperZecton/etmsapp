@@ -272,13 +272,14 @@ class _HomePageState extends State<HomePage> {
                                     color: Colors.white, size: 30.0),
                               )),
                           Padding(padding: EdgeInsets.only(bottom: 16.0)),
-                          Text('Mileage History',
+                          Text('MT-RAC Form',
                               style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.w700,
                                   fontSize: 22.0)),
                         ]),
                   ),
+                  onTap: () => vm.racFormURLPush(),
                 ),
                 _buildTile(
                   Padding(
