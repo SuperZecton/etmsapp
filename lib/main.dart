@@ -7,6 +7,8 @@ import 'package:ltcapp/features/login/viewmodel/authentication.dart';
 import 'package:ltcapp/features/registration/viewmodel/RegistrationViewModel.dart';
 import 'package:ltcapp/features/vehiclebookout/viewmodel/VehicleBookOutViewModel.dart';
 
+import 'package:mysql1/mysql1.dart';
+
 import 'package:ltcapp/utils/database_linker.dart';
 import 'package:ltcapp/utils/individual_identity.dart';
 import 'package:ltcapp/utils/personnel_database_linker.dart';

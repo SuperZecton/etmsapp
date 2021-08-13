@@ -5,9 +5,13 @@ import 'dart:async';
 import 'package:path/path.dart';
 import 'dart:convert';
 import 'package:sqflite/sqflite.dart';
+import 'package:mysql1/mysql1.dart';
 
 class PersonnelDatabaseHandler extends DatabaseHandler
 {
+  MySqlConnection connectionInstance;
+
+  // Local DB Creation and management
   @override
   Future<void> databaseCreationOptimizer() async
   {
@@ -164,29 +168,6 @@ class PersonnelDatabaseHandler extends DatabaseHandler
 
   }
 
-  Future<List<Map>> getFullRowFromEmail(String email) async
-  {
-    final Database database = await db;
-
-    try {
- /*     var result = await database.rawQuery(""
-          "SELECT * "
-          "FROM $dbTableName "
-          "WHERE email=? "
-          "", [email]);
-          */
-
-      var result = await getColumnInRowData("email", email);
-     // await setColumnInRowData("fullName", targetRow, targetRowData, updateData)
-      return result;
-    }
-    catch (_) {
-
-    }
-
-    return null;
-  }
-
   @override
   Future<void> buildBaseDBData() async
   {
@@ -197,6 +178,49 @@ class PersonnelDatabaseHandler extends DatabaseHandler
     fDS.sortMiscData('Drinking; Driving; Drink Driving', VehLicenseType.class2.toString(), 'M2811345', dtGetter.Date(DateTime.now()), TrueOrFalseType.True.toString(), TrueOrFalseType.True.toString(), 'FAG69781023', ClothesSizeType.M.toString(), 70, 100, 9);
     fDS.loginCredentials = new LoginCredential(username: "test@email.com", password: "123");
     insertNewRow(fDS);
+  }
+
+  Future<void> establishMySQLConnection() async
+  {
+    var settings = new ConnectionSettings(
+      host: '178.63.43.123',
+      port: 3308,
+      user: 'doodoo',
+      password: 'lanjiao son',
+      db: 'ocs dream'
+    );
+
+    var connection = await MySqlConnection.connect(settings);
+
+    if (connection != null)
+      {
+        connectionInstance = connection;
+      }
+
+    
+  }
+
+  Future<List<Map>> getFullRowFromEmail(String email) async
+  {
+    final Database database = await db;
+
+    try {
+      /*     var result = await database.rawQuery(""
+          "SELECT * "
+          "FROM $dbTableName "
+          "WHERE email=? "
+          "", [email]);
+          */
+
+      var result = await getColumnInRowData("email", email);
+      // await setColumnInRowData("fullName", targetRow, targetRowData, updateData)
+      return result;
+    }
+    catch (_) {
+
+    }
+
+    return null;
   }
 
 }
