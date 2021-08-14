@@ -329,57 +329,58 @@ class FullDetailSet {
 
   Map<String, dynamic> toMap()
   {
-    return
-      {
-        /* Personal Section */
-        'fullName': personalDataSet.fullName,
-        'nricLast4Digits': personalDataSet.nricLast4Digits,
-        'fullHomeAddress': personalDataSet.fullHomeAddress,
-        'handphoneNumber': personalDataSet.handphoneNumber,
-        'homephoneNumber': personalDataSet.homephoneNumber,
-        'dateOfBirth': personalDataSet.dateOfBirth,
-        'dateOfEnlistment': personalDataSet.dateOfEnlistment,
-        'dateOfORD': personalDataSet.dateOfORD,
-        'dateOfPostIn': personalDataSet.dateOfPostIn,
-        'pesType': personalDataSet.pes,
-        'religion': personalDataSet.religion,
-        'race': personalDataSet.race,
-        'bloodGroup': personalDataSet.bloodGroup,
-        'drugAllergy': personalDataSet.drugAllergy,
-        'foodAllergy': personalDataSet.foodAllergy,
-        'NOKDetailfullName': personalDataSet.NOKDetailfullName,
-        'NOKDetailcontactNumber': personalDataSet.NOKDetailcontactNumber,
-        'NOKDetailfullAddress': personalDataSet.NOKDetailfullAddress,
-        'vocationType': personalDataSet.vocationType,
-        'stayInstayOut': personalDataSet.stayInstayOut,
-        'medicalConditions': personalDataSet.medicalConditions,
-        /* Training Section */
-        'trainingFrame': trainingDataSet.trainingFrame,
-        'trainingPeriod': trainingDataSet.trainingPeriod,
-        'passAttempts': trainingDataSet.passAttempts,
-        'militaryLicenseNo': trainingDataSet.militaryLicenseNo,
-        'militaryLicenseType': trainingDataSet.militaryLicenseType,
-        'milLicenseDateOfIssue': trainingDataSet.milLicenseDateOfIssue,
-        /* Education Section */
-        'educationLevel': educationDataSet.educationLevel,
-        'streamcourseName': educationDataSet.streamcourseName,
-        'ccaOptional': educationDataSet.ccaOptional,
-        'schName': educationDataSet.schName,
-        /* Others Section */
-        'hobbiesInterest': miscDataSet.hobbiesInterest,
-        'civillianLicenseType': miscDataSet.civillianLicenseType,
-        'civillianLicenseNumber': miscDataSet.civillianLicenseNumber,
-        'civillianLicenseDateOfIssue': miscDataSet.civillianLicenseDateOfIssue,
-        'hasDoneDefensiveCourse': miscDataSet.hasDoneDefensiveCourse,
-        'hasPersonalVehicle': miscDataSet.hasPersonalVehicle,
-        'personalVehiclePlateNumber': miscDataSet.personalVehiclePlateNumber,
-        'tShirtSize': miscDataSet.tShirtSize,
-        'no3sizeUpperTorso': miscDataSet.no3sizeUpperTorso,
-        'no3sizeWaist': miscDataSet.no3sizeWaist,
-        'no3sizeShoes': miscDataSet.no3sizeShoes,
-        /* Login Creds Section */
-        'email': loginCredentials.username,
-        'password': loginCredentials.password
+    return      {
+    /* Personal Section */
+    'fullName': personalDataSet.fullName,
+    'nricLast4Digits': personalDataSet.nricLast4Digits,
+    'fullHomeAddress': personalDataSet.fullHomeAddress,
+    'handphoneNumber': personalDataSet.handphoneNumber,
+    'homephoneNumber': personalDataSet.homephoneNumber,
+    'dateOfBirth': personalDataSet.dateOfBirth,
+    'dateOfEnlistment': personalDataSet.dateOfEnlistment,
+    'dateOfORD': personalDataSet.dateOfORD,
+    'dateOfPostIn': personalDataSet.dateOfPostIn,
+    'pesType': personalDataSet.pes,
+    'religion': personalDataSet.religion,
+    'race': personalDataSet.race,
+    'bloodGroup': personalDataSet.bloodGroup,
+    'drugAllergy': personalDataSet.drugAllergy,
+    'foodAllergy': personalDataSet.foodAllergy,
+    'NOKDetailfullName': personalDataSet.NOKDetailfullName,
+    'NOKDetailcontactNumber': personalDataSet.NOKDetailcontactNumber,
+    'NOKDetailfullAddress': personalDataSet.NOKDetailfullAddress,
+    'vocationType': personalDataSet.vocationType,
+    'stayInstayOut': personalDataSet.stayInstayOut,
+    'medicalConditions': personalDataSet.medicalConditions,
+    /* Training Section */
+    'trainingFrame': trainingDataSet.trainingFrame,
+    'trainingPeriod': trainingDataSet.trainingPeriod,
+    'passAttempts': trainingDataSet.passAttempts,
+    'militaryLicenseNo': trainingDataSet.militaryLicenseNo,
+    'militaryLicenseType': trainingDataSet.militaryLicenseType,
+    'milLicenseDateOfIssue': trainingDataSet.milLicenseDateOfIssue,
+    /* Education Section */
+    'educationLevel': educationDataSet.educationLevel,
+    'streamcourseName': educationDataSet.streamcourseName,
+    'ccaOptional': educationDataSet.ccaOptional,
+    'schName': educationDataSet.schName,
+    /* Others Section */
+    'hobbiesInterest': miscDataSet.hobbiesInterest,
+    'civillianLicenseType': miscDataSet.civillianLicenseType,
+    'civillianLicenseNumber': miscDataSet.civillianLicenseNumber,
+    'civillianLicenseDateOfIssue': miscDataSet.civillianLicenseDateOfIssue,
+    'hasDoneDefensiveCourse': miscDataSet.hasDoneDefensiveCourse,
+    'hasPersonalVehicle': miscDataSet.hasPersonalVehicle,
+    'personalVehiclePlateNumber': miscDataSet.personalVehiclePlateNumber,
+    'tShirtSize': miscDataSet.tShirtSize,
+    'no3sizeUpperTorso': miscDataSet.no3sizeUpperTorso,
+    'no3sizeWaist': miscDataSet.no3sizeWaist,
+    'no3sizeShoes': miscDataSet.no3sizeShoes,
+    /* Login Creds Section */
+    'email': loginCredentials.username,
+    'password': loginCredentials.password
+
       };
   }
+
 }

@@ -14,12 +14,15 @@ import 'package:ltcapp/features/login/model/login_credentials.dart';
 import 'dart:io';
 import 'package:ltcapp/utils/DateAndTimeGetter.dart';
 import 'package:http/http.dart' as http;
-
+import 'package:mysql1/mysql1.dart';
 
 class DatabaseHandler {
-  // The pointer to the database itself
+  // The pointer to the SQFlite local database itself
   var db;
-
+  // The pointer to the MySQL Connection
+  MySqlConnection mySQLConnectionInstance;
+  String mySQLDBName;
+  String mySQLTableName;
 
   String dbPath;
 
@@ -33,21 +36,26 @@ class DatabaseHandler {
   // Nehmind; Replace this with a Listener func in the LoginPageVM file!!!
   //  bool tempPassChecker = false;
 
-  Future<void> setDBInitParams(String name, String tableName) async
+  Future<void> setDBInitParams(String name, String tableName, String sqlname, String sqlTableName) async
   {
     dbName = name;
     dbTableName = tableName;
+    mySQLDBName = sqlname;
+    mySQLTableName = sqlTableName;
   }
 
+  // Obsolete
+  /*
   void fetchDatabaseFromServer(String url) async
   {
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
       fetchedData = json.decode(response.body);
-      // TODO; Create auto data importer for db populating
+
     }
   }
+*/
 
   void setDatabasePath(String path) {
     dbPath = path;
@@ -205,7 +213,7 @@ class DatabaseHandler {
     return null;
   }
 
-  Future<List<Map>> getColumnInRowData(String columnName, String rowIdentifier) async
+  Future<List<Map>> getLocalColumnInRowData(String columnName, String rowIdentifier) async
   {
     final Database database = await db;
 
@@ -225,7 +233,7 @@ class DatabaseHandler {
     return null;
   }
 
-  Future<void> setColumnInRowData(String columnName, String targetRow, String targetRowData, String updateData) async
+  Future<void> setLocalColumnInRowData(String columnName, String targetRow, String targetRowData, String updateData) async
   {
     final Database database = await db;
 
@@ -320,6 +328,85 @@ class DatabaseHandler {
       case 'LtcVehTripsInfo':
         break;
     }*/
+  }
+
+  Future<void> establishMySQLConnection() async
+  {
+    print("Starting MySQL Connection.");
+
+    var settings = ConnectionSettings(
+        host: "163.123.183.91",
+        port: 17477,
+        user: "u1_s9A48A0igy",
+        password: "0bkLKwB=upnTHB0s3qEbk=QP",
+        db: "ltcapp"
+    );
+
+    var connection = await MySqlConnection.connect(settings);
+
+    print("Connecting...");
+
+    if (connection != null)
+    {
+      mySQLConnectionInstance = connection;
+      print("Connection Established.");
+      return;
+    }
+
+    print("Connection Failed.");
+  }
+
+  Future<void> buildMySQLDBData() async
+  {
+
+  }
+
+  Future<List<Map>> getMySQLColumnInRowData(String columnName, String rowIdentifier) async
+  {
+
+    try {
+      var result = await mySQLConnectionInstance.query(""
+          "SELECT * "
+          "FROM $mySQLTableName "
+          "WHERE $columnName=?"
+          "", [rowIdentifier]);
+
+ //     return;
+    }
+    catch (_)
+    {
+
+    }
+    return null;
+  }
+
+  Future<Results> getMySQLDataFromExistingData(String columnChosen, String rowIdentifier, String columnIdentifier) async
+  {
+      var results = await mySQLConnectionInstance.query(''
+          'select $columnChosen '
+          'from $mySQLTableName '
+          'where $columnIdentifier = ?'
+          '', [rowIdentifier]);
+
+ //     var resultsList = results.toList();
+  //    return resultsList.asMap();
+        return results;
+  }
+
+  Future<void> setMySQLColumnInRowData(String columnName, String targetRow, String targetRowData, String updateData) async
+  {
+
+    try {
+      var result = await mySQLConnectionInstance.query(""
+          "UPDATE $mySQLTableName "
+          "SET $columnName = $updateData"
+          "WHERE $targetRow = $targetRowData");
+    }
+    catch(_)
+    {
+      print("Unable to find column to send data into. $columnName not found.");
+    }
+
   }
 
   DatabaseHandler({this.dbName, this.dbTableName});

@@ -5,11 +5,11 @@ import 'dart:async';
 import 'package:path/path.dart';
 import 'dart:convert';
 import 'package:sqflite/sqflite.dart';
+//import 'package:dart_mssql/dart_mssql.dart';
 import 'package:mysql1/mysql1.dart';
 
 class PersonnelDatabaseHandler extends DatabaseHandler
 {
-  MySqlConnection connectionInstance;
 
   // Local DB Creation and management
   @override
@@ -105,67 +105,195 @@ class PersonnelDatabaseHandler extends DatabaseHandler
 
     await getTableAsWhole();
 
+    establishMySQLConnection();
+
+
+
     callConversion();
   }
 
   Future<void> insertNewRow(FullDetailSet dataSet) async
   {
-    if (db == null)
-      {
-        return null;
-      }
+    switch (mySQLConnectionInstance)
+    {
+      case null:
+        {
+          if (db == null)
+          {
+            return null;
+          }
 
-    if (dataSet == null)
-      {
-        return null;
-      }
+          if (dataSet == null)
+          {
+            return null;
+          }
 
-    final Database cachedDB = await db;
+          final Database cachedDB = await db;
 
-    await cachedDB.insert(dbTableName, dataSet.toMap(), conflictAlgorithm: ConflictAlgorithm.ignore);
+          await cachedDB.insert(dbTableName, dataSet.toMap(), conflictAlgorithm: ConflictAlgorithm.ignore);
+        }
+        break;
+      default:
+        {
+
+
+          var result = await mySQLConnectionInstance.query(''
+              'INSERT into $mySQLTableName '
+              '('
+              'UUID, '
+              'fullName, '
+              'nricLast4Digits, '
+              'fullHomeAddress, '
+              'handphoneNumber, '
+              'homephoneNumber, '
+              'dateOfBirth, '
+              'dateOfEnlistment, '
+              'dateOfORD, '
+              'dateOfPostIn, '
+              'pesType, '
+              'religion, '
+              'race, '
+              'bloodGroup, '
+              'drugAllergy, '
+              'foodAllergy, '
+              'NOKDetailfullName, '
+              'NOKDetailcontactNumber, '
+              'NOKDetailfullAddress, '
+              'vocationType, '
+              'stayInstayOut, '
+              'medicalConditions, '
+              'trainingFrame, '
+              'trainingPeriod, '
+              'passAttempts, '
+              'militaryLicenseNo, '
+              'militaryLicenseType, '
+              'milLicenseDateOfIssue, '
+              'educationLevel, '
+              'streamcourseName, '
+              'ccaOptional, '
+              'schName, '
+              'hobbiesInterest, '
+              'civillianLicenseType, '
+              'civillianLicenseNumber, '
+              'civillianLicenseDateOfIssue, '
+              'hasDoneDefensiveCourse, '
+              'hasPersonalVehicle, '
+              'personalVehiclePlateNumber, '
+              'tShirtSize, '
+              'no3sizeUpperTorso, '
+              'no3sizeWaist, '
+              'no3sizeShoes, '
+              'username, '
+              'password'
+              ') value (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
+              '', ['0',
+            dataSet.personalDataSet.fullName,
+            dataSet.personalDataSet.nricLast4Digits,
+            dataSet.personalDataSet.handphoneNumber,
+            dataSet.personalDataSet.homephoneNumber,
+            dataSet.personalDataSet.dateOfBirth,
+            dataSet.personalDataSet.dateOfEnlistment,
+            dataSet.personalDataSet.dateOfORD,
+            dataSet.personalDataSet.dateOfPostIn,
+            dataSet.personalDataSet.pes,
+            dataSet.personalDataSet.religion,
+            dataSet.personalDataSet.race,
+            dataSet.personalDataSet.bloodGroup,
+            dataSet.personalDataSet.drugAllergy,
+            dataSet.personalDataSet.foodAllergy,
+            dataSet.personalDataSet.NOKDetailfullName,
+            dataSet.personalDataSet.NOKDetailfullAddress,
+            dataSet.personalDataSet.NOKDetailcontactNumber,
+            dataSet.personalDataSet.vocationType,
+            dataSet.personalDataSet.stayInstayOut,
+            dataSet.trainingDataSet.trainingFrame,
+            dataSet.trainingDataSet.trainingPeriod,
+            dataSet.trainingDataSet.passAttempts,
+            dataSet.trainingDataSet.militaryLicenseNo,
+            dataSet.trainingDataSet.militaryLicenseType,
+            dataSet.trainingDataSet.milLicenseDateOfIssue,
+            dataSet.educationDataSet.educationLevel,
+            dataSet.educationDataSet.streamcourseName,
+            dataSet.educationDataSet.ccaOptional,
+            dataSet.educationDataSet.schName,
+            dataSet.miscDataSet.hobbiesInterest,
+            dataSet.miscDataSet.civillianLicenseType,
+            dataSet.miscDataSet.civillianLicenseNumber,
+            dataSet.miscDataSet.civillianLicenseDateOfIssue,
+            dataSet.miscDataSet.hasDoneDefensiveCourse,
+            dataSet.miscDataSet.hasPersonalVehicle,
+            dataSet.miscDataSet.personalVehiclePlateNumber,
+            dataSet.miscDataSet.personalVehiclePlateNumber,
+            dataSet.miscDataSet.tShirtSize,
+            dataSet.miscDataSet.no3sizeUpperTorso,
+            dataSet.miscDataSet.no3sizeWaist,
+            dataSet.miscDataSet.no3sizeShoes,
+            dataSet.loginCredentials.username,
+            dataSet.loginCredentials.password]);
+        }
+        break;
+    }
+
 
   }
 
   Future<bool> verifyLoginCreds(String email, String pass) async
   {
-
-    if (db == null)
+    switch (mySQLConnectionInstance)
     {
-      print("Error: Database was not created.");
-      return false;
-    }
-
-    // Weak-ass stopgap to prevent empty logins
-    if (email == "")
+      case null: // No connection to MySQL DB
       {
-        return false;
+        if (db == null)
+        {
+          print("Error: Database was not created.");
+          return false;
+        }
+
+        // Weak-ass stopgap to prevent empty logins
+        if (email == "")
+        {
+          return false;
+        }
+
+        Database database = await db;
+        String targetColumn = 'password';
+        List<Map> result;
+        try
+        {
+          result = await database.rawQuery(
+              'SELECT $targetColumn '
+                  'FROM $dbTableName '
+                  'WHERE email=? '
+                  '', [email]);
+
+          String checker = result.toString();
+          print("This is the current response from the password query: " + checker);
+          print ((await isolateChar(targetColumn ,checker)).toString());
+
+
+          return checker.contains(pass);
+        }
+        catch (_)
+        {
+          print("Table name invalid. $dbTableName not found.");
+          return false;
+        }
       }
-
-    Database database = await db;
-    String targetColumn = 'password';
-    List<Map> result;
-    try
-    {
-       result = await database.rawQuery(
-          'SELECT $targetColumn '
-              'FROM $dbTableName '
-              'WHERE email=? '
-              '', [email]);
-
-      String checker = result.toString();
-      print("This is the current response from the password query: " + checker);
-      print ((await isolateChar(targetColumn ,checker)).toString());
-
-
-      return checker.contains(pass);
+        break;
+      default:
+        {
+                  var results = getMySQLDataFromExistingData("password", email, "username");
+          // Conversion Guide
+          //        await mySQLConnectionInstance.query(""
+          //           "select password "
+          //            "from LTC_PERSONNEL_INFO "
+          //            "where username = ?"
+          //             "", [email]);
+                print(results);
+        }
+        break;
     }
-    catch (_)
-    {
-      print("Table name invalid. $dbTableName not found.");
-      return false;
-    }
-
-
+    mySQLConnectionInstance.close();
   }
 
   @override
@@ -180,45 +308,47 @@ class PersonnelDatabaseHandler extends DatabaseHandler
     insertNewRow(fDS);
   }
 
-  Future<void> establishMySQLConnection() async
+  @override
+  Future<void> buildMySQLDBData() async
   {
-    var settings = new ConnectionSettings(
-      host: '178.63.43.123',
-      port: 3308,
-      user: 'doodoo',
-      password: 'lanjiao son',
-      db: 'ocs dream'
-    );
 
-    var connection = await MySqlConnection.connect(settings);
-
-    if (connection != null)
-      {
-        connectionInstance = connection;
-      }
-
-    
   }
 
   Future<List<Map>> getFullRowFromEmail(String email) async
   {
-    final Database database = await db;
+    switch (mySQLConnectionInstance)
+    {
+      case null: // No connection established
+        {
+          final Database database = await db;
 
-    try {
-      /*     var result = await database.rawQuery(""
+          try {
+            /*     var result = await database.rawQuery(""
           "SELECT * "
           "FROM $dbTableName "
           "WHERE email=? "
           "", [email]);
           */
 
-      var result = await getColumnInRowData("email", email);
-      // await setColumnInRowData("fullName", targetRow, targetRowData, updateData)
-      return result;
-    }
-    catch (_) {
+            var result = await getLocalColumnInRowData("email", email);
+            // await setColumnInRowData("fullName", targetRow, targetRowData, updateData)
+            return result;
+          }
+          catch (_) {
 
+          }
+        }
+        break;
+      default: // Connection established
+        {
+
+
+
+    //        return results;
+        }
+        break;
     }
+
 
     return null;
   }

@@ -24,7 +24,7 @@ FullDetailSet fDSTemp;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await personnelDBHandle.setDBInitParams(
-      "main_personnel.db", "LtcPersonnelInfo");
+      "main_personnel.db", "LtcPersonnelInfo", "ltcapp", "LTC_PERSONNEL_INFO");
   await personnelDBHandle.databaseCreationOptimizer();
   runApp(MyApp());
 }
