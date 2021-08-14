@@ -282,18 +282,26 @@ class PersonnelDatabaseHandler extends DatabaseHandler
         break;
       default:
         {
-                  var results = getMySQLDataFromExistingData("password", email, "username");
+                  var results = await getMySQLDataFromExistingData("password", email, "username");
           // Conversion Guide
           //        await mySQLConnectionInstance.query(""
           //           "select password "
           //            "from LTC_PERSONNEL_INFO "
           //            "where username = ?"
           //             "", [email]);
-                print(results);
+                for (var row in results)
+                  {
+                    print("Obtained Password: " + row[0].toString() + "  Input Password: " + pass);
+                    if (row[0] == pass)
+                      {
+                        mySQLConnectionInstance.close();
+                        return true;
+                      }
+                  }
         }
         break;
     }
-    mySQLConnectionInstance.close();
+
   }
 
   @override
