@@ -58,7 +58,7 @@ class HomePageViewModel extends ChangeNotifier {
     }
   }
   safeEntryURLPush() async {
-    const url = "https://docs.google.com/forms/d/e/1FAIpQLSfOG1IHwj2B9zXGpRrpjdb5quiKBEmhyUF3-QvhQdS0o2C60Q/viewform?usp=sf_link";
+    const url = "https://docs.google.com/forms/d/e/1FAIpQLSfOG1IHwj2B9zXGpRrpjdb5quiKBEmhyUF3-QvhQdS0o2C60Q/viewform";
     if (await canLaunch(url)) {
       launch(url, forceWebView: true, enableJavaScript: true);
     } else{
@@ -66,7 +66,7 @@ class HomePageViewModel extends ChangeNotifier {
     }
   }
   shroFormURLPush() async {
-    const url = "https://docs.google.com/forms/d/e/1FAIpQLSdPMik7Z8Zhy-RvmIb5Sc7rJnEbWQDt4lhbQBmoUgc3TuMuVQ/viewform?usp=sf_link";
+    const url = "https://docs.google.com/forms/d/e/1FAIpQLSdPMik7Z8Zhy-RvmIb5Sc7rJnEbWQDt4lhbQBmoUgc3TuMuVQ/viewform";
     if (await canLaunch(url)) {
       launch(url, forceWebView: true, enableJavaScript: true);
     } else {
