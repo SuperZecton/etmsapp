@@ -60,7 +60,7 @@ class _HomePageState extends State<HomePage> {
                           children: <Widget>[
                             Container(
                               child: Text(
-                                'PTE AARON',
+                                'LTC TMS Application',
                                 textAlign: TextAlign.left,
                                 style: TextStyle(
                                   fontSize: 22.0,
@@ -75,7 +75,7 @@ class _HomePageState extends State<HomePage> {
                                 Container(
                                   padding: EdgeInsets.only(right: 10.0),
                                   child: Text(
-                                    '123A',
+                                    'Welcome',
                                     textAlign: TextAlign.left,
                                     style: TextStyle(
                                       fontSize: 16.0,
@@ -87,7 +87,7 @@ class _HomePageState extends State<HomePage> {
                                 Container(
                                   padding: EdgeInsets.only(right: 10.0),
                                   child: Text(
-                                    'TOA',
+                                    '',
                                     textAlign: TextAlign.left,
                                     style: TextStyle(
                                       fontSize: 16.0,
@@ -256,7 +256,14 @@ class _HomePageState extends State<HomePage> {
                         ]),
                   ),
                   onTap: () =>
-                      Navigator.pushNamed(context, '/vehicleManagement'),
+                      /*Navigator.pushNamed(context, '/vehicleManagement'),*/
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text("Function Not Available Yet"),
+                        );
+                      })
                 ),
                 _buildTile(
                   Padding(

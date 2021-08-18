@@ -52,7 +52,7 @@ class HomePageViewModel extends ChangeNotifier {
   racFormURLPush() async {
     const url = "https://mtrac.ado.sg/login";
     if (await canLaunch(url)) {
-      launch(url, forceWebView: true, enableJavaScript: true);
+      launch(url, enableJavaScript: true);
     } else {
       throw "Could not launch $url";
     }

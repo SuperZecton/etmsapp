@@ -178,17 +178,27 @@ class _LoginPageState extends State<LoginPage> {
     return InkWell(
         onTap: () {
 
-          // TODO: Implement better ChangeNotifier for vm so vm does not need to be redefined in this widget
+          /*// TODO: Implement better ChangeNotifier for vm so vm does not need to be redefined in this widget
           auth.email = vm.emailController.text;
           auth.password = vm.passwordController.text;
-          auth.verifyLoginData(context, loginCreds);
+          auth.verifyLoginData(context, loginCreds);*/
+          showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: Text("Function Not Available Yet.\n\nPlease click below to enter the TMS Application."),
+                );
+              });
         },
         child: Container(
           width: MediaQuery.of(context).size.width,
           padding: EdgeInsets.symmetric(vertical: 15),
           alignment: Alignment.center,
           decoration: BoxDecoration(
+/*
             color: Colors.blue,
+*/
+            color: Color(0xff808080),
             borderRadius: BorderRadius.all(Radius.circular(5)),
           ),
           child: Text(
@@ -251,7 +261,10 @@ class _LoginPageState extends State<LoginPage> {
             flex: 1,
             child: Container(
               decoration: BoxDecoration(
+/*
                 color: Color(0xff808080),
+*/
+                color: Colors.white,
                 borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(5),
                     topLeft: Radius.circular(5)),
@@ -269,13 +282,16 @@ class _LoginPageState extends State<LoginPage> {
               onTap: () => Navigator.pushNamed(context, '/home'),
               child: Container(
                 decoration: BoxDecoration(
+/*
                   color: Color(0xffA9A9A9),
+*/
+                  color: Colors.blue,
                   borderRadius: BorderRadius.only(
                       bottomRight: Radius.circular(5),
                       topRight: Radius.circular(5)),
                 ),
                 alignment: Alignment.center,
-                child: Text('Log in with Singpass',
+                child: Text('Enter TMS Application',
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 18,
@@ -291,7 +307,16 @@ class _LoginPageState extends State<LoginPage> {
   Widget _createAccountLabel() {
     return InkWell(
       onTap: () {
+/*
         Navigator.pushNamed(context, '/signup');
+*/
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text("Function Not Available Yet"),
+              );
+            });
       },
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 20),
