@@ -3,6 +3,7 @@ import 'package:ltcapp/features/bibo/view/pages/BookInOutPage.dart';
 import 'package:ltcapp/features/home/view/pages/HomePage.dart';
 import 'package:ltcapp/features/login/view/pages/LoginPage.dart';
 import 'package:ltcapp/features/login/view/pages/WelcomePage.dart';
+import 'package:ltcapp/features/mileage/view/pages/MileageMainPage.dart';
 
 import 'package:ltcapp/features/registration/view/pages/EducationRegPage.dart';
 import 'package:ltcapp/features/registration/view/pages/OtherInfoRegPage.dart';
@@ -37,7 +38,8 @@ class Routers {
         return MaterialPageRoute(builder: (_) => VehicleBookOutFormPage());
       case '/vehicleManagementFormIn':
         return MaterialPageRoute(builder: (_) => VehicleBookInFormPage());
-
+      case '/mileageMain':
+        return MaterialPageRoute(builder: (_) => MileageMainPage());
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(

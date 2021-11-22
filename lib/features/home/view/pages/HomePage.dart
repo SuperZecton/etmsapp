@@ -124,11 +124,16 @@ class _HomePageState extends State<HomePage> {
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                      Text(
-                        "Select Month",
-                        style: TextStyle(
-                          fontSize: 19.0,
-                          color: Colors.black,
+                      InkWell(
+                        onTap: (){
+                          Navigator.pushNamed(context, '/', );
+                        },
+                        child: Text(
+                          "Show History",
+                          style: TextStyle(
+                            fontSize: 19.0,
+                            color: Colors.black,
+                          ),
                         ),
                       ),
                     ],
