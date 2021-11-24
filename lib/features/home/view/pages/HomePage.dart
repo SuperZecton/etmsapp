@@ -126,7 +126,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                       InkWell(
                         onTap: (){
-                          Navigator.pushNamed(context, '/', );
+                          Navigator.pushNamed(context, '/mileageMain', );
                         },
                         child: Text(
                           "Show History",
