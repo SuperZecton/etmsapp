@@ -6,11 +6,9 @@ import 'package:ltcapp/features/login/viewmodel/LoginPageVM.dart';
 import 'package:ltcapp/features/login/viewmodel/authentication.dart';
 import 'package:ltcapp/features/registration/viewmodel/RegistrationViewModel.dart';
 import 'package:ltcapp/features/vehiclebookout/viewmodel/VehicleBookOutViewModel.dart';
-
-import 'package:mysql1/mysql1.dart';
-
-import 'package:ltcapp/utils/database_linker.dart';
-import 'package:ltcapp/utils/individual_identity.dart';
+import 'package:sqljocky5/sqljocky.dart';
+//import 'package:ltcapp/utils/database_linker.dart';
+//import 'package:ltcapp/utils/individual_identity.dart';
 import 'package:ltcapp/utils/personnel_database_linker.dart';
 
 import 'package:provider/provider.dart';
@@ -19,13 +17,27 @@ import 'package:ltcapp/core/config/router.dart';
 //void main() => runApp(MyApp());
 
 PersonnelDatabaseHandler personnelDBHandle = new PersonnelDatabaseHandler();
-FullDetailSet fDSTemp;
+//FullDetailSet fDSTemp;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await personnelDBHandle.setDBInitParams(
+  /*await personnelDBHandle.setDBInitParams(
       "main_personnel.db", "LtcPersonnelInfo", "ltcapp", "LTC_PERSONNEL_INFO");
-  await personnelDBHandle.databaseCreationOptimizer();
+  await personnelDBHandle.databaseCreationOptimizer();*/
+  var settings = ConnectionSettings(
+      user: 'LTCAppuser',
+      password: 'LTCuser123',
+      host: '192.168.86.30',
+      port: 3306,
+      db: 'test'
+  );
+  print("Opening connection");
+  var conn = await MySqlConnection.connect(settings);
+  print("Opened connection!");
+//  var tof = await personnelDBHandle.verifyLoginCreds("dlze2001@gmailcom", "nicetry");
+  await personnelDBHandle.ReadVehicleTable(conn);
+  await conn.close();
+//  print(tof);
   runApp(MyApp());
 }
 

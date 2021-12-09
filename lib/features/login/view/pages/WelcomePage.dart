@@ -73,7 +73,7 @@ class _WelcomePageState extends State<WelcomePage> {
     return InkWell(
       onTap: () {
         setState(() {
-          fDSTemp = null;
+          //fDSTemp = null;
           Navigator.pushNamed(context, '/login', );
 
         });
@@ -97,7 +97,7 @@ class _WelcomePageState extends State<WelcomePage> {
     return InkWell(
       onTap: () {
         setState(() {
-          fDSTemp = new FullDetailSet();
+          //fDSTemp = new FullDetailSet();
 /*
           Navigator.pushNamed(context, '/signUp',);
 */

@@ -1,18 +1,22 @@
+//import 'dart:html';
+
+import 'package:flutter/material.dart';
 import 'package:ltcapp/utils/database_linker.dart';
 import 'package:ltcapp/utils/individual_identity.dart';
 import 'package:ltcapp/features/login/model/login_credentials.dart';
 import 'dart:async';
 import 'package:path/path.dart';
 import 'dart:convert';
-import 'package:sqflite/sqflite.dart';
+import 'package:sqljocky5/sqljocky.dart';
+import 'package:sqljocky5/results/results.dart';
 //import 'package:dart_mssql/dart_mssql.dart';
-import 'package:mysql1/mysql1.dart';
 
-class PersonnelDatabaseHandler extends DatabaseHandler
+class PersonnelDatabaseHandler
 {
+  PersonnelDatabaseHandler();
 
   // Local DB Creation and management
-  @override
+/*  @override
   Future<void> databaseCreationOptimizer() async
   {
     dbPath = await getDatabasesPath();
@@ -236,8 +240,8 @@ class PersonnelDatabaseHandler extends DatabaseHandler
 
 
   }
-
-  Future<bool> verifyLoginCreds(String email, String pass) async
+*/
+  /*Future<bool> verifyLoginCreds(String email, String pass) async
   {
     switch (mySQLConnectionInstance)
     {
@@ -302,8 +306,8 @@ class PersonnelDatabaseHandler extends DatabaseHandler
         break;
     }
 
-  }
-
+  }*/
+/*
   @override
   Future<void> buildBaseDBData() async
   {
@@ -315,14 +319,14 @@ class PersonnelDatabaseHandler extends DatabaseHandler
     fDS.loginCredentials = new LoginCredential(username: "test@email.com", password: "123");
     insertNewRow(fDS);
   }
-
+*/
   @override
   Future<void> buildMySQLDBData() async
   {
 
   }
 
-  Future<List<Map>> getFullRowFromEmail(String email) async
+/*  Future<List<Map>> getFullRowFromEmail(String email) async
   {
     switch (mySQLConnectionInstance)
     {
@@ -360,5 +364,55 @@ class PersonnelDatabaseHandler extends DatabaseHandler
 
     return null;
   }
+*/
+  Future<void> ReadVehicleTable(MySqlConnection conn) async
+  {
 
+    // In MYSQL, use ` (backticks) for Columns Eg. `Username`
+    // use ' (apostrophe) for Values Eg. 'elephant123'
+    // End MYSQL Query with ;
+
+/*    var settings = ConnectionSettings(
+        user: 'LTCAppuser',
+        password: 'LTCuser123',
+        host: '192.168.86.30',
+        port: 3306,
+        db: 'test'
+    );
+    var conn = await MySqlConnection.connect(settings);*/
+
+    /*var userId = 1;*/
+//    var testers = await conn.execute('use test;');
+//    print(testers);
+    //"INSERT INTO Vehicles (`VehicleNo`,`CarModel`,`ClassType`,`Status`,`CurrentAVIDate`,`NextAVIDate`,`LastWPTDate`,`AdditionalPlate`,`AdditionalRemarks`) VALUES ('50','G2 Ford','3','Available','08/04/2021','03/02/2022','25/11/2021','SJR9443E','DMI')
+    // ^ This works
+    Results results = await (await conn.execute('SELECT * FROM Vehicles Where `ID` = 2;')).deStream();
+    print(results);
+  }
+
+  Future<bool> verifyLoginCreds(String email, String pass) async
+  {
+    var settings = new ConnectionSettings(
+        user: 'LTCAppuser',
+        password: 'LTCuser123',
+        host: '192.168.86.30',
+        port: 3306,
+        db: 'test'
+    );
+    var conn = await MySqlConnection.connect(settings);
+    print("debug test");
+    await conn.execute("use test;");
+    var pwfromdb = await conn.execute("SELECT `Password` FROM Users WHERE `Email` = ?;", );
+//    print(pwfromdb);
+    conn.close();
+/*    if (pwfromdb.toString() == pass)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }*/
+    return true;
+  }
 }

@@ -3,7 +3,6 @@ import 'package:ltcapp/features/vehiclebookout/model/individual_vehicle.dart';
 import 'dart:async';
 import 'package:path/path.dart';
 import 'dart:convert';
-import 'package:sqflite/sqflite.dart';
 
 class VehInfoDatabaseHandler extends DatabaseHandler {
   @override

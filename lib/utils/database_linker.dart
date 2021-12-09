@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:async/async.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:sqflite/sqflite.dart';
+//import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'package:ltcapp/utils/csv_utils.dart';
 import 'package:csv/csv.dart';
@@ -14,8 +14,8 @@ import 'package:ltcapp/features/login/model/login_credentials.dart';
 import 'dart:io';
 import 'package:ltcapp/utils/DateAndTimeGetter.dart';
 import 'package:http/http.dart' as http;
-import 'package:mysql1/mysql1.dart';
-
+//import 'package:mysql1/mysql1.dart';
+/*
 class DatabaseHandler {
   // The pointer to the SQFlite local database itself
   var db;
@@ -410,4 +410,4 @@ class DatabaseHandler {
   }
 
   DatabaseHandler({this.dbName, this.dbTableName});
-}
+}*/

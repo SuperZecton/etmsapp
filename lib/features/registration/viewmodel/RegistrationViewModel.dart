@@ -63,7 +63,7 @@ class RegistrationViewModel with ChangeNotifier {
   signUpValidation(BuildContext context) {
     if (signUpFormKey.currentState.validate()) {
       signUpFormKey.currentState.save();
-      fDSTemp.sortPersonalData(
+      /*fDSTemp.sortPersonalData(
         nameController.text,
         nricController.text,
         addressController.text,
@@ -87,7 +87,7 @@ class RegistrationViewModel with ChangeNotifier {
         medicalConditionController.text,
       );
       fDSTemp.sortLoginData(emailController.text, passwordController.text);
-      Navigator.pushNamed(context, '/trainingReg');
+      Navigator.pushNamed(context, '/trainingReg');*/
     } else {
       showDialog(
           context: context,
@@ -118,14 +118,14 @@ class RegistrationViewModel with ChangeNotifier {
   trainingSignUpValidation(BuildContext context) {
     if (trainingRegFormKey.currentState.validate()) {
       trainingRegFormKey.currentState.save();
-      fDSTemp.sortTrainingData(
+      /*fDSTemp.sortTrainingData(
         trgFrameController.text,
         trgPeriodController.text,
         int.parse(noAttemptsController.text),
         militaryLicenseController.text,
         militaryLicenseTypeController.text,
         doiController.text,
-      );
+      );*/
       Navigator.pushNamed(context, '/educationReg');
     } else {
       showDialog(
@@ -155,12 +155,12 @@ class RegistrationViewModel with ChangeNotifier {
   educationSignUpValidation(BuildContext context) {
     if (educationRegFormKey.currentState.validate()) {
       educationRegFormKey.currentState.save();
-      fDSTemp.sortEducationData(
+      /*fDSTemp.sortEducationData(
           educationLevelController.text,
           streamCourseController.text,
           ccaController.text,
           schoolController.text
-      );
+      );*/
       Navigator.pushNamed(context, '/otherReg');
     } else {
       showDialog(
@@ -194,7 +194,7 @@ class RegistrationViewModel with ChangeNotifier {
   otherSignUpValidation(BuildContext context) {
     if (otherRegFormKey.currentState.validate()) {
       otherRegFormKey.currentState.save();
-      fDSTemp.sortMiscData(
+      /*fDSTemp.sortMiscData(
           hobbiesController.text,
           civilianLicenseController.text,
           civilianLicenseNoController.text,
@@ -206,7 +206,7 @@ class RegistrationViewModel with ChangeNotifier {
           50,
           50,
           9);
-      personnelDBHandle.insertNewRow(fDSTemp);
+      personnelDBHandle.insertNewRow(fDSTemp);*/
       Navigator.pushNamed(context, '/');
     } else {
       showDialog(

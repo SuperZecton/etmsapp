@@ -1,7 +1,6 @@
 
 import 'dart:async';
 import 'package:path/path.dart';
-import 'package:sqflite/sqflite.dart';
 import 'package:ltcapp/features/login/model/login_credentials.dart';
 import 'package:meta/meta.dart';
 
