@@ -27,17 +27,17 @@ void main() async {
   var settings = ConnectionSettings(
       user: 'LTCAppuser',
       password: 'LTCuser123',
-      host: '192.168.86.30',
+      host: '116.89.31.147',
       port: 3306,
       db: 'test'
   );
   print("Opening connection");
   var conn = await MySqlConnection.connect(settings);
   print("Opened connection!");
-//  var tof = await personnelDBHandle.verifyLoginCreds("dlze2001@gmailcom", "nicetry");
   await personnelDBHandle.ReadVehicleTable(conn);
   await conn.close();
-//  print(tof);
+  var tof = await personnelDBHandle.verifyLoginCreds("dlze2001@gmail.com", "nicetry");
+  print(tof);
   runApp(MyApp());
 }
 

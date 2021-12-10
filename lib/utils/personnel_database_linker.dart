@@ -395,24 +395,24 @@ class PersonnelDatabaseHandler
     var settings = new ConnectionSettings(
         user: 'LTCAppuser',
         password: 'LTCuser123',
-        host: '192.168.86.30',
+        host: '116.89.31.147',
         port: 3306,
         db: 'test'
     );
     var conn = await MySqlConnection.connect(settings);
-    print("debug test");
-    await conn.execute("use test;");
-    var pwfromdb = await conn.execute("SELECT `Password` FROM Users WHERE `Email` = ?;", );
-//    print(pwfromdb);
+    var querystring = "SELECT `Password` FROM Users WHERE `Email` = '" + email + "';";
+    print("Query String: " + querystring);
+    Results pwfromdb = await (await conn.execute(querystring)).deStream();
+    print("Database Result: " + pwfromdb.toString());
     conn.close();
-/*    if (pwfromdb.toString() == pass)
+    if (pwfromdb.toString() == "(["+pass+"])")
     {
         return true;
     }
     else
     {
         return false;
-    }*/
+    }
     return true;
   }
 }
