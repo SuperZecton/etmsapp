@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:ltcapp/features/home/viewmodel/HomePageViewModel.dart';
 import 'package:ltcapp/features/login/viewmodel/LoginPageVM.dart';
 import 'package:ltcapp/features/login/viewmodel/authentication.dart';
+import 'package:ltcapp/features/mileage/viewmodel/MileageViewModel.dart';
 import 'package:ltcapp/features/registration/viewmodel/RegistrationViewModel.dart';
 import 'package:ltcapp/features/vehiclebookout/viewmodel/VehicleBookOutViewModel.dart';
 import 'package:sqljocky5/sqljocky.dart';
@@ -29,14 +30,14 @@ void main() async {
       password: 'LTCuser123',
       host: '116.89.31.147',
       port: 3306,
-      db: 'test'
-  );
+      db: 'test');
   print("Opening connection");
   var conn = await MySqlConnection.connect(settings);
   print("Opened connection!");
   await personnelDBHandle.ReadVehicleTable(conn);
   await conn.close();
-  var tof = await personnelDBHandle.verifyLoginCreds("dlze2001@gmail.com", "nicetry");
+  var tof =
+      await personnelDBHandle.verifyLoginCreds("dlze2001@gmail.com", "nicetry");
   print(tof);
   runApp(MyApp());
 }
@@ -58,6 +59,8 @@ class MyApp extends StatelessWidget {
             create: (context) => LoginPageViewModel()),
         ChangeNotifierProvider<Authentication>(
             create: (context) => Authentication()),
+        ChangeNotifierProvider<MileageViewModel>(
+            create: (context) => MileageViewModel()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
