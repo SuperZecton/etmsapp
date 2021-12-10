@@ -98,16 +98,16 @@ class _WelcomePageState extends State<WelcomePage> {
       onTap: () {
         setState(() {
           //fDSTemp = new FullDetailSet();
-/*
+
           Navigator.pushNamed(context, '/signUp',);
-*/
-          showDialog(
+
+          /*showDialog(
               context: context,
               builder: (BuildContext context) {
                 return AlertDialog(
                   title: Text("Function Not Available Yet"),
                 );
-              });
+              });*/
         });
       },
       child: Container(
