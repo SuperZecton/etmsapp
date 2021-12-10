@@ -1,4 +1,4 @@
-import 'dart:async';
+/*import 'dart:async';
 import 'package:mysql1/mysql1.dart';
 
 class DatabaseCore {
@@ -22,6 +22,16 @@ class DatabaseCore {
   for (var row in results) {
     print('Name: ${row[0]}');
   }
+*/
+
+
+
+
+
+
+
+
+
 
   /*var result = await conn.query('insert into users (name, email, age) values (?, ?, ?)', ['Bob', 'bob@bob.com', 25]);*/
 
@@ -36,5 +46,3 @@ class DatabaseCore {
   [26, 'Bob']);*/
 
 
-  }
-}
