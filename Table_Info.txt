@@ -1,0 +1,70 @@
+User Table
+
+Section 0: Database Identifier
+      "UUID VARBINARY(64) PRIMARY KEY"
+Section 1: Personal Particulars
+      String fullName,
+      String nricLast4Digits,
+      String fullHomeAddress,
+      String handphoneNumber,
+      String homephoneNumber,
+      String personalEmail,
+      String dateOfBirth,
+      String dateOfEnlistment,
+      String dateOfORD,
+      String dateOfPostIn,
+      String pesType,
+      String religion,
+      String race,
+      String bloodGroup,
+      String drugAllergy,
+      String foodAllergy,
+      String NOKDetailFullName,
+      String NOKDetailContactNumber,
+      String NOKDetailFullAddress,
+      String vocationType,
+      String stayInStayOut,
+      String medicalConditions,
+Section 2: Training Information
+      String trainingFrame,
+      String trainingPeriod,
+      String passAttempts,
+      String militaryLicenseNo,
+      String militaryLicenseType,
+      String militaryLicenseDateOfIssue,
+      String LTCTraining, ***
+      String drivingCategory, ***
+Section 3: Education
+      String educationLevel,
+      String streamCourseName,
+      String ccaOptional,
+      String schName,
+Section 4: Other Information
+      String hobbiesInterest,
+      String civilianLicenseType,
+      String civilianLicenseNumber,
+      String civilianLicenseDateOfIssue,
+      String hasDoneDefensiveCourse,
+      String hasPersonalVehicle,
+      String personalVehiclePlateNumber,
+      String tShirtSize,
+      String no3SizeUpperTorso,
+      String no3SizeWaist,
+      String no3SizeShoes,
+Section 5: System Information
+      String username,
+      String password,
+      String permissionLevel, ***
+      String remarks, ***
+
+Vehicle Table
+
+** rmb to do **
+
+Logging Table
+Request Table
+WP Table
+
+Training Table (Not confirmed)
+- FAM (Authorised Vehicles)
+- Refer to training Group
