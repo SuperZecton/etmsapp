@@ -115,4 +115,24 @@ class PersonnelDatabaseHandler {
     print("Database Result: " + results.toString());
     conn.close();
   }
+
+  Future<String> SingleDataPull(String table, String collumIdentifier, String collumIdentifierValue, String neededCollum) async {
+    var settings = new ConnectionSettings(
+        user: 'LTCAppuser',
+        password: 'LTCuser123',
+        host: '116.89.31.147',
+        port: 3306,
+        db: 'test');
+    var conn = await MySqlConnection.connect(settings);
+    var querystring =
+        "SELECT `" + neededCollum + "` FROM " + table + " WHERE `" + collumIdentifier + "` = '" + collumIdentifierValue + "';";
+    print("Query String: " + querystring);
+    Results results = await (await conn.execute(querystring)).deStream();
+    print("Database Result: " + results.toString());
+    var rawValue = results.toString();
+    conn.close();
+    var value = rawValue.substring(2, rawValue.length - 2);
+    return value;
+  }
+
 }
