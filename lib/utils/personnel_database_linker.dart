@@ -11,8 +11,7 @@ import 'package:sqljocky5/sqljocky.dart';
 import 'package:sqljocky5/results/results.dart';
 //import 'package:dart_mssql/dart_mssql.dart';
 
-class PersonnelDatabaseHandler
-{
+class PersonnelDatabaseHandler {
   PersonnelDatabaseHandler();
 
   // Local DB Creation and management
@@ -54,11 +53,11 @@ class PersonnelDatabaseHandler
                   "bloodGroup TEXT, "
                   "drugAllergy TEXT, "
                   "foodAllergy TEXT, "
-                  "NOKDetailfullName TEXT, "
-                  "NOKDetailcontactNumber TEXT, "
-                  "NOKDetailfullAddress TEXT, "
+                  "NOKDetailFullName TEXT, "
+                  "NOKDetailContactNumber TEXT, "
+                  "NOKDetailFullAddress TEXT, "
                   "vocationType TEXT, "
-                  "stayInstayOut TEXT, "
+                  "stayInStayOut TEXT, "
                   "medicalConditions TEXT, "
               // Section 2: Training Information
                   "trainingFrame TEXT, "
@@ -66,24 +65,24 @@ class PersonnelDatabaseHandler
                   "passAttempts INTEGER, "
                   "militaryLicenseNo TEXT, "
                   "militaryLicenseType TEXT, "
-                  "milLicenseDateOfIssue TEXT, "
+                  "militaryLicenseDateOfIssue TEXT, "
               // Section 3: Education
                   "educationLevel TEXT, "
-                  "streamcourseName TEXT, "
+                  "streamCourseName TEXT, "
                   "ccaOptional TEXT, "
                   "schName TEXT, "
               // Section 4: Other Information
                   "hobbiesInterest TEXT, "
-                  "civillianLicenseType TEXT, "
-                  "civillianLicenseNumber TEXT, "
-                  "civillianLicenseDateOfIssue TEXT, "
+                  "civilianLicenseType TEXT, "
+                  "civilianLicenseNumber TEXT, "
+                  "civilianLicenseDateOfIssue TEXT, "
                   "hasDoneDefensiveCourse TEXT, "
                   "hasPersonalVehicle TEXT, "
                   "personalVehiclePlateNumber TEXT, "
                   "tShirtSize TEXT, "
-                  "no3sizeUpperTorso INTEGER, "
-                  "no3sizeWaist INTEGER, "
-                  "no3sizeShoes INTEGER, "
+                  "no3SizeUpperTorso INTEGER, "
+                  "no3SizeWaist INTEGER, "
+                  "no3SizeShoes INTEGER, "
               // Section 5: Login Information
                   "username TEXT, "
                   "password TEXT"
@@ -116,130 +115,6 @@ class PersonnelDatabaseHandler
     callConversion();
   }
 
-  Future<void> insertNewRow(FullDetailSet dataSet) async
-  {
-    switch (mySQLConnectionInstance)
-    {
-      case null:
-        {
-          if (db == null)
-          {
-            return null;
-          }
-
-          if (dataSet == null)
-          {
-            return null;
-          }
-
-          final Database cachedDB = await db;
-
-          await cachedDB.insert(dbTableName, dataSet.toMap(), conflictAlgorithm: ConflictAlgorithm.ignore);
-        }
-        break;
-      default:
-        {
-
-
-          var result = await mySQLConnectionInstance.query(''
-              'INSERT into $mySQLTableName '
-              '('
-              'UUID, '
-              'fullName, '
-              'nricLast4Digits, '
-              'fullHomeAddress, '
-              'handphoneNumber, '
-              'homephoneNumber, '
-              'dateOfBirth, '
-              'dateOfEnlistment, '
-              'dateOfORD, '
-              'dateOfPostIn, '
-              'pesType, '
-              'religion, '
-              'race, '
-              'bloodGroup, '
-              'drugAllergy, '
-              'foodAllergy, '
-              'NOKDetailfullName, '
-              'NOKDetailcontactNumber, '
-              'NOKDetailfullAddress, '
-              'vocationType, '
-              'stayInstayOut, '
-              'medicalConditions, '
-              'trainingFrame, '
-              'trainingPeriod, '
-              'passAttempts, '
-              'militaryLicenseNo, '
-              'militaryLicenseType, '
-              'milLicenseDateOfIssue, '
-              'educationLevel, '
-              'streamcourseName, '
-              'ccaOptional, '
-              'schName, '
-              'hobbiesInterest, '
-              'civillianLicenseType, '
-              'civillianLicenseNumber, '
-              'civillianLicenseDateOfIssue, '
-              'hasDoneDefensiveCourse, '
-              'hasPersonalVehicle, '
-              'personalVehiclePlateNumber, '
-              'tShirtSize, '
-              'no3sizeUpperTorso, '
-              'no3sizeWaist, '
-              'no3sizeShoes, '
-              'username, '
-              'password'
-              ') value (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
-              '', ['0',
-            dataSet.personalDataSet.fullName,
-            dataSet.personalDataSet.nricLast4Digits,
-            dataSet.personalDataSet.handphoneNumber,
-            dataSet.personalDataSet.homephoneNumber,
-            dataSet.personalDataSet.dateOfBirth,
-            dataSet.personalDataSet.dateOfEnlistment,
-            dataSet.personalDataSet.dateOfORD,
-            dataSet.personalDataSet.dateOfPostIn,
-            dataSet.personalDataSet.pes,
-            dataSet.personalDataSet.religion,
-            dataSet.personalDataSet.race,
-            dataSet.personalDataSet.bloodGroup,
-            dataSet.personalDataSet.drugAllergy,
-            dataSet.personalDataSet.foodAllergy,
-            dataSet.personalDataSet.NOKDetailfullName,
-            dataSet.personalDataSet.NOKDetailfullAddress,
-            dataSet.personalDataSet.NOKDetailcontactNumber,
-            dataSet.personalDataSet.vocationType,
-            dataSet.personalDataSet.stayInstayOut,
-            dataSet.trainingDataSet.trainingFrame,
-            dataSet.trainingDataSet.trainingPeriod,
-            dataSet.trainingDataSet.passAttempts,
-            dataSet.trainingDataSet.militaryLicenseNo,
-            dataSet.trainingDataSet.militaryLicenseType,
-            dataSet.trainingDataSet.milLicenseDateOfIssue,
-            dataSet.educationDataSet.educationLevel,
-            dataSet.educationDataSet.streamcourseName,
-            dataSet.educationDataSet.ccaOptional,
-            dataSet.educationDataSet.schName,
-            dataSet.miscDataSet.hobbiesInterest,
-            dataSet.miscDataSet.civillianLicenseType,
-            dataSet.miscDataSet.civillianLicenseNumber,
-            dataSet.miscDataSet.civillianLicenseDateOfIssue,
-            dataSet.miscDataSet.hasDoneDefensiveCourse,
-            dataSet.miscDataSet.hasPersonalVehicle,
-            dataSet.miscDataSet.personalVehiclePlateNumber,
-            dataSet.miscDataSet.personalVehiclePlateNumber,
-            dataSet.miscDataSet.tShirtSize,
-            dataSet.miscDataSet.no3sizeUpperTorso,
-            dataSet.miscDataSet.no3sizeWaist,
-            dataSet.miscDataSet.no3sizeShoes,
-            dataSet.loginCredentials.username,
-            dataSet.loginCredentials.password]);
-        }
-        break;
-    }
-
-
-  }
 */
   /*Future<bool> verifyLoginCreds(String email, String pass) async
   {
@@ -320,99 +195,109 @@ class PersonnelDatabaseHandler
     insertNewRow(fDS);
   }
 */
-  @override
-  Future<void> buildMySQLDBData() async
-  {
 
-  }
-
-/*  Future<List<Map>> getFullRowFromEmail(String email) async
-  {
-    switch (mySQLConnectionInstance)
-    {
-      case null: // No connection established
-        {
-          final Database database = await db;
-
-          try {
-            /*     var result = await database.rawQuery(""
-          "SELECT * "
-          "FROM $dbTableName "
-          "WHERE email=? "
-          "", [email]);
-          */
-
-            var result = await getLocalColumnInRowData("email", email);
-            // await setColumnInRowData("fullName", targetRow, targetRowData, updateData)
-            return result;
-          }
-          catch (_) {
-
-          }
-        }
-        break;
-      default: // Connection established
-        {
-
-
-
-    //        return results;
-        }
-        break;
-    }
-
-
-    return null;
-  }
-*/
-  Future<void> ReadVehicleTable(MySqlConnection conn) async
-  {
-
+  Future<void> DBFunctionTemplate(String value) async {
     // In MYSQL, use ` (backticks) for Columns Eg. `Username`
     // use ' (apostrophe) for Values Eg. 'elephant123'
     // End MYSQL Query with ;
 
-/*    var settings = ConnectionSettings(
-        user: 'LTCAppuser',
-        password: 'LTCuser123',
-        host: '192.168.86.30',
-        port: 3306,
-        db: 'test'
-    );
-    var conn = await MySqlConnection.connect(settings);*/
-
-    /*var userId = 1;*/
-//    var testers = await conn.execute('use test;');
-//    print(testers);
-    //"INSERT INTO Vehicles (`VehicleNo`,`CarModel`,`ClassType`,`Status`,`CurrentAVIDate`,`NextAVIDate`,`LastWPTDate`,`AdditionalPlate`,`AdditionalRemarks`) VALUES ('50','G2 Ford','3','Available','08/04/2021','03/02/2022','25/11/2021','SJR9443E','DMI')
-    // ^ This works
-    Results results = await (await conn.execute('SELECT * FROM Vehicles Where `ID` = 2;')).deStream();
-    print(results);
-  }
-
-  Future<bool> verifyLoginCreds(String email, String pass) async
-  {
     var settings = new ConnectionSettings(
         user: 'LTCAppuser',
         password: 'LTCuser123',
         host: '116.89.31.147',
         port: 3306,
-        db: 'test'
-    );
+        db: 'test');
     var conn = await MySqlConnection.connect(settings);
-    var querystring = "SELECT `Password` FROM Users WHERE `Email` = '" + email + "';";
+    var querystring =
+        "SELECT `Password` FROM Users WHERE `Username` = '" + value + "';";
+    print("Query String: " + querystring);
+    Results results = await (await conn.execute(querystring)).deStream();
+    print("Database Result: " + results.toString());
+    value = results.toString();
+    conn.close();
+  }
+
+  Future<bool> verifyLoginCreds(String username, String pass) async {
+    var settings = new ConnectionSettings(
+        user: 'LTCAppuser',
+        password: 'LTCuser123',
+        host: '116.89.31.147',
+        port: 3306,
+        db: 'test');
+    var conn = await MySqlConnection.connect(settings);
+    var querystring =
+        "SELECT `Password` FROM Users WHERE `Username` = '" + username + "';";
     print("Query String: " + querystring);
     Results pwfromdb = await (await conn.execute(querystring)).deStream();
     print("Database Result: " + pwfromdb.toString());
     conn.close();
-    if (pwfromdb.toString() == "(["+pass+"])")
-    {
-        return true;
+    if (pwfromdb.toString() == "([" + pass + "])") {
+      return true;
+    } else {
+      return false;
     }
-    else
-    {
-        return false;
-    }
-    return true;
+  }
+
+  Future<void> createUserAccount(
+      String fullName,
+      String nricLast4Digits,
+      String fullHomeAddress,
+      String handphoneNumber,
+      String homephoneNumber,
+      String personalEmail,
+      String dateOfBirth,
+      String dateOfEnlistment,
+      String dateOfORD,
+      String dateOfPostIn,
+      String pesType,
+      String religion,
+      String race,
+      String bloodGroup,
+      String drugAllergy,
+      String foodAllergy,
+      String NOKDetailFullName,
+      String NOKDetailContactNumber,
+      String NOKDetailFullAddress,
+      String vocationType,
+      String stayInStayOut,
+      String medicalConditions,
+      String trainingFrame,
+      String trainingPeriod,
+      String passAttempts,
+      String militaryLicenseNo,
+      String militaryLicenseType,
+      String militaryLicenseDateOfIssue,
+      String educationLevel,
+      String streamCourseName,
+      String ccaOptional,
+      String schName,
+      String hobbiesInterest,
+      String civilianLicenseType,
+      String civilianLicenseNumber,
+      String civilianLicenseDateOfIssue,
+      String hasDoneDefensiveCourse,
+      String hasPersonalVehicle,
+      String personalVehiclePlateNumber,
+      String tShirtSize,
+      String no3SizeUpperTorso,
+      String no3SizeWaist,
+      String no3SizeShoes,
+      String username,
+      String password) async {
+
+    var settings = new ConnectionSettings(
+        user: 'LTCAppuser',
+        password: 'LTCuser123',
+        host: '116.89.31.147',
+        port: 3306,
+        db: 'test');
+    var conn = await MySqlConnection.connect(settings);
+    var querystring =
+        "INSERT INTO Users (`UUID`, `fullName`, `nricLast4Digits`, `fullHomeAddress`, `handphoneNumber`, `homephoneNumber`, `personalEmail`, `dateOfBirth`, `dateOfEnlistment`, `dateOfORD`, `dateOfPostIn`, `pesType`, `religion`, `race`, `bloodGroup`, `drugAllergy`, `foodAllergy`, `NOKDetailFullName`, `NOKDetailContactNumber`, `NOKDetailFullAddress`, `vocationType`, `stayInStayOut`, `medicalConditions`, `trainingFrame`, `trainingPeriod`, `passAttempts`, `militaryLicenseNo`, `militaryLicenseType`, `militaryLicenseDateOfIssue`, `educationLevel`, `streamCourseName`, `ccaOptional`, `schName`, `hobbiesInterest`, `civilianLicenseType`, `civilianLicenseNumber`, `civilianLicenseDateOfIssue`, `hasDoneDefensiveCourse`, `hasPersonalVehicle`, `personalVehiclePlateNumber`, `tShirtSize`, `no3SizeUpperTorso`, `no3SizeWaist`, `no3SizeShoes`, `username`, `password`) "
+        "VALUES (UUID(),'"+fullName+"','"+nricLast4Digits+"','"+fullHomeAddress+"','"+handphoneNumber+"','"+homephoneNumber+"','"+personalEmail+"','"+dateOfBirth+"','"+dateOfEnlistment+"','"+dateOfORD+"','"+dateOfPostIn+"','"+pesType+"','"+religion+"','"+race+"','"+bloodGroup+"','"+drugAllergy+"','"+foodAllergy+"','"+NOKDetailFullName+"','"+NOKDetailContactNumber+"','"+NOKDetailFullAddress+"','"+vocationType+"','"+stayInStayOut+"','"+medicalConditions+"','"+trainingFrame+"','"+trainingPeriod+"','"+passAttempts+"','"+militaryLicenseNo+"','"+militaryLicenseType+"','"+militaryLicenseDateOfIssue+"','"+educationLevel+"','"+streamCourseName+"','"+ccaOptional+"','"+schName+"','"+hobbiesInterest+"','"+civilianLicenseType+"','"+civilianLicenseNumber+"','"+civilianLicenseDateOfIssue+"','"+hasDoneDefensiveCourse+"','"+hasPersonalVehicle+"','"+personalVehiclePlateNumber+"','"+tShirtSize+"','"+no3SizeUpperTorso+"','"+no3SizeWaist+"','"+no3SizeShoes+"','"+username+"','"+password+"');";
+    print("Query String: " + querystring);
+    Results results = await (await conn.execute(querystring)).deStream();
+    print("Database Result: " + results.toString());
+    conn.close();
   }
 }

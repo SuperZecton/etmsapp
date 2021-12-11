@@ -25,17 +25,6 @@ void main() async {
   /*await personnelDBHandle.setDBInitParams(
       "main_personnel.db", "LtcPersonnelInfo", "ltcapp", "LTC_PERSONNEL_INFO");
   await personnelDBHandle.databaseCreationOptimizer();*/
-  var settings = ConnectionSettings(
-      user: 'LTCAppuser',
-      password: 'LTCuser123',
-      host: '116.89.31.147',
-      port: 3306,
-      db: 'test');
-  print("Opening connection");
-  var conn = await MySqlConnection.connect(settings);
-  print("Opened connection!");
-  await personnelDBHandle.ReadVehicleTable(conn);
-  await conn.close();
   var tof =
       await personnelDBHandle.verifyLoginCreds("dlze2001@gmail.com", "nicetry");
   print(tof);
