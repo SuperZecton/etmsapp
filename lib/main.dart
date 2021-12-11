@@ -10,7 +10,7 @@ import 'package:ltcapp/features/vehiclebookout/viewmodel/VehicleBookOutViewModel
 import 'package:sqljocky5/sqljocky.dart';
 //import 'package:ltcapp/utils/database_linker.dart';
 //import 'package:ltcapp/utils/individual_identity.dart';
-import 'package:ltcapp/utils/personnel_database_linker.dart';
+import 'package:ltcapp/newdbutils/database_connector.dart';
 
 import 'package:provider/provider.dart';
 import 'package:ltcapp/core/config/router.dart';

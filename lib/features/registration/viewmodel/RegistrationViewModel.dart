@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:ltcapp/utils/individual_identity.dart';
+import 'package:ltcapp/features/registration/model/individual_identity.dart';
 import 'package:ltcapp/main.dart';
 
 class RegistrationViewModel with ChangeNotifier {

@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:ltcapp/features/registration/view/pages/SignupPage.dart';
-import 'package:ltcapp/utils/individual_identity.dart';
+import 'package:ltcapp/features/registration/model/individual_identity.dart';
 import 'package:ltcapp/utils/database_linker.dart';
 
 import 'package:ltcapp/main.dart' as app;

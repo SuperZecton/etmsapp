@@ -34,8 +34,6 @@ class VocationType {
 
 }
 
-
-
 class VehLicenseType {
 
   final value;
@@ -69,7 +67,6 @@ class ClothesSizeType {
   static List<ClothesSizeType> getValues() => list;
 }
 
-
 class PESType {
   final value;
   const PESType._internal(this.value);
@@ -90,7 +87,6 @@ class PESType {
 
 
 }
-
 
 class RaceType {
   final value;
@@ -141,7 +137,6 @@ class BloodType {
   static List<BloodType> getValues() => list;
 }
 
-
 class StayInStayOutType {
   final value;
   const StayInStayOutType._internal(this.value);
@@ -164,7 +159,6 @@ class TrueOrFalseType {
   static List<TrueOrFalseType> getValues() => list;
 }
 
-
 /*-----*/
 /*
 class NOKDetailSet {
@@ -175,7 +169,6 @@ class NOKDetailSet {
   NOKDetailSet({this.fullName, this.contactNumber, this.fullAddress});
 }
 */
-
 // Currently split to make things easier to read when all the data comes pouring in
 class PersonalDataSet {
   String fullName = "NIL";
@@ -378,7 +371,6 @@ class FullDetailSet {
     /* Login Creds Section */
     'email': loginCredentials.username,
     'password': loginCredentials.password
-
       };
   }
 

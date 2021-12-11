@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ltcapp/core/config/globals.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
-import '../../../../utils/individual_identity.dart';
+import '../../../registration/model/individual_identity.dart';
 import 'package:ltcapp/main.dart';
 
 class WelcomePage extends StatefulWidget {
