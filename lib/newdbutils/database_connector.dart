@@ -10,7 +10,9 @@ import 'package:sqljocky5/results/results.dart';
 //import 'package:dart_mssql/dart_mssql.dart';
 
 class PersonnelDatabaseHandler {
+
   PersonnelDatabaseHandler();
+
   Future<void> DBFunctionTemplate(String value) async {
     // In MYSQL, use ` (backticks) for Columns Eg. `Username`
     // use ' (apostrophe) for Values Eg. 'elephant123'
@@ -120,7 +122,7 @@ class PersonnelDatabaseHandler {
     conn.close();
   }
 
-  Future<String> SingleDataPull(String table, String collumIdentifier, String collumIdentifierValue, String neededCollum) async {
+  Future<String> singleDataPull(String table, String collumIdentifier, String collumIdentifierValue, String neededCollum) async {
     var settings = new ConnectionSettings(
         user: 'LTCAppuser',
         password: 'LTCuser123',
@@ -137,6 +139,50 @@ class PersonnelDatabaseHandler {
     conn.close();
     var value = rawValue.substring(2, rawValue.length - 2);
     return value;
+  }
+
+  Future<void> createVehicle(
+      String vehicleNo,
+      String carModel,
+      String classType,
+      String status,
+      String lastAVIDate,
+      String nextAVIDate,
+      String lastWPTDate,
+      String nextWPTDate,
+      String additionalPlate,
+      String additionalRemarks) async {
+
+    var settings = new ConnectionSettings(
+        user: 'LTCAppuser',
+        password: 'LTCuser123',
+        host: '116.89.31.147',
+        port: 3306,
+        db: 'test');
+    var conn = await MySqlConnection.connect(settings);
+    var querystring =
+        "INSERT INTO Vehicles (`UUID`, `vehicleNo`, `carModel`, `classType`, `status`, `lastAVIDate`, `nextAVIDate`, `lastWPTDate`, `nextWPTDate`, `additionalPlate`, additionalRemarks`) "
+        "VALUES (UUID(),'"+vehicleNo+"','"+carModel+"','"+classType+"','"+status+"','"+lastAVIDate+"','"+nextAVIDate+"','"+lastWPTDate+"','"+nextWPTDate+"','"+additionalPlate+"','"+additionalRemarks+"');";
+    print("Query String: " + querystring);
+    Results results = await (await conn.execute(querystring)).deStream();
+    print("Database Result: " + results.toString());
+    conn.close();
+  }
+
+  Future<void> editSingleDataEntry(String table, String collumIdentifier, String collumIdentifierValue, String editingCollum, String editingCollumValue) async {
+    var settings = new ConnectionSettings(
+        user: 'LTCAppuser',
+        password: 'LTCuser123',
+        host: '116.89.31.147',
+        port: 3306,
+        db: 'test');
+    var conn = await MySqlConnection.connect(settings);
+    var querystring =
+        "UPDATE " + table + " SET `" + editingCollum + "` = '" + editingCollumValue + "' WHERE `" + collumIdentifier + "` = '" + collumIdentifierValue + "';";
+    print("Query String: " + querystring);
+    Results results = await (await conn.execute(querystring)).deStream();
+    print("Database Result: " + results.toString());
+    conn.close();
   }
 
 }

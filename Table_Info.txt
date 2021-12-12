@@ -63,7 +63,7 @@ vehicleNo
 carModel
 classType
 status
-currentAVIDate
+lastAVIDate
 nextAVIDate
 lastWPTDate
 nextWPTDate
