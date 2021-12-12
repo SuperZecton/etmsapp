@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ltcapp/core/config/globals.dart';
+import 'package:ltcapp/features/mileage/view/widgets/MileageAppBar.dart';
+import 'package:ltcapp/features/mileage/view/widgets/MileageList.dart';
 import 'package:ltcapp/features/mileage/viewmodel/MileageViewModel.dart';
 import 'package:provider/provider.dart';
 
@@ -11,14 +13,16 @@ class MileageMainPage extends StatefulWidget {
 class _MileageMainPageState extends State<MileageMainPage> {
   @override
   Widget build(BuildContext context) {
-    final vm = Provider.of<MileageViewModel>(context,listen:false);
+    final vm = Provider.of<MileageViewModel>(context, listen: false);
     return Scaffold(
-      body: Container(
-        color: kBackgroundColor,
-        child: CustomScrollView(
-          
+        body: CustomScrollView(
+          slivers: <Widget>[
+            MileageAppBar(),
+            MileageList(),
+
+
+          ]
         ),
-      )
     );
   }
 }

@@ -11,13 +11,12 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:ltcapp/features/registration/view/pages/SignupPage.dart';
 import 'package:ltcapp/features/registration/model/individual_identity.dart';
-import 'package:ltcapp/utils/database_linker.dart';
 
 import 'package:ltcapp/main.dart' as app;
 
 //void main() => run(mainApp);
 
-DatabaseHandler mainHandle = new DatabaseHandler(dbName: "main_personnel.db");
+//DatabaseHandler mainHandle = new DatabaseHandler(dbName: "main_personnel.db");
 
 void mainApp() {
   /*
@@ -42,5 +41,5 @@ void mainApp() {
   });
   */
   app.MyApp();
-  mainHandle.databaseCreationOptimizer();
+  //mainHandle.databaseCreationOptimizer();
 }

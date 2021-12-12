@@ -2,4 +2,5 @@
 
 Flutter App for LTC E-Management
 
-Using BloC Architecture with Sqlite for database
+Using Provider for state management with MySql for database
+App created by Jovan Tan, Damon Lim, Darren Teh and Aaron Jed Fusana Bernardo
