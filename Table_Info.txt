@@ -1,4 +1,4 @@
-User Table
+Users Table
 
 Section 0: Database Identifier
       "UUID VARBINARY(64) PRIMARY KEY"
@@ -57,7 +57,18 @@ Section 5: System Information
       String permissionLevel, ***
       String remarks, ***
 
-Vehicle Table
+Vehicles Table
+UUID PRIMARY KEY
+vehicleNo
+carModel
+classType
+status
+currentAVIDate
+nextAVIDate
+lastWPTDate
+nextWPTDate
+additionalPlate
+additionalRemarks
 
 ** rmb to do **
 
