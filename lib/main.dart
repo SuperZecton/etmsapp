@@ -17,7 +17,7 @@ import 'package:ltcapp/core/config/router.dart';
 
 //void main() => runApp(MyApp());
 
-PersonnelDatabaseHandler personnelDBHandle = new PersonnelDatabaseHandler();
+DatabaseHandler personnelDBHandle = new DatabaseHandler();
 //FullDetailSet fDSTemp;
 
 void main() async {

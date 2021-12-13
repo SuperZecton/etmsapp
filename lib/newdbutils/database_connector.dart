@@ -9,9 +9,8 @@ import 'package:sqljocky5/sqljocky.dart';
 import 'package:sqljocky5/results/results.dart';
 //import 'package:dart_mssql/dart_mssql.dart';
 
-class PersonnelDatabaseHandler {
-
-  PersonnelDatabaseHandler();
+class DatabaseHandler {
+  DatabaseHandler();
 
   Future<void> DBFunctionTemplate(String value) async {
     // In MYSQL, use ` (backticks) for Columns Eg. `Username`
