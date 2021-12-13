@@ -70,11 +70,36 @@ nextWPTDate
 additionalPlate
 additionalRemarks
 
-** rmb to do **
-
 Logging Table
-Request Table
+UUID PRIMARY KEY
+username
+date
+vehicleNo
+odometerStart
+odometerEnd
+mileage
+purposeOfTrip
+locationStart
+locationEnd
+classType
+authorizingSignature
+
+Requests Table
+UUID PRIMARY KEY
+dateSubmitted
+requesterUser
+commanderUser
+updatedUser
+typeOfRequest
+dateOfChange
+dateOfAccepted
+remarks
+
 WP Table
+date
+user1
+user2
+user3
 
 Training Table (Not confirmed)
 - FAM (Authorised Vehicles)
