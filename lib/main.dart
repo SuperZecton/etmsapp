@@ -15,6 +15,8 @@ import 'package:ltcapp/newdbutils/database_connector.dart';
 import 'package:provider/provider.dart';
 import 'package:ltcapp/core/config/router.dart';
 
+import 'core/services/permissions.dart';
+
 //void main() => runApp(MyApp());
 
 DatabaseHandler personnelDBHandle = new DatabaseHandler();
@@ -25,9 +27,14 @@ void main() async {
   /*await personnelDBHandle.setDBInitParams(
       "main_personnel.db", "LtcPersonnelInfo", "ltcapp", "LTC_PERSONNEL_INFO");
   await personnelDBHandle.databaseCreationOptimizer();*/
-  var tof =
+  ///Debugging nonsense
+  /*var tof =
       await personnelDBHandle.verifyLoginCreds("dlze2001@gmail.com", "nicetry");
-  print(tof);
+  print(tof);*/
+  Permissions lol = Permissions();
+  var testPermissions = await lol.getPermissionLevel("damonlim");
+  print(testPermissions);
+
   runApp(MyApp());
 }
 

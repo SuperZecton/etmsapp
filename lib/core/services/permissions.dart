@@ -3,13 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:ltcapp/newdbutils/database_connector.dart';
 
 class Permissions{
+
   DatabaseHandler newDatabase = DatabaseHandler();
 
     getPermissionLevel(String usernameValue){
       var permissionLevel;
-      permissionLevel = newDatabase.singleDataPull("Users", "username", usernameValue, "permissionsLevel");
+      permissionLevel = newDatabase.singleDataPull("Users", "username", usernameValue, "permissionLevel");
       return permissionLevel;
     }
+
 
 
 }
