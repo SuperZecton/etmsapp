@@ -3,6 +3,7 @@ Users Table
 Section 0: Database Identifier
       "UUID VARBINARY(64) PRIMARY KEY"
 Section 1: Personal Particulars
+      String rank,
       String fullName,
       String nricLast4Digits,
       String fullHomeAddress,
