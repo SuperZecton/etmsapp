@@ -185,4 +185,50 @@ class DatabaseHandler {
     conn.close();
   }
 
+  Future<void> createLoginEntry(
+      String deviceIdentifier,
+      String username,
+      String password) async {
+
+    var settings = new ConnectionSettings(
+        user: 'LTCAppuser',
+        password: 'LTCuser123',
+        host: '116.89.31.147',
+        port: 3306,
+        db: 'test');
+    var conn = await MySqlConnection.connect(settings);
+    var querystring =
+        "INSERT INTO RememberLogin (`UUID`, `deviceIdentifier`, `username`, `password`) "
+            "VALUES (UUID(),'"+deviceIdentifier+"','"+username+"','"+password+"');";
+    print("Query String: " + querystring);
+    Results results = await (await conn.execute(querystring)).deStream();
+    print("Database Result: " + results.toString());
+    conn.close();
+  }
+
+  Future<bool> checkLoginEntry(
+      String deviceIdentifier,
+      String username) async {
+
+    var settings = new ConnectionSettings(
+        user: 'LTCAppuser',
+        password: 'LTCuser123',
+        host: '116.89.31.147',
+        port: 3306,
+        db: 'test');
+    var conn = await MySqlConnection.connect(settings);
+    var querystring =
+        "SELECT `username` FROM RememberTable WHERE `deviceIdentifier` = '" + deviceIdentifier + "');";
+    print("Query String: " + querystring);
+    Results results = await (await conn.execute(querystring)).deStream();
+    print("Database Result: " + results.toString());
+    conn.close();
+    if (results.toString() == "(["+username+"])"){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
 }
