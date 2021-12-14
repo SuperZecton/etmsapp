@@ -100,6 +100,12 @@ class _SignUpPageState extends State<SignUpPage> {
                         input.isValidEmail() ? null : "Enter valid email",
                   ),
                   RegistrationTextField(
+                    "Username",
+                    FontAwesomeIcons.user,
+                    vm.usernameController,
+                    helperText: "Please input a username you'll remember",
+                  ),
+                  RegistrationTextField(
                     "Password",
                     FontAwesomeIcons.key,
                     vm.passwordController,
@@ -273,7 +279,8 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   Widget _submitButton() {
-    final viewModel = Provider.of<RegistrationViewModel>(context, listen: false);
+    final viewModel =
+        Provider.of<RegistrationViewModel>(context, listen: false);
     return Consumer<RegistrationViewModel>(
       builder: (context, vm, child) => Container(
         padding: EdgeInsets.symmetric(horizontal: 40),

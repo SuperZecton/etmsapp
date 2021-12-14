@@ -7,10 +7,10 @@ import 'package:ltcapp/newdbutils/database_connector.dart';
 class RegistrationViewModel with ChangeNotifier {
   DatabaseHandler db = DatabaseHandler();
 
-
   ///Sign Up Page Controllers
   final signUpFormKey = GlobalKey<FormState>();
   final nameController = TextEditingController();
+  final usernameController = TextEditingController();
   final nricController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -66,7 +66,6 @@ class RegistrationViewModel with ChangeNotifier {
   signUpValidation(BuildContext context) {
     if (signUpFormKey.currentState.validate()) {
       signUpFormKey.currentState.save();
-
     } else {
       showDialog(
           context: context,
@@ -158,9 +157,59 @@ class RegistrationViewModel with ChangeNotifier {
   otherSignUpValidation(BuildContext context) {
     if (otherRegFormKey.currentState.validate()) {
       otherRegFormKey.currentState.save();
-      ///Last page -> Create user
-      db.createUserAccount('', nameController.text, nricController.text, addressController.text, numberController.text, homeNumberController.text, emailController.text, dobController.text, doeController.text, ordController.text, dopController.text, currentPESValue.toString(), currentReligionValue.toString(), currentRaceValue.toString(), currentBloodValue.toString(), drugAllergyController.text, foodAllergyController.text, nokController.text, nokNumberController.text, nokAddressController.text, currentVocationValue.toString(), '', medicalConditionController.text, trgFrameController.text, trgPeriodController.text, noAttemptsController.text, militaryLicenseController.text, militaryLicenseTypeController.text, doiController.text, '', '', educationLevelController.text, streamCourseController.text, ccaController.text, schoolController.text, hobbiesController.text, civilianLicenseController.text, civilianLicenseNoController.text, civilianLicenseDOIController.text, '', personalVehicleController.text, '', '', '', '', '', 'username', passwordController.text, '', '');
 
+      ///Last page -> Create user
+      db.createUserAccount(
+          '',
+          nameController.text,
+          nricController.text,
+          addressController.text,
+          numberController.text,
+          homeNumberController.text,
+          emailController.text,
+          dobController.text,
+          doeController.text,
+          ordController.text,
+          dopController.text,
+          currentPESValue.toString(),
+          currentReligionValue.toString(),
+          currentRaceValue.toString(),
+          currentBloodValue.toString(),
+          drugAllergyController.text,
+          foodAllergyController.text,
+          nokController.text,
+          nokNumberController.text,
+          nokAddressController.text,
+          currentVocationValue.toString(),
+          '',
+          medicalConditionController.text,
+          trgFrameController.text,
+          trgPeriodController.text,
+          noAttemptsController.text,
+          militaryLicenseController.text,
+          militaryLicenseTypeController.text,
+          doiController.text,
+          '',
+          '',
+          educationLevelController.text,
+          streamCourseController.text,
+          ccaController.text,
+          schoolController.text,
+          hobbiesController.text,
+          civilianLicenseController.text,
+          civilianLicenseNoController.text,
+          civilianLicenseDOIController.text,
+          '',
+          personalVehicleController.text,
+          '',
+          '',
+          '',
+          '',
+          '',
+          usernameController.text,
+          passwordController.text,
+          '',
+          '');
 
       Navigator.pushNamed(context, '/');
     } else {

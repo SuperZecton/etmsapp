@@ -5,25 +5,52 @@ import 'package:ltcapp/features/login/view/widgets/LoadingIndicator.dart';
 import 'package:ltcapp/newdbutils/database_connector.dart';
 
 class LoginPageViewModel extends ChangeNotifier {
-  String get user => usernameController.text;
-  String get password => passwordController.text;
-
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
+
+  String get user => usernameController.text;
+  String get password => passwordController.text;
   DatabaseHandler db = DatabaseHandler();
 
-  Future verifyLoginData(BuildContext context, bool loginCreds) async {
+  Future verifyLoginData(BuildContext context) async {
+    bool loginCreds;
     loginCreds = await db.verifyLoginCreds(user, password);
-    LoginPageViewModel().onLoading(context);
-    await new Future.delayed(
-      const Duration(seconds: 2),
-    );
     if (loginCreds == true) {
       Navigator.pushNamed(context, '/home');
-      //    print((await personnelDBHandle.getFullRowFromEmail(email)).toString());
+    } else {
+      showDialog(
+          context: context,
+          barrierDismissible: true,
+          builder: (BuildContext context) {
+            return Dialog(
+              child: Container(
+                height: 200,
+                width: 200,
+                padding: EdgeInsets.all(40.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Login Failed!",
+                      style: GoogleFonts.roboto(
+                        color: Colors.black,
+                        fontSize: 24.0,
+                      ),
+                    ),
+                    Text(
+                      "Please check your username/password again!",
+                      style: GoogleFonts.roboto(
+                        color: Colors.black,
+                        fontSize: 12.0,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          });
     }
   }
-
 
   void onLoading(BuildContext context) {
     showDialog(

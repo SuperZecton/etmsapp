@@ -51,8 +51,6 @@ class MyApp extends StatelessWidget {
             create: (context) => VehicleBookOutViewModel()),
         ChangeNotifierProvider<LoginPageViewModel>(
             create: (context) => LoginPageViewModel()),
-        ChangeNotifierProvider<Authentication>(
-            create: (context) => Authentication()),
         ChangeNotifierProvider<MileageViewModel>(
             create: (context) => MileageViewModel()),
       ],

@@ -21,7 +21,6 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     final vm = Provider.of<LoginPageViewModel>(context, listen: false);
-    bool loginCheck = false;
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Container(
@@ -48,7 +47,7 @@ class _LoginPageState extends State<LoginPage> {
                       ],
                     ),
                     SizedBox(height: 20),
-                    _submitButton(loginCheck),
+                    _submitButton(),
                     Container(
                       padding: EdgeInsets.symmetric(vertical: 10),
                       alignment: Alignment.centerRight,
@@ -171,23 +170,11 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _submitButton(bool loginCreds) {
-    final auth = Provider.of<Authentication>(context, listen: false);
+  Widget _submitButton() {
     final vm = Provider.of<LoginPageViewModel>(context, listen: false);
     return InkWell(
         onTap: () {
-          /*// TODO: Implement better ChangeNotifier for vm so vm does not need to be redefined in this widget
-          auth.email = vm.emailController.text;
-          auth.password = vm.passwordController.text;
-          auth.verifyLoginData(context, loginCreds);*/
-          showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  title: Text(
-                      "Function Not Available Yet.\n\nPlease click below to enter the TMS Application."),
-                );
-              });
+          vm.verifyLoginData(context);
         },
         child: Container(
           width: MediaQuery.of(context).size.width,
