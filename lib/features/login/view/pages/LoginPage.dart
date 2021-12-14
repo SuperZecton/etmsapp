@@ -44,7 +44,7 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(height: 50),
                     Column(
                       children: <Widget>[
-                        _emailEntryField(),
+                        _usernameEntryField(),
                         _passwordEntryField(),
                       ],
                     ),
@@ -80,7 +80,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _emailEntryField() {
+  Widget _usernameEntryField() {
     return Consumer<LoginPageViewModel>(
       builder: (context, vm, child) => Container(
         margin: EdgeInsets.symmetric(vertical: 10),
@@ -88,7 +88,7 @@ class _LoginPageState extends State<LoginPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(
-              "Email",
+              "Username",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 15,
@@ -106,7 +106,7 @@ class _LoginPageState extends State<LoginPage> {
                     fontWeight: FontWeight.w600,
                     color: Colors.white),
                 obscureText: false,
-                controller: vm.emailController,
+                controller: vm.usernameController,
                 decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(
                         borderSide:
@@ -177,7 +177,6 @@ class _LoginPageState extends State<LoginPage> {
     final vm = Provider.of<LoginPageViewModel>(context, listen: false);
     return InkWell(
         onTap: () {
-
           /*// TODO: Implement better ChangeNotifier for vm so vm does not need to be redefined in this widget
           auth.email = vm.emailController.text;
           auth.password = vm.passwordController.text;
@@ -186,7 +185,8 @@ class _LoginPageState extends State<LoginPage> {
               context: context,
               builder: (BuildContext context) {
                 return AlertDialog(
-                  title: Text("Function Not Available Yet.\n\nPlease click below to enter the TMS Application."),
+                  title: Text(
+                      "Function Not Available Yet.\n\nPlease click below to enter the TMS Application."),
                 );
               });
         },
