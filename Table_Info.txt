@@ -102,6 +102,12 @@ user1
 user2
 user3
 
+RememberLogin Table
+UUID PRIMARY KEY
+deviceIdentifier
+username
+password
+
 Training Table (Not confirmed)
 - FAM (Authorised Vehicles)
 - Refer to training Group
