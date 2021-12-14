@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ltcapp/features/login/viewmodel/LoginPageVM.dart';
-import 'package:ltcapp/features/login/viewmodel/authentication.dart';
 import 'package:ltcapp/features/registration/view/pages/SignupPage.dart';
 import 'package:ltcapp/features/login/model/login_credentials.dart';
 import 'package:google_fonts/google_fonts.dart';

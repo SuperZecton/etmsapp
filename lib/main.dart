@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ltcapp/features/home/viewmodel/HomePageViewModel.dart';
 import 'package:ltcapp/features/login/viewmodel/LoginPageVM.dart';
-import 'package:ltcapp/features/login/viewmodel/authentication.dart';
 import 'package:ltcapp/features/mileage/viewmodel/MileageViewModel.dart';
 import 'package:ltcapp/features/registration/viewmodel/RegistrationViewModel.dart';
 import 'package:ltcapp/features/vehiclebookout/viewmodel/VehicleBookOutViewModel.dart';
@@ -20,7 +19,6 @@ import 'core/services/permissions.dart';
 //void main() => runApp(MyApp());
 
 DatabaseHandler personnelDBHandle = new DatabaseHandler();
-//FullDetailSet fDSTemp;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -2,10 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ltcapp/features/registration/model/individual_identity.dart';
 import 'package:ltcapp/main.dart';
+import 'package:ltcapp/newdbutils/database_connector.dart';
 
 class RegistrationViewModel with ChangeNotifier {
-  ///Sign Up Page Controllers
+  DatabaseHandler db = DatabaseHandler();
 
+
+  ///Sign Up Page Controllers
   final signUpFormKey = GlobalKey<FormState>();
   final nameController = TextEditingController();
   final nricController = TextEditingController();
@@ -155,6 +158,8 @@ class RegistrationViewModel with ChangeNotifier {
   otherSignUpValidation(BuildContext context) {
     if (otherRegFormKey.currentState.validate()) {
       otherRegFormKey.currentState.save();
+      ///Last page -> Create user
+      db.createUserAccount(rank, fullName, nricLast4Digits, fullHomeAddress, handphoneNumber, homephoneNumber, personalEmail, dateOfBirth, dateOfEnlistment, dateOfORD, dateOfPostIn, pesType, religion, race, bloodGroup, drugAllergy, foodAllergy, NOKDetailFullName, NOKDetailContactNumber, NOKDetailFullAddress, vocationType, stayInStayOut, medicalConditions, trainingFrame, trainingPeriod, passAttempts, militaryLicenseNo, militaryLicenseType, militaryLicenseDateOfIssue, LTCTraining, drivingCategory, educationLevel, streamCourseName, ccaOptional, schName, hobbiesInterest, civilianLicenseType, civilianLicenseNumber, civilianLicenseDateOfIssue, hasDoneDefensiveCourse, hasPersonalVehicle, personalVehiclePlateNumber, tShirtSize, no3SizeUpperTorso, no3SizeWaist, no3SizeShoes, username, password, permissionsLevel, remarks)
 
 
       Navigator.pushNamed(context, '/');
