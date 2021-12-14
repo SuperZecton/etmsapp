@@ -20,7 +20,7 @@ class RegistrationViewModel with ChangeNotifier {
 
   final drugAllergyController = TextEditingController();
   final foodAllergyController = TextEditingController();
-  final nokController = TextEditingController();
+  final nokController = TextEditingController(); // full name
   final nokAddressController = TextEditingController();
   final nokNumberController = TextEditingController();
 
@@ -150,7 +150,7 @@ class RegistrationViewModel with ChangeNotifier {
   final otherRegFormKey = GlobalKey<FormState>();
 
   final hobbiesController = TextEditingController();
-  final civilianLicenseController = TextEditingController();
+  final civilianLicenseController = TextEditingController(); // class 3 / 4
   final civilianLicenseNoController = TextEditingController();
   final civilianLicenseDOIController = TextEditingController();
   final personalVehicleController = TextEditingController();
@@ -159,7 +159,7 @@ class RegistrationViewModel with ChangeNotifier {
     if (otherRegFormKey.currentState.validate()) {
       otherRegFormKey.currentState.save();
       ///Last page -> Create user
-      db.createUserAccount(rank, fullName, nricLast4Digits, fullHomeAddress, handphoneNumber, homephoneNumber, personalEmail, dateOfBirth, dateOfEnlistment, dateOfORD, dateOfPostIn, pesType, religion, race, bloodGroup, drugAllergy, foodAllergy, NOKDetailFullName, NOKDetailContactNumber, NOKDetailFullAddress, vocationType, stayInStayOut, medicalConditions, trainingFrame, trainingPeriod, passAttempts, militaryLicenseNo, militaryLicenseType, militaryLicenseDateOfIssue, LTCTraining, drivingCategory, educationLevel, streamCourseName, ccaOptional, schName, hobbiesInterest, civilianLicenseType, civilianLicenseNumber, civilianLicenseDateOfIssue, hasDoneDefensiveCourse, hasPersonalVehicle, personalVehiclePlateNumber, tShirtSize, no3SizeUpperTorso, no3SizeWaist, no3SizeShoes, username, password, permissionsLevel, remarks)
+      db.createUserAccount('', nameController.text, nricController.text, addressController.text, numberController.text, homeNumberController.text, emailController.text, dobController.text, doeController.text, ordController.text, dopController.text, currentPESValue.toString(), currentReligionValue.toString(), currentRaceValue.toString(), currentBloodValue.toString(), drugAllergyController.text, foodAllergyController.text, nokController.text, nokNumberController.text, nokAddressController.text, currentVocationValue.toString(), '', medicalConditionController.text, trgFrameController.text, trgPeriodController.text, noAttemptsController.text, militaryLicenseController.text, militaryLicenseTypeController.text, doiController.text, '', '', educationLevelController.text, streamCourseController.text, ccaController.text, schoolController.text, hobbiesController.text, civilianLicenseController.text, civilianLicenseNoController.text, civilianLicenseDOIController.text, '', personalVehicleController.text, '', '', '', '', '', 'username', passwordController.text, '', '');
 
 
       Navigator.pushNamed(context, '/');
