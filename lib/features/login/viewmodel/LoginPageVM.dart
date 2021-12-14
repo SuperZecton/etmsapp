@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/features/login/view/widgets/LoadingIndicator.dart';
 import 'package:ltcapp/newdbutils/database_connector.dart';
-
+import 'package:ltcapp/features/login/model/CurrentSession.dart';
+import 'package:ltcapp/core/config/globals.dart';
 class LoginPageViewModel extends ChangeNotifier {
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
@@ -13,9 +14,13 @@ class LoginPageViewModel extends ChangeNotifier {
   DatabaseHandler db = DatabaseHandler();
 
   Future verifyLoginData(BuildContext context) async {
-    bool loginCreds;
-    loginCreds = await db.verifyLoginCreds(user, password);
-    if (loginCreds == true) {
+    bool loginCredentials;
+    loginCredentials = await db.verifyLoginCreds(user, password);
+    if (loginCredentials == true) {
+      /// Sets global user
+      CurrentUser.instance.username = user;
+      CurrentUser.instance.password = password;
+      /// Redirects user to home page
       Navigator.pushNamed(context, '/home');
     } else {
       showDialog(

@@ -1,7 +1,7 @@
 //import 'dart:html';
 
 import 'package:ltcapp/features/registration/model/individual_identity.dart';
-import 'package:ltcapp/features/login/model/login_credentials.dart';
+import 'package:ltcapp/features/login/model/CurrentSession.dart';
 import 'dart:async';
 import 'package:path/path.dart';
 import 'dart:convert';

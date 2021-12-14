@@ -2,13 +2,13 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:ltcapp/features/home/view/pages/HomePage.dart';
+import 'package:ltcapp/features/login/model/CurrentSession.dart';
 import 'package:provider/provider.dart';
+import 'package:ltcapp/main.dart';
 import 'package:url_launcher/url_launcher.dart';
-
+import 'package:ltcapp/features/login/viewmodel/LoginPageVM.dart';
 class HomePageViewModel extends ChangeNotifier {
-  ///TODO implement database getters here thx aaron <3
-  final name = '';
-  final nric = '';
+  final username = CurrentUser.instance.username;
 
   /// CampDropDown
   static final List<String> campDropdownItems = [
@@ -73,4 +73,6 @@ class HomePageViewModel extends ChangeNotifier {
       throw "Error launching $url";
     }
   }
+
+
 }
