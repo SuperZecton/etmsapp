@@ -6,8 +6,10 @@ import 'package:ltcapp/newdbutils/database_connector.dart';
 import 'package:ltcapp/features/login/model/CurrentSession.dart';
 import 'package:ltcapp/core/config/globals.dart';
 class LoginPageViewModel extends ChangeNotifier {
-  final usernameController = TextEditingController();
-  final passwordController = TextEditingController();
+  static String rememberedUsername = "test";
+  static String rememberedPassword = "test";
+  final usernameController = TextEditingController(text: rememberedUsername);
+  final passwordController = TextEditingController(text: rememberedPassword);
 
   String get user => usernameController.text;
   String get password => passwordController.text;
