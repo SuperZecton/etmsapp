@@ -30,7 +30,13 @@ void main() async {
   Permissions lol = Permissions();
   var testPermissions = await lol.getPermissionLevel("damonlim");
   print(testPermissions);
-
+  var notquitenow = DateTime.now();
+  var now = DateTime.parse(notquitenow.toString()+'-08:00');
+  var date = now.day.toString().padLeft(2, '0') + "/" + now.month.toString().padLeft(2, '0') + "/" + now.year.toString();
+  print(date);
+  var time = now.hour.toString().padLeft(2, '0') + now.minute.toString().padLeft(2, '0') + now.second.toString().padLeft(2, '0');
+  print(time);
+  personnelDBHandle.findLoginEntry("android1123");
   runApp(MyApp());
 }
 

@@ -6,6 +6,7 @@ import 'package:ltcapp/newdbutils/database_connector.dart';
 import 'package:ltcapp/features/login/model/CurrentSession.dart';
 import 'package:ltcapp/core/config/globals.dart';
 class LoginPageViewModel extends ChangeNotifier {
+  DatabaseHandler db = DatabaseHandler();
   static String rememberedUsername = "test";
   static String rememberedPassword = "test";
   final usernameController = TextEditingController(text: rememberedUsername);
@@ -13,7 +14,6 @@ class LoginPageViewModel extends ChangeNotifier {
 
   String get user => usernameController.text;
   String get password => passwordController.text;
-  DatabaseHandler db = DatabaseHandler();
 
   Future verifyLoginData(BuildContext context) async {
     bool loginCredentials;
