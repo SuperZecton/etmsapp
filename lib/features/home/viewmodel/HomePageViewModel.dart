@@ -1,14 +1,24 @@
-
-
 import 'package:flutter/cupertino.dart';
+import 'package:ltcapp/features/home/model/HomePageModel.dart';
 import 'package:ltcapp/features/home/view/pages/HomePage.dart';
 import 'package:ltcapp/features/login/model/CurrentSession.dart';
 import 'package:provider/provider.dart';
 import 'package:ltcapp/main.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:ltcapp/features/login/viewmodel/LoginPageVM.dart';
+
 class HomePageViewModel extends ChangeNotifier {
+
   final username = CurrentUser.instance.username;
+
+  HomePageModel model = HomePageModel();
+  String fullName;
+  fullNameGetter(){
+    print("FullNameGetter debug test");
+    fullName = model.getName();
+  }
+  HomePageViewModel(){
+    fullNameGetter();
+  }
 
   /// CampDropDown
   static final List<String> campDropdownItems = [
@@ -57,16 +67,20 @@ class HomePageViewModel extends ChangeNotifier {
       throw "Could not launch $url";
     }
   }
+
   safeEntryURLPush() async {
-    const url = "https://docs.google.com/forms/d/e/1FAIpQLSfOG1IHwj2B9zXGpRrpjdb5quiKBEmhyUF3-QvhQdS0o2C60Q/viewform";
+    const url =
+        "https://docs.google.com/forms/d/e/1FAIpQLSfOG1IHwj2B9zXGpRrpjdb5quiKBEmhyUF3-QvhQdS0o2C60Q/viewform";
     if (await canLaunch(url)) {
       launch(url, forceWebView: true, enableJavaScript: true);
-    } else{
+    } else {
       throw "Error launching $url";
     }
   }
+
   shroFormURLPush() async {
-    const url = "https://docs.google.com/forms/d/e/1FAIpQLSdaPpHhO8dO2qnyLonsLO41b1eTDfZdkwzmBksOQKbLNrgcTg/viewform";
+    const url =
+        "https://docs.google.com/forms/d/e/1FAIpQLSdaPpHhO8dO2qnyLonsLO41b1eTDfZdkwzmBksOQKbLNrgcTg/viewform";
     if (await canLaunch(url)) {
       launch(url, forceWebView: true, enableJavaScript: true);
     } else {

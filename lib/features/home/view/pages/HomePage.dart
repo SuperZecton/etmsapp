@@ -75,7 +75,7 @@ class _HomePageState extends State<HomePage> {
                                 Container(
                                   padding: EdgeInsets.only(right: 10.0),
                                   child: Text(
-                                    vm.username,
+                                    vm.fullName,
                                     textAlign: TextAlign.left,
                                     style: TextStyle(
                                       fontSize: 16.0,
