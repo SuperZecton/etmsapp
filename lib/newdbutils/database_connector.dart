@@ -5,34 +5,28 @@ import 'package:ltcapp/features/login/model/CurrentSession.dart';
 import 'dart:async';
 import 'package:path/path.dart';
 import 'dart:convert';
-import 'package:sqljocky5/sqljocky.dart';
-import 'package:sqljocky5/results/results.dart';
+import 'package:postgres/postgres.dart';
 //import 'package:dart_mssql/dart_mssql.dart';
 
 class DatabaseHandler {
   DatabaseHandler();
 
   Future<void> DBFunctionTemplate(String value) async {
-    // In MYSQL, use ` (backticks) for Columns Eg. `Username`
+    // In PostgreSQL, use " (double quotes) for Columns Eg. "Username"
     // use ' (apostrophe) for Values Eg. 'elephant123'
-    // End MYSQL Query with ;
+    // End PostgreSQL Query with ;
 
-    var settings = new ConnectionSettings(
-        user: 'LTCAppuser',
-        password: 'LTCuser123',
-        host: '116.89.31.147',
-        port: 3306,
-        db: 'test');
-    var conn = await MySqlConnection.connect(settings);
+    var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC", username: "LTCAppUser", password: "LTCuser123");
+    await connection.open();
     var querystring =
-        "SELECT `DeviceIdentifier` FROM RememberLogin WHERE `Username` = '" + value + "';";
+        'SELECT "fullName" FROM Users WHERE'" username = '" + value + "';";
     print("Query String: " + querystring);
-    Results results = await (await conn.execute(querystring)).deStream();
+    var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
     value = results.toString();
-    conn.close();
+    connection.close();
   }
-
+/*
   Future<bool> verifyLoginCreds(String username, String pass) async {
     var settings = new ConnectionSettings(
         user: 'LTCAppuser',
@@ -305,5 +299,5 @@ class DatabaseHandler {
       return true;
     }
   }
-
+*/
 }

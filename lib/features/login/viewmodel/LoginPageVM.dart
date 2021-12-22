@@ -14,7 +14,7 @@ class LoginPageViewModel extends ChangeNotifier {
 
   String get user => usernameController.text;
   String get password => passwordController.text;
-
+/*
   Future verifyLoginData(BuildContext context) async {
     bool loginCredentials;
     loginCredentials = await db.verifyLoginCreds(user, password);
@@ -58,7 +58,7 @@ class LoginPageViewModel extends ChangeNotifier {
           });
     }
   }
-
+*/
   void onLoading(BuildContext context) {
     showDialog(
         context: context,

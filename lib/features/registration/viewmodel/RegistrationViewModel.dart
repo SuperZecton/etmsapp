@@ -153,7 +153,7 @@ class RegistrationViewModel with ChangeNotifier {
   final civilianLicenseNoController = TextEditingController();
   final civilianLicenseDOIController = TextEditingController();
   final personalVehicleController = TextEditingController();
-
+/*
   otherSignUpValidation(BuildContext context) {
     if (otherRegFormKey.currentState.validate()) {
       otherRegFormKey.currentState.save();
@@ -228,5 +228,5 @@ class RegistrationViewModel with ChangeNotifier {
             );
           });
     }
-  }
+  }*/
 }

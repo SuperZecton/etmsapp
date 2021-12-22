@@ -7,7 +7,6 @@ import 'package:ltcapp/features/login/viewmodel/LoginPageVM.dart';
 import 'package:ltcapp/features/mileage/viewmodel/MileageViewModel.dart';
 import 'package:ltcapp/features/registration/viewmodel/RegistrationViewModel.dart';
 import 'package:ltcapp/features/vehiclebookout/viewmodel/VehicleBookOutViewModel.dart';
-import 'package:sqljocky5/sqljocky.dart';
 import 'package:ltcapp/newdbutils/database_connector.dart';
 import 'package:provider/provider.dart';
 import 'package:ltcapp/core/config/router.dart';
@@ -36,7 +35,8 @@ void main() async {
   print(date);
   var time = now.hour.toString().padLeft(2, '0') + now.minute.toString().padLeft(2, '0') + now.second.toString().padLeft(2, '0');
   print(time);
-  personnelDBHandle.findLoginEntry("android1123");
+//  personnelDBHandle.findLoginEntry("android1123");
+  personnelDBHandle.DBFunctionTemplate("damonlim");
   runApp(MyApp());
 }
 

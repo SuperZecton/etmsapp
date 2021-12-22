@@ -8,7 +8,7 @@ class Permissions{
 
     getPermissionLevel(String usernameValue){
       var permissionLevel;
-      permissionLevel = newDatabase.singleDataPull("Users", "username", usernameValue, "permissionLevel");
+      //permissionLevel = newDatabase.singleDataPull("Users", "username", usernameValue, "permissionLevel");
       return permissionLevel;
     }
 

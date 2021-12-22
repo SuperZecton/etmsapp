@@ -46,8 +46,8 @@ class _LoginPageState extends State<LoginPage> {
                         _passwordEntryField(),
                       ],
                     ),
-                    SizedBox(height: 20),
-                    _submitButton(),
+                    /*SizedBox(height: 20),
+                    _submitButton(),*/
                     Container(
                       padding: EdgeInsets.symmetric(vertical: 10),
                       alignment: Alignment.centerRight,
@@ -170,7 +170,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _submitButton() {
+  /*Widget _submitButton() {
     final vm = Provider.of<LoginPageViewModel>(context, listen: false);
     return InkWell(
         onTap: () {
@@ -192,7 +192,7 @@ class _LoginPageState extends State<LoginPage> {
             style: TextStyle(fontSize: 20, color: Colors.white),
           ),
         ));
-  }
+  }*/
 
   Widget _divider() {
     return Container(

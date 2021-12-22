@@ -71,7 +71,7 @@ class _OtherInfoRegistrationPageState extends State<OtherInfoRegistrationPage> {
                   SizedBox(
                     height: 20,
                   ),
-                  _submitButton(),
+                  //_submitButton(),
                   SizedBox(height: height * .14),
                 ],
               ),
@@ -98,7 +98,7 @@ class _OtherInfoRegistrationPageState extends State<OtherInfoRegistrationPage> {
     );
   }
 
-  Widget _submitButton() {
+  /*Widget _submitButton() {
     final viewModel = Provider.of<RegistrationViewModel>(context, listen: false);
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 40),
@@ -119,5 +119,5 @@ class _OtherInfoRegistrationPageState extends State<OtherInfoRegistrationPage> {
         ),
       ),
     );
-  }
+  }*/
 }
