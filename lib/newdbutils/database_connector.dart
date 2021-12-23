@@ -26,22 +26,17 @@ class DatabaseHandler {
     value = results.toString();
     connection.close();
   }
-/*
+
   Future<bool> verifyLoginCreds(String username, String pass) async {
-    var settings = new ConnectionSettings(
-        user: 'LTCAppuser',
-        password: 'LTCuser123',
-        host: '116.89.31.147',
-        port: 3306,
-        db: 'test');
-    var conn = await MySqlConnection.connect(settings);
+    var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC", username: "LTCAppUser", password: "LTCuser123");
+    await connection.open();
     var querystring =
-        "SELECT `password` FROM Users WHERE `username` = '" + username + "';";
+        'SELECT "password" FROM Users WHERE "username" = '"'" + username + "';";
     print("Query String: " + querystring);
-    Results pwfromdb = await (await conn.execute(querystring)).deStream();
-    print("Database Result: " + pwfromdb.toString());
-    conn.close();
-    if (pwfromdb.toString() == "([" + pass + "])") {
+    var results = await connection.query(querystring);
+    print("Database Result: " + results.toString());
+    connection.close();
+    if (results.toString() == "[[" + pass + "]]") {
       return true;
     } else {
       return false;
@@ -100,37 +95,27 @@ class DatabaseHandler {
       String permissionsLevel,
       String remarks) async {
 
-    var settings = new ConnectionSettings(
-        user: 'LTCAppuser',
-        password: 'LTCuser123',
-        host: '116.89.31.147',
-        port: 3306,
-        db: 'test');
-    var conn = await MySqlConnection.connect(settings);
+    var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC", username: "LTCAppUser", password: "LTCuser123");
+    await connection.open();
     var querystring =
-        "INSERT INTO Users (`UUID`, `rank`, `fullName`, `nricLast4Digits`, `fullHomeAddress`, `handphoneNumber`, `homephoneNumber`, `personalEmail`, `dateOfBirth`, `dateOfEnlistment`, `dateOfORD`, `dateOfPostIn`, `pesType`, `religion`, `race`, `bloodGroup`, `drugAllergy`, `foodAllergy`, `NOKDetailFullName`, `NOKDetailContactNumber`, `NOKDetailFullAddress`, `vocationType`, `stayInStayOut`, `medicalConditions`, `trainingFrame`, `trainingPeriod`, `passAttempts`, `militaryLicenseNo`, `militaryLicenseType`, `militaryLicenseDateOfIssue`, `LTCTraining`, `drivingCategory`, `educationLevel`, `streamCourseName`, `ccaOptional`, `schName`, `hobbiesInterest`, `civilianLicenseType`, `civilianLicenseNumber`, `civilianLicenseDateOfIssue`, `hasDoneDefensiveCourse`, `hasPersonalVehicle`, `personalVehiclePlateNumber`, `tShirtSize`, `no3SizeUpperTorso`, `no3SizeWaist`, `no3SizeShoes`, `username`, `password`, `permissionLevel`, `remarks`) "
-        "VALUES (UUID(),'"+rank+"','"+fullName+"','"+nricLast4Digits+"','"+fullHomeAddress+"','"+handphoneNumber+"','"+homephoneNumber+"','"+personalEmail+"','"+dateOfBirth+"','"+dateOfEnlistment+"','"+dateOfORD+"','"+dateOfPostIn+"','"+pesType+"','"+religion+"','"+race+"','"+bloodGroup+"','"+drugAllergy+"','"+foodAllergy+"','"+NOKDetailFullName+"','"+NOKDetailContactNumber+"','"+NOKDetailFullAddress+"','"+vocationType+"','"+stayInStayOut+"','"+medicalConditions+"','"+trainingFrame+"','"+trainingPeriod+"','"+passAttempts+"','"+militaryLicenseNo+"','"+militaryLicenseType+"','"+militaryLicenseDateOfIssue+"','"+LTCTraining+"','"+drivingCategory+"','"+educationLevel+"','"+streamCourseName+"','"+ccaOptional+"','"+schName+"','"+hobbiesInterest+"','"+civilianLicenseType+"','"+civilianLicenseNumber+"','"+civilianLicenseDateOfIssue+"','"+hasDoneDefensiveCourse+"','"+hasPersonalVehicle+"','"+personalVehiclePlateNumber+"','"+tShirtSize+"','"+no3SizeUpperTorso+"','"+no3SizeWaist+"','"+no3SizeShoes+"','"+username+"','"+password+"','"+permissionsLevel+"','"+remarks+"');";
+        'INSERT INTO Users ("UUID", "rank", "fullName", "nricLast4Digits", "fullHomeAddress", "handphoneNumber", "homephoneNumber", "personalEmail", "dateOfBirth", "dateOfEnlistment", "dateOfORD", "dateOfPostIn", "pesType", "religion", "race", "bloodGroup", "drugAllergy", "foodAllergy", "NOKDetailFullName", "NOKDetailContactNumber", "NOKDetailFullAddress", "vocationType", "stayInStayOut", "medicalConditions", "trainingFrame", "trainingPeriod", "passAttempts", "militaryLicenseNo", "militaryLicenseType", "militaryLicenseDateOfIssue", "LTCTraining", "drivingCategory", "educationLevel", "streamCourseName", "ccaOptional", "schName", "hobbiesInterest", "civilianLicenseType", "civilianLicenseNumber", "civilianLicenseDateOfIssue", "hasDoneDefensiveCourse", "hasPersonalVehicle", "personalVehiclePlateNumber", "tShirtSize", "no3SizeUpperTorso", "no3SizeWaist", "no3SizeShoes", "username", "password", "permissionLevel", "remarks") '
+        "VALUES (uuid_generate_v4(),'"+rank+"','"+fullName+"','"+nricLast4Digits+"','"+fullHomeAddress+"','"+handphoneNumber+"','"+homephoneNumber+"','"+personalEmail+"','"+dateOfBirth+"','"+dateOfEnlistment+"','"+dateOfORD+"','"+dateOfPostIn+"','"+pesType+"','"+religion+"','"+race+"','"+bloodGroup+"','"+drugAllergy+"','"+foodAllergy+"','"+NOKDetailFullName+"','"+NOKDetailContactNumber+"','"+NOKDetailFullAddress+"','"+vocationType+"','"+stayInStayOut+"','"+medicalConditions+"','"+trainingFrame+"','"+trainingPeriod+"','"+passAttempts+"','"+militaryLicenseNo+"','"+militaryLicenseType+"','"+militaryLicenseDateOfIssue+"','"+LTCTraining+"','"+drivingCategory+"','"+educationLevel+"','"+streamCourseName+"','"+ccaOptional+"','"+schName+"','"+hobbiesInterest+"','"+civilianLicenseType+"','"+civilianLicenseNumber+"','"+civilianLicenseDateOfIssue+"','"+hasDoneDefensiveCourse+"','"+hasPersonalVehicle+"','"+personalVehiclePlateNumber+"','"+tShirtSize+"','"+no3SizeUpperTorso+"','"+no3SizeWaist+"','"+no3SizeShoes+"','"+username+"','"+password+"','"+permissionsLevel+"','"+remarks+"');";
     print("Query String: " + querystring);
-    Results results = await (await conn.execute(querystring)).deStream();
+    var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
-    conn.close();
+    connection.close();
   }
 
   Future<String> singleDataPull(String table, String collumIdentifier, String collumIdentifierValue, String neededCollum) async {
-    var settings = new ConnectionSettings(
-        user: 'LTCAppuser',
-        password: 'LTCuser123',
-        host: '116.89.31.147',
-        port: 3306,
-        db: 'test');
-    var conn = await MySqlConnection.connect(settings);
+    var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC", username: "LTCAppUser", password: "LTCuser123");
+    await connection.open();
     var querystring =
-        "SELECT `" + neededCollum + "` FROM " + table + " WHERE `" + collumIdentifier + "` = '" + collumIdentifierValue + "';";
+        'SELECT "'+ neededCollum +'" FROM ' + table + ' WHERE "' + collumIdentifier + '"'" = '" + collumIdentifierValue + "';";
     print("Query String: " + querystring);
-    Results results = await (await conn.execute(querystring)).deStream();
+    var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
     var rawValue = results.toString();
-    conn.close();
+    connection.close();
     var value = rawValue.substring(2, rawValue.length - 2);
     return value;
   }
@@ -147,36 +132,26 @@ class DatabaseHandler {
       String additionalPlate,
       String additionalRemarks) async {
 
-    var settings = new ConnectionSettings(
-        user: 'LTCAppuser',
-        password: 'LTCuser123',
-        host: '116.89.31.147',
-        port: 3306,
-        db: 'test');
-    var conn = await MySqlConnection.connect(settings);
+    var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC", username: "LTCAppUser", password: "LTCuser123");
+    await connection.open();
     var querystring =
-        "INSERT INTO Vehicles (`UUID`, `vehicleNo`, `carModel`, `classType`, `status`, `lastAVIDate`, `nextAVIDate`, `lastWPTDate`, `nextWPTDate`, `additionalPlate`, additionalRemarks`) "
-        "VALUES (UUID(),'"+vehicleNo+"','"+carModel+"','"+classType+"','"+status+"','"+lastAVIDate+"','"+nextAVIDate+"','"+lastWPTDate+"','"+nextWPTDate+"','"+additionalPlate+"','"+additionalRemarks+"');";
+        'INSERT INTO Vehicles ("UUID", "vehicleNo", "carModel", "classType", "status", "lastAVIDate", "nextAVIDate", "lastWPTDate", "nextWPTDate", "additionalPlate", "additionalRemarks") '
+        "VALUES (uuid_generate_v4(),'"+vehicleNo+"','"+carModel+"','"+classType+"','"+status+"','"+lastAVIDate+"','"+nextAVIDate+"','"+lastWPTDate+"','"+nextWPTDate+"','"+additionalPlate+"','"+additionalRemarks+"');";
     print("Query String: " + querystring);
-    Results results = await (await conn.execute(querystring)).deStream();
+    var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
-    conn.close();
+    connection.close();
   }
 
   Future<void> editSingleDataEntry(String table, String collumIdentifier, String collumIdentifierValue, String editingCollum, String editingCollumValue) async {
-    var settings = new ConnectionSettings(
-        user: 'LTCAppuser',
-        password: 'LTCuser123',
-        host: '116.89.31.147',
-        port: 3306,
-        db: 'test');
-    var conn = await MySqlConnection.connect(settings);
+    var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC", username: "LTCAppUser", password: "LTCuser123");
+    await connection.open();
     var querystring =
-        "UPDATE " + table + " SET `" + editingCollum + "` = '" + editingCollumValue + "' WHERE `" + collumIdentifier + "` = '" + collumIdentifierValue + "';";
+        "UPDATE " + table + ' SET "' + editingCollum + '" = '"'" + editingCollumValue + "' WHERE "'"' + collumIdentifier + '"'" = '" + collumIdentifierValue + "';";
     print("Query String: " + querystring);
-    Results results = await (await conn.execute(querystring)).deStream();
+    var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
-    conn.close();
+    connection.close();
   }
 
   Future<void> createLoginEntry(
@@ -184,22 +159,17 @@ class DatabaseHandler {
       String username,
       String password) async {
 
-    var settings = new ConnectionSettings(
-        user: 'LTCAppuser',
-        password: 'LTCuser123',
-        host: '116.89.31.147',
-        port: 3306,
-        db: 'test');
-    var conn = await MySqlConnection.connect(settings);
+    var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC", username: "LTCAppUser", password: "LTCuser123");
+    await connection.open();
     var querystring =
-        "INSERT INTO RememberLogin (`UUID`, `deviceIdentifier`, `username`, `password`) "
-            "VALUES (UUID(),'"+deviceIdentifier+"','"+username+"','"+password+"');";
+        'INSERT INTO RememberLogin ("UUID", "deviceIdentifier", "username", "password") '
+            "VALUES (uuid_generate_v4(),'"+deviceIdentifier+"','"+username+"','"+password+"');";
     print("Query String: " + querystring);
-    Results results = await (await conn.execute(querystring)).deStream();
+    var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
-    conn.close();
+    connection.close();
   }
-
+/*
   Future<bool> checkLoginEntry(
       String deviceIdentifier,
       String username) async {
@@ -212,7 +182,7 @@ class DatabaseHandler {
         db: 'test');
     var conn = await MySqlConnection.connect(settings);
     var querystring =
-        "SELECT `username` FROM RememberLogin WHERE `deviceIdentifier` = '" + deviceIdentifier + "';";
+        "SELECT "username" FROM RememberLogin WHERE "deviceIdentifier" = '" + deviceIdentifier + "';";
     print("Query String: " + querystring);
     Results results = await (await conn.execute(querystring)).deStream();
     print("Database Result: " + results.toString());
@@ -236,7 +206,7 @@ class DatabaseHandler {
         db: 'test');
     var conn = await MySqlConnection.connect(settings);
     var querystring =
-        "SELECT * FROM RememberLogin WHERE `deviceIdentifier` = '" + deviceIdentifier + "';";
+        "SELECT * FROM RememberLogin WHERE "deviceIdentifier" = '" + deviceIdentifier + "';";
     print("Query String: " + querystring);
     Results results = await (await conn.execute(querystring)).deStream();
     print("Database Result: " + results.toString());
@@ -248,7 +218,7 @@ class DatabaseHandler {
       var storingDate = [];
       var storingTime = [];
       var querystring =
-          "SELECT `date` FROM RememberLogin WHERE `deviceIdentifier` = '" + deviceIdentifier + "';";
+          "SELECT "date" FROM RememberLogin WHERE "deviceIdentifier" = '" + deviceIdentifier + "';";
       print("Query String: " + querystring);
       Results results = await (await conn.execute(querystring)).deStream();
       results.forEach((row) {
@@ -268,7 +238,7 @@ class DatabaseHandler {
           else if (storingDate[j].compareTo(storingDate[j+1]) == 0){
             var samedate = storingDate[j].day.toString() + "/" + storingDate[j].month.toString() + "/" + storingDate[j].year.toString();
             var querystring =
-                "SELECT `time` FROM RememberLogin WHERE `deviceIdentifier` = '" + deviceIdentifier + "' AND `date` = '" + samedate + "';";
+                "SELECT "time" FROM RememberLogin WHERE "deviceIdentifier" = '" + deviceIdentifier + "' AND "date" = '" + samedate + "';";
             print("Query String: " + querystring);
             Results results = await (await conn.execute(querystring)).deStream();
             results.forEach((row) {
