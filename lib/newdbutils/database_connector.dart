@@ -169,25 +169,20 @@ class DatabaseHandler {
     print("Database Result: " + results.toString());
     connection.close();
   }
-/*
+
   Future<bool> checkLoginEntry(
       String deviceIdentifier,
       String username) async {
 
-    var settings = new ConnectionSettings(
-        user: 'LTCAppuser',
-        password: 'LTCuser123',
-        host: '116.89.31.147',
-        port: 3306,
-        db: 'test');
-    var conn = await MySqlConnection.connect(settings);
+    var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC", username: "LTCAppUser", password: "LTCuser123");
+    await connection.open();
     var querystring =
-        "SELECT "username" FROM RememberLogin WHERE "deviceIdentifier" = '" + deviceIdentifier + "';";
+        'SELECT "username" FROM RememberLogin WHERE "deviceIdentifier" = '"'" + deviceIdentifier + "';";
     print("Query String: " + querystring);
-    Results results = await (await conn.execute(querystring)).deStream();
+    var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
-    conn.close();
-    if (results.toString() == "(["+username+"])"){
+    connection.close();
+    if (results.toString() == "[["+username+"]]"){
       return false;
     }
     else{
@@ -195,32 +190,27 @@ class DatabaseHandler {
     }
   }
 
-  Future<bool> findLoginEntry(
+  Future<List<dynamic>> findLoginEntry( //This Function takes in deviceIdentifier and returns username and password
       String deviceIdentifier) async {
 
-    var settings = new ConnectionSettings(
-        user: 'LTCAppuser',
-        password: 'LTCuser123',
-        host: '116.89.31.147',
-        port: 3306,
-        db: 'test');
-    var conn = await MySqlConnection.connect(settings);
+    var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC", username: "LTCAppUser", password: "LTCuser123");
+    await connection.open();
     var querystring =
-        "SELECT * FROM RememberLogin WHERE "deviceIdentifier" = '" + deviceIdentifier + "';";
+        'SELECT * FROM RememberLogin WHERE "deviceIdentifier" = '"'" + deviceIdentifier + "';";
     print("Query String: " + querystring);
-    Results results = await (await conn.execute(querystring)).deStream();
+    var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
     if (results.toString() == "([])"){
       print("No Entry with match Device Identifier");
-      return false;
+      return [];
     }
     else{
       var storingDate = [];
       var storingTime = [];
       var querystring =
-          "SELECT "date" FROM RememberLogin WHERE "deviceIdentifier" = '" + deviceIdentifier + "';";
+          'SELECT "date" FROM RememberLogin WHERE "deviceIdentifier" = '"'" + deviceIdentifier + "';";
       print("Query String: " + querystring);
-      Results results = await (await conn.execute(querystring)).deStream();
+      List<dynamic> results = await connection.query(querystring);
       results.forEach((row) {
         print("Database Result: " + row.toString());
         var rawdate = row.toString().substring(1, row.toString().length - 1);
@@ -235,39 +225,45 @@ class DatabaseHandler {
             storingDate[j] = storingDate[j+1];
             storingDate[j+1] = temp;
           }
-          else if (storingDate[j].compareTo(storingDate[j+1]) == 0){
-            var samedate = storingDate[j].day.toString() + "/" + storingDate[j].month.toString() + "/" + storingDate[j].year.toString();
-            var querystring =
-                "SELECT "time" FROM RememberLogin WHERE "deviceIdentifier" = '" + deviceIdentifier + "' AND "date" = '" + samedate + "';";
-            print("Query String: " + querystring);
-            Results results = await (await conn.execute(querystring)).deStream();
-            results.forEach((row) {
-              print("Database Result: " + row.toString());
-              var rawtime = row.toString().substring(1, row.toString().length - 1);
-              var t1 = DateTime.utc(2021, 12, 18, int.parse(rawtime.substring(0, rawtime.length -4)), int.parse(rawtime.substring(2, rawtime.length -2)), int.parse(rawtime.substring(4, rawtime.length)));
-              storingTime.add(t1);
-            });
-            for (int x = 0; x < storingTime.length - 1; x++) {
-              for (int y = 0; y < storingTime.length - x - 1; y++) {
-                if (storingTime[y].compareTo(storingTime[y + 1]) < 0) {
-                  DateTime temp = storingTime[y];
-                  storingTime[y] = storingTime[y + 1];
-                  storingTime[y + 1] = temp;
-                }
-              }
+        }
+      }
+      print(storingDate);
+      if (storingDate[0] == storingDate[1]){
+        var samedate = storingDate[0].day.toString() + "/" + storingDate[0].month.toString() + "/" + storingDate[0].year.toString();
+        var querystring =
+            'SELECT "time" FROM RememberLogin WHERE "deviceIdentifier" = '"'" + deviceIdentifier + "'"' AND "date" = '"'" + samedate + "';";
+        print("Query String: " + querystring);
+        List<dynamic> results = await connection.query(querystring);
+        results.forEach((row) {
+          print("Database Result: " + row.toString());
+          var rawtime = row.toString().substring(1, row.toString().length - 1);
+          var t1 = DateTime.utc(2021, 12, 18, int.parse(rawtime.substring(0, rawtime.length -4)), int.parse(rawtime.substring(2, rawtime.length -2)), int.parse(rawtime.substring(4, rawtime.length)));
+          storingTime.add(t1);
+        });
+        for (int x = 0; x < storingTime.length - 1; x++) {
+          for (int y = 0; y < storingTime.length - x - 1; y++) {
+            if (storingTime[y].compareTo(storingTime[y + 1]) < 0) {
+              DateTime temp = storingTime[y];
+              storingTime[y] = storingTime[y + 1];
+              storingTime[y + 1] = temp;
             }
           }
         }
       }
-      print(storingDate);
       print(storingTime);
-      if (storingDate[0] == storingDate[1]){
-        //storingTime[0];
-      }
-      /*var tempnow = DateTime.now().toUtc();
-      var currentdate = DateTime.utc(temp.year, temp.month, temp.day);*/
-      return true;
+      var entrydate = storingDate[0].day.toString().padLeft(2, '0') + "/" + storingDate[0].month.toString().padLeft(2, '0') + "/" + storingDate[0].year.toString();
+      var entrytime = storingTime[0].hour.toString().padLeft(2, '0') + storingTime[0].hour.toString().padLeft(2, '0') + storingTime[0].hour.toString().padLeft(2, '0');
+      var querystring1 =
+          'SELECT "username", "password" FROM RememberLogin WHERE "deviceIdentifier" = '"'" + deviceIdentifier + "'"' AND "date" = '"'" + entrydate + "'"' AND "time" = '"'" + entrytime + "';";
+      print("Query String: " + querystring1);
+      List<dynamic> results1 = await connection.query(querystring);
+      print("Database Result: " + results1.toString());
+      var userpass = [];
+      results1.forEach((row) {
+        userpass.add(row);
+      });
+      return userpass;
     }
   }
-*/
+
 }
