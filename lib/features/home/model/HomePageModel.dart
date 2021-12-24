@@ -14,7 +14,7 @@ class HomePageModel {
       return "Error Getting Data";
     }
   }*/
-  String nameName;
+  late String nameName;
   String getName(){
     return nameName;
   }

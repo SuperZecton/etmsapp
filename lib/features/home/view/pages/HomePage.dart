@@ -336,7 +336,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _buildTile(Widget child, {Function() onTap}) {
+  Widget _buildTile(Widget child, {Function() ?onTap}) {
     return Material(
       
         elevation: 12.0,

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class TopBackButton extends StatelessWidget {
-  const TopBackButton({Key key, this.color = Colors.white, this.padding}) : super(key: key);
-  final EdgeInsets padding;
+  const TopBackButton({Key? key, this.color = Colors.white, this.padding}) : super(key: key);
+  final EdgeInsets? padding;
   final Color color;
   @override
   Widget build(BuildContext context) {

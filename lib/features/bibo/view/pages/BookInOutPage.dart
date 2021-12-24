@@ -69,6 +69,7 @@ class _BookInOutPageState extends State<BookInOutPage> {
                             actions: <Widget>[
                               IconButton(
                                 icon: Icon(Icons.list),
+                                onPressed:(){},
                               )
                             ],
                           ),
@@ -76,8 +77,6 @@ class _BookInOutPageState extends State<BookInOutPage> {
                             padding:
                                 EdgeInsets.only(left: 16, right: 16, top: 16),
                             child: TextFormField(
-                              validator: (val) =>
-                                  val.length == 4 ? null : 'Example: 123A',
                               decoration: InputDecoration(
                                 labelText: 'NRIC',
                                 hintText: 'Last 4 Digits only',
@@ -102,12 +101,12 @@ class _BookInOutPageState extends State<BookInOutPage> {
                                 child: DropdownButton(
                                     isDense: true,
                                     value: actualDropdown,
-                                    onChanged: (String value) => setState(() {
+                                    /*onChanged: (String value) => setState(() {
                                           actualDropdown = value;
                                           actualChart =
                                               chartDropdownItems.indexOf(
                                                   value); // Refresh the chart
-                                        }),
+                                        }),*/
                                     items: chartDropdownItems.map((String title) {
                                       return DropdownMenuItem(
                                         value: title,
