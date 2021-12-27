@@ -5,10 +5,17 @@ import 'package:ltcapp/features/login/view/widgets/LoadingIndicator.dart';
 import 'package:ltcapp/newdbutils/database_connector.dart';
 import 'package:ltcapp/features/login/model/CurrentSession.dart';
 import 'package:ltcapp/core/config/globals.dart';
+import 'package:ltcapp/utils/UUIDGetter.dart';
 class LoginPageViewModel extends ChangeNotifier {
+  LoginPageViewModel();
   DatabaseHandler db = DatabaseHandler();
-  static String rememberedUsername = "damonlim";
-  static String rememberedPassword = "pass1234";
+  deviceUUID dID =  deviceUUID();
+  if (db.findLoginEntry(dID.getUUID()) != []){
+    var usernpass = [];
+    usernpass =  db.findLoginEntry(dID.getUUID());
+  }
+  static String rememberedUsername = usernpass[0];
+  static String rememberedPassword = usernpass[1];
   final usernameController = TextEditingController(text: rememberedUsername);
   final passwordController = TextEditingController(text: rememberedPassword);
 
