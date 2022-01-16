@@ -16,8 +16,8 @@ import '../../../login/view/pages/WelcomePage.dart';
 
 //TODO Validate all fields, implement viewmodel for all signup pages, and clean up code
 class SignUpPage extends StatefulWidget {
-  SignUpPage({Key key, this.title}) : super(key: key);
-  final String title;
+  SignUpPage({Key? key, this.title}) : super(key: key);
+  final String? title;
   @override
   _SignUpPageState createState() => _SignUpPageState();
 }

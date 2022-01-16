@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 
 class DateTextField extends StatefulWidget {
   const DateTextField(this.mainText, this.icon, this.controller,
-      {Key key, this.helperText = ""})
+      {Key? key, this.helperText = ""})
       : super(key: key);
 
   final IconData icon;

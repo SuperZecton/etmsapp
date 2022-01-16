@@ -13,8 +13,8 @@ import '../../../../main.dart';
 
 
 class OtherInfoRegistrationPage extends StatefulWidget {
-  OtherInfoRegistrationPage({Key key, this.title}) : super(key: key);
-  final String title;
+  OtherInfoRegistrationPage({Key? key, this.title}) : super(key: key);
+  final String? title;
   @override
   _OtherInfoRegistrationPageState createState() =>
       _OtherInfoRegistrationPageState();

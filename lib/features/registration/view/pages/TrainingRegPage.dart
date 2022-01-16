@@ -11,8 +11,8 @@ import 'package:ltcapp/core/widgets/widgets.dart';
 import 'package:provider/provider.dart';
 import '../../../login/view/pages/WelcomePage.dart';
 class TrainingRegistrationPage extends StatefulWidget {
-  TrainingRegistrationPage({Key key, this.title}) : super(key: key);
-  final String title;
+  TrainingRegistrationPage({Key? key, this.title}) : super(key: key);
+  final String? title;
   @override
   _TrainingRegistrationPageState createState() =>
       _TrainingRegistrationPageState();

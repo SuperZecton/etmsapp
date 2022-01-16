@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:ltcapp/features/registration/model/individual_identity.dart';
 import 'package:ltcapp/main.dart';
 import 'package:ltcapp/newdbutils/database_connector.dart';
+import 'package:stacked/stacked.dart';
 
-class RegistrationViewModel with ChangeNotifier {
+class RegistrationViewModel extends BaseViewModel {
+  ///DB Instance initialized here
   DatabaseHandler db = DatabaseHandler();
 
   ///Sign Up Page Controllers
@@ -30,12 +32,12 @@ class RegistrationViewModel with ChangeNotifier {
   final ordController = TextEditingController();
   final dopController = TextEditingController();
 
-  ///Sign up Page Dropdown Values
-  PESType currentPESValue;
-  RaceType currentRaceValue;
-  ReligionType currentReligionValue;
-  BloodType currentBloodValue;
-  VocationType currentVocationValue;
+  ///Sign up Page Dropdown Values -> Default Values
+  PESType currentPESValue = PESType.A;
+  RaceType currentRaceValue = RaceType.Chinese;
+  ReligionType currentReligionValue = ReligionType.Christianity;
+  BloodType currentBloodValue = BloodType.O_MINUS;
+  VocationType currentVocationValue = VocationType.STO;
 
   ///Sign up Page Dropdown Functions
   void pesDropDownOnChanged(PESType value) {
@@ -62,7 +64,7 @@ class RegistrationViewModel with ChangeNotifier {
     currentVocationValue = value;
     notifyListeners();
   }
-
+  /// ADD NULL CHECKS HERE
   signUpValidation(BuildContext context) {
     if (signUpFormKey.currentState.validate()) {
       signUpFormKey.currentState.save();

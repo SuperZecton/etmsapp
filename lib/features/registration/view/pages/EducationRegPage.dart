@@ -12,8 +12,8 @@ import 'package:provider/provider.dart';
 import '../../../login/view/pages/WelcomePage.dart';
 
 class EducationRegistrationPage extends StatefulWidget {
-  EducationRegistrationPage({Key key, this.title}) : super(key: key);
-  final String title;
+  EducationRegistrationPage({Key? key, this.title}) : super(key: key);
+  final String? title;
   @override
   _EducationRegistrationPageState createState() => _EducationRegistrationPageState();
 }
