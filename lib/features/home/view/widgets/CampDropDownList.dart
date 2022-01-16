@@ -1,25 +1,23 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:ltcapp/features/home/viewmodel/HomePageViewModel.dart';
 import 'package:provider/provider.dart';
+import 'package:stacked/stacked.dart';
 
-class DropDownList extends StatelessWidget {
+class DropDownList extends ViewModelWidget<HomePageViewModel> {
+  const DropDownList({Key? key}) : super(key: key, reactive: true);
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, HomePageViewModel model) {
     return Container(
       margin: EdgeInsets.only(right: 8.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          Consumer<HomePageViewModel>(
-            builder: (context, vm, child) => DropdownButton(
+          DropdownButton(
                 isDense: true,
-                value: vm.campDropdown,
-                onChanged: (String value) => vm.campDropDownUpdate(value),
-                items: HomePageViewModel.campDropdownItems
-                    .map((String title) {
+                value: model.campDropdown,
+                onChanged: (String? value) => model.campDropDownUpdate(value),
+                items: HomePageViewModel.campDropdownItems.map((String title) {
                   return DropdownMenuItem(
                     value: title,
                     child: Text(title,
@@ -28,11 +26,10 @@ class DropDownList extends StatelessWidget {
                             fontWeight: FontWeight.w400,
                             fontSize: 14.0)),
                   );
-                }).toList()),
-          ),
+                }).toList()).
+
         ],
       ),
     );
-
   }
 }

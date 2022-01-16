@@ -43,22 +43,7 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider<LoginPageViewModel>(
-            create: (context) => LoginPageViewModel()),
-        ChangeNotifierProvider<HomePageViewModel>(
-            create: (context) => HomePageViewModel()),
-        ChangeNotifierProvider<RegistrationViewModel>(
-            create: (context) => RegistrationViewModel()),
-        ChangeNotifierProvider<VehicleBookOutViewModel>(
-            create: (context) => VehicleBookOutViewModel()),
-        ChangeNotifierProvider<LoginPageViewModel>(
-            create: (context) => LoginPageViewModel()),
-        ChangeNotifierProvider<MileageViewModel>(
-            create: (context) => MileageViewModel()),
-      ],
-      child: MaterialApp(
+    return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'LTC App',
         initialRoute: '/',

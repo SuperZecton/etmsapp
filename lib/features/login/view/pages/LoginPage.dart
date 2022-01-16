@@ -7,75 +7,71 @@ import 'package:ltcapp/core/widgets/widgets.dart';
 import 'package:ltcapp/core/config/globals.dart';
 import 'package:ltcapp/main.dart';
 import 'package:provider/provider.dart';
+import 'package:stacked/stacked.dart';
 
-class LoginPage extends StatefulWidget {
-  LoginPage({Key key, this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  _LoginPageState createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
+class LoginPage extends StatelessWidget {
+  const LoginPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final vm = Provider.of<LoginPageViewModel>(context, listen: false);
     final height = MediaQuery.of(context).size.height;
-    return Scaffold(
-      body: Container(
-        height: height,
-        decoration: BoxDecoration(
-          color: primaryColor,
-        ),
-        child: Stack(
-          children: <Widget>[
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    SizedBox(height: height * .2),
-                    _title(),
-                    SizedBox(height: 50),
-                    Column(
-                      children: <Widget>[
-                        _usernameEntryField(),
-                        _passwordEntryField(),
-                      ],
+    return ViewModelBuilder<LoginPageViewModel>.reactive(
+        viewModelBuilder: () => LoginPageViewModel(),
+        builder: (context, model, child) {
+          return Scaffold(
+            body: Container(
+              height: height,
+              decoration: BoxDecoration(
+                color: primaryColor,
+              ),
+              child: Stack(
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          SizedBox(height: height * .2),
+                          _title(),
+                          SizedBox(height: 50),
+                          Column(
+                            children: <Widget>[
+                              _usernameEntryField(),
+                              _passwordEntryField(),
+                            ],
+                          ),
+                          /*SizedBox(height: 20),
+                      _submitButton(),*/
+                          Container(
+                            padding: EdgeInsets.symmetric(vertical: 10),
+                            alignment: Alignment.centerRight,
+                            child: Text('Forgot Password ?',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500)),
+                          ),
+                          _divider(),
+                          _singPassButton(),
+                          SizedBox(height: height * .055),
+                          _createAccountLabel(),
+                        ],
+                      ),
                     ),
-                    /*SizedBox(height: 20),
-                    _submitButton(),*/
-                    Container(
-                      padding: EdgeInsets.symmetric(vertical: 10),
-                      alignment: Alignment.centerRight,
-                      child: Text('Forgot Password ?',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500)),
-                    ),
-                    _divider(),
-                    _singPassButton(),
-                    SizedBox(height: height * .055),
-                    _createAccountLabel(),
-                  ],
-                ),
+                  ),
+                  Positioned(
+                      top: 40,
+                      left: 0,
+                      child: TopBackButton(
+                          padding: EdgeInsets.symmetric(
+                        horizontal: 10,
+                      ))),
+                ],
               ),
             ),
-            Positioned(
-                top: 40,
-                left: 0,
-                child: TopBackButton(
-                    padding: EdgeInsets.symmetric(
-                  horizontal: 10,
-                ))),
-          ],
-        ),
-      ),
-    );
+          );
+        });
   }
 
   Widget _usernameEntryField() {

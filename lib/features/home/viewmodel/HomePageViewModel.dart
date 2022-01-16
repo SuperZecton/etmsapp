@@ -4,21 +4,23 @@ import 'package:ltcapp/features/home/view/pages/HomePage.dart';
 import 'package:ltcapp/features/login/model/CurrentSession.dart';
 import 'package:provider/provider.dart';
 import 'package:ltcapp/main.dart';
+import 'package:stacked/stacked.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class HomePageViewModel extends ChangeNotifier {
+class HomePageViewModel extends BaseViewModel {
+  /// Fetch current user from Singleton
+  //final username = CurrentUser.instance.username;
 
-  final username = CurrentUser.instance.username;
-
-  HomePageModel model = HomePageModel();
+  ///Incomplete code for getting fullname from model
+  /*HomePageModel model = HomePageModel();
   String fullName;
   fullNameGetter(){
     print("FullNameGetter debug test");
     fullName = model.getName();
-  }
-  HomePageViewModel(){
-    fullNameGetter();
-  }
+  }*/
+  ///TODO Implement fullname getter here
+  final String _fullName = "";
+  String get fullName => _fullName;
 
   /// CampDropDown
   static final List<String> campDropdownItems = [

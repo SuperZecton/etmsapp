@@ -6,8 +6,10 @@ import 'package:ltcapp/newdbutils/database_connector.dart';
 import 'package:ltcapp/features/login/model/CurrentSession.dart';
 import 'package:ltcapp/core/config/globals.dart';
 import 'package:ltcapp/utils/UUIDGetter.dart';
-class LoginPageViewModel extends ChangeNotifier {
-  LoginPageViewModel();
+import 'package:stacked/stacked.dart';
+
+class LoginPageViewModel extends BaseViewModel {
+
   DatabaseHandler db = DatabaseHandler();
   deviceUUID dID =  deviceUUID();
   if (db.findLoginEntry(dID.getUUID()) != []){
