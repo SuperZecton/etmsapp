@@ -9,7 +9,7 @@ import 'package:ltcapp/utils/UUIDGetter.dart';
 import 'package:stacked/stacked.dart';
 
 class LoginPageViewModel extends BaseViewModel {
-
+  ///TODO Fix this
   DatabaseHandler db = DatabaseHandler();
   deviceUUID dID =  deviceUUID();
   if (db.findLoginEntry(dID.getUUID()) != []){

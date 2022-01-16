@@ -14,20 +14,19 @@ class DropDownList extends ViewModelWidget<HomePageViewModel> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           DropdownButton(
-                isDense: true,
-                value: model.campDropdown,
-                onChanged: (String? value) => model.campDropDownUpdate(value),
-                items: HomePageViewModel.campDropdownItems.map((String title) {
-                  return DropdownMenuItem(
-                    value: title,
-                    child: Text(title,
-                        style: TextStyle(
-                            color: Colors.blue,
-                            fontWeight: FontWeight.w400,
-                            fontSize: 14.0)),
-                  );
-                }).toList()).
-
+              isDense: true,
+              value: model.campDropdown,
+              onChanged: (String? value) => model.campDropDownUpdate(value),
+              items: HomePageViewModel.campDropdownItems.map((String title) {
+                return DropdownMenuItem(
+                  value: title,
+                  child: Text(title,
+                      style: TextStyle(
+                          color: Colors.blue,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 14.0)),
+                );
+              }).toList()),
         ],
       ),
     );

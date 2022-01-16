@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class VehicleButton extends StatefulWidget {
-  VehicleButton( this.text, {Key key, this.onPressed}) : super(key: key);
-  final Function onPressed;
+  VehicleButton(this.text, {Key? key, this.onPressed}) : super(key: key);
+  final VoidCallback? onPressed;
   final String text;
 
   @override

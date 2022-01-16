@@ -2,81 +2,84 @@ import 'package:flutter/material.dart';
 import 'package:ltcapp/core/config/globals.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/core/services/permissions.dart';
+import 'package:ltcapp/features/login/viewmodel/LoginPageViewModel.dart';
+import 'package:ltcapp/features/login/viewmodel/WelcomePageViewModel.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:stacked/stacked.dart';
 import '../../../registration/model/individual_identity.dart';
 import 'package:ltcapp/main.dart';
 
-class WelcomePage extends StatefulWidget {
-  WelcomePage({Key key}) : super(key: key);
-
-  @override
-  _WelcomePageState createState() => _WelcomePageState();
-}
-
-
-
-class _WelcomePageState extends State<WelcomePage> {
+class WelcomePage extends StatelessWidget {
+  WelcomePage({Key? key}) : super(key: key);
   final double _imageHeight = 256.0;
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(5)),
-            color: primaryColor,
-            boxShadow: <BoxShadow>[
-              BoxShadow(
-                  color: Colors.grey.shade200,
-                  offset: Offset(2, 4),
-                  blurRadius: 5,
-                  spreadRadius: 2)
-            ],
+    return ViewModelBuilder<WelcomePageViewModel>.reactive(
+      viewModelBuilder: ()=> WelcomePageViewModel(),
+      builder: (context, model, child ){
+        return Scaffold(
+          body: SingleChildScrollView(
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(5)),
+                color: primaryColor,
+                boxShadow: <BoxShadow>[
+                  BoxShadow(
+                      color: Colors.grey.shade200,
+                      offset: Offset(2, 4),
+                      blurRadius: 5,
+                      spreadRadius: 2)
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  _buildLogo(),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  _firstTitle(),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  _secondTitle(),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  _label(),
+                  _loginButton(),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  _signUpButton(),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  _declarationText(),
+                ],
+              ),
+            ),
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              _buildLogo(),
-              SizedBox(
-                height: 20,
-              ),
-              _firstTitle(),
-              SizedBox(
-                height: 10,
-              ),
-              _secondTitle(),
-              SizedBox(
-                height: 20,
-              ),
-              _label(),
-              _loginButton(),
-              SizedBox(
-                height: 20,
-              ),
-              _signUpButton(),
-              SizedBox(
-                height: 30,
-              ),
-              _declarationText(),
-            ],
-          ),
-        ),
-      ),
+        );
+      },
+
     );
   }
 
   Widget _loginButton() {
     return InkWell(
       onTap: () {
+        ///TODO Remove setstate!
         setState(() {
           //fDSTemp = null;
-          Navigator.pushNamed(context, '/login', );
-
+          Navigator.pushNamed(
+            context,
+            '/login',
+          );
         });
       },
       child: Container(
@@ -93,6 +96,7 @@ class _WelcomePageState extends State<WelcomePage> {
       ),
     );
   }
+
   Widget _debugButton() {
     return InkWell(
       onTap: () {
@@ -128,7 +132,10 @@ class _WelcomePageState extends State<WelcomePage> {
         setState(() {
           //fDSTemp = new FullDetailSet();
 
-          Navigator.pushNamed(context, '/signUp',);
+          Navigator.pushNamed(
+            context,
+            '/signUp',
+          );
 
           /*showDialog(
               context: context,
@@ -229,7 +236,7 @@ class _WelcomePageState extends State<WelcomePage> {
             child: RichText(
               text: TextSpan(
                 text:
-                'I do hereby declare that all the information given above is true to the best of my knowledge and belief.',
+                    'I do hereby declare that all the information given above is true to the best of my knowledge and belief.',
                 style: GoogleFonts.lato(
                     textStyle: Theme.of(context).textTheme.headline4,
                     fontSize: 12,

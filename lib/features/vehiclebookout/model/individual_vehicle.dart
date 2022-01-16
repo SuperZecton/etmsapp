@@ -27,31 +27,3 @@ class VehClassType
   static List<VehClassType> getValues() => list;
 }
 
-class FullVehicleDetailSet
-{
-  String midPlateNo;
-  String vehType;
-  String vehClassType;
-  String currentOdo;
-
-  void sortData(String mid, String vehT, String vehCT, String cOdo)
-  {
-    midPlateNo = mid;
-    vehType = vehT;
-    vehClassType = vehCT;
-    currentOdo = cOdo;
-  }
-
-  FullVehicleDetailSet({this.midPlateNo, this.vehType, this.vehClassType, this.currentOdo});
-
-  Map<String, dynamic> toMap()
-  {
-    return
-        {
-          'midPlate': midPlateNo,
-          'vehType': vehType,
-          'classType': vehClassType,
-          'currentOdo': currentOdo
-        };
-  }
-}

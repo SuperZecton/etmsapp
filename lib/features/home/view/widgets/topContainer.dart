@@ -4,12 +4,12 @@ import 'package:ltcapp/core/config/globals.dart';
 
 
 class TopContainer extends StatelessWidget {
-  final double height;
-  final double width;
+  final double? height;
+  final double? width;
   final Widget child;
-  final EdgeInsets padding;
+  final EdgeInsets? padding;
 
-  const TopContainer({Key key, this.height, this.width, this.padding, @required this.child}) : super(key: key);
+  const TopContainer({Key? key, this.height, this.width, this.padding, required this.child}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

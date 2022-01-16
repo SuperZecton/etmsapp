@@ -30,9 +30,13 @@ class HomePageViewModel extends BaseViewModel {
   String campDropdown = campDropdownItems[0];
   int campChartNo = 0;
 
-  void campDropDownUpdate(String value) {
-    campDropdown = value;
-    campChartNo = campDropdownItems.indexOf(value);
+  void campDropDownUpdate(String? value) {
+    if (value != null) {
+      campDropdown = value!;
+      campChartNo = campDropdownItems.indexOf(value);
+    } else {
+      print("Null value for campDrownDownUpdate");
+    }
 
     notifyListeners();
   }
@@ -55,9 +59,13 @@ class HomePageViewModel extends BaseViewModel {
   String dateDropdown = dateDropdownItems[0];
   int dateChartNo = 0;
 
-  void dateDropDownUpdate(String value) {
-    dateDropdown = value;
-    dateChartNo = dateDropdownItems.indexOf(value);
+  void dateDropDownUpdate(String? value) {
+    if (value != null) {
+      dateDropdown = value;
+      dateChartNo = dateDropdownItems.indexOf(value);
+    } else {
+      print("Null value for dateDropDownUpdate");
+    }
     notifyListeners();
   }
 
@@ -89,6 +97,4 @@ class HomePageViewModel extends BaseViewModel {
       throw "Error launching $url";
     }
   }
-
-
 }
