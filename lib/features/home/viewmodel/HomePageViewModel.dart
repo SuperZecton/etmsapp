@@ -69,7 +69,7 @@ class HomePageViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  racFormURLPush() async {
+  void racFormURLPush() async {
     const url = "https://mtrac.ado.sg/login";
     if (await canLaunch(url)) {
       launch(url, enableJavaScript: true);
@@ -78,7 +78,7 @@ class HomePageViewModel extends BaseViewModel {
     }
   }
 
-  safeEntryURLPush() async {
+  void safeEntryURLPush() async {
     const url =
         "https://docs.google.com/forms/d/e/1FAIpQLSfOG1IHwj2B9zXGpRrpjdb5quiKBEmhyUF3-QvhQdS0o2C60Q/viewform";
     if (await canLaunch(url)) {
@@ -88,7 +88,7 @@ class HomePageViewModel extends BaseViewModel {
     }
   }
 
-  shroFormURLPush() async {
+  void shroFormURLPush() async {
     const url =
         "https://docs.google.com/forms/d/e/1FAIpQLSdaPpHhO8dO2qnyLonsLO41b1eTDfZdkwzmBksOQKbLNrgcTg/viewform";
     if (await canLaunch(url)) {
@@ -97,4 +97,6 @@ class HomePageViewModel extends BaseViewModel {
       throw "Error launching $url";
     }
   }
+
+
 }

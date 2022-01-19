@@ -331,12 +331,42 @@ class HomePage extends StatelessWidget {
                         ),
                         onTap: () => model.shroFormURLPush(),
                       ),
+                      _buildTile(
+                        Padding(
+                          padding: const EdgeInsets.all(24.0),
+                          child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Material(
+                                    color: Colors.amber,
+                                    shape: CircleBorder(),
+                                    child: Padding(
+                                      padding: EdgeInsets.all(16.0),
+                                      child: Icon(
+                                          FontAwesomeIcons.clipboardCheck,
+                                          color: Colors.white,
+                                          size: 30.0),
+                                    ),),
+                                Padding(padding: EdgeInsets.only(bottom: 16.0)),
+                                Text('Maintenance',
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 24.0)),
+                                //Text('For DTL/ ADTL',
+                                //style: TextStyle(color: Colors.black45)),
+                              ]),
+                        ),
+                        onTap: () => Navigator.pushNamed(context, '/maintainencesdfiyhgsdfuhi'),
+                      ),
                     ],
                     staggeredTiles: [
                       StaggeredTile.extent(1, 190.0),
                       StaggeredTile.extent(1, 190.0),
                       StaggeredTile.extent(1, 190.0),
                       StaggeredTile.extent(1, 190.0),
+                      StaggeredTile.extent(2, 190.0),
                     ],
                   ),
                 ],
