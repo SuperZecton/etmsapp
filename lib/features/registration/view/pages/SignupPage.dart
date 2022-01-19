@@ -71,7 +71,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           "Full Name",
                           Icons.perm_identity_rounded,
                           vm.nameController,
-                          validationAction: (String input) => input
+                          validationAction: (String? input) => input!
                                   .isValidName()
                               ? null
                               : "Name cannot have numbers or special characters",
@@ -83,8 +83,8 @@ class _SignUpPageState extends State<SignUpPage> {
                           Icons.assessment,
                           vm.nricController,
                           helperText: "Last 4 characters only",
-                          validationAction: (String input) =>
-                              input.isValidNRIC()
+                          validationAction: (String? input) =>
+                              input!.isValidNRIC()
                                   ? null
                                   : "Enter last 4 characters only",
                           maxLength: 4,
@@ -96,8 +96,8 @@ class _SignUpPageState extends State<SignUpPage> {
                     "Email Address",
                     Icons.alternate_email,
                     vm.emailController,
-                    validationAction: (String input) =>
-                        input.isValidEmail() ? null : "Enter valid email",
+                    validationAction: (String? input) =>
+                        input!.isValidEmail() ? null : "Enter valid email",
                   ),
                   RegistrationTextField(
                     "Username",
@@ -118,8 +118,8 @@ class _SignUpPageState extends State<SignUpPage> {
                     "Phone Number",
                     Icons.phone_android,
                     vm.numberController,
-                    validationAction: (String input) =>
-                        input.isValidPhoneNumber()
+                    validationAction: (String? input) =>
+                        input!.isValidPhoneNumber()
                             ? null
                             : "Enter a valid number",
                   ),
@@ -127,8 +127,8 @@ class _SignUpPageState extends State<SignUpPage> {
                     "Home Number",
                     Icons.phone,
                     vm.homeNumberController,
-                    validationAction: (String input) =>
-                        input.isValidPhoneNumber()
+                    validationAction: (String? input) =>
+                        input!.isValidPhoneNumber()
                             ? null
                             : "Enter a valid number",
                   ),
@@ -146,7 +146,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         values: PESType.getValues(),
                         value: vm.currentPESValue,
                         icon: Icons.fitness_center,
-                        onChanged: (value) => vm.pesDropDownOnChanged(value)),
+                        onChanged: (value) => vm.pesDropDownOnChanged(value!)),
                   ),
                   Consumer<RegistrationViewModel>(
                     builder: (context, vm, child) => DropDownField<RaceType>(
@@ -154,7 +154,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         values: RaceType.getValues(),
                         value: vm.currentRaceValue,
                         icon: Icons.recent_actors,
-                        onChanged: (value) => vm.raceDropDownOnChanged(value)),
+                        onChanged: (value) => vm.raceDropDownOnChanged(value!)),
                   ),
                   Consumer<RegistrationViewModel>(
                     builder: (context, vm, child) =>
@@ -164,7 +164,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             value: vm.currentReligionValue,
                             icon: FontAwesomeIcons.syringe,
                             onChanged: (value) =>
-                                vm.religionDropDownOnChanged(value)),
+                                vm.religionDropDownOnChanged(value!)),
                   ),
                   Consumer<RegistrationViewModel>(
                     builder: (context, vm, child) => DropDownField<BloodType>(
@@ -172,7 +172,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         values: BloodType.getValues(),
                         value: vm.currentBloodValue,
                         icon: Icons.fitness_center,
-                        onChanged: (value) => vm.bloodDropDownOnChanged(value)),
+                        onChanged: (value) => vm.bloodDropDownOnChanged(value!)),
                   ),
                   RegistrationTextField("Drug Allergy",
                       FontAwesomeIcons.tablets, vm.drugAllergyController),
@@ -186,7 +186,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             value: vm.currentVocationValue,
                             icon: FontAwesomeIcons.briefcase,
                             onChanged: (value) =>
-                                vm.vocationDropDownOnChanged(value)),
+                                vm.vocationDropDownOnChanged(value!)),
                   ),
                   RegistrationTextField(
                       "Medical Condition",
@@ -199,7 +199,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     "Next of Kin Name",
                     FontAwesomeIcons.userFriends,
                     vm.nokController,
-                    validationAction: (String input) => input.isValidName()
+                    validationAction: (String? input) => input!.isValidName()
                         ? null
                         : "Name cannot have numbers or special characters",
                   ),
@@ -213,8 +213,8 @@ class _SignUpPageState extends State<SignUpPage> {
                     "Next of Kin Number",
                     FontAwesomeIcons.phone,
                     vm.nokNumberController,
-                    validationAction: (String input) =>
-                        input.isValidPhoneNumber()
+                    validationAction: (String? input) =>
+                        input!.isValidPhoneNumber()
                             ? null
                             : "Enter a valid number",
                   ),

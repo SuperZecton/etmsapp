@@ -10,6 +10,8 @@ import 'package:stacked/stacked.dart';
 
 class LoginPageViewModel extends BaseViewModel {
   ///TODO Fix this
+  ///
+  /*
   DatabaseHandler db = DatabaseHandler();
   deviceUUID dID =  deviceUUID();
   if (db.findLoginEntry(dID.getUUID()) != []){
@@ -18,11 +20,13 @@ class LoginPageViewModel extends BaseViewModel {
   }
   static String rememberedUsername = usernpass[0];
   static String rememberedPassword = usernpass[1];
-  final usernameController = TextEditingController(text: rememberedUsername);
-  final passwordController = TextEditingController(text: rememberedPassword);
+  */
+  final usernameController = TextEditingController(text: "");
+  final passwordController = TextEditingController(text: "");
 
   String get user => usernameController.text;
   String get password => passwordController.text;
+
 /*
   Future verifyLoginData(BuildContext context) async {
     bool loginCredentials;

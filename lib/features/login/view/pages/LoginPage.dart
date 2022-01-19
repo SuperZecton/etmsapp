@@ -33,7 +33,7 @@ class LoginPage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           SizedBox(height: height * .2),
-                          _title(),
+                          _title(context),
                           SizedBox(height: 50),
                           Column(
                             children: <Widget>[
@@ -53,9 +53,9 @@ class LoginPage extends StatelessWidget {
                                     fontWeight: FontWeight.w500)),
                           ),
                           _divider(),
-                          _singPassButton(),
+                          _singPassButton(context),
                           SizedBox(height: height * .055),
-                          _createAccountLabel(),
+                          _createAccountLabel(context),
                         ],
                       ),
                     ),
@@ -230,7 +230,7 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  Widget _singPassButton() {
+  Widget _singPassButton(BuildContext context) {
     return Container(
       height: 50,
       margin: EdgeInsets.symmetric(vertical: 20),
@@ -286,12 +286,9 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  Widget _createAccountLabel() {
+  Widget _createAccountLabel(BuildContext context) {
     return InkWell(
       onTap: () {
-/*
-        Navigator.pushNamed(context, '/signup');
-*/
         showDialog(
             context: context,
             builder: (BuildContext context) {
@@ -331,7 +328,7 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  Widget _title() {
+  Widget _title(BuildContext context) {
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(

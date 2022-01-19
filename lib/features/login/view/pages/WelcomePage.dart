@@ -15,8 +15,8 @@ class WelcomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<WelcomePageViewModel>.reactive(
-      viewModelBuilder: ()=> WelcomePageViewModel(),
-      builder: (context, model, child ){
+      viewModelBuilder: () => WelcomePageViewModel(),
+      builder: (context, model, child) {
         return Scaffold(
           body: SingleChildScrollView(
             child: Container(
@@ -42,46 +42,36 @@ class WelcomePage extends StatelessWidget {
                   SizedBox(
                     height: 20,
                   ),
-                  _firstTitle(),
+                  _firstTitle(context),
                   SizedBox(
                     height: 10,
                   ),
-                  _secondTitle(),
+                  _secondTitle(context),
                   SizedBox(
                     height: 20,
                   ),
                   _label(),
-                  _loginButton(),
+                  _loginButton(context),
                   SizedBox(
                     height: 20,
                   ),
-                  _signUpButton(),
+                  _signUpButton(context),
                   SizedBox(
                     height: 30,
                   ),
-                  _declarationText(),
+                  _declarationText(context),
                 ],
               ),
             ),
           ),
         );
       },
-
     );
   }
 
-  Widget _loginButton() {
+  Widget _loginButton(BuildContext context) {
     return InkWell(
-      onTap: () {
-        ///TODO Remove setstate!
-        setState(() {
-          //fDSTemp = null;
-          Navigator.pushNamed(
-            context,
-            '/login',
-          );
-        });
-      },
+      onTap: () => Navigator.pushNamed(context, '/login'),
       child: Container(
         width: MediaQuery.of(context).size.width,
         padding: EdgeInsets.symmetric(vertical: 13),
@@ -97,7 +87,7 @@ class WelcomePage extends StatelessWidget {
     );
   }
 
-  Widget _debugButton() {
+  /*Widget _debugButton(BuildContext context) {
     return InkWell(
       onTap: () {
         setState(() {
@@ -124,28 +114,19 @@ class WelcomePage extends StatelessWidget {
         ),
       ),
     );
-  }
+  } */
 
-  Widget _signUpButton() {
+  Widget _signUpButton(BuildContext context) {
     return InkWell(
-      onTap: () {
-        setState(() {
-          //fDSTemp = new FullDetailSet();
-
-          Navigator.pushNamed(
-            context,
-            '/signUp',
-          );
-
-          /*showDialog(
+      onTap: () => Navigator.pushNamed(context, '/signup'),
+      /*showDialog(
               context: context,
               builder: (BuildContext context) {
                 return AlertDialog(
                   title: Text("Function Not Available Yet"),
                 );
               });*/
-        });
-      },
+
       child: Container(
         width: MediaQuery.of(context).size.width,
         padding: EdgeInsets.symmetric(vertical: 13),
@@ -162,7 +143,7 @@ class WelcomePage extends StatelessWidget {
     );
   }
 
-  Widget _firstTitle() {
+  Widget _firstTitle(BuildContext context) {
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
@@ -177,7 +158,7 @@ class WelcomePage extends StatelessWidget {
     );
   }
 
-  Widget _secondTitle() {
+  Widget _secondTitle(BuildContext context) {
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
@@ -222,7 +203,7 @@ class WelcomePage extends StatelessWidget {
     );
   }
 */
-  Widget _declarationText() {
+  Widget _declarationText(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(top: 30, bottom: 10),
       child: Row(

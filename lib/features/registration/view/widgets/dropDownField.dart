@@ -6,20 +6,19 @@ import 'package:provider/provider.dart';
 
 class DropDownField<T> extends StatelessWidget {
   const DropDownField(
-      {Key key,
-      this.hint,
-      this.value,
+      {Key? key,
+      this.hint = "",
+      required this.value,
       this.icon,
-      @required this.values,
-      this.onChanged})
-      : assert(values != null),
-        super(key: key);
+      required this.values,
+      required this.onChanged})
+      : super(key: key);
 
   final String hint;
   final T value;
   final List<T> values;
-  final ValueChanged<T> onChanged;
-  final IconData icon;
+  final ValueChanged<T?>? onChanged;
+  final IconData? icon;
 
   @override
   Widget build(BuildContext context) {

@@ -7,10 +7,10 @@ class RegistrationTextField extends StatelessWidget {
     this.mainText,
     this.icon,
     this.controller, {
-    Key key,
+    Key? key,
     this.isPassword = false,
     this.helperText = "",
-    this.maxLength,
+    this.maxLength = 10,
     this.validationAction,
   }) : super(key: key);
 
@@ -20,7 +20,7 @@ class RegistrationTextField extends StatelessWidget {
   final bool isPassword;
   final String helperText;
   final int maxLength;
-  final Function validationAction;
+  final String? Function(String?)? validationAction;
   @override
   Widget build(BuildContext context) {
     return Container(

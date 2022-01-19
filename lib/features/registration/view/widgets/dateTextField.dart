@@ -31,7 +31,9 @@ class _DateTextFieldState extends State<DateTextField> {
           builder: (context, vm, child) => TextFormField(
             readOnly: true,
             controller: widget.controller,
-            onTap: () => vm.selectDate(context, widget.controller),
+            onTap: () {
+              //vm.selectDate(context, widget.controller);
+            },
             cursorColor: Colors.grey,
             style: GoogleFonts.roboto(
               textStyle: Theme.of(context).textTheme.headline4,

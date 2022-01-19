@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:stacked/stacked.dart';
 
 class DatePickerNotifier with ChangeNotifier {
   /// DatePicker Notifier manages state for DateTextField widget
 
-  String selectedDate;
+  String selectedDate = "";
 
-  Future<void> selectDate(BuildContext context, TextEditingController controller) async {
+  /*Future<void> selectDate(BuildContext context, TextEditingController controller) async {
     final DateTime picked = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
@@ -20,7 +21,7 @@ class DatePickerNotifier with ChangeNotifier {
       notifyListeners();
     }
   }
-
+*/
 
 
 }

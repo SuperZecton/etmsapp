@@ -64,10 +64,11 @@ class RegistrationViewModel extends BaseViewModel {
     currentVocationValue = value;
     notifyListeners();
   }
+
   /// ADD NULL CHECKS HERE
   signUpValidation(BuildContext context) {
-    if (signUpFormKey.currentState.validate()) {
-      signUpFormKey.currentState.save();
+    if (signUpFormKey.currentState!.validate()) {
+      signUpFormKey.currentState!.save();
     } else {
       showDialog(
           context: context,
@@ -96,8 +97,8 @@ class RegistrationViewModel extends BaseViewModel {
   final doiController = TextEditingController();
 
   trainingSignUpValidation(BuildContext context) {
-    if (trainingRegFormKey.currentState.validate()) {
-      trainingRegFormKey.currentState.save();
+    if (trainingRegFormKey.currentState!.validate()) {
+      trainingRegFormKey.currentState!.save();
 
       Navigator.pushNamed(context, '/educationReg');
     } else {
@@ -125,9 +126,9 @@ class RegistrationViewModel extends BaseViewModel {
   final ccaController = TextEditingController();
   final schoolController = TextEditingController();
 
-  educationSignUpValidation(BuildContext context) {
-    if (educationRegFormKey.currentState.validate()) {
-      educationRegFormKey.currentState.save();
+  void educationSignUpValidation(BuildContext context) {
+    if (educationRegFormKey.currentState!.validate()) {
+      educationRegFormKey.currentState!.save();
       Navigator.pushNamed(context, '/otherReg');
     } else {
       showDialog(
