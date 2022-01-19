@@ -41,8 +41,8 @@ class LoginPage extends StatelessWidget {
                               _passwordEntryField(),
                             ],
                           ),
-                          /*SizedBox(height: 20),
-                      _submitButton(),*/
+                          SizedBox(height: 20),
+                          _submitButton(context,model),
                           Container(
                             padding: EdgeInsets.symmetric(vertical: 10),
                             alignment: Alignment.centerRight,
@@ -166,20 +166,16 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  /*Widget _submitButton() {
-    final vm = Provider.of<LoginPageViewModel>(context, listen: false);
+  Widget _submitButton(BuildContext context, LoginPageViewModel model) {
     return InkWell(
         onTap: () {
-          vm.verifyLoginData(context);
+          model.verifyLoginData(context);
         },
         child: Container(
           width: MediaQuery.of(context).size.width,
           padding: EdgeInsets.symmetric(vertical: 15),
           alignment: Alignment.center,
           decoration: BoxDecoration(
-/*
-            color: Colors.blue,
-*/
             color: Color(0xff808080),
             borderRadius: BorderRadius.all(Radius.circular(5)),
           ),
@@ -188,7 +184,7 @@ class LoginPage extends StatelessWidget {
             style: TextStyle(fontSize: 20, color: Colors.white),
           ),
         ));
-  }*/
+  }
 
   Widget _divider() {
     return Container(

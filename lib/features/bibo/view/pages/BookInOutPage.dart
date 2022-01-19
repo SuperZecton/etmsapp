@@ -101,12 +101,12 @@ class _BookInOutPageState extends State<BookInOutPage> {
                                 child: DropdownButton(
                                     isDense: true,
                                     value: actualDropdown,
-                                    /*onChanged: (String value) => setState(() {
-                                          actualDropdown = value;
+                                    onChanged: (String? value) => setState(() {
+                                          actualDropdown = value!;
                                           actualChart =
                                               chartDropdownItems.indexOf(
                                                   value); // Refresh the chart
-                                        }),*/
+                                        }),
                                     items: chartDropdownItems.map((String title) {
                                       return DropdownMenuItem(
                                         value: title,

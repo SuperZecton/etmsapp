@@ -32,7 +32,7 @@ class HomePageViewModel extends BaseViewModel {
 
   void campDropDownUpdate(String? value) {
     if (value != null) {
-      campDropdown = value!;
+      campDropdown = value;
       campChartNo = campDropdownItems.indexOf(value);
     } else {
       print("Null value for campDrownDownUpdate");

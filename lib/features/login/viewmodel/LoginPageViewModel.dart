@@ -11,9 +11,10 @@ import 'package:stacked/stacked.dart';
 class LoginPageViewModel extends BaseViewModel {
   ///TODO Fix this
   ///
-  /*
+
   DatabaseHandler db = DatabaseHandler();
-  deviceUUID dID =  deviceUUID();
+  deviceUUID dID =
+      deviceUUID(); /*
   if (db.findLoginEntry(dID.getUUID()) != []){
     var usernpass = [];
     usernpass =  db.findLoginEntry(dID.getUUID());
@@ -27,7 +28,6 @@ class LoginPageViewModel extends BaseViewModel {
   String get user => usernameController.text;
   String get password => passwordController.text;
 
-/*
   Future verifyLoginData(BuildContext context) async {
     bool loginCredentials;
     loginCredentials = await db.verifyLoginCreds(user, password);
@@ -35,6 +35,7 @@ class LoginPageViewModel extends BaseViewModel {
       /// Sets global user
       CurrentUser.instance.username = user;
       CurrentUser.instance.password = password;
+
       /// Redirects user to home page
       Navigator.pushNamed(context, '/home');
     } else {
@@ -71,7 +72,7 @@ class LoginPageViewModel extends BaseViewModel {
           });
     }
   }
-*/
+
   void onLoading(BuildContext context) {
     showDialog(
         context: context,
