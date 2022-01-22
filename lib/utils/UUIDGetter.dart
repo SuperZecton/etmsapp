@@ -3,7 +3,7 @@ class deviceUUID {
   deviceUUID();
 
   Future<String> getUUID() async{
-    var identifier = UniqueIdentifier.serial;
-    return (identifier as String);
+    var identifier = await UniqueIdentifier.serial;
+    return identifier!;
   }
 }
