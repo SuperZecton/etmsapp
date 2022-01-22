@@ -11,27 +11,39 @@ import 'package:stacked/stacked.dart';
 
 class LoginPageViewModel extends BaseViewModel {
   LoginPageViewModel() {
-    deviceUUID deviceID = new deviceUUID();
-    Future string = deviceID.getUUID();
-    string.then((result) {
+    Future futureUUID = deviceID.getUUID();
+    futureUUID.then((result) {
       _uuid = result;
     });
+    _loginEntry = findRememberedAccount();
+    rememberedUsername = _loginEntry[0];
+    rememberedUsername = _loginEntry[1];
   }
 
-  ///TODO Fix this
+  void initialise() {
+    notifyListeners();
+  }
+
   String _uuid = "";
+  List<dynamic> _loginEntry = [];
+  static String? rememberedUsername;
+  static String? rememberedPassword;
+  deviceUUID deviceID = new deviceUUID();
   DatabaseHandler db = DatabaseHandler();
 
-/*  deviceUUID dID = new deviceUUID();
-  if (db.findLoginEntry(dID.getUUID()) != []){
-    var usernpass = [];
-    usernpass = db.findLoginEntry(dID.getUUID());
+  List<dynamic> findRememberedAccount() {
+    var _futureEntry = db.findLoginEntry(_uuid);
+    List<dynamic> _usernpass = [];
+    _futureEntry.then((result) {
+      _usernpass = result;
+    });
+    return _usernpass;
   }
-  static String rememberedUsername = usernpass[0];
-  static String rememberedPassword = usernpass[1];
-*/
-  final usernameController = TextEditingController(text: "");
-  final passwordController = TextEditingController(text: "");
+
+
+
+  final usernameController = TextEditingController(text: rememberedUsername);
+  final passwordController = TextEditingController(text: rememberedPassword);
 
   String get user => usernameController.text;
   String get password => passwordController.text;

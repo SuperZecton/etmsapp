@@ -16,10 +16,11 @@ class DatabaseHandler {
     // use ' (apostrophe) for Values Eg. 'elephant123'
     // End PostgreSQL Query with ;
 
-    var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC", username: "LTCAppUser", password: "LTCuser123");
+    var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
+        username: "LTCAppUser", password: "LTCuser123");
     await connection.open();
     var querystring =
-        'SELECT "fullName" FROM Users WHERE'" username = '" + value + "';";
+        'SELECT "fullName" FROM Users WHERE' " username = '" + value + "';";
     print("Query String: " + querystring);
     var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
@@ -28,10 +29,12 @@ class DatabaseHandler {
   }
 
   Future<bool> verifyLoginCreds(String username, String pass) async {
-    var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC", username: "LTCAppUser", password: "LTCuser123");
+    var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
+        username: "LTCAppUser", password: "LTCuser123");
     await connection.open();
-    var querystring =
-        'SELECT "password" FROM Users WHERE "username" = '"'" + username + "';";
+    var querystring = 'SELECT "password" FROM Users WHERE "username" = ' "'" +
+        username +
+        "';";
     print("Query String: " + querystring);
     var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
@@ -94,23 +97,132 @@ class DatabaseHandler {
       String password,
       String permissionsLevel,
       String remarks) async {
-
-    var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC", username: "LTCAppUser", password: "LTCuser123");
+    var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
+        username: "LTCAppUser", password: "LTCuser123");
     await connection.open();
     var querystring =
         'INSERT INTO Users ("UUID", "rank", "fullName", "nricLast4Digits", "fullHomeAddress", "handphoneNumber", "homephoneNumber", "personalEmail", "dateOfBirth", "dateOfEnlistment", "dateOfORD", "dateOfPostIn", "pesType", "religion", "race", "bloodGroup", "drugAllergy", "foodAllergy", "NOKDetailFullName", "NOKDetailContactNumber", "NOKDetailFullAddress", "vocationType", "stayInStayOut", "medicalConditions", "trainingFrame", "trainingPeriod", "passAttempts", "militaryLicenseNo", "militaryLicenseType", "militaryLicenseDateOfIssue", "LTCTraining", "drivingCategory", "educationLevel", "streamCourseName", "ccaOptional", "schName", "hobbiesInterest", "civilianLicenseType", "civilianLicenseNumber", "civilianLicenseDateOfIssue", "hasDoneDefensiveCourse", "hasPersonalVehicle", "personalVehiclePlateNumber", "tShirtSize", "no3SizeUpperTorso", "no3SizeWaist", "no3SizeShoes", "username", "password", "permissionLevel", "remarks") '
-        "VALUES (uuid_generate_v4(),'"+rank+"','"+fullName+"','"+nricLast4Digits+"','"+fullHomeAddress+"','"+handphoneNumber+"','"+homephoneNumber+"','"+personalEmail+"','"+dateOfBirth+"','"+dateOfEnlistment+"','"+dateOfORD+"','"+dateOfPostIn+"','"+pesType+"','"+religion+"','"+race+"','"+bloodGroup+"','"+drugAllergy+"','"+foodAllergy+"','"+NOKDetailFullName+"','"+NOKDetailContactNumber+"','"+NOKDetailFullAddress+"','"+vocationType+"','"+stayInStayOut+"','"+medicalConditions+"','"+trainingFrame+"','"+trainingPeriod+"','"+passAttempts+"','"+militaryLicenseNo+"','"+militaryLicenseType+"','"+militaryLicenseDateOfIssue+"','"+LTCTraining+"','"+drivingCategory+"','"+educationLevel+"','"+streamCourseName+"','"+ccaOptional+"','"+schName+"','"+hobbiesInterest+"','"+civilianLicenseType+"','"+civilianLicenseNumber+"','"+civilianLicenseDateOfIssue+"','"+hasDoneDefensiveCourse+"','"+hasPersonalVehicle+"','"+personalVehiclePlateNumber+"','"+tShirtSize+"','"+no3SizeUpperTorso+"','"+no3SizeWaist+"','"+no3SizeShoes+"','"+username+"','"+password+"','"+permissionsLevel+"','"+remarks+"');";
+                "VALUES (uuid_generate_v4(),'" +
+            rank +
+            "','" +
+            fullName +
+            "','" +
+            nricLast4Digits +
+            "','" +
+            fullHomeAddress +
+            "','" +
+            handphoneNumber +
+            "','" +
+            homephoneNumber +
+            "','" +
+            personalEmail +
+            "','" +
+            dateOfBirth +
+            "','" +
+            dateOfEnlistment +
+            "','" +
+            dateOfORD +
+            "','" +
+            dateOfPostIn +
+            "','" +
+            pesType +
+            "','" +
+            religion +
+            "','" +
+            race +
+            "','" +
+            bloodGroup +
+            "','" +
+            drugAllergy +
+            "','" +
+            foodAllergy +
+            "','" +
+            NOKDetailFullName +
+            "','" +
+            NOKDetailContactNumber +
+            "','" +
+            NOKDetailFullAddress +
+            "','" +
+            vocationType +
+            "','" +
+            stayInStayOut +
+            "','" +
+            medicalConditions +
+            "','" +
+            trainingFrame +
+            "','" +
+            trainingPeriod +
+            "','" +
+            passAttempts +
+            "','" +
+            militaryLicenseNo +
+            "','" +
+            militaryLicenseType +
+            "','" +
+            militaryLicenseDateOfIssue +
+            "','" +
+            LTCTraining +
+            "','" +
+            drivingCategory +
+            "','" +
+            educationLevel +
+            "','" +
+            streamCourseName +
+            "','" +
+            ccaOptional +
+            "','" +
+            schName +
+            "','" +
+            hobbiesInterest +
+            "','" +
+            civilianLicenseType +
+            "','" +
+            civilianLicenseNumber +
+            "','" +
+            civilianLicenseDateOfIssue +
+            "','" +
+            hasDoneDefensiveCourse +
+            "','" +
+            hasPersonalVehicle +
+            "','" +
+            personalVehiclePlateNumber +
+            "','" +
+            tShirtSize +
+            "','" +
+            no3SizeUpperTorso +
+            "','" +
+            no3SizeWaist +
+            "','" +
+            no3SizeShoes +
+            "','" +
+            username +
+            "','" +
+            password +
+            "','" +
+            permissionsLevel +
+            "','" +
+            remarks +
+            "');";
     print("Query String: " + querystring);
     var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
     connection.close();
   }
 
-  Future<String> singleDataPull(String table, String collumIdentifier, String collumIdentifierValue, String neededCollum) async {
-    var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC", username: "LTCAppUser", password: "LTCuser123");
+  Future<String> singleDataPull(String table, String collumIdentifier,
+      String collumIdentifierValue, String neededCollum) async {
+    var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
+        username: "LTCAppUser", password: "LTCuser123");
     await connection.open();
-    var querystring =
-        'SELECT "'+ neededCollum +'" FROM ' + table + ' WHERE "' + collumIdentifier + '"'" = '" + collumIdentifierValue + "';";
+    var querystring = 'SELECT "' +
+        neededCollum +
+        '" FROM ' +
+        table +
+        ' WHERE "' +
+        collumIdentifier +
+        '"' " = '" +
+        collumIdentifierValue +
+        "';";
     print("Query String: " + querystring);
     var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
@@ -131,23 +243,58 @@ class DatabaseHandler {
       String nextWPTDate,
       String additionalPlate,
       String additionalRemarks) async {
-
-    var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC", username: "LTCAppUser", password: "LTCuser123");
+    var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
+        username: "LTCAppUser", password: "LTCuser123");
     await connection.open();
     var querystring =
         'INSERT INTO Vehicles ("UUID", "vehicleNo", "carModel", "classType", "status", "lastAVIDate", "nextAVIDate", "lastWPTDate", "nextWPTDate", "additionalPlate", "additionalRemarks") '
-        "VALUES (uuid_generate_v4(),'"+vehicleNo+"','"+carModel+"','"+classType+"','"+status+"','"+lastAVIDate+"','"+nextAVIDate+"','"+lastWPTDate+"','"+nextWPTDate+"','"+additionalPlate+"','"+additionalRemarks+"');";
+                "VALUES (uuid_generate_v4(),'" +
+            vehicleNo +
+            "','" +
+            carModel +
+            "','" +
+            classType +
+            "','" +
+            status +
+            "','" +
+            lastAVIDate +
+            "','" +
+            nextAVIDate +
+            "','" +
+            lastWPTDate +
+            "','" +
+            nextWPTDate +
+            "','" +
+            additionalPlate +
+            "','" +
+            additionalRemarks +
+            "');";
     print("Query String: " + querystring);
     var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
     connection.close();
   }
 
-  Future<void> editSingleDataEntry(String table, String collumIdentifier, String collumIdentifierValue, String editingCollum, String editingCollumValue) async {
-    var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC", username: "LTCAppUser", password: "LTCuser123");
+  Future<void> editSingleDataEntry(
+      String table,
+      String collumIdentifier,
+      String collumIdentifierValue,
+      String editingCollum,
+      String editingCollumValue) async {
+    var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
+        username: "LTCAppUser", password: "LTCuser123");
     await connection.open();
-    var querystring =
-        "UPDATE " + table + ' SET "' + editingCollum + '" = '"'" + editingCollumValue + "' WHERE "'"' + collumIdentifier + '"'" = '" + collumIdentifierValue + "';";
+    var querystring = "UPDATE " +
+        table +
+        ' SET "' +
+        editingCollum +
+        '" = ' "'" +
+        editingCollumValue +
+        "' WHERE " '"' +
+        collumIdentifier +
+        '"' " = '" +
+        collumIdentifierValue +
+        "';";
     print("Query String: " + querystring);
     var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
@@ -155,89 +302,114 @@ class DatabaseHandler {
   }
 
   Future<void> createLoginEntry(
-      String deviceIdentifier,
-      String username,
-      String password) async {
-
-    var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC", username: "LTCAppUser", password: "LTCuser123");
+      String deviceIdentifier, String username, String password) async {
+    var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
+        username: "LTCAppUser", password: "LTCuser123");
     await connection.open();
     var querystring =
         'INSERT INTO RememberLogin ("UUID", "deviceIdentifier", "username", "password") '
-            "VALUES (uuid_generate_v4(),'"+deviceIdentifier+"','"+username+"','"+password+"');";
+                "VALUES (uuid_generate_v4(),'" +
+            deviceIdentifier +
+            "','" +
+            username +
+            "','" +
+            password +
+            "');";
     print("Query String: " + querystring);
     var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
     connection.close();
   }
 
-  Future<bool> checkLoginEntry(
-      String deviceIdentifier,
-      String username) async {
-
-    var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC", username: "LTCAppUser", password: "LTCuser123");
+  Future<bool> checkLoginEntry(String deviceIdentifier, String username) async {
+    var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
+        username: "LTCAppUser", password: "LTCuser123");
     await connection.open();
     var querystring =
-        'SELECT "username" FROM RememberLogin WHERE "deviceIdentifier" = '"'" + deviceIdentifier + "';";
+        'SELECT "username" FROM RememberLogin WHERE "deviceIdentifier" = ' "'" +
+            deviceIdentifier +
+            "';";
     print("Query String: " + querystring);
     var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
     connection.close();
-    if (results.toString() == "[["+username+"]]"){
+    if (results.toString() == "[[" + username + "]]") {
       return false;
-    }
-    else{
+    } else {
       return true;
     }
   }
 
-  Future<List<dynamic>> findLoginEntry( //This Function takes in deviceIdentifier and returns username and password
+  Future<List<dynamic>> findLoginEntry(
+      //This Function takes in deviceIdentifier and returns username and password
       String deviceIdentifier) async {
-
-    var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC", username: "LTCAppUser", password: "LTCuser123");
+    bool canFind;
+    var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
+        username: "LTCAppUser", password: "LTCuser123");
     await connection.open();
     var querystring =
-        'SELECT * FROM RememberLogin WHERE "deviceIdentifier" = '"'" + deviceIdentifier + "';";
+        'SELECT * FROM RememberLogin WHERE "deviceIdentifier" = ' "'" +
+            deviceIdentifier +
+            "';";
     print("Query String: " + querystring);
     var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
-    if (results.toString() == "([])"){
+    if (results.toString() == "([])") {
       print("No Entry with match Device Identifier");
+      canFind = false;
+      print("Can't find UUID");
       return [];
-    }
-    else{
+    } else {
       var storingDate = [];
       var storingTime = [];
       var querystring =
-          'SELECT "date" FROM RememberLogin WHERE "deviceIdentifier" = '"'" + deviceIdentifier + "';";
+          'SELECT "date" FROM RememberLogin WHERE "deviceIdentifier" = ' "'" +
+              deviceIdentifier +
+              "';";
       print("Query String: " + querystring);
       List<dynamic> results = await connection.query(querystring);
       results.forEach((row) {
         print("Database Result: " + row.toString());
         var rawdate = row.toString().substring(1, row.toString().length - 1);
         var date = rawdate.split("/");
-        var d1 = DateTime.utc(int.parse(date[2]), int.parse(date[1]), int.parse(date[0]));
+        var d1 = DateTime.utc(
+            int.parse(date[2]), int.parse(date[1]), int.parse(date[0]));
         storingDate.add(d1);
       });
-      for (int i = 0; i < storingDate.length - 1; i++){
-        for (int j = 0; j < storingDate.length - i - 1; j++){
-          if (storingDate[j].compareTo(storingDate[j+1]) < 0){
+      for (int i = 0; i < storingDate.length - 1; i++) {
+        for (int j = 0; j < storingDate.length - i - 1; j++) {
+          if (storingDate[j].compareTo(storingDate[j + 1]) < 0) {
             DateTime temp = storingDate[j];
-            storingDate[j] = storingDate[j+1];
-            storingDate[j+1] = temp;
+            storingDate[j] = storingDate[j + 1];
+            storingDate[j + 1] = temp;
           }
         }
       }
       print(storingDate);
-      if (storingDate[0] == storingDate[1]){
-        var samedate = storingDate[0].day.toString() + "/" + storingDate[0].month.toString() + "/" + storingDate[0].year.toString();
+      if (storingDate[0] == storingDate[1]) {
+        var samedate = storingDate[0].day.toString() +
+            "/" +
+            storingDate[0].month.toString() +
+            "/" +
+            storingDate[0].year.toString();
         var querystring =
-            'SELECT "time" FROM RememberLogin WHERE "deviceIdentifier" = '"'" + deviceIdentifier + "'"' AND "date" = '"'" + samedate + "';";
+            'SELECT "time" FROM RememberLogin WHERE "deviceIdentifier" = ' "'" +
+                deviceIdentifier +
+                "'" ' AND "date" = ' "'" +
+                samedate +
+                "';";
         print("Query String: " + querystring);
         List<dynamic> results = await connection.query(querystring);
         results.forEach((row) {
           print("Database Result: " + row.toString());
           var rawtime = row.toString().substring(1, row.toString().length - 1);
-          var t1 = DateTime.utc(2021, 12, 18, int.parse(rawtime.substring(0, rawtime.length -4)), int.parse(rawtime.substring(2, rawtime.length -2)), int.parse(rawtime.substring(4, rawtime.length)));
+          var t1 = DateTime.utc(
+              2021,
+              12,
+              18,
+              int.parse(rawtime.substring(0, rawtime.length - 4)),
+              int.parse(rawtime.substring(2, rawtime.length - 2)),
+              int.parse(rawtime.substring(4, rawtime.length)));
           storingTime.add(t1);
         });
         for (int x = 0; x < storingTime.length - 1; x++) {
@@ -251,10 +423,23 @@ class DatabaseHandler {
         }
       }
       print(storingTime);
-      var entrydate = storingDate[0].day.toString().padLeft(2, '0') + "/" + storingDate[0].month.toString().padLeft(2, '0') + "/" + storingDate[0].year.toString();
-      var entrytime = storingTime[0].hour.toString().padLeft(2, '0') + storingTime[0].hour.toString().padLeft(2, '0') + storingTime[0].hour.toString().padLeft(2, '0');
+      var entrydate = storingDate[0].day.toString().padLeft(2, '0') +
+          "/" +
+          storingDate[0].month.toString().padLeft(2, '0') +
+          "/" +
+          storingDate[0].year.toString();
+      var entrytime = storingTime[0].hour.toString().padLeft(2, '0') +
+          storingTime[0].hour.toString().padLeft(2, '0') +
+          storingTime[0].hour.toString().padLeft(2, '0');
       var querystring1 =
-          'SELECT "username", "password" FROM RememberLogin WHERE "deviceIdentifier" = '"'" + deviceIdentifier + "'"' AND "date" = '"'" + entrydate + "'"' AND "time" = '"'" + entrytime + "';";
+          'SELECT "username", "password" FROM RememberLogin WHERE "deviceIdentifier" = '
+                  "'" +
+              deviceIdentifier +
+              "'" ' AND "date" = ' "'" +
+              entrydate +
+              "'" ' AND "time" = ' "'" +
+              entrytime +
+              "';";
       print("Query String: " + querystring1);
       List<dynamic> results1 = await connection.query(querystring);
       print("Database Result: " + results1.toString());
@@ -265,5 +450,4 @@ class DatabaseHandler {
       return userpass;
     }
   }
-
 }
