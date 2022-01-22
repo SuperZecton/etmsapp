@@ -1,21 +1,27 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ltcapp/features/login/view/pages/LoginPage.dart';
 import 'package:ltcapp/features/login/view/widgets/LoadingIndicator.dart';
 import 'package:ltcapp/newdbutils/database_connector.dart';
 import 'package:ltcapp/features/login/model/CurrentSession.dart';
 import 'package:ltcapp/core/config/globals.dart';
-import 'package:ltcapp/utils/UUIDGetter.dart';
+import 'package:ltcapp/features/login/model/UUIDGetter.dart';
 import 'package:stacked/stacked.dart';
 
 class LoginPageViewModel extends BaseViewModel {
-  ///TODO Fix this
-  ///
-  LoginPageViewModel();
-  DatabaseHandler db = DatabaseHandler();
-  deviceUUID dID = deviceUUID();
+  LoginPageViewModel() {
+    deviceUUID deviceID = new deviceUUID();
+    Future string = deviceID.getUUID();
+    string.then((result) {
+      _uuid = result;
+    });
+  }
 
-  dID
+  ///TODO Fix this
+  String _uuid = "";
+  DatabaseHandler db = DatabaseHandler();
+
 /*  deviceUUID dID = new deviceUUID();
   if (db.findLoginEntry(dID.getUUID()) != []){
     var usernpass = [];
