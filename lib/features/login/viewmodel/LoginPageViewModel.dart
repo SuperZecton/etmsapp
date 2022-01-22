@@ -26,8 +26,8 @@ class LoginPageViewModel extends BaseViewModel {
 
   String _uuid = "";
   List<dynamic> _loginEntry = [];
-  static String? rememberedUsername;
-  static String? rememberedPassword;
+  static String rememberedUsername = "";
+  static String rememberedPassword = "";
   deviceUUID deviceID = new deviceUUID();
   DatabaseHandler db = DatabaseHandler();
 
@@ -37,11 +37,13 @@ class LoginPageViewModel extends BaseViewModel {
     _futureEntry.then((result) {
       _usernpass = result;
     });
-    print(_uuid);
-    if (_usernpass == []){
+    print("login entry is "+ _usernpass.toString());
+    if (_usernpass.isEmpty){
+      print("Login entry is empty");
       return ["",""];
     }
     else{
+      print("Login entry is successful");
       return _usernpass;
     }
   }
