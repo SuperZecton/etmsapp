@@ -354,7 +354,7 @@ class DatabaseHandler {
     print("Query String: " + querystring);
     var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
-    if (results.toString() == "([])") {
+    if (results.toString() == "[]") {
       print("No Entry with match Device Identifier");
       canFind = false;
       print("Can't find UUID");

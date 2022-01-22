@@ -17,7 +17,7 @@ class LoginPageViewModel extends BaseViewModel {
     });
     _loginEntry = findRememberedAccount();
     rememberedUsername = _loginEntry[0];
-    rememberedUsername = _loginEntry[1];
+    rememberedPassword = _loginEntry[1];
   }
 
   void initialise() {
@@ -37,7 +37,13 @@ class LoginPageViewModel extends BaseViewModel {
     _futureEntry.then((result) {
       _usernpass = result;
     });
-    return _usernpass;
+    print(_uuid);
+    if (_usernpass == []){
+      return ["",""];
+    }
+    else{
+      return _usernpass;
+    }
   }
 
 
