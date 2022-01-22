@@ -32,9 +32,9 @@ void main() async {
   var notquitenow = DateTime.now();
   var now = DateTime.parse(notquitenow.toString()+'-08:00');
   var date = now.day.toString().padLeft(2, '0') + "/" + now.month.toString().padLeft(2, '0') + "/" + now.year.toString();
-  print(date);
+  print("The current date is " + date);
   var time = now.hour.toString().padLeft(2, '0') + now.minute.toString().padLeft(2, '0') + now.second.toString().padLeft(2, '0');
-  print(time);
+  print("The current time is " + time);
 //  personnelDBHandle.findLoginEntry("android1123");
   personnelDBHandle.DBFunctionTemplate("damonlim");
   runApp(MyApp());
