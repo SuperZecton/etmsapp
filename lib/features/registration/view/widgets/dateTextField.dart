@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:ltcapp/core/config/globals.dart';
+import 'package:ltcapp/core/config/Globals.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/features/registration/viewmodel/DatePickerNotifier.dart';
 import 'package:provider/provider.dart';

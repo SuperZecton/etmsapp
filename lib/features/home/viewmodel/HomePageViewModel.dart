@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:ltcapp/features/home/model/HomePageModel.dart';
 import 'package:ltcapp/features/home/view/pages/HomePage.dart';
 import 'package:ltcapp/core/services/CurrentSession.dart';
@@ -13,7 +14,7 @@ class HomePageViewModel extends BaseViewModel {
   ///Incomplete code for getting fullname from model
   final currentUsername = CurrentUser.instance.username;
   DatabaseHandler db = DatabaseHandler();
-  Future<String> getFullNameFromDB() async {
+  Future<String> getFullName() async {
     String _username;
     if (currentUsername != null) {
       _username = currentUsername as String;
@@ -25,9 +26,30 @@ class HomePageViewModel extends BaseViewModel {
     }
   }
 
+  Future<String> getNRIC() async {
+    String _username;
+    if (currentUsername != null) {
+      _username = currentUsername as String;
+      return await db.singleDataPull("Users", "username", _username, "nricLast4Digits");
+    } else {
+      print("NRIC from DB is empty when searching");
+      _username = "";
+      return Future.error("No NRIC found");
+    }
+  }
   void initialise() {
     notifyListeners();
   }
+  /// <--------- State Logic --------->
+  /// Variable Initialization
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  GlobalKey<ScaffoldState> get scaffoldKey => _scaffoldKey;
+  void onDrawerMenuTap(){
+    _scaffoldKey.currentState!.openDrawer();
+    notifyListeners();
+
+  }
+
 
   /// CampDropDown
   static final List<String> campDropdownItems = [

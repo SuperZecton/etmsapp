@@ -6,7 +6,7 @@ import 'package:ltcapp/features/login/view/pages/LoginPage.dart';
 import 'package:ltcapp/core/widgets/LoadingIndicator.dart';
 import 'package:ltcapp/core/utils/database_connector.dart';
 import 'package:ltcapp/core/services/CurrentSession.dart';
-import 'package:ltcapp/core/config/globals.dart';
+import 'package:ltcapp/core/config/Globals.dart';
 import 'package:ltcapp/features/login/model/UUIDGetter.dart';
 import 'package:ltcapp/features/login/view/widgets/LoginFailDialog.dart';
 import 'package:stacked/stacked.dart';
@@ -39,17 +39,15 @@ class LoginPageViewModel extends BaseViewModel {
     _futureEntry.then((result) {
       _usernpass = result;
     });
-    print("login entry is "+ _usernpass.toString());
-    if (_usernpass.isEmpty){
+    print("login entry is " + _usernpass.toString());
+    if (_usernpass.isEmpty) {
       print("Login entry is empty");
-      return ["",""];
-    }
-    else{
+      return ["", ""];
+    } else {
       print("Login entry is successful");
       return _usernpass;
     }
   }
-
 
   final usernameController = TextEditingController(text: rememberedUsername);
   final passwordController = TextEditingController(text: rememberedPassword);
@@ -65,16 +63,16 @@ class LoginPageViewModel extends BaseViewModel {
       CurrentUser.instance.username = user;
       CurrentUser.instance.password = password;
       bool canFindLoginEntry = await db.checkLoginEntry(_uuid, user);
-      if (canFindLoginEntry == true){
-        
+      if (canFindLoginEntry == true) {
+        ///TODO For Damon to input
       }
 
       /// Redirects user to home page
       Navigator.pushNamed(context, '/home');
-    } else { LoginFailDialog.loginFailDailog(context);
+    } else {
+      LoginFailDialog.loginFailDailog(context);
     }
   }
-
 
   @override
   void notifyListeners() {

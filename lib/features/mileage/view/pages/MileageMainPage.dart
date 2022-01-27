@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:ltcapp/core/config/globals.dart';
+import 'package:ltcapp/core/config/Globals.dart';
 import 'package:ltcapp/features/mileage/view/widgets/MileageAppBar.dart';
 import 'package:ltcapp/features/mileage/view/widgets/MileageList.dart';
 import 'package:ltcapp/features/mileage/viewmodel/MileageViewModel.dart';
 import 'package:provider/provider.dart';
+import 'package:stacked/stacked.dart';
 
 class MileageMainPage extends StatefulWidget {
   @override
@@ -13,16 +14,15 @@ class MileageMainPage extends StatefulWidget {
 class _MileageMainPageState extends State<MileageMainPage> {
   @override
   Widget build(BuildContext context) {
-    final vm = Provider.of<MileageViewModel>(context, listen: false);
-    return Scaffold(
-        body: CustomScrollView(
-          slivers: <Widget>[
-            MileageAppBar(),
-            MileageList(),
-
-
-          ]
-        ),
-    );
+    return ViewModelBuilder<MileageViewModel>.reactive(
+        viewModelBuilder: () => MileageViewModel(),
+        builder: (context, model, child) {
+          return Scaffold(
+            body: CustomScrollView(slivers: <Widget>[
+              MileageAppBar(),
+              MileageList(),
+            ]),
+          );
+        },);
   }
 }

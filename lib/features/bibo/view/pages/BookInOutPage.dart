@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:ltcapp/core/config/globals.dart';
+import 'package:ltcapp/core/config/Globals.dart';
 import 'package:intl/intl.dart';
 
 class BookInOutPage extends StatefulWidget {

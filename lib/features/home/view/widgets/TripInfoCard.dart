@@ -1,23 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:ltcapp/core/config/Globals.dart';
 
 class TripInfoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 200,
+      height: 180,
       padding: EdgeInsets.all(16),
       margin: EdgeInsets.symmetric(horizontal: 16.0),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: darkPrimary700,
         borderRadius: BorderRadius.circular(8),
         boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.4),
-            spreadRadius: 4,
+          /*BoxShadow(
+            color: Colors.grey.withOpacity(0.2),
+            spreadRadius: 2,
             blurRadius: 6,
             offset: Offset(0, 3), // changes position of shadow
-          ),
+          ),*/
         ],
       ),
       child: Column(
@@ -30,7 +32,7 @@ class TripInfoCard extends StatelessWidget {
                 child: Text(
                   'Current Trip',
                   style: TextStyle(
-                    color: Color(0xff64676F),
+                    color: darkTextColor,
                     fontFamily: 'Regular',
                     fontSize: 16,
                   ),
@@ -80,16 +82,15 @@ class TripInfoCard extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: 5),
+                  SizedBox(height: 10),
                   Material(
                     color: Colors.transparent,
                     child: Text(
                       'Add Vehicle',
-                      style: TextStyle(
-                        color: Colors.black54,
-                        fontFamily: 'Regular',
-                        fontSize: 14,
-                      ),
+                      style: GoogleFonts.roboto(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: darkTextColor),
                     ),
                   )
                 ],
@@ -111,16 +112,15 @@ class TripInfoCard extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: 5),
+                  SizedBox(height: 10),
                   Material(
                     color: Colors.transparent,
                     child: Text(
                       'End Trip',
-                      style: TextStyle(
-                        color: Colors.black54,
-                        fontFamily: 'Regular',
-                        fontSize: 14,
-                      ),
+                      style: GoogleFonts.roboto(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: darkTextColor),
                     ),
                   )
                 ],

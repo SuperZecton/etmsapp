@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:ltcapp/features/registration/viewmodel/RegistrationViewModel.dart';
 import 'package:ltcapp/main.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ltcapp/core/config/globals.dart';
+import 'package:ltcapp/core/config/Globals.dart';
 import 'package:ltcapp/features/registration/view/widgets/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ltcapp/core/utils/extensions.dart';

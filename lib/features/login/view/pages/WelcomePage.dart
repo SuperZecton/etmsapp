@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ltcapp/core/config/globals.dart';
+import 'package:ltcapp/core/config/Globals.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/core/services/Permissions.dart';
 import 'package:ltcapp/features/login/viewmodel/LoginPageViewModel.dart';
@@ -25,7 +25,7 @@ class WelcomePage extends StatelessWidget {
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(5)),
-                color: primaryColor,
+                color: Theme.of(context).backgroundColor,
                 boxShadow: <BoxShadow>[
                   BoxShadow(
                       color: Colors.grey.shade200,
@@ -78,43 +78,14 @@ class WelcomePage extends StatelessWidget {
         alignment: Alignment.center,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(5)),
-            color: Colors.blue),
+            color: darkSecondaryColor),
         child: Text(
           'Login',
-          style: TextStyle(fontSize: 20, color: Colors.white),
+          style: TextStyle(fontSize: 20, color: darkTextColor),
         ),
       ),
     );
   }
-
-  /*Widget _debugButton(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        setState(() {
-          showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  title: Text("Function Not Available Yet"),
-                );
-              });
-        });
-      },
-      child: Container(
-        width: MediaQuery.of(context).size.width,
-        padding: EdgeInsets.symmetric(vertical: 13),
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(5)),
-          border: Border.all(color: Colors.white, width: 2),
-        ),
-        child: Text(
-          'Debugging Button',
-          style: TextStyle(fontSize: 20, color: Colors.white),
-        ),
-      ),
-    );
-  } */
 
   Widget _signUpButton(BuildContext context) {
     return InkWell(

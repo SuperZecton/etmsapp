@@ -10,8 +10,9 @@ import 'package:ltcapp/features/registration/viewmodel/RegistrationViewModel.dar
 import 'package:ltcapp/features/vehiclebookout/viewmodel/VehicleBookOutViewModel.dart';
 import 'package:ltcapp/core/utils/database_connector.dart';
 import 'package:provider/provider.dart';
-import 'package:ltcapp/core/config/router.dart';
+import 'package:ltcapp/core/config/Router.dart';
 
+import 'core/config/ThemeClass.dart';
 import 'core/services/Permissions.dart';
 
 //void main() => runApp(MyApp());
@@ -40,9 +41,7 @@ class MyApp extends StatelessWidget {
         title: 'LTC App',
         initialRoute: '/',
         onGenerateRoute: Routers.generateRoute,
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
+        theme: ThemeClass.darkTheme,
       );
 
   }

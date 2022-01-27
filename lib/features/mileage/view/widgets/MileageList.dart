@@ -8,8 +8,8 @@ class MileageList extends StatefulWidget {
 }
 
 class _MileageListState extends State<MileageList> {
-  @override
   var simpleList = ["41599", "46190", "41323","46190", "41323","46190", "41323","46190", "41323"];
+  @override
   Widget build(BuildContext context) {
     return SliverList(
       delegate: SliverChildBuilderDelegate(

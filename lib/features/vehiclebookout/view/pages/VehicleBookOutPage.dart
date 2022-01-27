@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:ltcapp/core/config/globals.dart';
+import 'package:ltcapp/core/config/Globals.dart';
 import 'package:ltcapp/core/widgets/topBackButton.dart';
-import 'package:ltcapp/features/home/view/widgets/topContainer.dart';
+import 'package:ltcapp/features/home/view/widgets/TopContainer.dart';
 import 'package:ltcapp/features/vehiclebookout/view/widgets/VehicleButton.dart';
 import 'package:ltcapp/features/vehiclebookout/view/widgets/VehicleEntryField.dart';
 import 'package:ltcapp/features/vehiclebookout/view/widgets/VehicleBookOutCard.dart';
@@ -30,6 +30,7 @@ class _VehicleBookOutPageState extends State<VehicleBookOutPage> {
             TopContainer(
               height: 100,
               width: MediaQuery.of(context).size.width,
+              color: darkGreenColor,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [

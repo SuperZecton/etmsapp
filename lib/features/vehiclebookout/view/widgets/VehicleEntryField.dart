@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ltcapp/core/config/globals.dart';
+import 'package:ltcapp/core/config/Globals.dart';
 
 class VehicleEntryField extends StatefulWidget {
   const VehicleEntryField(this.mainText, {Key? key}) : super(key: key);
