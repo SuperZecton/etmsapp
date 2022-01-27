@@ -8,19 +8,24 @@ import 'package:stacked/stacked.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomePageViewModel extends BaseViewModel {
-  /// Fetch current user from Singleton
-  //final username = CurrentUser.instance.username;
+  HomePageViewModel(){
+    _fullName = HomePageViewModel().getFullName();
+  }
 
   ///Incomplete code for getting fullname from model
-  /*HomePageModel model = HomePageModel();
-  String fullName;
-  fullNameGetter(){
-    print("FullNameGetter debug test");
-    fullName = model.getName();
-  }*/
-  ///TODO Implement fullname getter here
-  final String _fullName = "";
+  HomePageModel model = HomePageModel();
+  String getFullName(){
+    print("getFullName Function ran");
+    String _name = model.fullName;
+    return _name;
+  }
+
+  String _fullName = "";
   String get fullName => _fullName;
+
+  void initialise() {
+    notifyListeners();
+  }
 
   /// CampDropDown
   static final List<String> campDropdownItems = [
