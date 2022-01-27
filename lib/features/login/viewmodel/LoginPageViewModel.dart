@@ -28,7 +28,7 @@ class LoginPageViewModel extends BaseViewModel {
   List<dynamic> _loginEntry = [];
   static String rememberedUsername = "";
   static String rememberedPassword = "";
-  deviceUUID deviceID = new deviceUUID();
+  DeviceUUID deviceID = new DeviceUUID();
   DatabaseHandler db = DatabaseHandler();
 
   List<dynamic> findRememberedAccount() {
@@ -63,7 +63,10 @@ class LoginPageViewModel extends BaseViewModel {
       /// Sets global user
       CurrentUser.instance.username = user;
       CurrentUser.instance.password = password;
-      if (db.checkLoginEntry(_uuid, user) == true)
+      bool canFindLoginEntry = await db.checkLoginEntry(_uuid, user);
+      if (canFindLoginEntry == true){
+        
+      }
 
       /// Redirects user to home page
       Navigator.pushNamed(context, '/home');

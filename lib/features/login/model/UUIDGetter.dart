@@ -1,7 +1,7 @@
 import 'package:unique_identifier/unique_identifier.dart';
 
-class deviceUUID {
-  deviceUUID();
+class DeviceUUID {
+  DeviceUUID();
 
   Future<String> getUUID() async {
     var identifier = await UniqueIdentifier.serial;

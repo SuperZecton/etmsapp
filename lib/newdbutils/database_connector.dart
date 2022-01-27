@@ -334,9 +334,9 @@ class DatabaseHandler {
     print("Database Result: " + results.toString());
     connection.close();
     if (results.toString() == "[" + username + "]") {
-      return false;
-    } else {
       return true;
+    } else {
+      return false;
     }
   }
 
