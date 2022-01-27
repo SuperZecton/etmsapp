@@ -74,15 +74,41 @@ class HomePage extends StatelessWidget {
                                         MainAxisAlignment.spaceEvenly,
                                     children: [
                                       Container(
-                                        padding: EdgeInsets.only(right: 10.0),
-                                        child: Text(
-                                          model.fullName,
-                                          textAlign: TextAlign.left,
-                                          style: TextStyle(
-                                            fontSize: 16.0,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w400,
-                                          ),
+                                        padding: EdgeInsets.only(right:10.0),
+                                        child: FutureBuilder<String>(
+                                          future: model.getFullNameFromDB(),
+                                          builder: (BuildContext context, AsyncSnapshot<String> snapshot){
+                                            switch (snapshot.connectionState){
+                                              case ConnectionState.waiting: return Text(
+                                                'Data not available yet',
+                                                textAlign: TextAlign.left,
+                                                style: TextStyle(
+                                                  fontSize: 16.0,
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.w400,
+                                                ),
+                                              );
+                                              case ConnectionState.done: return Text(
+                                                snapshot.data!,
+                                                textAlign: TextAlign.left,
+                                                style: TextStyle(
+                                                  fontSize: 16.0,
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.w400,
+                                                ),
+                                              );
+                                              default:
+                                                return Text(
+                                                  'State is ${snapshot.connectionState}',
+                                                  textAlign: TextAlign.left,
+                                                  style: TextStyle(
+                                                    fontSize: 16.0,
+                                                    color: Colors.white,
+                                                    fontWeight: FontWeight.w400,
+                                                  ),
+                                                );
+                                            }
+                                          }
                                         ),
                                       ),
                                       Container(

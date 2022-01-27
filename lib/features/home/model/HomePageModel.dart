@@ -4,12 +4,6 @@ import 'package:ltcapp/newdbutils/database_connector.dart';
 import 'package:ltcapp/features/login/model/CurrentSession.dart';
 
 class HomePageModel {
-  HomePageModel() {
-    getFullNameFromDB().then((val) {
-      _fullName = val;
-    });
-    print("fullname is " + _fullName);
-  }
   final currentUsername = CurrentUser.instance.username;
   DatabaseHandler db = DatabaseHandler();
 
@@ -17,13 +11,12 @@ class HomePageModel {
     String _username;
     if (currentUsername != null) {
       _username = currentUsername as String;
+      return await db.singleDataPull("Users", "username", _username, "fullName");
     } else {
       print("Username from DB is empty when searching");
       _username = "";
+      return Future.error("No Name found");
     }
-    String val =
-        await db.singleDataPull("Users", "username", _username, "fullName");
-    return val;
   }
 
   String _fullName = "";
