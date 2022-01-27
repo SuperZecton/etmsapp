@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ltcapp/features/login/viewmodel/LoginPageViewModel.dart';
 import 'package:ltcapp/features/registration/view/pages/SignupPage.dart';
-import 'package:ltcapp/features/login/model/CurrentSession.dart';
+import 'package:ltcapp/core/services/CurrentSession.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/core/widgets/widgets.dart';
 import 'package:ltcapp/core/config/globals.dart';

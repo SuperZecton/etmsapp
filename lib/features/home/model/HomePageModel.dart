@@ -1,7 +1,7 @@
 import 'package:ltcapp/features/home/viewmodel/HomePageViewModel.dart';
 import 'package:ltcapp/features/registration/model/individual_identity.dart';
-import 'package:ltcapp/newdbutils/database_connector.dart';
-import 'package:ltcapp/features/login/model/CurrentSession.dart';
+import 'package:ltcapp/core/utils/database_connector.dart';
+import 'package:ltcapp/core/services/CurrentSession.dart';
 
 class HomePageModel {
   final currentUsername = CurrentUser.instance.username;

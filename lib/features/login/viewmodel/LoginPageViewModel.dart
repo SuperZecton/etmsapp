@@ -1,12 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ltcapp/core/utils/locator.dart';
 import 'package:ltcapp/features/login/view/pages/LoginPage.dart';
-import 'package:ltcapp/features/login/view/widgets/LoadingIndicator.dart';
-import 'package:ltcapp/newdbutils/database_connector.dart';
-import 'package:ltcapp/features/login/model/CurrentSession.dart';
+import 'package:ltcapp/core/widgets/LoadingIndicator.dart';
+import 'package:ltcapp/core/utils/database_connector.dart';
+import 'package:ltcapp/core/services/CurrentSession.dart';
 import 'package:ltcapp/core/config/globals.dart';
 import 'package:ltcapp/features/login/model/UUIDGetter.dart';
+import 'package:ltcapp/features/login/view/widgets/LoginFailDialog.dart';
 import 'package:stacked/stacked.dart';
 
 class LoginPageViewModel extends BaseViewModel {
@@ -49,7 +51,6 @@ class LoginPageViewModel extends BaseViewModel {
   }
 
 
-
   final usernameController = TextEditingController(text: rememberedUsername);
   final passwordController = TextEditingController(text: rememberedPassword);
 
@@ -70,64 +71,10 @@ class LoginPageViewModel extends BaseViewModel {
 
       /// Redirects user to home page
       Navigator.pushNamed(context, '/home');
-    } else {
-      showDialog(
-          context: context,
-          barrierDismissible: true,
-          builder: (BuildContext context) {
-            return Dialog(
-              child: Container(
-                height: 200,
-                width: 200,
-                padding: EdgeInsets.all(40.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Login Failed!",
-                      style: GoogleFonts.roboto(
-                        color: Colors.black,
-                        fontSize: 24.0,
-                      ),
-                    ),
-                    Text(
-                      "Please check your username/password again!",
-                      style: GoogleFonts.roboto(
-                        color: Colors.black,
-                        fontSize: 12.0,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            );
-          });
+    } else { LoginFailDialog.loginFailDailog(context);
     }
   }
 
-  void onLoading(BuildContext context) {
-    showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (BuildContext context) {
-          return Dialog(
-            child: Container(
-              height: 200,
-              width: 200,
-              padding: EdgeInsets.all(40.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  LoadingIndicator(),
-                  Text("Loading..",
-                      style: GoogleFonts.roboto(
-                          color: Colors.black, fontSize: 24.0))
-                ],
-              ),
-            ),
-          );
-        });
-  }
 
   @override
   void notifyListeners() {

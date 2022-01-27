@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ltcapp/core/config/globals.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ltcapp/core/services/permissions.dart';
+import 'package:ltcapp/core/services/Permissions.dart';
 import 'package:ltcapp/features/login/viewmodel/LoginPageViewModel.dart';
 import 'package:ltcapp/features/login/viewmodel/WelcomePageViewModel.dart';
 import 'package:page_transition/page_transition.dart';

@@ -1,7 +1,7 @@
 
 import 'dart:async';
 import 'package:path/path.dart';
-import 'package:ltcapp/features/login/model/CurrentSession.dart';
+import 'package:ltcapp/core/services/CurrentSession.dart';
 import 'package:meta/meta.dart';
 
 

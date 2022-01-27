@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ltcapp/features/registration/model/individual_identity.dart';
 import 'package:ltcapp/main.dart';
-import 'package:ltcapp/newdbutils/database_connector.dart';
+import 'package:ltcapp/core/utils/database_connector.dart';
 import 'package:stacked/stacked.dart';
 
 class RegistrationViewModel extends BaseViewModel {
