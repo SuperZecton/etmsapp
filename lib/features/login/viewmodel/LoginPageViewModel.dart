@@ -63,6 +63,7 @@ class LoginPageViewModel extends BaseViewModel {
       /// Sets global user
       CurrentUser.instance.username = user;
       CurrentUser.instance.password = password;
+      if (db.checkLoginEntry(_uuid, user) == true)
 
       /// Redirects user to home page
       Navigator.pushNamed(context, '/home');

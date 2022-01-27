@@ -333,7 +333,7 @@ class DatabaseHandler {
     var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
     connection.close();
-    if (results.toString() == "[[" + username + "]]") {
+    if (results.toString() == "[" + username + "]") {
       return false;
     } else {
       return true;
