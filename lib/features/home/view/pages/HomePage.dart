@@ -336,7 +336,7 @@ class HomePage extends StatelessWidget {
                                   color: darkSecondaryColor,
                                   shape: CircleBorder(),
                                   child: Padding(
-                                    padding: EdgeInsets.all(16.0),
+                                    padding: EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 16.0),
                                     child: Icon(FontAwesomeIcons.clipboardCheck,
                                         color: Colors.white, size: 30.0),
                                   ),

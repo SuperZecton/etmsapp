@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:ltcapp/features/home/model/HomePageModel.dart';
 import 'package:ltcapp/features/home/view/pages/HomePage.dart';
 import 'package:ltcapp/core/services/CurrentSession.dart';
-import 'package:ltcapp/core/utils/database_connector.dart';
+import 'package:ltcapp/core/database/database_connector.dart';
 import 'package:provider/provider.dart';
 import 'package:ltcapp/main.dart';
 import 'package:stacked/stacked.dart';

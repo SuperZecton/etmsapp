@@ -1,6 +1,6 @@
 import 'package:ltcapp/features/home/viewmodel/HomePageViewModel.dart';
 import 'package:ltcapp/features/registration/model/individual_identity.dart';
-import 'package:ltcapp/core/utils/database_connector.dart';
+import 'package:ltcapp/core/database/database_connector.dart';
 import 'package:ltcapp/core/services/CurrentSession.dart';
 
 class HomePageModel {
