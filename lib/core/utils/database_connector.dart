@@ -450,4 +450,39 @@ class DatabaseHandler {
       return userpass;
     }
   }
+
+  Future<String> startTrip(String username, String date, String vehicleNo, String timeStart, String odometerStart, String locationStart, String purposeOfTrip, String classType) async {
+    var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
+        username: "LTCAppUser", password: "LTCuser123");
+    await connection.open();
+    var querystring =
+        'INSERT INTO Logging ("UUID", "username", "date", "vehicleNo", "timeStart", "odometerStart", "locationStart", "purposeOfTrip", "classType") ' + "VALUES (uuid_generate_v4(),'" + username + "','" + date + "','" + vehicleNo + "','" + timeStart + "','" + odometerStart + "','" + locationStart + "','" + purposeOfTrip + "','" + classType + "');";
+    print("Query String: " + querystring);
+    var results = await connection.query(querystring);
+    print("Database Result: " + results.toString());
+    var querystring2 = 'SELECT "UUID" FROM logging WHERE "username"='"'"+username+"';";
+    print("Query String: " + querystring2);
+    var results2 = await connection.query(querystring2);
+    print("Database Result: " + results2.toString());
+    var rawValue = results2.toString();
+    var value = rawValue.substring(2, rawValue.length - 2);
+    connection.close();
+    return value;
+  }
+
+  Future<void> endTrip(String UUID, String odometerStart, String timeEnd, String odometerEnd, String locationEnd) async{
+    if (int.parse(odometerEnd) < int.parse(odometerStart)){
+      print("Error: Negative Mileage | File: database_connector.dart | Function: endTrip");
+    }
+    else {
+      var mileage = int.parse(odometerEnd) - int.parse(odometerStart);
+      var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
+          username: "LTCAppUser", password: "LTCuser123");
+      await connection.open();
+      var querystring = "UPDATE logging " + 'SET "timeEnd" = '"'" + timeEnd + "', "'"odometerEnd" = '"'" + odometerEnd + "', "'"locationEnd" = '"'" + locationEnd + "', "'"mileage" = '"'" + mileage.toString() + "' WHERE "'"UUID" = ' + UUID + ";";
+      print("Query String: " + querystring);
+      var results = await connection.query(querystring);
+      print("Database Result: " + results.toString());
+    }
+  }
 }
