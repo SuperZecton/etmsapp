@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:ltcapp/features/home/model/HomePageModel.dart';
 import 'package:ltcapp/features/home/view/pages/HomePage.dart';
 import 'package:ltcapp/core/services/CurrentSession.dart';
-import 'package:ltcapp/core/database/database_connector.dart';
+import 'package:ltcapp/core/utils/database_connector.dart';
 import 'package:provider/provider.dart';
 import 'package:ltcapp/main.dart';
 import 'package:stacked/stacked.dart';
@@ -11,6 +11,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 class HomePageViewModel extends BaseViewModel {
   HomePageViewModel();
+
   ///Incomplete code for getting fullname from model
   final currentUsername = CurrentUser.instance.username;
   DatabaseHandler db = DatabaseHandler();
@@ -18,7 +19,8 @@ class HomePageViewModel extends BaseViewModel {
     String _username;
     if (currentUsername != null) {
       _username = currentUsername as String;
-      return await db.singleDataPull("Users", "username", _username, "fullName");
+      return await db.singleDataPull(
+          "Users", "username", _username, "fullName");
     } else {
       print("Username from DB is empty when searching");
       _username = "";
@@ -30,26 +32,27 @@ class HomePageViewModel extends BaseViewModel {
     String _username;
     if (currentUsername != null) {
       _username = currentUsername as String;
-      return await db.singleDataPull("Users", "username", _username, "nricLast4Digits");
+      return await db.singleDataPull(
+          "Users", "username", _username, "nricLast4Digits");
     } else {
       print("NRIC from DB is empty when searching");
       _username = "";
       return Future.error("No NRIC found");
     }
   }
+
   void initialise() {
     notifyListeners();
   }
+
   /// <--------- State Logic --------->
   /// Variable Initialization
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   GlobalKey<ScaffoldState> get scaffoldKey => _scaffoldKey;
-  void onDrawerMenuTap(){
+  void onDrawerMenuTap() {
     _scaffoldKey.currentState!.openDrawer();
     notifyListeners();
-
   }
-
 
   /// CampDropDown
   static final List<String> campDropdownItems = [
@@ -127,5 +130,11 @@ class HomePageViewModel extends BaseViewModel {
     }
   }
 
+  void startTripPush(BuildContext context) {
+    Navigator.pushNamed(context, '/vehicleManagement');
+  }
 
+  void endTripPush(BuildContext context) {
+    Navigator.pushNamed(context, '');
+  }
 }

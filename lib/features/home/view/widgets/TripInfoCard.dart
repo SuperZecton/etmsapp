@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/core/config/Globals.dart';
+import 'package:ltcapp/features/home/viewmodel/HomePageViewModel.dart';
+import 'package:stacked/stacked.dart';
 
-class TripInfoCard extends StatelessWidget {
+class TripInfoCard extends ViewModelWidget<HomePageViewModel>{
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, HomePageViewModel model) {
     return Container(
       height: 180,
       padding: EdgeInsets.all(16),
@@ -13,14 +15,6 @@ class TripInfoCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: darkPrimary700,
         borderRadius: BorderRadius.circular(8),
-        boxShadow: [
-          /*BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
-            spreadRadius: 2,
-            blurRadius: 6,
-            offset: Offset(0, 3), // changes position of shadow
-          ),*/
-        ],
       ),
       child: Column(
         children: <Widget>[
@@ -68,7 +62,7 @@ class TripInfoCard extends StatelessWidget {
               Column(
                 children: <Widget>[
                   InkWell(
-                    onTap: () {},
+                    onTap: () => model.startTripPush(context),
                     child: Container(
                       width: 60,
                       height: 60,
@@ -86,7 +80,7 @@ class TripInfoCard extends StatelessWidget {
                   Material(
                     color: Colors.transparent,
                     child: Text(
-                      'Add Vehicle',
+                      'Start Trip',
                       style: GoogleFonts.roboto(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
@@ -98,7 +92,7 @@ class TripInfoCard extends StatelessWidget {
               Column(
                 children: <Widget>[
                   InkWell(
-                    onTap: () {},
+                    onTap: () => model.endTripPush(context),
                     child: Container(
                       width: 60,
                       height: 60,

@@ -259,7 +259,6 @@ class HomePage extends StatelessWidget {
                               ]),
                         ),
                         onTap: () =>
-                            /*Navigator.pushNamed(context, '/vehicleManagement'),*/
                             showDialog(
                           context: context,
                           builder: (BuildContext context) {

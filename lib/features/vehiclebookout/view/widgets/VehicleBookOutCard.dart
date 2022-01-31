@@ -16,7 +16,7 @@ class VehicleBookOutCard extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12.0),
         ),
-        color: kBackgroundColor,
+        color: darkPrimary500,
         elevation: 10,
         child: Column(
           children: <Widget>[

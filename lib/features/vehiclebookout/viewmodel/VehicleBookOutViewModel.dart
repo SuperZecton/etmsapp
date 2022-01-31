@@ -1,8 +1,9 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:stacked/stacked.dart';
 
-class VehicleBookOutViewModel with ChangeNotifier {
+class VehicleBookOutViewModel extends BaseViewModel {
 
 
 

@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/core/utils/locator.dart';
 import 'package:ltcapp/features/login/view/pages/LoginPage.dart';
 import 'package:ltcapp/core/widgets/LoadingIndicator.dart';
-import 'package:ltcapp/core/database/database_connector.dart';
+import 'package:ltcapp/core/utils/database_connector.dart';
 import 'package:ltcapp/core/services/CurrentSession.dart';
 import 'package:ltcapp/core/config/Globals.dart';
 import 'package:ltcapp/features/login/model/UUIDGetter.dart';
