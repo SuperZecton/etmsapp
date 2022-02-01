@@ -470,12 +470,7 @@ class DatabaseHandler {
     return value;
   }
 
-  Future<void> endTrip(String UUID, String odometerStart, String timeEnd, String odometerEnd, String locationEnd) async{
-    if (int.parse(odometerEnd) < int.parse(odometerStart)){
-      print("Error: Negative Mileage | File: database_connector.dart | Function: endTrip");
-    }
-    else {
-      var mileage = int.parse(odometerEnd) - int.parse(odometerStart);
+  Future<void> endTrip(String UUID, String mileage, String timeEnd, String odometerEnd, String locationEnd) async{
       var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
           username: "LTCAppUser", password: "LTCuser123");
       await connection.open();
@@ -483,6 +478,5 @@ class DatabaseHandler {
       print("Query String: " + querystring);
       var results = await connection.query(querystring);
       print("Database Result: " + results.toString());
-    }
   }
 }
