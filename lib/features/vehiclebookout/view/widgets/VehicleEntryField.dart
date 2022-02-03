@@ -2,16 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/core/config/Globals.dart';
 
-class VehicleEntryField extends StatefulWidget {
+class VehicleEntryField extends StatelessWidget {
   const VehicleEntryField(this.mainText, {Key? key}) : super(key: key);
 
   final String mainText;
-
-  @override
-  _VehicleEntryFieldState createState() => _VehicleEntryFieldState();
-}
-
-class _VehicleEntryFieldState extends State<VehicleEntryField> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -30,7 +24,7 @@ class _VehicleEntryFieldState extends State<VehicleEntryField> {
         decoration: InputDecoration(
           filled: true,
           fillColor: Colors.white24,
-          labelText: widget.mainText,
+          labelText: mainText,
           labelStyle: TextStyle(
             color: Colors.black54,
           ),

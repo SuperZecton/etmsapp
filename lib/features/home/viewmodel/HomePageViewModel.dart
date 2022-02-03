@@ -131,10 +131,10 @@ class HomePageViewModel extends BaseViewModel {
   }
 
   void startTripPush(BuildContext context) {
-    Navigator.pushNamed(context, '/vehicleManagement');
+    Navigator.pushNamed(context, '/vehicleStartTrip');
   }
 
   void endTripPush(BuildContext context) {
-    Navigator.pushNamed(context, '');
+    Navigator.pushNamed(context, '/vehicleEndTrip');
   }
 }

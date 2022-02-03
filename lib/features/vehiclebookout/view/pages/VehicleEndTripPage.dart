@@ -4,18 +4,13 @@ import 'package:ltcapp/features/vehiclebookout/view/widgets/VehicleButton.dart';
 import 'package:ltcapp/features/vehiclebookout/view/widgets/VehicleEntryField.dart';
 import 'package:ltcapp/features/vehiclebookout/view/widgets/VehicleBookOutCard.dart';
 
-class VehicleBookOutFormPage extends StatefulWidget {
-  @override
-  _VehicleBookOutFormPageState createState() => _VehicleBookOutFormPageState();
-}
-
-class _VehicleBookOutFormPageState extends State<VehicleBookOutFormPage> {
+class VehicleEndTripPage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.lightBlue,
-        title: Text("Start Trip"),
+        title: Text("End Trip"),
 
         centerTitle: true,
       ),
@@ -32,16 +27,11 @@ class _VehicleBookOutFormPageState extends State<VehicleBookOutFormPage> {
               SizedBox(height: 30,),
               VehicleEntryField("Vehicle number"),
               VehicleEntryField("Type of Vehicle"),
-              VehicleEntryField("Starting Odometer"),
-              VehicleEntryField("Purpose of Trip"),
-              VehicleEntryField("Time started"),
+              VehicleEntryField("Ending Odometer"),
+              VehicleEntryField("Time Ended"),
               SizedBox(height: 30,),
-              VehicleButton("Submit"),
-
-
-
-
-
+              VehicleButton("Submit", onPressed: () => Navigator.pushNamed(context, '/vehicleManagement'),),
+              
             ],
           ),
         ),

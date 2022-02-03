@@ -3,6 +3,8 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/core/config/Globals.dart';
+import 'package:ltcapp/features/home/view/futurewidgets/FullNameTextWidget.dart';
+import 'package:ltcapp/features/home/view/futurewidgets/NRICTextWidget.dart';
 import 'package:ltcapp/features/home/view/widgets/CampDropDownList.dart';
 import 'package:ltcapp/features/home/view/widgets/DateDropDownList.dart';
 import 'package:ltcapp/features/home/view/widgets/HomePageDrawer.dart';
@@ -31,7 +33,7 @@ class HomePage extends StatelessWidget {
                 shrinkWrap: true,
                 children: [
                   TopContainer(
-                    height: 200,
+                    height: 180,
                     width: width,
                     color: darkGreenColor,
                     child: Column(
@@ -87,95 +89,13 @@ class HomePage extends StatelessWidget {
                                     children: [
                                       Container(
                                         padding: EdgeInsets.only(right: 10.0),
-                                        child: FutureBuilder<String>(
-                                            future: model.getFullName(),
-                                            builder: (BuildContext context,
-                                                AsyncSnapshot<String>
-                                                    snapshot) {
-                                              switch (
-                                                  snapshot.connectionState) {
-                                                case ConnectionState.waiting:
-                                                  return Text(
-                                                    'Loading..',
-                                                    textAlign: TextAlign.left,
-                                                    style: TextStyle(
-                                                      fontSize: 16.0,
-                                                      color: Colors.white,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                    ),
-                                                  );
-                                                case ConnectionState.done:
-                                                  return Text(
-                                                    snapshot.data!,
-                                                    textAlign: TextAlign.left,
-                                                    style: TextStyle(
-                                                      fontSize: 16.0,
-                                                      color: Colors.white,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                    ),
-                                                  );
-                                                default:
-                                                  return Text(
-                                                    'State is ${snapshot.connectionState}',
-                                                    textAlign: TextAlign.left,
-                                                    style: TextStyle(
-                                                      fontSize: 16.0,
-                                                      color: Colors.white,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                    ),
-                                                  );
-                                              }
-                                            }),
+                                        child: FullNameTextWidget(),
                                       ),
                                     ],
                                   ),
                                   Container(
                                     padding: EdgeInsets.only(right: 10.0),
-                                    child: FutureBuilder<String>(
-                                        future: model.getNRIC(),
-                                        builder: (BuildContext context,
-                                            AsyncSnapshot<String>
-                                            snapshot) {
-                                          switch (
-                                          snapshot.connectionState) {
-                                            case ConnectionState.waiting:
-                                              return Text(
-                                                'Loading..',
-                                                textAlign: TextAlign.left,
-                                                style: TextStyle(
-                                                  fontSize: 16.0,
-                                                  color: Colors.white,
-                                                  fontWeight:
-                                                  FontWeight.w400,
-                                                ),
-                                              );
-                                            case ConnectionState.done:
-                                              return Text(
-                                                snapshot.data!,
-                                                textAlign: TextAlign.left,
-                                                style: TextStyle(
-                                                  fontSize: 16.0,
-                                                  color: Colors.white,
-                                                  fontWeight:
-                                                  FontWeight.w400,
-                                                ),
-                                              );
-                                            default:
-                                              return Text(
-                                                'State is ${snapshot.connectionState}',
-                                                textAlign: TextAlign.left,
-                                                style: TextStyle(
-                                                  fontSize: 16.0,
-                                                  color: Colors.white,
-                                                  fontWeight:
-                                                  FontWeight.w400,
-                                                ),
-                                              );
-                                          }
-                                        }),
+                                    child: NRICTextWidget(),
                                   ),
                                 ],
                               )
