@@ -1,5 +1,6 @@
 //import 'dart:html';
 
+import 'package:flutter/material.dart';
 import 'package:ltcapp/features/registration/model/individual_identity.dart';
 import 'package:ltcapp/core/services/CurrentSession.dart';
 import 'dart:async';
@@ -553,5 +554,46 @@ class DatabaseHandler {
     print("Query String: " + querystring);
     var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
+  }
+
+  Future<bool> checkDataExist(String table, String column, String data) async {
+    var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
+        username: "LTCAppUser", password: "LTCuser123");
+    await connection.open();
+    var querystring =
+        'SELECT "'+column+'" FROM '+table+';';
+    print("Query String: " + querystring);
+    var results = await connection.query(querystring);
+    print("Database Result: " + results.toString());
+    var value = [];
+    results.forEach((row) {
+      value.add(row);
+    });
+    for (int i = 0; i < value.length; i++){
+      if ("["+data+"]" == value[i].toString()){
+        connection.close();
+        return true;
+      }
+    }
+    connection.close();
+    return false;
+  }
+
+  Future<List<dynamic>> multiDataPull(String table, String column) async {
+    var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
+        username: "LTCAppUser", password: "LTCuser123");
+    await connection.open();
+    var querystring =
+        'SELECT "'+column+'" FROM '+table+';';
+    print("Query String: " + querystring);
+    var results = await connection.query(querystring);
+    print("Database Result: " + results.toString());
+    var value = [];
+    results.forEach((rawRow) {
+      var row = rawRow.toString().substring(1, rawRow.toString().length - 1);
+      value.add(row);
+    });
+    connection.close();
+    return value;
   }
 }
