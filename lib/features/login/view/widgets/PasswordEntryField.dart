@@ -4,16 +4,11 @@ import 'package:ltcapp/core/config/Globals.dart';
 import 'package:ltcapp/features/login/viewmodel/LoginPageViewModel.dart';
 import 'package:stacked/stacked.dart';
 
-class PasswordEntryField extends ViewModelBuilderWidget<LoginPageViewModel>{
+class PasswordEntryField extends ViewModelWidget<LoginPageViewModel>{
   const PasswordEntryField({Key? key}) : super(key: key);
+
   @override
-  bool get reactive => true;
-  @override
-  bool get createNewModelOnInsert => false;
-  @override
-  LoginPageViewModel viewModelBuilder(BuildContext context) => LoginPageViewModel();
-  @override
-  Widget builder(BuildContext context, LoginPageViewModel model, Widget? child) {
+  Widget build(BuildContext context, LoginPageViewModel model) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
       child: Column(
