@@ -9,4 +9,5 @@ class WelcomePageViewModel extends BaseViewModel {
     Navigator.pushNamed(context, '/login');
   }
 
+
 }

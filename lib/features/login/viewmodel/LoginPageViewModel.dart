@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/core/utils/locator.dart';
 import 'package:ltcapp/features/login/view/pages/LoginPage.dart';
@@ -11,34 +12,44 @@ import 'package:ltcapp/features/login/model/UUIDGetter.dart';
 import 'package:ltcapp/features/login/view/widgets/LoginFailDialog.dart';
 import 'package:stacked/stacked.dart';
 
-class LoginPageViewModel extends BaseViewModel {
+class LoginPageViewModel extends FutureViewModel<List<dynamic>> {
 
-  void initialise() {
-    findRememberedAccount();
-    notifyListeners();
+  @override
+  Future<dynamic> initialise() async{
+    /*_loginEntry = await findRememberedAccount();
+   rememberedUsername = _loginEntry[0];
+   rememberedPassword = _loginEntry[1];
+   print('something blah blah $rememberedUsername and $rememberedPassword');
+   notifyListeners();*/
   }
+  @override
+  Future<List<dynamic>> futureToRun() => findRememberedAccount();
+  List<dynamic> _loginEntry = ["",""];
 
-
-  static List<dynamic> _loginEntry = ["",""];
-  static String rememberedUsername = _loginEntry[0];
-  static String rememberedPassword = _loginEntry[1];
+  static String rememberedUsername = "";
+  static String rememberedPassword = "";
   DeviceUUID deviceID = new DeviceUUID();
   String _deviceID = CurrentUser.instance.deviceID!;
   DatabaseHandler db = DatabaseHandler();
 
-  Future findRememberedAccount() async {
+  Future<List<dynamic>> findRememberedAccount() async {
     List<dynamic> _futureEntry = await db.findLoginEntry(_deviceID);
     print("login entry is " + _futureEntry.toString());
-    if (_futureEntry.isEmpty) {
-      print("Login entry is empty");
-      _loginEntry = ["", ""];
-    } else {
+    List<dynamic> _localEntry;
+    if (_futureEntry.isNotEmpty) {
       print("Login entry is successful");
-      _loginEntry = _futureEntry;
-      rememberedUsername = _loginEntry[0];
-      rememberedPassword = _loginEntry[1];
+      _localEntry = _futureEntry;
+
+      rememberedUsername = _localEntry[0];
+      rememberedUsername = _localEntry[1];
       print('Remembered user is $rememberedUsername and remembered pass is $rememberedPassword');
       notifyListeners();
+      return _localEntry;
+    } else {
+      print("Login entry is empty");
+      _localEntry = ["", ""];
+      notifyListeners();
+      return _localEntry;
     }
   }
 
