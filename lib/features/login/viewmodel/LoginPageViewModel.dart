@@ -12,16 +12,13 @@ import 'package:ltcapp/features/login/view/widgets/LoginFailDialog.dart';
 import 'package:stacked/stacked.dart';
 
 class LoginPageViewModel extends BaseViewModel {
-
   void initialise() {
     findRememberedAccount();
     notifyListeners();
   }
 
 
-  static List<dynamic> _loginEntry = ["",""];
-  static String rememberedUsername = _loginEntry[0];
-  static String rememberedPassword = _loginEntry[1];
+
   DeviceUUID deviceID = new DeviceUUID();
   String _deviceID = CurrentUser.instance.deviceID!;
   DatabaseHandler db = DatabaseHandler();
@@ -29,21 +26,24 @@ class LoginPageViewModel extends BaseViewModel {
   Future findRememberedAccount() async {
     List<dynamic> _futureEntry = await db.findLoginEntry(_deviceID);
     print("login entry is " + _futureEntry.toString());
+    List<dynamic> _loginEntry;
     if (_futureEntry.isEmpty) {
       print("Login entry is empty");
       _loginEntry = ["", ""];
+      usernameController.text = _loginEntry[0];
+      passwordController.text = _loginEntry[1];
     } else {
       print("Login entry is successful");
       _loginEntry = _futureEntry;
-      rememberedUsername = _loginEntry[0];
-      rememberedPassword = _loginEntry[1];
-      print('Remembered user is $rememberedUsername and remembered pass is $rememberedPassword');
+      usernameController.text = _loginEntry[0];
+      passwordController.text = _loginEntry[1];
+      print('Remembered user is ' + usernameController.text + ' and remembered pass is ' + passwordController.text);
       notifyListeners();
     }
   }
 
-  final usernameController = TextEditingController(text: rememberedUsername);
-  final passwordController = TextEditingController(text: rememberedPassword);
+  final usernameController = TextEditingController();
+  final passwordController = TextEditingController();
 
   String get user => usernameController.text;
   String get password => passwordController.text;
