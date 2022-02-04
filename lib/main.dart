@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:ltcapp/core/utils/locator.dart';
 import 'package:ltcapp/features/home/viewmodel/HomePageViewModel.dart';
 import 'package:ltcapp/core/services/CurrentSession.dart';
+import 'package:ltcapp/features/login/model/UUIDGetter.dart';
 import 'package:ltcapp/features/login/viewmodel/LoginPageViewModel.dart';
 import 'package:ltcapp/features/mileage/viewmodel/MileageViewModel.dart';
 import 'package:ltcapp/features/registration/viewmodel/RegistrationViewModel.dart';
@@ -22,14 +23,14 @@ DatabaseHandler personnelDBHandle = new DatabaseHandler();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   ///Debugging nonsense
-  /*var tof =
-      await personnelDBHandle.verifyLoginCreds("dlze2001@gmail.com", "nicetry");
-  print(tof);*/
-  //  personnelDBHandle.findLoginEntry("android1123");
   Permissions permDebug = Permissions();
   var testPermissions = await permDebug.getPermissionLevel("damonlim");
   print(testPermissions);
   personnelDBHandle.DBFunctionTemplate("damonlim");
+  DeviceUUID deviceID = DeviceUUID();
+  String _uuid = await deviceID.getUUID();
+  print('Device ID is >> $_uuid' );
+  CurrentUser.instance.deviceID = _uuid;
   runApp(MyApp());
 }
 

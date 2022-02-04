@@ -13,10 +13,6 @@ import 'package:stacked/stacked.dart';
 
 class LoginPageViewModel extends BaseViewModel {
   LoginPageViewModel() {
-    Future futureUUID = deviceID.getUUID();
-    futureUUID.then((result) {
-      _uuid = result;
-    });
     _loginEntry = findRememberedAccount();
     rememberedUsername = _loginEntry[0];
     rememberedPassword = _loginEntry[1];
@@ -26,7 +22,7 @@ class LoginPageViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  String _uuid = "";
+  String _uuid = CurrentUser.instance.deviceID!;
   List<dynamic> _loginEntry = [];
   static String rememberedUsername = "";
   static String rememberedPassword = "";
@@ -58,13 +54,16 @@ class LoginPageViewModel extends BaseViewModel {
   Future verifyLoginData(BuildContext context) async {
     bool loginCredentials;
     loginCredentials = await db.verifyLoginCreds(user, password);
+
     if (loginCredentials == true) {
       /// Sets global user
       CurrentUser.instance.username = user;
-      CurrentUser.instance.password = password;
       bool canFindLoginEntry = await db.checkLoginEntry(_uuid, user);
-      if (canFindLoginEntry == true) {
-        ///TODO For Damon to input
+      if (canFindLoginEntry != true) {
+        db.createLoginEntry(_uuid, user, password);
+      } else {
+        //TODO Update the time of the current login entry to current login entry
+
       }
 
       /// Redirects user to home page

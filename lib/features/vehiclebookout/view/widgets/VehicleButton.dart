@@ -16,7 +16,6 @@ class _VehicleButtonState extends State<VehicleButton> {
     return InkWell(
       onTap: widget.onPressed,
       child: Container(
-
         width: MediaQuery.of(context).size.width,
         padding: EdgeInsets.symmetric(vertical: 13),
         margin: EdgeInsets.symmetric(horizontal: 100),
@@ -24,7 +23,6 @@ class _VehicleButtonState extends State<VehicleButton> {
         decoration: BoxDecoration(
           color: Colors.blue,
           borderRadius: BorderRadius.all(Radius.circular(5)),
-
         ),
         child: Text(
           widget.text,

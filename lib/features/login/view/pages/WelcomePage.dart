@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ltcapp/core/config/Globals.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/core/services/Permissions.dart';
+import 'package:ltcapp/features/login/view/widgets/LoginButton.dart';
 import 'package:ltcapp/features/login/viewmodel/LoginPageViewModel.dart';
 import 'package:ltcapp/features/login/viewmodel/WelcomePageViewModel.dart';
 import 'package:page_transition/page_transition.dart';
@@ -51,7 +52,7 @@ class WelcomePage extends StatelessWidget {
                     height: 20,
                   ),
                   _label(),
-                  _loginButton(context),
+                  LoginButton(),
                   SizedBox(
                     height: 20,
                   ),
@@ -66,24 +67,6 @@ class WelcomePage extends StatelessWidget {
           ),
         );
       },
-    );
-  }
-
-  Widget _loginButton(BuildContext context) {
-    return InkWell(
-      onTap: () => Navigator.pushNamed(context, '/login'),
-      child: Container(
-        width: MediaQuery.of(context).size.width,
-        padding: EdgeInsets.symmetric(vertical: 13),
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(5)),
-            color: darkSecondaryColor),
-        child: Text(
-          'Login',
-          style: TextStyle(fontSize: 20, color: darkTextColor),
-        ),
-      ),
     );
   }
 

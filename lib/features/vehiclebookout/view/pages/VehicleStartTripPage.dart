@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ltcapp/core/config/Globals.dart';
 import 'package:ltcapp/features/vehiclebookout/view/widgets/VehicleButton.dart';
 import 'package:ltcapp/features/vehiclebookout/view/widgets/VehicleEntryField.dart';
 import 'package:ltcapp/features/vehiclebookout/view/widgets/VehicleBookOutCard.dart';
@@ -14,7 +15,7 @@ class VehicleStartTripPage extends StatelessWidget {
         builder: (context, model, child) {
           return Scaffold(
             appBar: AppBar(
-              backgroundColor: Colors.lightBlue,
+              backgroundColor: darkGreenColor,
               title: Text("Start Trip"),
               centerTitle: true,
             ),
