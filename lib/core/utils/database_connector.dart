@@ -384,6 +384,9 @@ class DatabaseHandler {
         storingDate.add(d1);
         storingDateString.add(rawdate);
       });
+      if (storingDate.length == 2){
+
+      }
       if (storingDate.length != 1) {
         for (int i = 0; i < storingDate.length; i++) {
           for (int j = 0; j < storingDate.length - i; j++) {
@@ -468,6 +471,9 @@ class DatabaseHandler {
                   entrydate +
                   "';";
         }
+      }
+      else if (storingDate.length != 1){
+
       }
       else {
         querystring1 =

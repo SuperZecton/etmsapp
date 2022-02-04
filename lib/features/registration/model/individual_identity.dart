@@ -26,9 +26,10 @@ class VocationType {
   static const TO = const VocationType._internal('Transport Operator');
   static const STO = const VocationType._internal('Storeman');
   static const TOA = const VocationType._internal('Transport Operator Assistant');
+  static const TOB = const VocationType._internal('Transport Operator Base');
   static const OTHERS = const VocationType._internal('Others');
 
-  static List<VocationType> list = [TO,STO,TOA,OTHERS];
+  static List<VocationType> list = [TO,STO,TOA,TOB,OTHERS];
   static List<VocationType> getValues() => list;
 
 
