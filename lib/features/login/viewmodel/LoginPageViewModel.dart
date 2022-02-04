@@ -71,6 +71,7 @@ class LoginPageViewModel extends BaseViewModel {
       /// Redirects user to home page
       Navigator.pushNamed(context, '/home');
     } else {
+      print('user is $user and pass is $password');
       LoginFailDialog.loginFailDailog(context);
     }
   }
