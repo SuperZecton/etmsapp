@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ltcapp/core/config/Globals.dart';
 import 'package:ltcapp/core/widgets/LoadingIndicator.dart';
 
 class LoginLoadingDialog {
@@ -12,6 +13,7 @@ class LoginLoadingDialog {
             child: Container(
               height: 200,
               width: 200,
+              color: darkPrimary300.withOpacity(0.0),
               padding: EdgeInsets.all(40.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

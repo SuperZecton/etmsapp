@@ -12,49 +12,21 @@ import 'package:ltcapp/features/login/model/UUIDGetter.dart';
 import 'package:ltcapp/features/login/view/widgets/LoginFailDialog.dart';
 import 'package:stacked/stacked.dart';
 
-class LoginPageViewModel extends FutureViewModel<List<dynamic>> {
+class LoginPageViewModel extends BaseViewModel {
+  void initialise(){
+    usernameController.text = rememberedUsername!;
+    usernameController.text = rememberedPassword!;
 
-  @override
-  Future<dynamic> initialise() async{
-    /*_loginEntry = await findRememberedAccount();
-   rememberedUsername = _loginEntry[0];
-   rememberedPassword = _loginEntry[1];
-   print('something blah blah $rememberedUsername and $rememberedPassword');
-   notifyListeners();*/
   }
-  @override
-  Future<List<dynamic>> futureToRun() => findRememberedAccount();
-  List<dynamic> _loginEntry = ["",""];
 
-  static String rememberedUsername = "";
-  static String rememberedPassword = "";
+  static String? rememberedUsername = CurrentUser.instance.rememberedUser;
+  static String? rememberedPassword = CurrentUser.instance.rememberedPassword;
   DeviceUUID deviceID = new DeviceUUID();
   String _deviceID = CurrentUser.instance.deviceID!;
   DatabaseHandler db = DatabaseHandler();
 
-  Future<List<dynamic>> findRememberedAccount() async {
-    List<dynamic> _futureEntry = await db.findLoginEntry(_deviceID);
-    print("login entry is " + _futureEntry.toString());
-    List<dynamic> _localEntry;
-    if (_futureEntry.isNotEmpty) {
-      print("Login entry is successful");
-      _localEntry = _futureEntry;
-
-      rememberedUsername = _localEntry[0];
-      rememberedUsername = _localEntry[1];
-      print('Remembered user is $rememberedUsername and remembered pass is $rememberedPassword');
-      notifyListeners();
-      return _localEntry;
-    } else {
-      print("Login entry is empty");
-      _localEntry = ["", ""];
-      notifyListeners();
-      return _localEntry;
-    }
-  }
-
-  final usernameController = TextEditingController(text: rememberedUsername);
-  final passwordController = TextEditingController(text: rememberedPassword);
+  final usernameController = TextEditingController();
+  final passwordController = TextEditingController();
 
   String get user => usernameController.text;
   String get password => passwordController.text;
