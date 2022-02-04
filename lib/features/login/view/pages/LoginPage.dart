@@ -76,7 +76,7 @@ class LoginPage extends StatelessWidget {
         });
   }
 
-  Widget _usernameEntryField() {
+  /*Widget _usernameEntryField() {
     return Consumer<LoginPageViewModel>(
       builder: (context, vm, child) => Container(
         margin: EdgeInsets.symmetric(vertical: 10),
@@ -120,7 +120,7 @@ class LoginPage extends StatelessWidget {
         ),
       ),
     );
-  }
+  }*/
 
   Widget _passwordEntryField() {
     return Consumer<LoginPageViewModel>(

@@ -12,36 +12,33 @@ import 'package:ltcapp/features/login/view/widgets/LoginFailDialog.dart';
 import 'package:stacked/stacked.dart';
 
 class LoginPageViewModel extends BaseViewModel {
-  LoginPageViewModel() {
-    _loginEntry = findRememberedAccount();
-    rememberedUsername = _loginEntry[0];
-    rememberedPassword = _loginEntry[1];
-  }
 
   void initialise() {
+    findRememberedAccount();
     notifyListeners();
   }
 
-  String _uuid = CurrentUser.instance.deviceID!;
-  List<dynamic> _loginEntry = [];
-  static String rememberedUsername = "";
-  static String rememberedPassword = "";
+
+  static List<dynamic> _loginEntry = ["",""];
+  static String rememberedUsername = _loginEntry[0];
+  static String rememberedPassword = _loginEntry[1];
   DeviceUUID deviceID = new DeviceUUID();
+  String _deviceID = CurrentUser.instance.deviceID!;
   DatabaseHandler db = DatabaseHandler();
 
-  List<dynamic> findRememberedAccount() {
-    var _futureEntry = db.findLoginEntry(_uuid);
-    List<dynamic> _usernpass = [];
-    _futureEntry.then((result) {
-      _usernpass = result;
-    });
-    print("login entry is " + _usernpass.toString());
-    if (_usernpass.isEmpty) {
+  Future findRememberedAccount() async {
+    List<dynamic> _futureEntry = await db.findLoginEntry(_deviceID);
+    print("login entry is " + _futureEntry.toString());
+    if (_futureEntry.isEmpty) {
       print("Login entry is empty");
-      return ["", ""];
+      _loginEntry = ["", ""];
     } else {
       print("Login entry is successful");
-      return _usernpass;
+      _loginEntry = _futureEntry;
+      rememberedUsername = _loginEntry[0];
+      rememberedPassword = _loginEntry[1];
+      print('Remembered user is $rememberedUsername and remembered pass is $rememberedPassword');
+      notifyListeners();
     }
   }
 
@@ -58,12 +55,17 @@ class LoginPageViewModel extends BaseViewModel {
     if (loginCredentials == true) {
       /// Sets global user
       CurrentUser.instance.username = user;
-      bool canFindLoginEntry = await db.checkLoginEntry(_uuid, user);
+      bool canFindLoginEntry = await db.checkLoginEntry(_deviceID, user);
+      DateTime currentDateTime = DateTime.now();
+      var now = DateTime.parse(currentDateTime.toString()+'-08:00');
+      String _date = now.day.toString().padLeft(2, '0') + "/" + now.month.toString().padLeft(2, '0') + "/" + now.year.toString();
+      String _time = now.hour.toString().padLeft(2, '0') + now.minute.toString().padLeft(2, '0') + now.second.toString().padLeft(2, '0');
+
       if (canFindLoginEntry != true) {
-        db.createLoginEntry(_uuid, user, password);
+        print("Creating Login Entry..");
+        db.createLoginEntry(_deviceID, user, password, _date, _time);
       } else {
         //TODO Update the time of the current login entry to current login entry
-
       }
 
       /// Redirects user to home page
