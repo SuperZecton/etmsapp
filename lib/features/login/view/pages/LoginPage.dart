@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ltcapp/core/widgets/FunctionMissingDialog.dart';
+import 'package:ltcapp/features/login/view/widgets/PasswordEntryField.dart';
+import 'package:ltcapp/features/login/view/widgets/UsernameEntryField.dart';
 import 'package:ltcapp/features/login/viewmodel/LoginPageViewModel.dart';
 import 'package:ltcapp/features/registration/view/pages/SignupPage.dart';
 import 'package:ltcapp/core/services/CurrentSession.dart';
@@ -39,8 +41,8 @@ class LoginPage extends StatelessWidget {
                           SizedBox(height: 50),
                           Column(
                             children: <Widget>[
-                              _usernameEntryField(),
-                              _passwordEntryField(),
+                              UserNameEntryField(),
+                              PasswordEntryField(),
                             ],
                           ),
                           SizedBox(height: 20),
@@ -122,7 +124,7 @@ class LoginPage extends StatelessWidget {
     );
   }*/
 
-  Widget _passwordEntryField() {
+  /*Widget _passwordEntryField() {
     return Consumer<LoginPageViewModel>(
       builder: (context, vm, child) => Container(
         margin: EdgeInsets.symmetric(vertical: 10),
@@ -165,7 +167,7 @@ class LoginPage extends StatelessWidget {
         ),
       ),
     );
-  }
+  }*/
 
   Widget _submitButton(BuildContext context, LoginPageViewModel model) {
     return InkWell(
