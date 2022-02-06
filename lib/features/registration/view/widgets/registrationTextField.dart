@@ -10,7 +10,7 @@ class RegistrationTextField extends StatelessWidget {
     Key? key,
     this.isPassword = false,
     this.helperText = "",
-    this.maxLength = 10,
+    this.maxLength,
     this.validationAction,
   }) : super(key: key);
 
@@ -19,7 +19,7 @@ class RegistrationTextField extends StatelessWidget {
   final String mainText;
   final bool isPassword;
   final String helperText;
-  final int maxLength;
+  final int? maxLength;
   final String? Function(String?)? validationAction;
   @override
   Widget build(BuildContext context) {
@@ -37,25 +37,28 @@ class RegistrationTextField extends StatelessWidget {
           textStyle: Theme.of(context).textTheme.headline4,
           fontSize: 13,
           fontWeight: FontWeight.w700,
-          color: Colors.white,
+          color: darkTextColor,
         ),
         decoration: InputDecoration(
-          fillColor: secondaryColor,
+          fillColor: darkPrimary700,
           filled: true,
           prefixIcon: Icon(
             icon,
-            color: Colors.white,
+            color: darkTextColor,
           ),
           labelText: mainText,
           labelStyle: TextStyle(
-            color: Colors.white,
+            color: darkTextColor,
           ),
           helperStyle: TextStyle(
-            color: Colors.white,
+            color: darkTextColor,
           ),
           helperText: helperText,
           enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.blue),
+            borderSide: BorderSide(color: darkPrimary300),
+          ),
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.blueAccent, width: 2.0),
           ),
         ),
       ),

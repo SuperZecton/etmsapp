@@ -36,7 +36,7 @@ class SignUpPage extends StatelessWidget {
                       blurRadius: 5,
                       spreadRadius: 2)
                 ],
-                color: primaryColor,
+                color: Theme.of(context).backgroundColor,
               ),
               child: Stack(
                 children: <Widget>[
@@ -59,7 +59,7 @@ class SignUpPage extends StatelessWidget {
                               textStyle: Theme.of(context).textTheme.headline4,
                               fontSize: 30,
                               fontWeight: FontWeight.w700,
-                              color: Color(0xffffffff),
+                              color: darkTextColor,
                             ),
                           ),
                         ),
@@ -74,7 +74,7 @@ class SignUpPage extends StatelessWidget {
                               textStyle: Theme.of(context).textTheme.headline4,
                               fontSize: 24,
                               fontWeight: FontWeight.w700,
-                              color: Color(0xffffffff),
+                              color: darkTextColor,
                             ),
                           ),
                         ),
@@ -124,6 +124,7 @@ class SignUpPage extends StatelessWidget {
                           FontAwesomeIcons.user,
                           model.usernameController,
                           helperText: "Please input a username you'll remember",
+                          maxLength: 24,
                         ),
                         RegistrationTextField(
                           "Password",
