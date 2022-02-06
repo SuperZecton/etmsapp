@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ltcapp/core/config/Globals.dart';
 
 class VehicleButton extends StatefulWidget {
   VehicleButton(this.text, {Key? key, this.onPressed}) : super(key: key);
@@ -17,11 +18,11 @@ class _VehicleButtonState extends State<VehicleButton> {
       onTap: widget.onPressed,
       child: Container(
         width: MediaQuery.of(context).size.width,
-        padding: EdgeInsets.symmetric(vertical: 13),
+        padding: EdgeInsets.symmetric(vertical: 15),
         margin: EdgeInsets.symmetric(horizontal: 100),
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          color: Colors.blue,
+          color: darkGreenAccent,
           borderRadius: BorderRadius.all(Radius.circular(5)),
         ),
         child: Text(

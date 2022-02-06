@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ltcapp/core/config/Globals.dart';
+import 'package:ltcapp/core/utils/extensions.dart';
 import 'package:ltcapp/features/registration/view/widgets/dropDownField.dart';
 import 'package:ltcapp/features/vehiclebookout/model/individual_vehicle.dart';
 import 'package:ltcapp/features/vehiclebookout/view/widgets/VehicleButton.dart';
@@ -28,26 +29,22 @@ class VehicleStartTripPage extends StatelessWidget {
               padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 0.0),
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
-              child: Form(
-                key: model.startTripKey,
-                child: SingleChildScrollView(
+              child: SingleChildScrollView(
+                child: Form(
+                  key: model.startTripKey,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      SizedBox(
-                        height: 30,
-                      ),
+                      SizedBox(height: 30),
                       VehicleDropDownField<CarType?>(
                           hint: "Car Type",
                           values: CarType.getValues(),
                           value: model.currentCarValue,
-                          icon: FontAwesomeIcons.carAlt,
+                          icon: FontAwesomeIcons.truckPickup,
                           onChanged: (value) =>
                               model.carTypeDropDownOnChanged(value!)),
-                      SizedBox(
-                        height: 30,
-                      ),
+                      SizedBox(height: 5),
                       VehicleDropDownField<String?>(
                           hint: "Vehicle Number",
                           values: model.vehicleNumbers,
@@ -55,7 +52,27 @@ class VehicleStartTripPage extends StatelessWidget {
                           icon: FontAwesomeIcons.carAlt,
                           onChanged: (value) =>
                               model.vehicleNoDropDownOnChanged(value!)),
-                      VehicleButton("Submit"),
+                      VehicleEntryField(
+                        "Purpose of Trip",
+                        FontAwesomeIcons.luggageCart,
+                        model.purposeOfTrip,
+                        validationAction: (String? input) => input!
+                                .isValidName()
+                            ? null
+                            : "Purpose of Trip cannot have special characters",
+                      ),
+                      VehicleEntryField(
+                          "Start odometer",
+                          FontAwesomeIcons.tachometerAlt,
+                          model.startingOdometer),
+                      VehicleEntryField("Start Location",
+                          FontAwesomeIcons.mapMarkedAlt, model.locationStart),
+                      VehicleEntryField("End Location",
+                          FontAwesomeIcons.mapMarkedAlt, model.locationEnd),
+                      VehicleButton(
+                        "Submit",
+                        onPressed: () => model.onStartTripPush(context),
+                      ),
                     ],
                   ),
                 ),

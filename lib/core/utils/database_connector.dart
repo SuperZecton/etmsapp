@@ -308,7 +308,8 @@ class DatabaseHandler {
     connection.close();
   }
 
-  Future<void> checkAndCreateLoginEntry(String deviceIdentifier, String username, String password, String date, String time) async {
+  Future<void> checkAndCreateLoginEntry(String deviceIdentifier,
+      String username, String password, String date, String time) async {
     var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
         username: "LTCAppUser", password: "LTCuser123");
     await connection.open();
@@ -319,16 +320,27 @@ class DatabaseHandler {
     print("Query String: " + querystring);
     var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
-    if (results.toString() == "[" + username + "]") {
-      var querystring = "UPDATE RememberLogin" + ' SET "date" = ' + "'" + date + "', " + '"time" = ' + "'" + time +
-          "' WHERE "'"deviceIdentifier" = '"'" + deviceIdentifier + "' AND "'"username = '"'" + username + "';";
+    if (results.toString() == "[[" + username + "]]") {
+      var querystring = "UPDATE RememberLogin" +
+          ' SET "date" = ' +
+          "'" +
+          date +
+          "', " +
+          '"time" = ' +
+          "'" +
+          time +
+          "' WHERE " '"deviceIdentifier" = ' "'" +
+          deviceIdentifier +
+          "' AND " '"username" = ' "'" +
+          username +
+          "';";
       print("Query String: " + querystring);
       var results = await connection.query(querystring);
       print("Database Result: " + results.toString());
     } else {
       var querystring =
           'INSERT INTO RememberLogin ("UUID", "deviceIdentifier", "username", "password", "date", "time") '
-              "VALUES (uuid_generate_v4(),'" +
+                  "VALUES (uuid_generate_v4(),'" +
               deviceIdentifier +
               "','" +
               username +
@@ -385,8 +397,8 @@ class DatabaseHandler {
         storingDate.add(d1);
         storingDateString.add(rawdate);
       });
-      if (storingDate.length == 2){
-        if (storingDate[0].compareTo(storingDate[1]) < 0){
+      if (storingDate.length == 2) {
+        if (storingDate[0].compareTo(storingDate[1]) < 0) {
           DateTime temp = storingDate[0];
           storingDate[0] = storingDate[1];
           storingDate[1] = temp;
@@ -398,7 +410,8 @@ class DatabaseHandler {
           _ignoreTime = false;
           var samedate = storingDateString[0];
           var querystring =
-              'SELECT "time" FROM RememberLogin WHERE "deviceIdentifier" = ' "'" +
+              'SELECT "time" FROM RememberLogin WHERE "deviceIdentifier" = '
+                      "'" +
                   deviceIdentifier +
                   "'" ' AND "date" = ' "'" +
                   samedate +
@@ -407,7 +420,8 @@ class DatabaseHandler {
           List<dynamic> results = await connection.query(querystring);
           results.forEach((row) {
             print("Database Result: " + row.toString());
-            var rawtime = row.toString().substring(1, row.toString().length - 1);
+            var rawtime =
+                row.toString().substring(1, row.toString().length - 1);
             var t1 = DateTime.utc(
                 2021,
                 12,
@@ -422,9 +436,8 @@ class DatabaseHandler {
             storingTime[0] = storingTime[1];
             storingTime[1] = temp;
           }
-      }
-      }
-      else if (storingDate.length != 1){
+        }
+      } else if (storingDate.length != 1) {
         for (int i = 0; i < storingDate.length; i++) {
           for (int j = 0; j < storingDate.length - i; j++) {
             if (storingDate[j].compareTo(storingDate[j + 1]) < 0) {
@@ -442,7 +455,8 @@ class DatabaseHandler {
           _ignoreTime = false;
           var samedate = storingDateString[0];
           var querystring =
-              'SELECT "time" FROM RememberLogin WHERE "deviceIdentifier" = ' "'" +
+              'SELECT "time" FROM RememberLogin WHERE "deviceIdentifier" = '
+                      "'" +
                   deviceIdentifier +
                   "'" ' AND "date" = ' "'" +
                   samedate +
@@ -451,9 +465,8 @@ class DatabaseHandler {
           List<dynamic> results = await connection.query(querystring);
           results.forEach((row) {
             print("Database Result: " + row.toString());
-            var rawtime = row.toString().substring(1, row
-                .toString()
-                .length - 1);
+            var rawtime =
+                row.toString().substring(1, row.toString().length - 1);
             var t1 = DateTime.utc(
                 2021,
                 12,
@@ -481,8 +494,7 @@ class DatabaseHandler {
           storingDate[0].year.toString();*/
         var entrydate = storingDateString[0];
         print("Date of Last Login: " + entrydate);
-      }
-      else {
+      } else {
         _ignoreTime = true;
       }
       if (_ignoreTime == true) {
@@ -493,14 +505,13 @@ class DatabaseHandler {
                 "'" ' AND "date" = ' "'" +
                 storingDateString[0] +
                 "';";
-      }
-      else{
+      } else {
         var entrytime = storingTime[0].hour.toString().padLeft(2, '0') +
             storingTime[0].hour.toString().padLeft(2, '0') +
             storingTime[0].hour.toString().padLeft(2, '0');
         querystring1 =
             'SELECT "username", "password" FROM RememberLogin WHERE "deviceIdentifier" = '
-                "'" +
+                    "'" +
                 deviceIdentifier +
                 "'" ' AND "date" = ' "'" +
                 storingDateString[0] +
@@ -526,13 +537,14 @@ class DatabaseHandler {
       String timeStart,
       String odometerStart,
       String locationStart,
+      String locationEnd,
       String purposeOfTrip,
       String classType) async {
     var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
         username: "LTCAppUser", password: "LTCuser123");
     await connection.open();
     var querystring =
-        'INSERT INTO Logging ("UUID", "username", "date", "vehicleNo", "timeStart", "odometerStart", "locationStart", "purposeOfTrip", "classType") ' +
+        'INSERT INTO Logging ("UUID", "username", "date", "vehicleNo", "timeStart", "odometerStart", "locationStart", "locationEnd", "purposeOfTrip", "classType") ' +
             "VALUES (uuid_generate_v4(),'" +
             username +
             "','" +
@@ -546,6 +558,8 @@ class DatabaseHandler {
             "','" +
             locationStart +
             "','" +
+            locationEnd +
+            "','" +
             purposeOfTrip +
             "','" +
             classType +
@@ -554,7 +568,7 @@ class DatabaseHandler {
     var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
     var querystring2 =
-        'SELECT "UUID" FROM logging WHERE "username"=' "'" + username + "';";
+        'SELECT "UUID" FROM logging WHERE "username"=' "'" + username + "' AND "'"date" = '"'" + date + "' AND "'"timeStart" = '"'" + timeStart + "';";
     print("Query String: " + querystring2);
     var results2 = await connection.query(querystring2);
     print("Database Result: " + results2.toString());
@@ -564,8 +578,8 @@ class DatabaseHandler {
     return value;
   }
 
-  Future<void> endTrip(String UUID, String mileage, String timeEnd,
-      String odometerEnd, String locationEnd) async {
+  Future<void> endTrip(
+      String UUID, String mileage, String timeEnd, String odometerEnd) async {
     var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
         username: "LTCAppUser", password: "LTCuser123");
     await connection.open();
@@ -574,13 +588,11 @@ class DatabaseHandler {
         timeEnd +
         "', " '"odometerEnd" = ' "'" +
         odometerEnd +
-        "', " '"locationEnd" = ' "'" +
-        locationEnd +
         "', " '"mileage" = ' "'" +
         mileage.toString() +
-        "' WHERE " '"UUID" = ' +
+        "' WHERE " '"UUID" = '"'" +
         UUID +
-        ";";
+        "';";
     print("Query String: " + querystring);
     var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
@@ -590,8 +602,7 @@ class DatabaseHandler {
     var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
         username: "LTCAppUser", password: "LTCuser123");
     await connection.open();
-    var querystring =
-        'SELECT "'+column+'" FROM '+table+';';
+    var querystring = 'SELECT "' + column + '" FROM ' + table + ';';
     print("Query String: " + querystring);
     var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
@@ -599,8 +610,8 @@ class DatabaseHandler {
     results.forEach((row) {
       value.add(row);
     });
-    for (int i = 0; i < value.length; i++){
-      if ("["+data+"]" == value[i].toString()){
+    for (int i = 0; i < value.length; i++) {
+      if ("[" + data + "]" == value[i].toString()) {
         connection.close();
         return true;
       }
@@ -613,8 +624,7 @@ class DatabaseHandler {
     var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
         username: "LTCAppUser", password: "LTCuser123");
     await connection.open();
-    var querystring =
-        'SELECT "'+column+'" FROM '+table+';';
+    var querystring = 'SELECT "' + column + '" FROM ' + table + ';';
     print("Query String: " + querystring);
     var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
@@ -627,16 +637,23 @@ class DatabaseHandler {
     return value;
   }
 
-  Future<List<dynamic>> multiDataPullRow(String table, String columnIdentifier, String columnIdentifierValue) async {
+  Future<List<dynamic>> multiDataPullRow(String table, String columnIdentifier,
+      String columnIdentifierValue) async {
     var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
         username: "LTCAppUser", password: "LTCuser123");
     await connection.open();
-    var querystring =
-        'SELECT * FROM '+table+' WHERE "'+columnIdentifier+'" = '"'"+columnIdentifierValue+"';";
+    var querystring = 'SELECT * FROM ' +
+        table +
+        ' WHERE "' +
+        columnIdentifier +
+        '" = ' "'" +
+        columnIdentifierValue +
+        "';";
     print("Query String: " + querystring);
     var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
-    String values = results.toString().substring(2, results.toString().length - 2);
+    String values =
+        results.toString().substring(2, results.toString().length - 2);
     var trueresults = values.split(", ");
     connection.close();
     return trueresults;
@@ -647,7 +664,9 @@ class DatabaseHandler {
         username: "LTCAppUser", password: "LTCuser123");
     await connection.open();
     var querystring =
-        'SELECT "vehicleNo" FROM vehicles WHERE "carType" = '"'"+carType+"';";
+        'SELECT "vehicleNo" FROM vehicles WHERE "carType" = ' "'" +
+            carType +
+            "';";
     print("Query String: " + querystring);
     var results = await connection.query(querystring);
     print("Database Result: " + results.toString());

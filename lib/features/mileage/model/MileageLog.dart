@@ -6,7 +6,6 @@ class MileageLog {
   final String startOdometer;
   final String endOdometer;
   final String mileage;
-  List<String>
 
 
 }

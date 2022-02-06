@@ -178,7 +178,7 @@ class RegistrationViewModel extends BaseViewModel {
   final civilianLicenseNoController = TextEditingController();
   final civilianLicenseDOIController = TextEditingController();
   final personalVehicleController = TextEditingController();
-
+/*
   otherSignUpValidation(BuildContext context) {
     if (otherRegFormKey.currentState.validate()) {
       otherRegFormKey.currentState.save();

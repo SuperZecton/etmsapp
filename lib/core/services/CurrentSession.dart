@@ -7,9 +7,10 @@ class CurrentUser {
   /// For example, to get username, just use CurrentUser.instance.username
   String ?username;
   String ?deviceID;
+  String ?currentTripID;
   static final CurrentUser _currentUser = CurrentUser._internal();
   CurrentUser._internal();
-  factory CurrentUser({String ?username, String ?deviceID}) => _currentUser;
+  factory CurrentUser({String ?username, String ?deviceID, String ?currentTripID}) => _currentUser;
   static CurrentUser get instance => _currentUser;
 
 
