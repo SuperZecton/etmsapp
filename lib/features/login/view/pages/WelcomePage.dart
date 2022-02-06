@@ -72,7 +72,7 @@ class WelcomePage extends StatelessWidget {
 
   Widget _signUpButton(BuildContext context) {
     return InkWell(
-      onTap: () => Navigator.pushNamed(context, '/signup'),
+      onTap: () => Navigator.pushNamed(context, '/signUp'),
       /*showDialog(
               context: context,
               builder: (BuildContext context) {

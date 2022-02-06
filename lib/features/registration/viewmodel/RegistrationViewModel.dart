@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ltcapp/features/registration/model/individual_identity.dart';
 import 'package:ltcapp/main.dart';
 import 'package:ltcapp/core/utils/database_connector.dart';
@@ -10,27 +10,47 @@ class RegistrationViewModel extends BaseViewModel {
   DatabaseHandler db = DatabaseHandler();
 
   ///Sign Up Page Controllers
-  final signUpFormKey = GlobalKey<FormState>();
-  final nameController = TextEditingController();
-  final usernameController = TextEditingController();
-  final nricController = TextEditingController();
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
-  final addressController = TextEditingController();
-  final numberController = TextEditingController();
-  final homeNumberController = TextEditingController();
+  final _signUpFormKey = GlobalKey<FormState>();
+  final _nameController = TextEditingController();
+  final _usernameController = TextEditingController();
+  final _nricController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _addressController = TextEditingController();
+  final _numberController = TextEditingController();
+  final _homeNumberController = TextEditingController();
 
-  final drugAllergyController = TextEditingController();
-  final foodAllergyController = TextEditingController();
-  final nokController = TextEditingController(); // full name
-  final nokAddressController = TextEditingController();
-  final nokNumberController = TextEditingController();
+  final _drugAllergyController = TextEditingController();
+  final _foodAllergyController = TextEditingController();
+  final _nokController = TextEditingController(); // full name
+  final _nokAddressController = TextEditingController();
+  final _nokNumberController = TextEditingController();
 
-  final medicalConditionController = TextEditingController();
-  final doeController = TextEditingController();
-  final dobController = TextEditingController();
-  final ordController = TextEditingController();
-  final dopController = TextEditingController();
+  final _medicalConditionController = TextEditingController();
+  final _doeController = TextEditingController();
+  final _dobController = TextEditingController();
+  final _ordController = TextEditingController();
+  final _dopController = TextEditingController();
+
+  GlobalKey get signUpFormKey => _signUpFormKey;
+  TextEditingController get nameController => _nameController;
+  TextEditingController get usernameController => _usernameController;
+  TextEditingController get nricController => _nricController;
+  TextEditingController get emailController=> _emailController;
+  TextEditingController get passwordController => _passwordController;
+  TextEditingController get addressController => _addressController;
+  TextEditingController get numberController => _numberController;
+  TextEditingController get homeNumberController => _homeNumberController;
+  TextEditingController get drugAllergyController => _drugAllergyController;
+  TextEditingController get foodAllergyController => _foodAllergyController;
+  TextEditingController get nokController  => _nokController;
+  TextEditingController get nokAddressController => _nokAddressController;
+  TextEditingController get nokNumberController => _nokNumberController;
+  TextEditingController get medicalConditionController => _medicalConditionController;
+  TextEditingController get doeController => _doeController;
+  TextEditingController get dobController => _dobController;
+  TextEditingController get ordController => _ordController;
+  TextEditingController get dopController => _dopController;
 
   ///Sign up Page Dropdown Values -> Default Values
   PESType currentPESValue = PESType.A;
@@ -67,8 +87,8 @@ class RegistrationViewModel extends BaseViewModel {
 
   /// ADD NULL CHECKS HERE
   signUpValidation(BuildContext context) {
-    if (signUpFormKey.currentState!.validate()) {
-      signUpFormKey.currentState!.save();
+    if (_signUpFormKey.currentState!.validate()) {
+      _signUpFormKey.currentState!.save();
     } else {
       showDialog(
           context: context,
