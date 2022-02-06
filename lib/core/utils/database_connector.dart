@@ -307,7 +307,7 @@ class DatabaseHandler {
     print("Database Result: " + results.toString());
     connection.close();
   }
-  
+
   Future<void> checkAndCreateLoginEntry(String deviceIdentifier, String username, String password, String date, String time) async {
     var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
         username: "LTCAppUser", password: "LTCuser123");
@@ -609,12 +609,45 @@ class DatabaseHandler {
     return false;
   }
 
-  Future<List<dynamic>> multiDataPull(String table, String column) async {
+  Future<List<dynamic>> multiDataPullColumn(String table, String column) async {
     var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
         username: "LTCAppUser", password: "LTCuser123");
     await connection.open();
     var querystring =
         'SELECT "'+column+'" FROM '+table+';';
+    print("Query String: " + querystring);
+    var results = await connection.query(querystring);
+    print("Database Result: " + results.toString());
+    var value = [];
+    results.forEach((rawRow) {
+      var row = rawRow.toString().substring(1, rawRow.toString().length - 1);
+      value.add(row);
+    });
+    connection.close();
+    return value;
+  }
+
+  Future<List<dynamic>> multiDataPullRow(String table, String columnIdentifier, String columnIdentifierValue) async {
+    var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
+        username: "LTCAppUser", password: "LTCuser123");
+    await connection.open();
+    var querystring =
+        'SELECT * FROM '+table+' WHERE "'+columnIdentifier+'" = '"'"+columnIdentifierValue+"';";
+    print("Query String: " + querystring);
+    var results = await connection.query(querystring);
+    print("Database Result: " + results.toString());
+    String values = results.toString().substring(2, results.toString().length - 2);
+    var trueresults = values.split(", ");
+    connection.close();
+    return trueresults;
+  }
+
+  Future<List<dynamic>> vehiclesBasedOnCarType(String carType) async {
+    var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
+        username: "LTCAppUser", password: "LTCuser123");
+    await connection.open();
+    var querystring =
+        'SELECT "vehicleNo" FROM vehicles WHERE "carType" = '"'"+carType+"';";
     print("Query String: " + querystring);
     var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
