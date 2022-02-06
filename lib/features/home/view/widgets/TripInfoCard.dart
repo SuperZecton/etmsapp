@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/core/config/Globals.dart';
+import 'package:ltcapp/features/home/view/futurewidgets/CurrentTripInfoWidget.dart';
 import 'package:ltcapp/features/home/viewmodel/HomePageViewModel.dart';
 import 'package:stacked/stacked.dart';
 
-class TripInfoCard extends ViewModelWidget<HomePageViewModel>{
+class TripInfoCard extends ViewModelWidget<HomePageViewModel> {
   @override
   Widget build(BuildContext context, HomePageViewModel model) {
     return Container(
-      height: 180,
+      height: 260,
       padding: EdgeInsets.all(16),
       margin: EdgeInsets.symmetric(horizontal: 16.0),
       decoration: BoxDecoration(
@@ -32,27 +33,17 @@ class TripInfoCard extends ViewModelWidget<HomePageViewModel>{
                   ),
                 ),
               ),
-              Material(
-                color: Colors.transparent,
-                child: Text(
-                  't',
-                  style: TextStyle(
-                    color: darkTextColor,
-                    fontFamily: 'Regular',
-                    fontSize: 16,
-                  ),
-                ),
-              ),
             ],
           ),
           SizedBox(
-            height: 16,
+            height: 12,
           ),
           Container(
             height: 1,
             width: MediaQuery.of(context).size.width,
             color: Colors.grey[300],
           ),
+          CurrentTripInfoWidget(),
           SizedBox(
             height: 24,
           ),
@@ -64,8 +55,8 @@ class TripInfoCard extends ViewModelWidget<HomePageViewModel>{
                   InkWell(
                     onTap: () => model.startTripPush(context),
                     child: Container(
-                      width: 60,
-                      height: 60,
+                      width: 50,
+                      height: 50,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color: Color(0xffF3F3FE),
@@ -94,8 +85,8 @@ class TripInfoCard extends ViewModelWidget<HomePageViewModel>{
                   InkWell(
                     onTap: () => model.endTripPush(context),
                     child: Container(
-                      width: 60,
-                      height: 60,
+                      width: 50,
+                      height: 50,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color: Color(0xffFFF3F3),

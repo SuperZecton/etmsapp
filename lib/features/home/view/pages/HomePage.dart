@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/core/config/Globals.dart';
 import 'package:ltcapp/features/home/view/futurewidgets/FullNameTextWidget.dart';
+import 'package:ltcapp/features/home/view/futurewidgets/FutureTripInfoCard.dart';
 import 'package:ltcapp/features/home/view/futurewidgets/NRICTextWidget.dart';
 import 'package:ltcapp/features/home/view/widgets/CampDropDownList.dart';
 import 'package:ltcapp/features/home/view/widgets/DateDropDownList.dart';
@@ -112,7 +113,7 @@ class HomePage extends StatelessWidget {
                   SizedBox(
                     height: 40,
                   ),
-                  TripInfoCard(),
+                  FutureTripInfoCard(),
                   SizedBox(
                     height: 40,
                   ),

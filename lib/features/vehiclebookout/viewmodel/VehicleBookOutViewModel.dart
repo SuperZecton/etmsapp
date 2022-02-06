@@ -90,15 +90,18 @@ class VehicleBookOutViewModel extends BaseViewModel {
   TextEditingController get endOdometer => _endOdometer;
 
   void onEndTripPush(BuildContext context) async {
+    //DateTime formatting
     DateTime currentDateTime = DateTime.now();
     var now = DateTime.parse(currentDateTime.toString() + '-08:00');
     String _time = now.hour.toString().padLeft(2, '0') +
         now.minute.toString().padLeft(2, '0');
+    //Local Variables
     String? _username = CurrentUser.instance.username;
     String? _tripID = CurrentUser.instance.currentTripID;
     if (_username != null && _tripID != null) {
       String startOdo =
           await db.singleDataPull("Logging", "UUID", _tripID, "odometerStart");
+      //Casting dyn to int
       int _mileage = int.parse(_endOdometer.text) - int.parse(startOdo);
       print(
           "Starting odo is $startOdo and Ending odo is ${_endOdometer.text} so total mileage is $_mileage");

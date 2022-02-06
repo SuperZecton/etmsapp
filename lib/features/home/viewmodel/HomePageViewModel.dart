@@ -67,6 +67,25 @@ class HomePageViewModel extends BaseViewModel {
     }
   }
 
+
+  Future<List<String?>> ensureCurrentTripData() async {
+    String? _tripID = CurrentUser.instance.currentTripID;
+    if (_tripID != null) {
+      print("Ensuring Current Trip Data");
+      List<dynamic> _dynList = await db.multiDataPullRow("Logging", "UUID", _tripID);
+      List<String?> _dataList = _dynList.map((s) => s as String?).toList();
+      print(_dataList);
+      return _dataList;
+
+    } else {
+      print("Ensure Current Trip Data failed to get data from DB");
+      return Future.error("No data");
+    }
+  }
+
+
+
+
   void initialise() {
     notifyListeners();
   }
@@ -172,6 +191,10 @@ class HomePageViewModel extends BaseViewModel {
     } else {
       Navigator.pushNamed(context, '/vehicleEndTrip');
     }
-
   }
+
+
+
 }
+
+
