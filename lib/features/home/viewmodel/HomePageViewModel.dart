@@ -11,9 +11,10 @@ import 'package:url_launcher/url_launcher.dart';
 
 class HomePageViewModel extends BaseViewModel {
   HomePageViewModel();
-
-  ///Incomplete code for getting fullname from model
   final currentUsername = CurrentUser.instance.username;
+
+  ///Future Getters
+
   DatabaseHandler db = DatabaseHandler();
   Future<String> getFullName() async {
     String _username;
@@ -38,6 +39,30 @@ class HomePageViewModel extends BaseViewModel {
       print("NRIC from DB is empty when searching");
       _username = "";
       return Future.error("No NRIC found");
+    }
+  }
+
+  Future<String> getClass3Mileage() async {
+    String _username;
+    if (currentUsername != null) {
+      _username = currentUsername as String;
+      return await db.singleDataPull(
+          "Users", "username", _username, "totalClass3Mileage");
+    } else {
+      print("Class 3 Mileage not found from DB");
+      return Future.error("Class 3 mileage Error");
+    }
+  }
+
+  Future<String> getClass4Mileage() async {
+    String _username;
+    if (currentUsername != null) {
+      _username = currentUsername as String;
+      return await db.singleDataPull(
+          "Users", "username", _username, "totalClass4Mileage");
+    } else {
+      print("Class 4 Mileage not found from DB");
+      return Future.error("Class 4 mileage Error");
     }
   }
 

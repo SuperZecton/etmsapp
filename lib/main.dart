@@ -31,10 +31,10 @@ void main() async {
   String _uuid = await deviceID.getUUID();
   print('Device ID is >> $_uuid' );
   CurrentUser.instance.deviceID = _uuid;
-  var demolist = await personnelDBHandle.vehiclesBasedOnCarType("MUV");
+  /*var demolist = await personnelDBHandle.vehiclesBasedOnCarType("MUV");
   for (int x=0; x < demolist.length; x++){
     print(demolist[x]);
-  }
+  }*/
   runApp(MyApp());
 }
 

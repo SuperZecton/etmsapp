@@ -32,11 +32,6 @@ class VehicleStartTripPage extends StatelessWidget {
                     SizedBox(
                       height: 30,
                     ),
-                    VehicleEntryField("Vehicle number"),
-                    VehicleEntryField("Type of Vehicle"),
-                    VehicleEntryField("Starting Odometer"),
-                    VehicleEntryField("Purpose of Trip"),
-                    VehicleEntryField("Time started"),
                     SizedBox(
                       height: 30,
                     ),

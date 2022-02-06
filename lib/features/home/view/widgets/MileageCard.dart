@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/core/config/Globals.dart';
+import 'package:ltcapp/features/home/view/futurewidgets/Class3MileageTextWidget.dart';
+import 'package:ltcapp/features/home/view/futurewidgets/Class4MileageTextWidget.dart';
 import 'package:ltcapp/features/home/viewmodel/HomePageViewModel.dart';
 import 'package:stacked/stacked.dart';
 
@@ -47,7 +49,7 @@ class MileageCard extends ViewModelWidget<HomePageViewModel> {
                     "Show History",
                     style: GoogleFonts.roboto(
                       textStyle: Theme.of(context).textTheme.headline4,
-                      fontSize: 20,
+                      fontSize: 18,
                       fontWeight: FontWeight.w600,
                       color: darkTextColor,
                     ),
@@ -63,26 +65,11 @@ class MileageCard extends ViewModelWidget<HomePageViewModel> {
               children: [
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      "Class 3: ",
-                      style: GoogleFonts.roboto(
-                        textStyle: Theme.of(context).textTheme.headline4,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                        color: darkTextColor,
-                      ),
-                    ),
+                    Class3MileageTextWidget(),
                     SizedBox(height: 10),
-                    Text(
-                      "Class 4: ",
-                      style: GoogleFonts.roboto(
-                        textStyle: Theme.of(context).textTheme.headline4,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                        color: darkTextColor,
-                      ),
-                    ),
+                    Class4MileageTextWidget(),
                   ],
                 ),
               ],

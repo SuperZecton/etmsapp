@@ -25,10 +25,6 @@ class VehicleEndTripPage extends StatelessWidget{
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(height: 30,),
-              VehicleEntryField("Vehicle number"),
-              VehicleEntryField("Type of Vehicle"),
-              VehicleEntryField("Ending Odometer"),
-              VehicleEntryField("Time Ended"),
               SizedBox(height: 30,),
               VehicleButton("Submit", onPressed: () => Navigator.pushNamed(context, '/vehicleManagement'),),
               
