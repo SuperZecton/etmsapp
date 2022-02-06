@@ -97,12 +97,14 @@ class DatabaseHandler {
       String username,
       String password,
       String permissionsLevel,
+      String totalClass3Mileage,
+      String totalClass4Mileage,
       String remarks) async {
     var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
         username: "LTCAppUser", password: "LTCuser123");
     await connection.open();
     var querystring =
-        'INSERT INTO Users ("UUID", "rank", "fullName", "nricLast4Digits", "fullHomeAddress", "handphoneNumber", "homephoneNumber", "personalEmail", "dateOfBirth", "dateOfEnlistment", "dateOfORD", "dateOfPostIn", "pesType", "religion", "race", "bloodGroup", "drugAllergy", "foodAllergy", "NOKDetailFullName", "NOKDetailContactNumber", "NOKDetailFullAddress", "vocationType", "stayInStayOut", "medicalConditions", "trainingFrame", "trainingPeriod", "passAttempts", "militaryLicenseNo", "militaryLicenseType", "militaryLicenseDateOfIssue", "LTCTraining", "drivingCategory", "educationLevel", "streamCourseName", "ccaOptional", "schName", "hobbiesInterest", "civilianLicenseType", "civilianLicenseNumber", "civilianLicenseDateOfIssue", "hasDoneDefensiveCourse", "hasPersonalVehicle", "personalVehiclePlateNumber", "tShirtSize", "no3SizeUpperTorso", "no3SizeWaist", "no3SizeShoes", "username", "password", "permissionLevel", "remarks") '
+        'INSERT INTO Users ("UUID", "rank", "fullName", "nricLast4Digits", "fullHomeAddress", "handphoneNumber", "homephoneNumber", "personalEmail", "dateOfBirth", "dateOfEnlistment", "dateOfORD", "dateOfPostIn", "pesType", "religion", "race", "bloodGroup", "drugAllergy", "foodAllergy", "NOKDetailFullName", "NOKDetailContactNumber", "NOKDetailFullAddress", "vocationType", "stayInStayOut", "medicalConditions", "trainingFrame", "trainingPeriod", "passAttempts", "militaryLicenseNo", "militaryLicenseType", "militaryLicenseDateOfIssue", "LTCTraining", "drivingCategory", "educationLevel", "streamCourseName", "ccaOptional", "schName", "hobbiesInterest", "civilianLicenseType", "civilianLicenseNumber", "civilianLicenseDateOfIssue", "hasDoneDefensiveCourse", "hasPersonalVehicle", "personalVehiclePlateNumber", "tShirtSize", "no3SizeUpperTorso", "no3SizeWaist", "no3SizeShoes", "username", "password", "permissionLevel", "totalClass3Mileage", "totalClass4Mileage", "remarks") '
                 "VALUES (uuid_generate_v4(),'" +
             rank +
             "','" +
@@ -201,6 +203,10 @@ class DatabaseHandler {
             password +
             "','" +
             permissionsLevel +
+            "','" +
+            totalClass3Mileage +
+            "','" +
+            totalClass4Mileage +
             "','" +
             remarks +
             "');";
