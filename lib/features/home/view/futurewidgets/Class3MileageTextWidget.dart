@@ -34,6 +34,17 @@ class Class3MileageTextWidget extends ViewModelWidget<HomePageViewModel> {
                   color: darkTextColor,
                 ),
               );
+            case ConnectionState.none:
+              return Text(
+                "Class 3:",
+                textAlign: TextAlign.left,
+                style: GoogleFonts.roboto(
+                  textStyle: Theme.of(context).textTheme.headline4,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                  color: darkTextColor,
+                ),
+              );
             default:
               return Text(
                 "Class 3: ${snapshot.connectionState}",

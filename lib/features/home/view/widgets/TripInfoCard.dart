@@ -35,14 +35,14 @@ class TripInfoCard extends ViewModelWidget<HomePageViewModel>{
               Material(
                 color: Colors.transparent,
                 child: Text(
-                  '',
+                  't',
                   style: TextStyle(
-                    color: Color(0xff464855),
+                    color: darkTextColor,
                     fontFamily: 'Regular',
                     fontSize: 16,
                   ),
                 ),
-              )
+              ),
             ],
           ),
           SizedBox(

@@ -4,6 +4,7 @@ import 'package:ltcapp/features/home/model/HomePageModel.dart';
 import 'package:ltcapp/features/home/view/pages/HomePage.dart';
 import 'package:ltcapp/core/services/CurrentSession.dart';
 import 'package:ltcapp/core/utils/database_connector.dart';
+import 'package:ltcapp/features/home/view/widgets/HomePageDialog.dart';
 import 'package:provider/provider.dart';
 import 'package:ltcapp/main.dart';
 import 'package:stacked/stacked.dart';
@@ -156,10 +157,21 @@ class HomePageViewModel extends BaseViewModel {
   }
 
   void startTripPush(BuildContext context) {
-    Navigator.pushNamed(context, '/vehicleStartTrip');
+    if(CurrentUser.instance.currentTripID != null){
+      HomePageDialog.startTripDeniedDialog(context);
+
+    } else {
+      Navigator.pushNamed(context, '/vehicleStartTrip');
+    }
+
   }
 
   void endTripPush(BuildContext context) {
-    Navigator.pushNamed(context, '/vehicleEndTrip');
+    if(CurrentUser.instance.currentTripID == null){
+      HomePageDialog.endTripDeniedDialog(context);
+    } else {
+      Navigator.pushNamed(context, '/vehicleEndTrip');
+    }
+
   }
 }

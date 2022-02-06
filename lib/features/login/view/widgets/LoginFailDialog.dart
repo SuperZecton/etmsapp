@@ -4,7 +4,7 @@ import 'package:ltcapp/core/config/Globals.dart';
 import 'package:ltcapp/core/widgets/LoadingIndicator.dart';
 
 class LoginFailDialog {
-  static void loginFailDailog(BuildContext context) {
+  static void loginFailDialog(BuildContext context) {
     showDialog(
         context: context,
         barrierDismissible: true,
