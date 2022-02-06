@@ -55,18 +55,11 @@ class LoginPageViewModel extends BaseViewModel {
     if (loginCredentials == true) {
       /// Sets global user
       CurrentUser.instance.username = user;
-      bool canFindLoginEntry = await db.checkLoginEntry(_deviceID, user);
       DateTime currentDateTime = DateTime.now();
       var now = DateTime.parse(currentDateTime.toString()+'-08:00');
       String _date = now.day.toString().padLeft(2, '0') + "/" + now.month.toString().padLeft(2, '0') + "/" + now.year.toString();
       String _time = now.hour.toString().padLeft(2, '0') + now.minute.toString().padLeft(2, '0') + now.second.toString().padLeft(2, '0');
-
-      if (canFindLoginEntry != true) {
-        print("Creating Login Entry..");
-        db.createLoginEntry(_deviceID, user, password, _date, _time);
-      } else {
-        //TODO Update the time of the current login entry to current login entry
-      }
+      await db.checkAndCreateLoginEntry(_deviceID, user, password, _date, _time);
 
       /// Redirects user to home page
       Navigator.pushNamed(context, '/home');

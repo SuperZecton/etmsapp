@@ -307,32 +307,8 @@ class DatabaseHandler {
     print("Database Result: " + results.toString());
     connection.close();
   }
-
-  Future<void> createLoginEntry(String deviceIdentifier, String username,
-      String password, String date, String time) async {
-    var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
-        username: "LTCAppUser", password: "LTCuser123");
-    await connection.open();
-    var querystring =
-        'INSERT INTO RememberLogin ("UUID", "deviceIdentifier", "username", "password", "date", "time") '
-                "VALUES (uuid_generate_v4(),'" +
-            deviceIdentifier +
-            "','" +
-            username +
-            "','" +
-            password +
-            "','" +
-            date +
-            "','" +
-            time +
-            "');";
-    print("Query String: " + querystring);
-    var results = await connection.query(querystring);
-    print("Database Result: " + results.toString());
-    connection.close();
-  }
-
-  Future<bool> checkLoginEntry(String deviceIdentifier, String username) async {
+  
+  Future<void> checkAndCreateLoginEntry(String deviceIdentifier, String username, String password, String date, String time) async {
     var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
         username: "LTCAppUser", password: "LTCuser123");
     await connection.open();
@@ -343,12 +319,31 @@ class DatabaseHandler {
     print("Query String: " + querystring);
     var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
-    connection.close();
     if (results.toString() == "[" + username + "]") {
-      return true;
+      var querystring = "UPDATE RememberLogin" + ' SET "date" = ' + "'" + date + "', " + '"time" = ' + "'" + time +
+          "' WHERE "'"deviceIdentifier" = '"'" + deviceIdentifier + "' AND "'"username = '"'" + username + "';";
+      print("Query String: " + querystring);
+      var results = await connection.query(querystring);
+      print("Database Result: " + results.toString());
     } else {
-      return false;
+      var querystring =
+          'INSERT INTO RememberLogin ("UUID", "deviceIdentifier", "username", "password", "date", "time") '
+              "VALUES (uuid_generate_v4(),'" +
+              deviceIdentifier +
+              "','" +
+              username +
+              "','" +
+              password +
+              "','" +
+              date +
+              "','" +
+              time +
+              "');";
+      print("Query String: " + querystring);
+      var results = await connection.query(querystring);
+      print("Database Result: " + results.toString());
     }
+    connection.close();
   }
 
   Future<List<dynamic>> findLoginEntry(
