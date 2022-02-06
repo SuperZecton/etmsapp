@@ -391,29 +391,61 @@ class DatabaseHandler {
         storingDateString.add(rawdate);
       });
       if (storingDate.length == 2){
-
+        if (storingDate[0].compareTo(storingDate[1]) < 0){
+          DateTime temp = storingDate[0];
+          storingDate[0] = storingDate[1];
+          storingDate[1] = temp;
+          String temp1 = storingDateString[0];
+          storingDateString[0] = storingDateString[1];
+          storingDateString[1] = temp1;
+        }
+        if (storingDate[0] == storingDate[1]) {
+          _ignoreTime = false;
+          var samedate = storingDateString[0];
+          var querystring =
+              'SELECT "time" FROM RememberLogin WHERE "deviceIdentifier" = ' "'" +
+                  deviceIdentifier +
+                  "'" ' AND "date" = ' "'" +
+                  samedate +
+                  "';";
+          print("Query String: " + querystring);
+          List<dynamic> results = await connection.query(querystring);
+          results.forEach((row) {
+            print("Database Result: " + row.toString());
+            var rawtime = row.toString().substring(1, row.toString().length - 1);
+            var t1 = DateTime.utc(
+                2021,
+                12,
+                18,
+                int.parse(rawtime.substring(0, rawtime.length - 4)),
+                int.parse(rawtime.substring(2, rawtime.length - 2)),
+                int.parse(rawtime.substring(4, rawtime.length)));
+            storingTime.add(t1);
+          });
+          if (storingTime[0].compareTo(storingTime[1]) < 0) {
+            DateTime temp = storingTime[0];
+            storingTime[0] = storingTime[1];
+            storingTime[1] = temp;
+          }
       }
-      if (storingDate.length != 1) {
+      }
+      else if (storingDate.length != 1){
         for (int i = 0; i < storingDate.length; i++) {
           for (int j = 0; j < storingDate.length - i; j++) {
             if (storingDate[j].compareTo(storingDate[j + 1]) < 0) {
               DateTime temp = storingDate[j];
               storingDate[j] = storingDate[j + 1];
               storingDate[j + 1] = temp;
-              DateTime temp1 = storingDateString[j];
+              String temp1 = storingDateString[j];
               storingDateString[j] = storingDateString[j + 1];
               storingDateString[j + 1] = temp1;
             }
           }
         }
-        print('Storing Date is ' + storingDate.toString());
+        print('Storing Date is ' + storingDateString[0]);
         if (storingDate[0] == storingDate[1]) {
           _ignoreTime = false;
-          var samedate = storingDate[0].day.toString() +
-              "/" +
-              storingDate[0].month.toString() +
-              "/" +
-              storingDate[0].year.toString();
+          var samedate = storingDateString[0];
           var querystring =
               'SELECT "time" FROM RememberLogin WHERE "deviceIdentifier" = ' "'" +
                   deviceIdentifier +
@@ -454,40 +486,31 @@ class DatabaseHandler {
           storingDate[0].year.toString();*/
         var entrydate = storingDateString[0];
         print("Date of Last Login: " + entrydate);
-        if (_ignoreTime == false) {
-          var entrytime = storingTime[0].hour.toString().padLeft(2, '0') +
-              storingTime[0].hour.toString().padLeft(2, '0') +
-              storingTime[0].hour.toString().padLeft(2, '0');
-          querystring1 =
-              'SELECT "username", "password" FROM RememberLogin WHERE "deviceIdentifier" = '
-                  "'" +
-                  deviceIdentifier +
-                  "'" ' AND "date" = ' "'" +
-                  entrydate +
-                  "'" ' AND "time" = ' "'" +
-                  entrytime +
-                  "';";
-        }
-        else {
-          querystring1 =
-              'SELECT "username", "password" FROM RememberLogin WHERE "deviceIdentifier" = '
-                  "'" +
-                  deviceIdentifier +
-                  "'" ' AND "date" = ' "'" +
-                  entrydate +
-                  "';";
-        }
-      }
-      else if (storingDate.length != 1){
-
       }
       else {
+        _ignoreTime = true;
+      }
+      if (_ignoreTime == true) {
+        querystring1 =
+            'SELECT "username", "password" FROM RememberLogin WHERE "deviceIdentifier" = '
+                    "'" +
+                deviceIdentifier +
+                "'" ' AND "date" = ' "'" +
+                storingDateString[0] +
+                "';";
+      }
+      else{
+        var entrytime = storingTime[0].hour.toString().padLeft(2, '0') +
+            storingTime[0].hour.toString().padLeft(2, '0') +
+            storingTime[0].hour.toString().padLeft(2, '0');
         querystring1 =
             'SELECT "username", "password" FROM RememberLogin WHERE "deviceIdentifier" = '
                 "'" +
                 deviceIdentifier +
                 "'" ' AND "date" = ' "'" +
                 storingDateString[0] +
+                "'" ' AND "time" = ' "'" +
+                entrytime +
                 "';";
       }
       print("Query String : " + querystring1);
