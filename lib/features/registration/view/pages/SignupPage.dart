@@ -163,7 +163,7 @@ class SignUpPage extends StatelessWidget {
                             model.dopController),
                         Consumer<RegistrationViewModel>(
                           builder: (context, vm, child) =>
-                              DropDownField<PESType>(
+                              DropDownField<PESType?>(
                                   hint: "PES",
                                   values: PESType.getValues(),
                                   value: vm.currentPESValue,
@@ -173,7 +173,7 @@ class SignUpPage extends StatelessWidget {
                         ),
                         Consumer<RegistrationViewModel>(
                           builder: (context, vm, child) =>
-                              DropDownField<RaceType>(
+                              DropDownField<RaceType?>(
                                   hint: "Race",
                                   values: RaceType.getValues(),
                                   value: vm.currentRaceValue,
@@ -183,7 +183,7 @@ class SignUpPage extends StatelessWidget {
                         ),
                         Consumer<RegistrationViewModel>(
                           builder: (context, vm, child) =>
-                              DropDownField<ReligionType>(
+                              DropDownField<ReligionType?>(
                                   hint: "Religion",
                                   values: ReligionType.getValues(),
                                   value: vm.currentReligionValue,
@@ -193,7 +193,7 @@ class SignUpPage extends StatelessWidget {
                         ),
                         Consumer<RegistrationViewModel>(
                           builder: (context, vm, child) =>
-                              DropDownField<BloodType>(
+                              DropDownField<BloodType?>(
                                   hint: "Blood Group",
                                   values: BloodType.getValues(),
                                   value: vm.currentBloodValue,
@@ -211,7 +211,7 @@ class SignUpPage extends StatelessWidget {
                             model.foodAllergyController),
                         Consumer<RegistrationViewModel>(
                           builder: (context, vm, child) =>
-                              DropDownField<VocationType>(
+                              DropDownField<VocationType?>(
                                   hint: "Vocation",
                                   values: VocationType.getValues(),
                                   value: vm.currentVocationValue,

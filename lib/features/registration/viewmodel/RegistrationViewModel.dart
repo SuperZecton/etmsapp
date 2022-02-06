@@ -53,11 +53,11 @@ class RegistrationViewModel extends BaseViewModel {
   TextEditingController get dopController => _dopController;
 
   ///Sign up Page Dropdown Values -> Default Values
-  PESType currentPESValue = PESType.A;
-  RaceType currentRaceValue = RaceType.Chinese;
-  ReligionType currentReligionValue = ReligionType.Christianity;
-  BloodType currentBloodValue = BloodType.O_MINUS;
-  VocationType currentVocationValue = VocationType.STO;
+  PESType? currentPESValue;
+  RaceType? currentRaceValue;
+  ReligionType? currentReligionValue;
+  BloodType? currentBloodValue;
+  VocationType? currentVocationValue;
 
   ///Sign up Page Dropdown Functions
   void pesDropDownOnChanged(PESType value) {
