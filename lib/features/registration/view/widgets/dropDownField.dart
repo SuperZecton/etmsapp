@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:ltcapp/core/config/Globals.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/features/registration/viewmodel/RegistrationViewModel.dart';
-import 'package:provider/provider.dart';
 
 class DropDownField<T> extends StatelessWidget {
   const DropDownField(
@@ -28,57 +27,62 @@ class DropDownField<T> extends StatelessWidget {
       height: 75,
       child: InputDecorator(
         decoration: InputDecoration(
-          fillColor: secondaryColor,
+          fillColor: darkPrimary700,
           filled: true,
           prefixIcon: Icon(
             icon,
-            color: Colors.white,
+            color: darkTextColor,
           ),
           enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.blue),
+            borderSide: BorderSide(color: darkPrimary300),
           ),
         ),
-        child: DropdownButtonHideUnderline(
-          child: DropdownButton<T>(
-            value: value,
-            hint: Text(
-              hint,
-              style: GoogleFonts.roboto(
-                textStyle: Theme.of(context).textTheme.headline4,
-                fontSize: 13,
-                fontWeight: FontWeight.w700,
-                color: Color(0xffffffff),
+        child: Theme(
+          data: Theme.of(context).copyWith(
+            canvasColor: Theme.of(context).backgroundColor
+          ),
+          child: DropdownButtonHideUnderline(
+            child: DropdownButton<T>(
+              value: value,
+              hint: Text(
+                hint,
+                style: GoogleFonts.roboto(
+                  textStyle: Theme.of(context).textTheme.headline4,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w700,
+                  color: darkTextColor,
+                ),
               ),
-            ),
-            isDense: true,
-            onChanged: onChanged,
-            selectedItemBuilder: (BuildContext context) {
-              return values.map((value) {
-                return Text(
-                  value.toString(),
-                  style: GoogleFonts.roboto(
-                    textStyle: Theme.of(context).textTheme.headline4,
-                    fontSize: 13,
-                    fontWeight: FontWeight.w700,
-                    color: Color(0xffffffff),
+              isDense: true,
+              onChanged: onChanged,
+              selectedItemBuilder: (BuildContext context) {
+                return values.map((value) {
+                  return Text(
+                    value.toString(),
+                    style: GoogleFonts.roboto(
+                      textStyle: Theme.of(context).textTheme.headline4,
+                      fontSize: 13,
+                      fontWeight: FontWeight.w700,
+                      color: darkTextColor,
+                    ),
+                  );
+                }).toList();
+              },
+              items: values.map((value) {
+                return DropdownMenuItem<T>(
+                  value: value,
+                  child: Text(
+                    value.toString(),
+                    style: GoogleFonts.roboto(
+                      textStyle: Theme.of(context).textTheme.headline4,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500,
+                      color: darkTextColor,
+                    ),
                   ),
                 );
-              }).toList();
-            },
-            items: values.map((value) {
-              return DropdownMenuItem<T>(
-                value: value,
-                child: Text(
-                  value.toString(),
-                  style: GoogleFonts.roboto(
-                    textStyle: Theme.of(context).textTheme.headline4,
-                    fontSize: 15,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.black,
-                  ),
-                ),
-              );
-            }).toList(),
+              }).toList(),
+            ),
           ),
         ),
       ),

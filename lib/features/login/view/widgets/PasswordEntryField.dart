@@ -4,7 +4,7 @@ import 'package:ltcapp/core/config/Globals.dart';
 import 'package:ltcapp/features/login/viewmodel/LoginPageViewModel.dart';
 import 'package:stacked/stacked.dart';
 
-class PasswordEntryField extends ViewModelWidget<LoginPageViewModel>{
+class PasswordEntryField extends ViewModelWidget<LoginPageViewModel> {
   const PasswordEntryField({Key? key}) : super(key: key);
 
   @override
@@ -35,12 +35,10 @@ class PasswordEntryField extends ViewModelWidget<LoginPageViewModel>{
               controller: model.passwordController,
               decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
-                      borderSide:
-                      BorderSide(color: darkPrimary500, width: 1.0),
+                      borderSide: BorderSide(color: darkPrimary500, width: 1.0),
                       borderRadius: BorderRadius.all(Radius.circular(5))),
                   focusedBorder: OutlineInputBorder(
-                      borderSide:
-                      BorderSide(color: darkPrimary300, width: 1.5),
+                      borderSide: BorderSide(color: darkPrimary300, width: 1.5),
                       borderRadius: BorderRadius.all(Radius.circular(5))),
                   fillColor: darkPrimary700,
                   filled: true),
