@@ -31,10 +31,10 @@ class VehicleBookOutViewModel extends BaseViewModel {
 
   List<String> vehicleNumbers = [""];
 
-  /*Future<List<String>> getVehicleNumbers(CarType? carType) async {
+  Future<List<String>> getVehicleNumbers( async {
     String? _carType = carType.toString();
     await personnelDBHandle.vehiclesBasedOnCarType(_carType);
 
-  }*/
+  }
 
 }

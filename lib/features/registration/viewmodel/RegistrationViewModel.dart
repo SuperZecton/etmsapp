@@ -89,6 +89,8 @@ class RegistrationViewModel extends BaseViewModel {
   signUpValidation(BuildContext context) {
     if (_signUpFormKey.currentState!.validate()) {
       _signUpFormKey.currentState!.save();
+
+      Navigator.pushNamed(context, '/trainingReg');
     } else {
       showDialog(
           context: context,
@@ -176,7 +178,7 @@ class RegistrationViewModel extends BaseViewModel {
   final civilianLicenseNoController = TextEditingController();
   final civilianLicenseDOIController = TextEditingController();
   final personalVehicleController = TextEditingController();
-/*
+
   otherSignUpValidation(BuildContext context) {
     if (otherRegFormKey.currentState.validate()) {
       otherRegFormKey.currentState.save();
