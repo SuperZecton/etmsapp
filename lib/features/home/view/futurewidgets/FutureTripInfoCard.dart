@@ -121,7 +121,7 @@ class FutureTripInfoCard extends ViewModelWidget<HomePageViewModel> {
               );
             case true:
               return Container(
-                height: 260,
+                height: 250,
                 padding: EdgeInsets.all(16),
                 margin: EdgeInsets.symmetric(horizontal: 16.0),
                 decoration: BoxDecoration(
@@ -155,7 +155,7 @@ class FutureTripInfoCard extends ViewModelWidget<HomePageViewModel> {
                       color: Colors.grey[300],
                     ),
                     Flexible(
-                      flex: 2,
+                      flex: 3,
                       child: Container(
                         margin: EdgeInsets.symmetric(horizontal: 0, vertical: 4.0),
                         padding: EdgeInsets.symmetric(horizontal: 2.0, vertical: 4.0),
@@ -203,9 +203,6 @@ class FutureTripInfoCard extends ViewModelWidget<HomePageViewModel> {
                           ],
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 24,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,

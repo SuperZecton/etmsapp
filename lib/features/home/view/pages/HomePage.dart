@@ -10,7 +10,6 @@ import 'package:ltcapp/features/home/view/widgets/CampDropDownList.dart';
 import 'package:ltcapp/features/home/view/widgets/DateDropDownList.dart';
 import 'package:ltcapp/features/home/view/widgets/HomePageDrawer.dart';
 import 'package:ltcapp/features/home/view/widgets/MileageCard.dart';
-import 'package:ltcapp/features/home/view/widgets/TripInfoCard.dart';
 import 'package:ltcapp/features/home/view/widgets/TopContainer.dart';
 import 'package:ltcapp/features/home/viewmodel/HomePageViewModel.dart';
 import 'package:provider/provider.dart';
@@ -167,11 +166,11 @@ class HomePage extends StatelessWidget {
                                     shape: CircleBorder(),
                                     child: Padding(
                                       padding: const EdgeInsets.all(16.0),
-                                      child: Icon(FontAwesomeIcons.car,
+                                      child: Icon(FontAwesomeIcons.book,
                                           color: Colors.white, size: 30.0),
                                     )),
                                 Padding(padding: EdgeInsets.only(bottom: 16.0)),
-                                Text('Book Out Vehicle',
+                                Text('Admin Section',
                                     style: GoogleFonts.roboto(
                                       fontSize: 22,
                                       fontWeight: FontWeight.w600,
