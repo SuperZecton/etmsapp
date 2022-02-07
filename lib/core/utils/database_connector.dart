@@ -572,6 +572,11 @@ class DatabaseHandler {
     print("Query String: " + querystring2);
     var results2 = await connection.query(querystring2);
     print("Database Result: " + results2.toString());
+    var querystring3 =
+        'UPDATE vehicles SET "inUse" = '"'true' WHERE "'"vehicleNo" = '"'" + vehicleNo + "';";
+    print("Query String: " + querystring3);
+    var results3 = await connection.query(querystring3);
+    print("Database Result: " + results3.toString());
     var rawValue = results2.toString();
     var value = rawValue.substring(2, rawValue.length - 2);
     connection.close();
@@ -596,6 +601,18 @@ class DatabaseHandler {
     print("Query String: " + querystring);
     var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
+    var querystring2 =
+        'SELECT "vehicleNo" FROM logging WHERE "UUID"='"'" + UUID + "';";
+    print("Query String: " + querystring2);
+    var results2 = await connection.query(querystring2);
+    print("Database Result: " + results2.toString());
+    var rawVehNo = results2.toString();
+    var vehNo = rawVehNo.substring(2, rawVehNo.length - 2);
+    var querystring3 =
+        'UPDATE vehicles SET "inUse" = '"'true' WHERE "'"vehicleNo" = '"'" + vehNo + "';";
+    print("Query String: " + querystring3);
+    var results3 = await connection.query(querystring3);
+    print("Database Result: " + results3.toString());
   }
 
   Future<bool> checkDataExist(String table, String column, String data) async {
@@ -666,7 +683,7 @@ class DatabaseHandler {
     var querystring =
         'SELECT "vehicleNo" FROM vehicles WHERE "carType" = ' "'" +
             carType +
-            "';";
+            "' AND " + '"inUse" = ' + "'false';";
     print("Query String: " + querystring);
     var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
@@ -677,5 +694,29 @@ class DatabaseHandler {
     });
     connection.close();
     return value;
+  }
+
+  Future<List<List<dynamic>>> getMileageHistory(String username) async {
+    var finallist = [[]];
+    var count = 0;
+    var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
+        username: "LTCAppUser", password: "LTCuser123");
+    await connection.open();
+    var querystring =
+        'SELECT "vehicleNo", "date", "odometerStart", "odometerEnd", "mileage" FROM logging WHERE "username" = '"'" +
+            username +
+            "' AND " + '"mileage" != ' + "'';";
+    print("Query String: " + querystring);
+    var results = await connection.query(querystring);
+    print("Database Result: " + results.toString());
+    results.forEach((rawRow) {
+      var row = rawRow.toString().substring(1, rawRow.toString().length - 1);
+      var innerList = row.split(", ");
+      finallist.add(innerList);
+      count = count + 1;
+    });
+    finallist.removeAt(0);
+    print("There are " + count.toString() + " mileage entries");
+    return finallist;
   }
 }
