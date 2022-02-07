@@ -15,14 +15,17 @@ class _MileageMainPageState extends State<MileageMainPage> {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<MileageViewModel>.reactive(
-        viewModelBuilder: () => MileageViewModel(),
-        builder: (context, model, child) {
-          return Scaffold(
-            body: CustomScrollView(slivers: <Widget>[
-              MileageAppBar(),
-              MileageList(),
-            ]),
-          );
-        },);
+      viewModelBuilder: () => MileageViewModel(),
+      builder: (context, model, child) {
+        return Scaffold(
+          backgroundColor: Theme.of(context).backgroundColor,
+          appBar: AppBar(
+            title: Text("Mileage History"),
+            centerTitle: true,
+          ),
+          body: MileageList(),
+        );
+      },
+    );
   }
 }

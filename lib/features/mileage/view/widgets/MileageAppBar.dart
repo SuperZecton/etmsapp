@@ -9,23 +9,10 @@ class MileageAppBar extends ViewModelWidget<MileageViewModel> {
   const MileageAppBar({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context, MileageViewModel model) {
-    return SliverAppBar(
-        pinned: true,
-        snap: false,
-        floating: false,
-        expandedHeight: 200.0,
-        flexibleSpace: FlexibleSpaceBar(
-          centerTitle: true,
-          title: Text(
-            'Mileage',
-            style: GoogleFonts.roboto(
-              fontSize: 30.0,
-              color: Colors.white,
-            ),
-          ),
-          background: Container(
-            color: darkPrimary500,
-          ),
-        ));
+    return AppBar(
+      backgroundColor: darkPrimary500,
+      title: Text("Mileage History"),
+      centerTitle: true,
+    );
   }
 }

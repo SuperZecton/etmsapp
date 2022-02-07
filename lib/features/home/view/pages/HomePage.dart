@@ -141,12 +141,14 @@ class HomePage extends StatelessWidget {
                                           color: Colors.white, size: 30.0),
                                     )),
                                 Padding(padding: EdgeInsets.only(bottom: 16.0)),
-                                Text('Safe-Entry',
-                                    style: GoogleFonts.roboto(
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.w600,
-                                      color: darkTextColor,
-                                    ),),
+                                Text(
+                                  'Safe-Entry',
+                                  style: GoogleFonts.roboto(
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.w600,
+                                    color: darkTextColor,
+                                  ),
+                                ),
                                 //Text('Book in/Book out',
                                 //style: TextStyle(color: Colors.black45)),
                               ]),
@@ -170,16 +172,17 @@ class HomePage extends StatelessWidget {
                                           color: Colors.white, size: 30.0),
                                     )),
                                 Padding(padding: EdgeInsets.only(bottom: 16.0)),
-                                Text('Admin Section',
-                                    style: GoogleFonts.roboto(
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.w600,
-                                      color: darkTextColor,
-                                    ),),
+                                Text(
+                                  'Admin Section',
+                                  style: GoogleFonts.roboto(
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.w600,
+                                    color: darkTextColor,
+                                  ),
+                                ),
                               ]),
                         ),
-                        onTap: () =>
-                            showDialog(
+                        onTap: () => showDialog(
                           context: context,
                           builder: (BuildContext context) {
                             return AlertDialog(
@@ -204,12 +207,14 @@ class HomePage extends StatelessWidget {
                                           color: Colors.white, size: 30.0),
                                     )),
                                 Padding(padding: EdgeInsets.only(bottom: 16.0)),
-                                Text('MT-RAC Form',
-                                    style: GoogleFonts.roboto(
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.w600,
-                                      color: darkTextColor,
-                                    ),),
+                                Text(
+                                  'MT-RAC Form',
+                                  style: GoogleFonts.roboto(
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.w600,
+                                    color: darkTextColor,
+                                  ),
+                                ),
                               ]),
                         ),
                         onTap: () => model.racFormURLPush(),
@@ -232,12 +237,14 @@ class HomePage extends StatelessWidget {
                                           size: 30.0),
                                     )),
                                 Padding(padding: EdgeInsets.only(bottom: 16.0)),
-                                Text('SHRO Forms',
-                                    style: GoogleFonts.roboto(
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.w600,
-                                      color: darkTextColor,
-                                    ),),
+                                Text(
+                                  'SHRO Forms',
+                                  style: GoogleFonts.roboto(
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.w600,
+                                    color: darkTextColor,
+                                  ),
+                                ),
                                 //Text('For DTL/ ADTL',
                                 //style: TextStyle(color: Colors.black45)),
                               ]),
@@ -255,7 +262,8 @@ class HomePage extends StatelessWidget {
                                   color: darkSecondaryColor,
                                   shape: CircleBorder(),
                                   child: Padding(
-                                    padding: EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 16.0),
+                                    padding: EdgeInsets.fromLTRB(
+                                        16.0, 8.0, 16.0, 16.0),
                                     child: Icon(FontAwesomeIcons.clipboardCheck,
                                         color: Colors.white, size: 30.0),
                                   ),
