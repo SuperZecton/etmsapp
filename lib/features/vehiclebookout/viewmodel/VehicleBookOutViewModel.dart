@@ -66,6 +66,7 @@ class VehicleBookOutViewModel extends BaseViewModel {
           _purposeOfTrip.text,
           _classType);
       CurrentUser.instance.currentTripID = _currentTripID;
+
       print("CurrentTripID stored as ${CurrentUser.instance.currentTripID}");
       Navigator.pushNamed(context, '/home');
     } else {

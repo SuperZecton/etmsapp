@@ -10,6 +10,7 @@ import 'package:ltcapp/features/mileage/viewmodel/MileageViewModel.dart';
 import 'package:ltcapp/features/registration/viewmodel/RegistrationViewModel.dart';
 import 'package:ltcapp/features/vehiclebookout/viewmodel/VehicleBookOutViewModel.dart';
 import 'package:ltcapp/core/services/DatabaseConnector.dart';
+import 'package:ltcapp/core/services/TelebotConnector.dart';
 import 'package:provider/provider.dart';
 import 'package:ltcapp/core/config/Router.dart';
 
@@ -19,6 +20,7 @@ import 'core/services/Permissions.dart';
 //void main() => runApp(MyApp());
 
 DatabaseHandler personnelDBHandle = new DatabaseHandler();
+TelebotConnector telebot = new TelebotConnector();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
