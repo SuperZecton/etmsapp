@@ -8,7 +8,7 @@ import 'package:ltcapp/features/home/view/futurewidgets/FutureTripInfoCard.dart'
 import 'package:ltcapp/features/home/view/futurewidgets/NRICTextWidget.dart';
 import 'package:ltcapp/features/home/view/widgets/CampDropDownList.dart';
 import 'package:ltcapp/features/home/view/widgets/DateDropDownList.dart';
-import 'package:ltcapp/features/home/view/widgets/HomePageDrawer.dart';
+import 'package:ltcapp/features/home/view/widgets/AfterLoginDrawer.dart';
 import 'package:ltcapp/features/home/view/widgets/MileageCard.dart';
 import 'package:ltcapp/features/home/view/widgets/TopContainer.dart';
 import 'package:ltcapp/features/home/viewmodel/HomePageViewModel.dart';
@@ -24,8 +24,6 @@ class HomePage extends StatelessWidget {
         viewModelBuilder: () => HomePageViewModel(),
         builder: (context, model, child) {
           return Scaffold(
-            key: model.scaffoldKey,
-            drawer: HomePageDrawer(),
             body: Container(
               color: Theme.of(context).backgroundColor,
               child: ListView(
@@ -43,9 +41,9 @@ class HomePage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
                             InkWell(
-                              onTap: () => model.onDrawerMenuTap(),
+                              onTap: () => model.onBackButtonTap(context),
                               child: Icon(
-                                Icons.menu,
+                                Icons.arrow_back_rounded,
                                 color: Colors.white,
                                 size: 30.0,
                               ),

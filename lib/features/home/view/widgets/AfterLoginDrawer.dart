@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ltcapp/features/home/viewmodel/AfterLoginPageViewModel.dart';
 import 'package:ltcapp/features/home/viewmodel/HomePageViewModel.dart';
 import 'package:stacked/stacked.dart';
 
-class HomePageDrawer extends ViewModelWidget<HomePageViewModel> {
-  const HomePageDrawer({Key? key}) : super(key: key);
+class AfterLoginDrawer extends ViewModelWidget<AfterLoginViewModel> {
+  const AfterLoginDrawer({Key? key}) : super(key: key);
   @override
-  Widget build(BuildContext context, HomePageViewModel model) {
+  Widget build(BuildContext context, AfterLoginViewModel model) {
     double _drawerWidth = MediaQuery.of(context).size.width / 2;
     return Container(
       width: _drawerWidth,

@@ -92,13 +92,11 @@ class HomePageViewModel extends BaseViewModel {
 
   /// <--------- State Logic --------->
   /// Variable Initialization
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-  GlobalKey<ScaffoldState> get scaffoldKey => _scaffoldKey;
-  void onDrawerMenuTap() {
-    _scaffoldKey.currentState!.openDrawer();
-    notifyListeners();
-  }
 
+
+  void onBackButtonTap(BuildContext context){
+    Navigator.pushNamed(context, '/afterLogin');
+  }
   /// CampDropDown
   static final List<String> campDropdownItems = [
     'LTC',

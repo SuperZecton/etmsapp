@@ -72,6 +72,7 @@ class VocationType {
   static const TOA =
       const VocationType._internal('Transport Operator Assistant');
   static const TOB = const VocationType._internal('Transport Operator Base');
+  static const Commander = const VocationType._internal('Commander');
   static const OTHERS = const VocationType._internal('Others');
 
   static List<VocationType> list = [TO, STO, TOA, TOB, OTHERS];

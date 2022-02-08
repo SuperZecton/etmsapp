@@ -62,7 +62,7 @@ class LoginPageViewModel extends BaseViewModel {
       await db.checkAndCreateLoginEntry(_deviceID, user, password, _date, _time);
 
       /// Redirects user to home page
-      Navigator.pushNamed(context, '/home');
+      Navigator.pushNamed(context, '/afterLogin');
     } else {
       print('user is $user and pass is $password');
       LoginFailDialog.loginFailDialog(context);

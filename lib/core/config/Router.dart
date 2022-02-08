@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ltcapp/features/bibo/view/pages/BookInOutPage.dart';
+import 'package:ltcapp/features/home/view/pages/AfterLoginPage.dart';
 import 'package:ltcapp/features/home/view/pages/HomePage.dart';
 import 'package:ltcapp/features/login/view/pages/LoginPage.dart';
 import 'package:ltcapp/features/login/view/pages/WelcomePage.dart';
@@ -20,6 +21,8 @@ class Routers {
         return MaterialPageRoute(builder: (_) => WelcomePage());
       case '/login':
         return MaterialPageRoute(builder: (_) => LoginPage());
+      case '/afterLogin':
+        return MaterialPageRoute(builder: (_) => AfterLoginPage());
       case '/home':
         return MaterialPageRoute(builder: (_) => HomePage());
       case '/signUp':
