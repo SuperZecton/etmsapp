@@ -3,7 +3,7 @@ import 'package:ltcapp/core/config/Globals.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/features/registration/viewmodel/SignupRegViewModel.dart';
 import 'package:ltcapp/features/vehiclebookout/view/pages/VehicleStartTripPage.dart';
-import 'package:ltcapp/features/vehiclebookout/viewmodel/VehicleBookOutViewModel.dart';
+import 'package:ltcapp/features/vehiclebookout/viewmodel/VehicleStartTripViewModel.dart';
 import 'package:stacked/stacked.dart';
 
 class VehicleDropDownField<T> extends StatelessWidget {

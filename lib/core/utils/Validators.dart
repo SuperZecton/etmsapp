@@ -1,6 +1,3 @@
-
-/// Going to update this soon, regex is a giant pain in the butt
-
 extension EmailValidator on String {
   bool isValidEmail() {
     return RegExp(

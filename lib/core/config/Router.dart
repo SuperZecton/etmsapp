@@ -12,7 +12,6 @@ import 'package:ltcapp/features/registration/view/pages/SignupPage.dart';
 import 'package:ltcapp/features/registration/view/pages/TrainingRegPage.dart';
 import 'package:ltcapp/features/vehiclebookout/view/pages/VehicleEndTripPage.dart';
 import 'package:ltcapp/features/vehiclebookout/view/pages/VehicleStartTripPage.dart';
-import 'package:ltcapp/features/vehiclebookout/view/pages/VehicleBookOutPage.dart';
 
 class Routers {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -35,8 +34,6 @@ class Routers {
         return MaterialPageRoute(builder: (_) => OtherInfoRegistrationPage());
       case '/bookInOut':
         return MaterialPageRoute(builder: (_) => BookInOutPage());
-      case '/vehicleManagement':
-        return MaterialPageRoute(builder: (_) => VehicleBookOutPage());
       case '/vehicleStartTrip':
         return MaterialPageRoute(builder: (_) => VehicleStartTripPage());
       case '/vehicleEndTrip':

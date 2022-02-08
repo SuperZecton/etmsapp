@@ -35,7 +35,7 @@ class EducationRegistrationPage extends StatelessWidget {
                     blurRadius: 5,
                     spreadRadius: 2)
               ],
-              color: primaryColor,
+              color: Theme.of(context).backgroundColor,
             ),
             child: Stack(
               children: <Widget>[

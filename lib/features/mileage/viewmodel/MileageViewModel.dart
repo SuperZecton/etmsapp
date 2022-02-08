@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:ltcapp/core/services/CurrentSession.dart';
 import 'package:ltcapp/core/services/DatabaseConnector.dart';
 import 'package:ltcapp/features/home/view/pages/HomePage.dart';
+import 'package:month_picker_dialog/month_picker_dialog.dart';
 import 'package:provider/provider.dart';
 import 'package:stacked/stacked.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -24,10 +25,27 @@ class MileageViewModel extends FutureViewModel {
       }
       print("This is the results from getDataListFromDB >> $_returnList");
       return _returnList;
-    }
-    else {
+    } else {
       print("Can't get DatabaseList from DB");
       return Future.error("error");
     }
+  }
+
+  DateTime? _selectedDate;
+  DateTime? get selectedDate => _selectedDate;
+  static final initialDate = DateTime.now();
+  void floatingButtonPress(BuildContext context) {
+    showMonthPicker(
+      context: context,
+      firstDate: DateTime(DateTime.now().year - 1, 5),
+      lastDate: DateTime(DateTime.now().year + 1, 9),
+      initialDate: selectedDate ?? initialDate,
+      locale: Locale("en"),
+    ).then((date) {
+      if (date != null) {
+        _selectedDate = date;
+        notifyListeners();
+      }
+    });
   }
 }

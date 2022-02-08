@@ -10,13 +10,33 @@ import 'package:ltcapp/main.dart';
 import 'package:stacked/stacked.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class HomePageViewModel extends BaseViewModel {
-  HomePageViewModel();
+class HomePageViewModel extends MultipleFutureViewModel {
   final currentUsername = CurrentUser.instance.username;
+  static const _nameDelayedFuture = "Name";
+  static const _nricDelayedFuture = "NRIC";
+  static const _rankDelayedFuture = "Rank";
+  static const _class3DelayedFuture = "CLass 3";
+  static const _class4DelayedFuture = "Class 4";
+  String get fetchedName => dataMap![_nameDelayedFuture];
+  String get fetchedNRIC => dataMap![_nricDelayedFuture];
+  String get fetchedRank => dataMap![_rankDelayedFuture];
+  String get fetchedClass3 => dataMap![_class3DelayedFuture];
+  String get fetchedClass4 => dataMap![_class4DelayedFuture];
+  bool get fetchingName => busy(_nameDelayedFuture);
+  bool get fetchingNRIC => busy(_nricDelayedFuture);
+  bool get fetchingRank => busy(_rankDelayedFuture);
+  bool get fetchingClass3 => busy(_class3DelayedFuture);
+  bool get fetchingClass4 => busy(_class4DelayedFuture);
 
-  ///Future Getters
+  @override
+  Map<String, Future Function()> get futuresMap => {
+    _nameDelayedFuture: getFullName,
+    _nricDelayedFuture: getNRIC,
+    _rankDelayedFuture: getRank,
+    _class3DelayedFuture: getClass3Mileage,
+    _class4DelayedFuture: getClass4Mileage,
+  };
 
-  DatabaseHandler db = DatabaseHandler();
   Future<String> getFullName() async {
     String _username;
     if (currentUsername != null) {
@@ -27,6 +47,15 @@ class HomePageViewModel extends BaseViewModel {
       print("Username from DB is empty when searching");
       _username = "";
       return Future.error("No Name found");
+    }
+  }
+
+  Future<String> getRank() async {
+    String? _username = CurrentUser.instance.username;
+    if(_username != null) {
+      return db.singleDataPull("Users", "username", _username, "rank");
+    } else {
+      return Future.error("Error");
     }
   }
 
@@ -68,6 +97,13 @@ class HomePageViewModel extends BaseViewModel {
   }
 
 
+
+
+  ///Future Getters
+
+  DatabaseHandler db = DatabaseHandler();
+
+
   Future<List<String?>> ensureCurrentTripData() async {
     String? _tripID = CurrentUser.instance.currentTripID;
     if (_tripID != null) {
@@ -83,12 +119,6 @@ class HomePageViewModel extends BaseViewModel {
     }
   }
 
-
-
-
-  void initialise() {
-    notifyListeners();
-  }
 
   /// <--------- State Logic --------->
   /// Variable Initialization
@@ -144,24 +174,6 @@ class HomePageViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  void racFormURLPush() async {
-    const url = "https://mtrac.ado.sg/login";
-    if (await canLaunch(url)) {
-      launch(url, enableJavaScript: true);
-    } else {
-      throw "Could not launch $url";
-    }
-  }
-
-  void safeEntryURLPush() async {
-    const url =
-        "https://docs.google.com/forms/d/e/1FAIpQLSfOG1IHwj2B9zXGpRrpjdb5quiKBEmhyUF3-QvhQdS0o2C60Q/viewform";
-    if (await canLaunch(url)) {
-      launch(url, forceWebView: true, enableJavaScript: true);
-    } else {
-      throw "Error launching $url";
-    }
-  }
 
   void shroFormURLPush() async {
     const url =

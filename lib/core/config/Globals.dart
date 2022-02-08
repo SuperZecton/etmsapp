@@ -18,8 +18,9 @@ const kTextColor = Color(0xFF3C4046);
 const kBackgroundColor = Color(0xFFf1f2f5);
 
 ///New Color Palette
-final Color darkPrimary500 = Color(0xff627D98);
 final Color darkPrimary300 = Color(0xff829AB1);
+final Color darkPrimary500 = Color(0xff627D98);
+final Color darkPrimary600 = Color(0xff486581);
 final Color darkPrimary700= Color(0xff334E68);
 final Color darkSecondaryColor = Color(0xff00A3BF);
 final Color darkSecondaryAccent= Color(0xff00C7E6);

@@ -9,7 +9,7 @@ import 'package:ltcapp/features/login/model/UUIDGetter.dart';
 import 'package:ltcapp/features/login/viewmodel/LoginPageViewModel.dart';
 import 'package:ltcapp/features/mileage/viewmodel/MileageViewModel.dart';
 import 'package:ltcapp/features/registration/viewmodel/SignupRegViewModel.dart';
-import 'package:ltcapp/features/vehiclebookout/viewmodel/VehicleBookOutViewModel.dart';
+import 'package:ltcapp/features/vehiclebookout/viewmodel/VehicleStartTripViewModel.dart';
 import 'package:ltcapp/core/services/DatabaseConnector.dart';
 import 'package:ltcapp/core/services/TelebotConnector.dart';
 import 'package:provider/provider.dart';
@@ -32,6 +32,7 @@ void main() async {
   db.DBFunctionTemplate("damonlim");
   DeviceUUID deviceID = DeviceUUID();
   String _uuid = await deviceID.getUUID();
+  db.editSingleDataEntry("Users", "username", "damonlim", "vocationType", "TOB");
   print('Device ID is >> $_uuid' );
   CurrentUser.instance.deviceID = _uuid;
   runApp(MyApp());

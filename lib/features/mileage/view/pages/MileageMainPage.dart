@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/core/config/Globals.dart';
 import 'package:ltcapp/features/mileage/view/widgets/MileageAppBar.dart';
 import 'package:ltcapp/features/mileage/view/widgets/MileageListCard.dart';
@@ -15,7 +17,13 @@ class MileageMainPage extends StatelessWidget {
         return Scaffold(
           backgroundColor: Theme.of(context).backgroundColor,
           appBar: AppBar(
-            title: Text("Mileage History"),
+            title: Text(
+              "Mileage History",
+              style: GoogleFonts.roboto(
+                color: darkTextColor,
+                fontSize: 24.0
+              ),
+            ),
             centerTitle: true,
           ),
           body: ListView.builder(
@@ -30,6 +38,12 @@ class MileageMainPage extends StatelessWidget {
                 mileage: item[4],
               );
             },
+          ),
+          floatingActionButton: FloatingActionButton.extended(
+            onPressed: () => model.floatingButtonPress(context),
+            backgroundColor: darkGreenAccent,
+            label: Text('Change Date'),
+            icon: Icon(FontAwesomeIcons.calendarWeek),
           ),
         );
       },

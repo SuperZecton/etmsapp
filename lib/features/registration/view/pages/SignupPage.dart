@@ -10,7 +10,7 @@ import 'package:ltcapp/features/registration/view/widgets/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ltcapp/features/registration/model/individual_identity.dart';
 import 'package:ltcapp/core/widgets/widgets.dart';
-import 'package:ltcapp/core/utils/extensions.dart';
+import 'package:ltcapp/core/utils/Validators.dart';
 import 'package:provider/provider.dart';
 import 'package:stacked/stacked.dart';
 import '../../../login/view/pages/WelcomePage.dart';

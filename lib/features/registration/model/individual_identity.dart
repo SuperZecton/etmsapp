@@ -67,11 +67,10 @@ class VocationType {
   const VocationType._internal(this.value);
   toString() => '$value';
 
-  static const TO = const VocationType._internal('Transport Operator');
-  static const STO = const VocationType._internal('Transport Operator Support');
-  static const TOA =
-      const VocationType._internal('Transport Operator Assistant');
-  static const TOB = const VocationType._internal('Transport Operator Base');
+  static const TO = const VocationType._internal('TO');
+  static const STO = const VocationType._internal('STO');
+  static const TOA = const VocationType._internal('TOA');
+  static const TOB = const VocationType._internal('TOB');
   static const Commander = const VocationType._internal('Commander');
   static const OTHERS = const VocationType._internal('Others');
 

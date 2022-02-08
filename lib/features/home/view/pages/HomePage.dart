@@ -87,13 +87,29 @@ class HomePage extends StatelessWidget {
                                     children: [
                                       Container(
                                         padding: EdgeInsets.only(right: 10.0),
-                                        child: FullNameTextWidget(),
+                                        child: Text(
+                                          model.fetchingRank && model.fetchingName ? '' : "${model.fetchedRank.toString()} ${model.fetchedName}",
+                                          textAlign: TextAlign.left,
+                                          style: TextStyle(
+                                            fontSize: 16.0,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                        ),
                                       ),
                                     ],
                                   ),
                                   Container(
                                     padding: EdgeInsets.only(right: 10.0),
-                                    child: NRICTextWidget(),
+                                    child: Text(
+                                      model.fetchingNRIC ? '': model.fetchedNRIC.toString(),
+                                      textAlign: TextAlign.left,
+                                      style: TextStyle(
+                                        fontSize: 16.0,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
                                   ),
                                 ],
                               )
@@ -135,43 +151,12 @@ class HomePage extends StatelessWidget {
                                     shape: CircleBorder(),
                                     child: Padding(
                                       padding: const EdgeInsets.all(16.0),
-                                      child: Icon(FontAwesomeIcons.checkSquare,
-                                          color: Colors.white, size: 30.0),
-                                    )),
-                                Padding(padding: EdgeInsets.only(bottom: 16.0)),
-                                Text(
-                                  'Safe-Entry',
-                                  style: GoogleFonts.roboto(
-                                    fontSize: 22,
-                                    fontWeight: FontWeight.w600,
-                                    color: darkTextColor,
-                                  ),
-                                ),
-                                //Text('Book in/Book out',
-                                //style: TextStyle(color: Colors.black45)),
-                              ]),
-                        ),
-                        //onTap: () => Navigator.pushNamed(context, '/bookInOut')),
-                        onTap: () => model.safeEntryURLPush(),
-                      ),
-                      _buildTile(
-                        Padding(
-                          padding: const EdgeInsets.all(24.0),
-                          child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Material(
-                                    color: darkSecondaryColor,
-                                    shape: CircleBorder(),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(16.0),
                                       child: Icon(FontAwesomeIcons.book,
                                           color: Colors.white, size: 30.0),
                                     )),
                                 Padding(padding: EdgeInsets.only(bottom: 16.0)),
                                 Text(
-                                  'Admin Section',
+                                  'Update Details',
                                   style: GoogleFonts.roboto(
                                     fontSize: 22,
                                     fontWeight: FontWeight.w600,
@@ -188,34 +173,6 @@ class HomePage extends StatelessWidget {
                             );
                           },
                         ),
-                      ),
-                      _buildTile(
-                        Padding(
-                          padding: const EdgeInsets.all(24.0),
-                          child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Material(
-                                    color: darkSecondaryColor,
-                                    shape: CircleBorder(),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(16.0),
-                                      child: Icon(FontAwesomeIcons.listAlt,
-                                          color: Colors.white, size: 30.0),
-                                    )),
-                                Padding(padding: EdgeInsets.only(bottom: 16.0)),
-                                Text(
-                                  'MT-RAC Form',
-                                  style: GoogleFonts.roboto(
-                                    fontSize: 22,
-                                    fontWeight: FontWeight.w600,
-                                    color: darkTextColor,
-                                  ),
-                                ),
-                              ]),
-                        ),
-                        onTap: () => model.racFormURLPush(),
                       ),
                       _buildTile(
                         Padding(
@@ -268,7 +225,7 @@ class HomePage extends StatelessWidget {
                                 ),
                                 Padding(padding: EdgeInsets.only(bottom: 16.0)),
                                 Text(
-                                  'Maintenance',
+                                  'DTL Report',
                                   style: GoogleFonts.roboto(
                                     fontSize: 22,
                                     fontWeight: FontWeight.w600,
@@ -284,8 +241,6 @@ class HomePage extends StatelessWidget {
                       ),
                     ],
                     staggeredTiles: [
-                      StaggeredTile.extent(1, 190.0),
-                      StaggeredTile.extent(1, 190.0),
                       StaggeredTile.extent(1, 190.0),
                       StaggeredTile.extent(1, 190.0),
                       StaggeredTile.extent(2, 190.0),

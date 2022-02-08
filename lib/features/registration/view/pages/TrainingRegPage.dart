@@ -7,7 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/core/config/Globals.dart';
 import 'package:ltcapp/features/registration/view/widgets/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:ltcapp/core/utils/extensions.dart';
+import 'package:ltcapp/core/utils/Validators.dart';
 import 'package:ltcapp/core/widgets/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:stacked/stacked.dart';
@@ -35,7 +35,7 @@ class TrainingRegistrationPage extends StatelessWidget {
                     blurRadius: 5,
                     spreadRadius: 2)
               ],
-              color: primaryColor,
+              color: Theme.of(context).backgroundColor,
             ),
             child: Stack(
               children: <Widget>[

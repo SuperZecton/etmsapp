@@ -49,9 +49,12 @@ class WelcomePage extends StatelessWidget {
                   ),
                   _secondTitle(context),
                   SizedBox(
-                    height: 20,
+                    height: 5,
                   ),
                   _label(),
+                  SizedBox(
+                    height: 20,
+                  ),
                   LoginButton(),
                   SizedBox(
                     height: 20,
@@ -127,7 +130,6 @@ class WelcomePage extends StatelessWidget {
     );
   }
 
-
   Widget _buildLogo() {
     return CircleAvatar(
       radius: 105,
@@ -193,7 +195,7 @@ class WelcomePage extends StatelessWidget {
           children: <Widget>[
             Text(
               'Mission First, Safe Always',
-              style: TextStyle(color: Colors.white, fontSize: 20),
+              style: GoogleFonts.roboto(color: darkTextColor, fontSize: 20),
             ),
             Text(
               'Good to go',

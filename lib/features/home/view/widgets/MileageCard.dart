@@ -2,15 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/core/config/Globals.dart';
-import 'package:ltcapp/features/home/view/futurewidgets/Class3MileageTextWidget.dart';
-import 'package:ltcapp/features/home/view/futurewidgets/Class4MileageTextWidget.dart';
 import 'package:ltcapp/features/home/viewmodel/HomePageViewModel.dart';
 import 'package:stacked/stacked.dart';
 
 class MileageCard extends ViewModelWidget<HomePageViewModel> {
   const MileageCard({Key? key}) : super(key: key);
   @override
-  Widget build(BuildContext context, HomePageViewModel viewModel) {
+  Widget build(BuildContext context, HomePageViewModel model) {
     return Container(
       height: 140,
       padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
@@ -67,9 +65,27 @@ class MileageCard extends ViewModelWidget<HomePageViewModel> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Class3MileageTextWidget(),
+                    Text(
+                      model.fetchingClass3 ? "Class 3" : "Class 3: ${model.fetchedClass3}",
+                      textAlign: TextAlign.left,
+                      style: GoogleFonts.roboto(
+                        textStyle: Theme.of(context).textTheme.headline4,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                        color: darkTextColor,
+                      ),
+                    ),
                     SizedBox(height: 10),
-                    Class4MileageTextWidget(),
+                    Text(
+                      model.fetchingClass4 ? "Class 4" : "Class 4: ${model.fetchedClass4}",
+                      textAlign: TextAlign.left,
+                      style: GoogleFonts.roboto(
+                        textStyle: Theme.of(context).textTheme.headline4,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                        color: darkTextColor,
+                      ),
+                    ),
                   ],
                 ),
               ],
