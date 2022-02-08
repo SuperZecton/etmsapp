@@ -34,8 +34,6 @@ void main() async {
   String _uuid = await deviceID.getUUID();
   print('Device ID is >> $_uuid' );
   CurrentUser.instance.deviceID = _uuid;
-  excelHandler.excelSheetTools();
-
   runApp(MyApp());
 }
 
