@@ -127,6 +127,7 @@ class WelcomePage extends StatelessWidget {
     );
   }
 
+
   Widget _buildLogo() {
     return CircleAvatar(
       radius: 105,
@@ -194,20 +195,13 @@ class WelcomePage extends StatelessWidget {
               'Mission First, Safe Always',
               style: TextStyle(color: Colors.white, fontSize: 20),
             ),
-            SizedBox(
-              height: 20,
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            /*Text(
-              'Stuff here',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 15,
-                decoration: TextDecoration.underline,
+            Text(
+              'Good to go',
+              style: GoogleFonts.roboto(
+                color: darkTextColor,
+                fontSize: 18,
               ),
-            ),*/
+            ),
           ],
         ));
   }

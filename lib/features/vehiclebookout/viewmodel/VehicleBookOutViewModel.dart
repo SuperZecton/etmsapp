@@ -28,15 +28,25 @@ class VehicleBookOutViewModel extends BaseViewModel {
   String? _currentVehicleNo;
   String? get currentVehicleNo => _currentVehicleNo;
 
+  String? _currentVCom;
+  String? get currentVCom => _currentVCom;
+
+
   void carTypeDropDownOnChanged(CarType value) async {
     _currentCarTypeValue = value;
     vehicleNumbers = await getVehicleNumbers(value);
+    vehicleCommanders = await getVCom();
     _currentVehicleNo = null;
     notifyListeners();
   }
 
   void vehicleNoDropDownOnChanged(String value) {
     _currentVehicleNo = value;
+    notifyListeners();
+  }
+
+  void vcDropDownOnChanged(String value){
+    _currentVCom = value;
     notifyListeners();
   }
 
@@ -67,7 +77,7 @@ class VehicleBookOutViewModel extends BaseViewModel {
           _locationEnd.text,
           _purposeOfTrip.text,
           _classType,
-      "");
+      _currentVCom!);
       CurrentUser.instance.currentTripID = _currentTripID;
       print("CurrentTripID stored as ${CurrentUser.instance.currentTripID}");
 
@@ -76,11 +86,10 @@ class VehicleBookOutViewModel extends BaseViewModel {
           await db.singleDataPull("Users", "username", _username, "rank");
       String _fullNameTO =
           await db.singleDataPull("Users", "username", _username, "fullName");
-      String _fullNameVC = "Damon Lim";
-      String _rankVC = "PTE";
-      String _rankFullNameVC = _rankVC + " " + _fullNameVC;
+      String? _fullNameVC = _currentVCom;
+
       telebot.sendMovement(_currentVehicleNo!, _locationEnd.text,
-          _purposeOfTrip.text, _rankTO, _fullNameTO, _rankFullNameVC);
+          _purposeOfTrip.text, _rankTO, _fullNameTO, _fullNameVC!);
 
       Navigator.pushNamed(context, '/home');
     } else {
@@ -95,6 +104,12 @@ class VehicleBookOutViewModel extends BaseViewModel {
     List<dynamic> _dynamicList = await db.vehiclesBasedOnCarType(_carType);
     List<String?> _vehicleList = _dynamicList.map((s) => s as String?).toList();
     return _vehicleList;
+  }
+  List<String?> vehicleCommanders = [""];
+  Future<List<String?>> getVCom() async {
+    List<dynamic> _dynamicList = await db.getAvailableVehCom();
+    List<String?> _vComList = _dynamicList.map((s) => s as String?).toList();
+    return _vComList;
   }
 
   /// <------------- End Trip Variables -------------> /////////
@@ -125,7 +140,13 @@ class VehicleBookOutViewModel extends BaseViewModel {
       print(
           "Current Trip ID Set to null >> ${CurrentUser.instance.currentTripID}");
       ///Telegram Movement
-      //telebot.endMovement(vehicleNo, locationEnd, toRank, toFullName, vcRank, vcFullName),
+      ///
+      String? _vehicleNo = await db.singleDataPull("Logging", "UUID", _tripID, "vehicleNo");
+      String? _locationEnd = await db.singleDataPull("Logging", "UUID", _tripID, "locationEnd");
+      String? _toRank = await db.singleDataPull("Users", "username", _username, "rank");
+      String? _toFullName = await db.singleDataPull("Users", "username", _username, "fullName");
+      String? _vcRankFullName = await db.singleDataPull("Logging", "UUID", _tripID, "vcRankFullName");
+      telebot.endMovement(_vehicleNo, _locationEnd, _toRank, _toFullName, _vcRankFullName);
 
       Navigator.pushNamed(context, '/home');
     }

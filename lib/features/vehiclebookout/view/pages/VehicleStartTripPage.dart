@@ -52,6 +52,13 @@ class VehicleStartTripPage extends StatelessWidget {
                           icon: FontAwesomeIcons.carAlt,
                           onChanged: (value) =>
                               model.vehicleNoDropDownOnChanged(value!)),
+                      VehicleDropDownField<String?>(
+                          hint: "Vehicle Commander",
+                          values: model.vehicleCommanders,
+                          value: model.currentVCom,
+                          icon: FontAwesomeIcons.userFriends,
+                          onChanged: (value) =>
+                              model.vcDropDownOnChanged(value!)),
                       VehicleEntryField(
                         "Purpose of Trip",
                         FontAwesomeIcons.luggageCart,
