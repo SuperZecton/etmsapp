@@ -7,7 +7,7 @@ import 'package:ltcapp/core/services/CurrentSession.dart';
 import 'package:ltcapp/features/login/model/UUIDGetter.dart';
 import 'package:ltcapp/features/login/viewmodel/LoginPageViewModel.dart';
 import 'package:ltcapp/features/mileage/viewmodel/MileageViewModel.dart';
-import 'package:ltcapp/features/registration/viewmodel/RegistrationViewModel.dart';
+import 'package:ltcapp/features/registration/viewmodel/SignupRegViewModel.dart';
 import 'package:ltcapp/features/vehiclebookout/viewmodel/VehicleBookOutViewModel.dart';
 import 'package:ltcapp/core/services/DatabaseConnector.dart';
 import 'package:ltcapp/core/services/TelebotConnector.dart';
@@ -24,20 +24,15 @@ TelebotConnector telebot = new TelebotConnector();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  //setupLocator();
   ///Debugging nonsense
-  Permissions permDebug = Permissions();
-  var testPermissions = await permDebug.getPermissionLevel("damonlim");
-  print(testPermissions);
   personnelDBHandle.DBFunctionTemplate("damonlim");
   DeviceUUID deviceID = DeviceUUID();
   String _uuid = await deviceID.getUUID();
   print('Device ID is >> $_uuid' );
   CurrentUser.instance.deviceID = _uuid;
-  /*var demolist = await personnelDBHandle.getAvailableVehCom();
-  print(demolist.length);
-  for (int x = 0; x < demolist.length; x++){
-    print(demolist[x]);
-  }*/
+
+
   runApp(MyApp());
 }
 

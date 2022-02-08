@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ltcapp/features/registration/viewmodel/RegistrationViewModel.dart';
+import 'package:ltcapp/features/registration/viewmodel/OtherRegViewModel.dart';
+import 'package:ltcapp/features/registration/viewmodel/SignupRegViewModel.dart';
 import 'package:ltcapp/main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/core/config/Globals.dart';
@@ -17,8 +18,8 @@ class OtherInfoRegistrationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
-    return ViewModelBuilder<RegistrationViewModel>.reactive(
-      viewModelBuilder: () => RegistrationViewModel(),
+    return ViewModelBuilder<OtherRegViewModel>.reactive(
+      viewModelBuilder: () => OtherRegViewModel(),
       builder: (context, model, child) {
         return Scaffold(
           body: Container(
@@ -95,7 +96,7 @@ class OtherInfoRegistrationPage extends StatelessWidget {
     );
   }
 
-  Widget _submitButton(BuildContext context, RegistrationViewModel model) {
+  Widget _submitButton(BuildContext context, OtherRegViewModel model) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 40),
       child: InkWell(

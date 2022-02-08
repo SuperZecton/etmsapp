@@ -437,7 +437,8 @@ class DatabaseHandler {
             storingTime[1] = temp;
           }
         }
-      } else if (storingDate.length != 1) {
+      }
+      else if (storingDate.length != 1) {
         for (int i = 0; i < storingDate.length; i++) {
           for (int j = 0; j < storingDate.length - i; j++) {
             if (storingDate[j].compareTo(storingDate[j + 1]) < 0) {
@@ -507,8 +508,8 @@ class DatabaseHandler {
                 "';";
       } else {
         var entrytime = storingTime[0].hour.toString().padLeft(2, '0') +
-            storingTime[0].hour.toString().padLeft(2, '0') +
-            storingTime[0].hour.toString().padLeft(2, '0');
+            storingTime[0].minute.toString().padLeft(2, '0') +
+            storingTime[0].second.toString().padLeft(2, '0');
         querystring1 =
             'SELECT "username", "password" FROM RememberLogin WHERE "deviceIdentifier" = '
                     "'" +

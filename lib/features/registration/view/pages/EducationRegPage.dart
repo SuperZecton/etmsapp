@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:ltcapp/features/registration/view/widgets/registrationTextField.dart';
-import 'package:ltcapp/features/registration/viewmodel/RegistrationViewModel.dart';
+import 'package:ltcapp/features/registration/viewmodel/EducationRegViewModel.dart';
+import 'package:ltcapp/features/registration/viewmodel/SignupRegViewModel.dart';
 import 'package:ltcapp/main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/core/config/Globals.dart';
@@ -18,8 +19,8 @@ class EducationRegistrationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
-    return ViewModelBuilder<RegistrationViewModel>.nonReactive(
-      viewModelBuilder: () => RegistrationViewModel(),
+    return ViewModelBuilder<EducationRegViewModel>.nonReactive(
+      viewModelBuilder: () => EducationRegViewModel(),
       builder: (context, model, child) {
         return Scaffold(
           body: Container(
@@ -97,7 +98,7 @@ class EducationRegistrationPage extends StatelessWidget {
     );
   }
 
-  Widget _submitButton(BuildContext context, RegistrationViewModel model) {
+  Widget _submitButton(BuildContext context, EducationRegViewModel model) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 40),
       child: InkWell(

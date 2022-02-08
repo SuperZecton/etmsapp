@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:ltcapp/features/registration/viewmodel/RegistrationViewModel.dart';
+import 'package:ltcapp/features/registration/viewmodel/SignupRegViewModel.dart';
 import 'package:ltcapp/main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/core/config/Globals.dart';
