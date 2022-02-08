@@ -12,7 +12,7 @@ class DatePickerNotifier extends BaseViewModel {
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
-      firstDate: DateTime(1980),
+      firstDate: DateTime(1930),
       lastDate: DateTime(2030),
     );
     if (picked != null && picked != DateTime.now()) {
