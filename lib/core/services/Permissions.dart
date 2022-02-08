@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:ltcapp/core/utils/database_connector.dart';
+import 'package:ltcapp/core/services/DatabaseConnector.dart';
 
 class Permissions {
   DatabaseHandler newDatabase = DatabaseHandler();

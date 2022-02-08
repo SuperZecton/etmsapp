@@ -2,7 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:ltcapp/core/services/CurrentSession.dart';
-import 'package:ltcapp/core/utils/database_connector.dart';
+import 'package:ltcapp/core/services/DatabaseConnector.dart';
 import 'package:ltcapp/features/home/view/pages/HomePage.dart';
 import 'package:provider/provider.dart';
 import 'package:stacked/stacked.dart';

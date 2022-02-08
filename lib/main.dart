@@ -9,7 +9,7 @@ import 'package:ltcapp/features/login/viewmodel/LoginPageViewModel.dart';
 import 'package:ltcapp/features/mileage/viewmodel/MileageViewModel.dart';
 import 'package:ltcapp/features/registration/viewmodel/RegistrationViewModel.dart';
 import 'package:ltcapp/features/vehiclebookout/viewmodel/VehicleBookOutViewModel.dart';
-import 'package:ltcapp/core/utils/database_connector.dart';
+import 'package:ltcapp/core/services/DatabaseConnector.dart';
 import 'package:provider/provider.dart';
 import 'package:ltcapp/core/config/Router.dart';
 

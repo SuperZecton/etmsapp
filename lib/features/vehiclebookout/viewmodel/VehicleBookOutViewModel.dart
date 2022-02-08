@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ltcapp/core/services/CurrentSession.dart';
-import 'package:ltcapp/core/utils/database_connector.dart';
+import 'package:ltcapp/core/services/DatabaseConnector.dart';
 import 'package:ltcapp/features/vehiclebookout/model/individual_vehicle.dart';
 import 'package:stacked/stacked.dart';
 
