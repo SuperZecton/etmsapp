@@ -16,7 +16,7 @@ class MileageListCard extends StatelessWidget {
   final String startOdo;
   final String endOdo;
   final String date;
-  final int mileage;
+  final String mileage;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -44,7 +44,7 @@ class MileageListCard extends StatelessWidget {
           ],
         ),
         subtitle: Text(
-          "$startOdo to $endOdo : ${mileage.toString()}km",
+          "$startOdo to $endOdo : ${mileage}km",
           style: GoogleFonts.roboto(
             fontSize: 16,
             fontWeight: FontWeight.w600,

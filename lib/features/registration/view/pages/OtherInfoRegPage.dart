@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:ltcapp/features/registration/viewmodel/RegistrationViewModel.dart';
 import 'package:ltcapp/main.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -8,82 +7,80 @@ import 'package:ltcapp/features/registration/view/widgets/widgets.dart';
 import 'package:ltcapp/core/widgets/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:stacked/stacked.dart';
 import '../../../login/view/pages/WelcomePage.dart';
 import '../../../../main.dart';
 
 
-class OtherInfoRegistrationPage extends StatefulWidget {
-  OtherInfoRegistrationPage({Key? key, this.title}) : super(key: key);
-  final String? title;
-  @override
-  _OtherInfoRegistrationPageState createState() =>
-      _OtherInfoRegistrationPageState();
-}
-
-class _OtherInfoRegistrationPageState extends State<OtherInfoRegistrationPage> {
-  
+class OtherInfoRegistrationPage extends StatelessWidget {
+  OtherInfoRegistrationPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final vm = Provider.of<RegistrationViewModel>(context, listen: false);
     final height = MediaQuery.of(context).size.height;
-    return Scaffold(
-      body: Container(
-        height: height,
-        padding: EdgeInsets.symmetric(horizontal: 0),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(5)),
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-                color: Colors.grey.shade200,
-                offset: Offset(2, 4),
-                blurRadius: 5,
-                spreadRadius: 2)
-          ],
-          color: primaryColor,
-        ),
-        child: Stack(
-          children: <Widget>[
-            Form(
-              key: vm.otherRegFormKey,
-              child: ListView(
-                children: <Widget>[
-                  SizedBox(
-                    height: 50,
-                  ),
-                  CircularLogo(),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  _title(),
-                  SizedBox(
-                    height: 50,
-                  ),
-                  RegistrationTextField("Hobbies", FontAwesomeIcons.paintBrush,
-                      vm.hobbiesController),
-                  RegistrationTextField("Civilian License",
-                      FontAwesomeIcons.idCardAlt, vm.civilianLicenseController),
-                  RegistrationTextField("License No.",
-                      FontAwesomeIcons.idCard, vm.civilianLicenseNoController),
-                  DateTextField(
-                      "License Date of Issue",
-                      FontAwesomeIcons.calendarAlt,
-                      vm.civilianLicenseDOIController),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  //_submitButton(),
-                  SizedBox(height: height * .14),
-                ],
-              ),
+    return ViewModelBuilder<RegistrationViewModel>.reactive(
+      viewModelBuilder: () => RegistrationViewModel(),
+      builder: (context, model, child) {
+        return Scaffold(
+          body: Container(
+            height: height,
+            padding: EdgeInsets.symmetric(horizontal: 0),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(5)),
+              boxShadow: <BoxShadow>[
+                BoxShadow(
+                    color: Colors.grey.shade200,
+                    offset: Offset(2, 4),
+                    blurRadius: 5,
+                    spreadRadius: 2)
+              ],
+              color: primaryColor,
             ),
-            Positioned(top: 40, left: 0, child: TopBackButton()),
-          ],
-        ),
-      ),
+            child: Stack(
+              children: <Widget>[
+                Form(
+                  key: model.otherRegFormKey,
+                  child: ListView(
+                    children: <Widget>[
+                      SizedBox(
+                        height: 50,
+                      ),
+                      CircularLogo(),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      _title(context),
+                      SizedBox(
+                        height: 50,
+                      ),
+                      RegistrationTextField("Hobbies", FontAwesomeIcons.paintBrush,
+                          model.hobbiesController),
+                      RegistrationTextField("Civilian License",
+                          FontAwesomeIcons.idCardAlt, model.civilianLicenseController),
+                      RegistrationTextField("License No.",
+                          FontAwesomeIcons.idCard, model.civilianLicenseNoController),
+                      DateTextField(
+                          "License Date of Issue",
+                          FontAwesomeIcons.calendarAlt,
+                          model.civilianLicenseDOIController),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      _submitButton(context, model),
+                      SizedBox(height: height * .14),
+                    ],
+                  ),
+                ),
+                Positioned(top: 40, left: 0, child: TopBackButton()),
+              ],
+            ),
+          ),
+        );
+      }
+
     );
   }
 
-  Widget _title() {
+  Widget _title(BuildContext context) {
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
@@ -98,12 +95,11 @@ class _OtherInfoRegistrationPageState extends State<OtherInfoRegistrationPage> {
     );
   }
 
-  /*Widget _submitButton() {
-    final viewModel = Provider.of<RegistrationViewModel>(context, listen: false);
+  Widget _submitButton(BuildContext context, RegistrationViewModel model) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 40),
       child: InkWell(
-        onTap: () => viewModel.otherSignUpValidation(context),
+        onTap: () => model.otherSignUpValidation(context),
         child: Container(
           width: MediaQuery.of(context).size.width * 0.5,
           padding: EdgeInsets.symmetric(vertical: 13),
@@ -119,5 +115,5 @@ class _OtherInfoRegistrationPageState extends State<OtherInfoRegistrationPage> {
         ),
       ),
     );
-  }*/
+  }
 }

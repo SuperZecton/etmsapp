@@ -36,23 +36,25 @@ class RegistrationViewModel extends BaseViewModel {
   TextEditingController get nameController => _nameController;
   TextEditingController get usernameController => _usernameController;
   TextEditingController get nricController => _nricController;
-  TextEditingController get emailController=> _emailController;
+  TextEditingController get emailController => _emailController;
   TextEditingController get passwordController => _passwordController;
   TextEditingController get addressController => _addressController;
   TextEditingController get numberController => _numberController;
   TextEditingController get homeNumberController => _homeNumberController;
   TextEditingController get drugAllergyController => _drugAllergyController;
   TextEditingController get foodAllergyController => _foodAllergyController;
-  TextEditingController get nokController  => _nokController;
+  TextEditingController get nokController => _nokController;
   TextEditingController get nokAddressController => _nokAddressController;
   TextEditingController get nokNumberController => _nokNumberController;
-  TextEditingController get medicalConditionController => _medicalConditionController;
+  TextEditingController get medicalConditionController =>
+      _medicalConditionController;
   TextEditingController get doeController => _doeController;
   TextEditingController get dobController => _dobController;
   TextEditingController get ordController => _ordController;
   TextEditingController get dopController => _dopController;
 
   ///Sign up Page Dropdown Values -> Default Values
+  RankType? currentRankValue;
   PESType? currentPESValue;
   RaceType? currentRaceValue;
   ReligionType? currentReligionValue;
@@ -60,6 +62,11 @@ class RegistrationViewModel extends BaseViewModel {
   VocationType? currentVocationValue;
 
   ///Sign up Page Dropdown Functions
+  void rankDropDownOnChanged(RankType value) {
+    currentRankValue = value;
+    notifyListeners();
+  }
+
   void pesDropDownOnChanged(PESType value) {
     currentPESValue = value;
     notifyListeners();
@@ -89,6 +96,8 @@ class RegistrationViewModel extends BaseViewModel {
   signUpValidation(BuildContext context) {
     if (_signUpFormKey.currentState!.validate()) {
       _signUpFormKey.currentState!.save();
+      print(
+          "Username is ${_usernameController.text}, Password is ${_passwordController.text}, Rank is ${currentRankValue.toString()}, PES is ${currentPESValue.toString()} ");
 
       Navigator.pushNamed(context, '/trainingReg');
     } else {
@@ -110,18 +119,29 @@ class RegistrationViewModel extends BaseViewModel {
   }
 
   ///Training Page Controllers
-  final trainingRegFormKey = GlobalKey<FormState>();
-  final trgFrameController = TextEditingController();
-  final trgPeriodController = TextEditingController();
-  final noAttemptsController = TextEditingController();
-  final militaryLicenseController = TextEditingController();
-  final militaryLicenseTypeController = TextEditingController();
-  final doiController = TextEditingController();
+  final _trainingRegFormKey = GlobalKey<FormState>();
+  final _trgFrameController = TextEditingController();
+  final _trgPeriodController = TextEditingController();
+  final _noAttemptsController = TextEditingController();
+  final _militaryLicenseController = TextEditingController();
+  final _militaryLicenseTypeController = TextEditingController();
+  final _doiController = TextEditingController();
+
+  GlobalKey get trainingRegFormKey => _trainingRegFormKey;
+  TextEditingController get trgFrameController => _trgFrameController;
+  TextEditingController get trgPeriodController => _trgPeriodController;
+  TextEditingController get noAttemptsController => _noAttemptsController;
+  TextEditingController get militaryLicenseController =>
+      _militaryLicenseController;
+  TextEditingController get militaryLicenseTypeController =>
+      _militaryLicenseTypeController;
+  TextEditingController get doiController => _doiController;
 
   trainingSignUpValidation(BuildContext context) {
-    if (trainingRegFormKey.currentState!.validate()) {
-      trainingRegFormKey.currentState!.save();
-
+    if (_trainingRegFormKey.currentState!.validate()) {
+      _trainingRegFormKey.currentState!.save();
+      print(
+          "Username is ${_usernameController.text}, Password is ${_passwordController.text}, Rank is ${currentRankValue.toString()}, PES is ${currentPESValue.toString()} ");
       Navigator.pushNamed(context, '/educationReg');
     } else {
       showDialog(
@@ -142,15 +162,22 @@ class RegistrationViewModel extends BaseViewModel {
   }
 
   ///Education Page Controllers
-  final educationRegFormKey = GlobalKey<FormState>();
-  final educationLevelController = TextEditingController();
-  final streamCourseController = TextEditingController();
-  final ccaController = TextEditingController();
-  final schoolController = TextEditingController();
+  final _educationRegFormKey = GlobalKey<FormState>();
+  final _educationLevelController = TextEditingController();
+  final _streamCourseController = TextEditingController();
+  final _ccaController = TextEditingController();
+  final _schoolController = TextEditingController();
+
+  GlobalKey get educationRegFormKey => _educationRegFormKey;
+  TextEditingController get educationLevelController =>
+      _educationLevelController;
+  TextEditingController get streamCourseController => _streamCourseController;
+  TextEditingController get ccaController => _ccaController;
+  TextEditingController get schoolController => _schoolController;
 
   void educationSignUpValidation(BuildContext context) {
-    if (educationRegFormKey.currentState!.validate()) {
-      educationRegFormKey.currentState!.save();
+    if (_educationRegFormKey.currentState!.validate()) {
+      _educationRegFormKey.currentState!.save();
       Navigator.pushNamed(context, '/otherReg');
     } else {
       showDialog(
@@ -171,70 +198,83 @@ class RegistrationViewModel extends BaseViewModel {
   }
 
   ///Other Info Page Controllers
-  final otherRegFormKey = GlobalKey<FormState>();
+  final _otherRegFormKey = GlobalKey<FormState>();
+  final _hobbiesController = TextEditingController();
+  final _civilianLicenseController = TextEditingController(); // class 3 / 4
+  final _civilianLicenseNoController = TextEditingController();
+  final _civilianLicenseDOIController = TextEditingController();
+  final _personalVehicleController = TextEditingController();
 
-  final hobbiesController = TextEditingController();
-  final civilianLicenseController = TextEditingController(); // class 3 / 4
-  final civilianLicenseNoController = TextEditingController();
-  final civilianLicenseDOIController = TextEditingController();
-  final personalVehicleController = TextEditingController();
-/*
+  GlobalKey get otherRegFormKey => _otherRegFormKey;
+  TextEditingController get hobbiesController => _hobbiesController;
+  TextEditingController get civilianLicenseController =>
+      _civilianLicenseController;
+  TextEditingController get civilianLicenseNoController =>
+      _civilianLicenseNoController;
+  TextEditingController get civilianLicenseDOIController =>
+      _civilianLicenseDOIController;
+  TextEditingController get personalVehicleController =>
+      _personalVehicleController;
+
   otherSignUpValidation(BuildContext context) {
-    if (otherRegFormKey.currentState.validate()) {
-      otherRegFormKey.currentState.save();
+    if (_otherRegFormKey.currentState!.validate()) {
+      _otherRegFormKey.currentState!.save();
 
       ///Last page -> Create user
       db.createUserAccount(
-          '',
-          nameController.text,
-          nricController.text,
-          addressController.text,
-          numberController.text,
-          homeNumberController.text,
-          emailController.text,
-          dobController.text,
-          doeController.text,
-          ordController.text,
-          dopController.text,
+          currentRankValue.toString(),
+          _nameController.text,
+          _nricController.text,
+          _addressController.text,
+          _numberController.text,
+          _homeNumberController.text,
+          _emailController.text,
+          _dobController.text,
+          _doeController.text,
+          _ordController.text,
+          _dopController.text,
           currentPESValue.toString(),
           currentReligionValue.toString(),
           currentRaceValue.toString(),
           currentBloodValue.toString(),
-          drugAllergyController.text,
-          foodAllergyController.text,
-          nokController.text,
-          nokNumberController.text,
-          nokAddressController.text,
+          _drugAllergyController.text,
+          _foodAllergyController.text,
+          _nokController.text,
+          _nokNumberController.text,
+          _nokAddressController.text,
           currentVocationValue.toString(),
-          '',
-          medicalConditionController.text,
-          trgFrameController.text,
-          trgPeriodController.text,
-          noAttemptsController.text,
-          militaryLicenseController.text,
-          militaryLicenseTypeController.text,
-          doiController.text,
-          '',
-          '',
-          educationLevelController.text,
-          streamCourseController.text,
-          ccaController.text,
-          schoolController.text,
-          hobbiesController.text,
-          civilianLicenseController.text,
-          civilianLicenseNoController.text,
-          civilianLicenseDOIController.text,
-          '',
+          'Stay-In',
+          _medicalConditionController.text,
+          _trgFrameController.text,
+          _trgPeriodController.text,
+          _noAttemptsController.text,
+          _militaryLicenseController.text,
+          _militaryLicenseTypeController.text,
+          _doiController.text,
+          'Not Started',
+          'CAT D',
+          _educationLevelController.text,
+          _streamCourseController.text,
+          _ccaController.text,
+          _schoolController.text,
+          _hobbiesController.text,
+          _civilianLicenseController.text,
+          _civilianLicenseNoController.text,
+          _civilianLicenseDOIController.text,
+          'No',
           personalVehicleController.text,
           '',
           '',
           '',
           '',
           '',
-          usernameController.text,
-          passwordController.text,
-          '',
+          _usernameController.text,
+          _passwordController.text,
+          '0',
+          '0',
+          '0',
           '');
+      print("Registration successful");
 
       Navigator.pushNamed(context, '/');
     } else {
@@ -253,5 +293,5 @@ class RegistrationViewModel extends BaseViewModel {
             );
           });
     }
-  }*/
+  }
 }

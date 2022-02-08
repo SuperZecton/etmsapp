@@ -81,18 +81,28 @@ class SignUpPage extends StatelessWidget {
                         SizedBox(
                           height: 20,
                         ),
+                        RegistrationTextField(
+                          "Full Name",
+                          Icons.perm_identity_rounded,
+                          model.nameController,
+                          validationAction: (String? input) => input!
+                              .isValidName()
+                              ? null
+                              : "Name cannot have numbers or special characters",
+                        ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Expanded(
-                              child: RegistrationTextField(
-                                "Full Name",
-                                Icons.perm_identity_rounded,
-                                model.nameController,
-                                validationAction: (String? input) => input!
-                                        .isValidName()
-                                    ? null
-                                    : "Name cannot have numbers or special characters",
+                              child: Consumer<RegistrationViewModel>(
+                                builder: (context, vm, child) =>
+                                    DropDownField<RankType?>(
+                                        hint: "Rank",
+                                        values: RankType.getValues(),
+                                        value: vm.currentRankValue,
+                                        icon: FontAwesomeIcons.certificate,
+                                        onChanged: (value) =>
+                                            vm.rankDropDownOnChanged(value!)),
                               ),
                             ),
                             Expanded(
@@ -108,8 +118,10 @@ class SignUpPage extends StatelessWidget {
                                 maxLength: 4,
                               ),
                             ),
+
                           ],
                         ),
+
                         RegistrationTextField(
                           "Email Address",
                           Icons.alternate_email,

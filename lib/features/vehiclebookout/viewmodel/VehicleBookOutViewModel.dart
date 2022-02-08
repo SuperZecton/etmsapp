@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:ltcapp/core/services/CurrentSession.dart';
 import 'package:ltcapp/core/services/DatabaseConnector.dart';
+import 'package:ltcapp/core/services/TelebotConnector.dart';
 import 'package:ltcapp/features/vehiclebookout/model/individual_vehicle.dart';
 import 'package:stacked/stacked.dart';
 
 class VehicleBookOutViewModel extends BaseViewModel {
   DatabaseHandler db = DatabaseHandler();
+  TelebotConnector telebot = TelebotConnector();
 
   ///<----------- Start Trip Variables --------------> ///
   TextEditingController _startingOdometer = TextEditingController();
@@ -66,8 +68,18 @@ class VehicleBookOutViewModel extends BaseViewModel {
           _purposeOfTrip.text,
           _classType);
       CurrentUser.instance.currentTripID = _currentTripID;
-
       print("CurrentTripID stored as ${CurrentUser.instance.currentTripID}");
+
+      ///Telegram movement
+      String _rankTO =
+          await db.singleDataPull("Users", "username", _username, "rank");
+      String _fullNameTO =
+          await db.singleDataPull("Users", "username", _username, "fullName");
+      String _fullNameVC = "Damon Lim";
+      String _rankVC = "PTE";
+      telebot.sendMovement(_currentVehicleNo!, _locationEnd.text,
+          _purposeOfTrip.text, _rankTO, _fullNameTO, _rankVC, _fullNameVC);
+
       Navigator.pushNamed(context, '/home');
     } else {
       print("Unsuccessful Submit, username null");
@@ -108,7 +120,11 @@ class VehicleBookOutViewModel extends BaseViewModel {
           "Starting odo is $startOdo and Ending odo is ${_endOdometer.text} so total mileage is $_mileage");
       db.endTrip(_tripID, _mileage.toString(), _time, _endOdometer.text);
       CurrentUser.instance.currentTripID = null;
-      print("Current Trip ID Set to null >> ${CurrentUser.instance.currentTripID}");
+      print(
+          "Current Trip ID Set to null >> ${CurrentUser.instance.currentTripID}");
+      ///Telegram Movement
+      //telebot.endMovement(vehicleNo, locationEnd, toRank, toFullName, vcRank, vcFullName),
+
       Navigator.pushNamed(context, '/home');
     }
   }
