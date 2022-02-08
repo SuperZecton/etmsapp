@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:ltcapp/core/services/ExcelConnector.dart';
 import 'package:ltcapp/core/utils/locator.dart';
 import 'package:ltcapp/features/home/viewmodel/HomePageViewModel.dart';
 import 'package:ltcapp/core/services/CurrentSession.dart';
@@ -19,19 +20,21 @@ import 'core/services/Permissions.dart';
 
 //void main() => runApp(MyApp());
 
-DatabaseHandler personnelDBHandle = new DatabaseHandler();
-TelebotConnector telebot = new TelebotConnector();
+
 
 void main() async {
+  DatabaseHandler db = DatabaseHandler();
+  TelebotConnector telebot = new TelebotConnector();
+  ExcelHandler excelHandler = new ExcelHandler();
   WidgetsFlutterBinding.ensureInitialized();
   //setupLocator();
   ///Debugging nonsense
-  personnelDBHandle.DBFunctionTemplate("damonlim");
+  db.DBFunctionTemplate("damonlim");
   DeviceUUID deviceID = DeviceUUID();
   String _uuid = await deviceID.getUUID();
   print('Device ID is >> $_uuid' );
   CurrentUser.instance.deviceID = _uuid;
-
+  excelHandler.excelSheetTools();
 
   runApp(MyApp());
 }

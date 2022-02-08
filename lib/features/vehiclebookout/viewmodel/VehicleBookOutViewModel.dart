@@ -66,7 +66,8 @@ class VehicleBookOutViewModel extends BaseViewModel {
           _locationStart.text,
           _locationEnd.text,
           _purposeOfTrip.text,
-          _classType);
+          _classType,
+      "");
       CurrentUser.instance.currentTripID = _currentTripID;
       print("CurrentTripID stored as ${CurrentUser.instance.currentTripID}");
 
@@ -77,8 +78,9 @@ class VehicleBookOutViewModel extends BaseViewModel {
           await db.singleDataPull("Users", "username", _username, "fullName");
       String _fullNameVC = "Damon Lim";
       String _rankVC = "PTE";
+      String _rankFullNameVC = _rankVC + " " + _fullNameVC;
       telebot.sendMovement(_currentVehicleNo!, _locationEnd.text,
-          _purposeOfTrip.text, _rankTO, _fullNameTO, _rankVC, _fullNameVC);
+          _purposeOfTrip.text, _rankTO, _fullNameTO, _rankFullNameVC);
 
       Navigator.pushNamed(context, '/home');
     } else {
