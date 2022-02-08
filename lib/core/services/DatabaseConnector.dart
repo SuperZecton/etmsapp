@@ -527,6 +527,7 @@ class DatabaseHandler {
       results1.forEach((row) {
         userpass.add(row);
       });
+      connection.close();
       return userpass[0];
     }
   }
@@ -613,10 +614,11 @@ class DatabaseHandler {
     var rawVehNo = results2.toString();
     var vehNo = rawVehNo.substring(2, rawVehNo.length - 2);
     var querystring3 =
-        'UPDATE vehicles SET "inUse" = '"'true' WHERE "'"vehicleNo" = '"'" + vehNo + "';";
+        'UPDATE vehicles SET "inUse" = '"'false' WHERE "'"vehicleNo" = '"'" + vehNo + "';";
     print("Query String: " + querystring3);
     var results3 = await connection.query(querystring3);
     print("Database Result: " + results3.toString());
+    connection.close();
   }
 
   Future<bool> checkDataExist(String table, String column, String data) async {
@@ -721,6 +723,7 @@ class DatabaseHandler {
     });
     finallist.removeAt(0);
     print("There are " + count.toString() + " mileage entries");
+    connection.close();
     return finallist;
   }
 
@@ -744,6 +747,7 @@ class DatabaseHandler {
     });
     print("There are " + count.toString() + " available Vehicle Commanders");
     List<String> _returnList = finallist.map((string) => string.toString()).toList();
+    connection.close();
     return _returnList;
   }
 
