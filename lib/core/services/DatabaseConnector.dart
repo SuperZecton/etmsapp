@@ -539,12 +539,13 @@ class DatabaseHandler {
       String locationStart,
       String locationEnd,
       String purposeOfTrip,
-      String classType) async {
+      String classType,
+      String vcRankFullName) async {
     var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
         username: "LTCAppUser", password: "LTCuser123");
     await connection.open();
     var querystring =
-        'INSERT INTO Logging ("UUID", "username", "date", "vehicleNo", "timeStart", "odometerStart", "locationStart", "locationEnd", "purposeOfTrip", "classType") ' +
+        'INSERT INTO Logging ("UUID", "username", "date", "vehicleNo", "timeStart", "odometerStart", "locationStart", "locationEnd", "purposeOfTrip", "classType", "vcRankFullName") ' +
             "VALUES (uuid_generate_v4(),'" +
             username +
             "','" +
@@ -563,6 +564,8 @@ class DatabaseHandler {
             purposeOfTrip +
             "','" +
             classType +
+            "','" +
+            vcRankFullName +
             "');";
     print("Query String: " + querystring);
     var results = await connection.query(querystring);
