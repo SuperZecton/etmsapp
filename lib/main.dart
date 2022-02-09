@@ -32,7 +32,6 @@ void main() async {
   db.DBFunctionTemplate("damonlim");
   DeviceUUID deviceID = DeviceUUID();
   String _uuid = await deviceID.getUUID();
-  db.editSingleDataEntry("Users", "username", "damonlim", "vocationType", "TOB");
   print('Device ID is >> $_uuid' );
   CurrentUser.instance.deviceID = _uuid;
   runApp(MyApp());

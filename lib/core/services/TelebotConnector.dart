@@ -12,10 +12,10 @@ class TelebotConnector {
     var teledart = TeleDart(botToken, Event(username!));
     teledart.start();
     if (vcRankFullName == ""){
-      teledart.sendMessage('-1001585228215', "MID" + vehicleNo + " moving to " + locationEnd + " for " + purposeOfTrip + "\nTO: " + toRank + " " + toFullName);
+      teledart.sendMessage('-1001585228215', "BOS & CT/JIT DONE\nMID" + vehicleNo + " moving to " + locationEnd + " for " + purposeOfTrip + "\nTO: " + toRank + " " + toFullName);
     }
     else{
-      teledart.sendMessage('-1001585228215', "MID" + vehicleNo + " moving to " + locationEnd + " for " + purposeOfTrip + "\nTO: " + toRank + " " + toFullName + "\nVC: " + vcRankFullName);
+      teledart.sendMessage('-1001585228215', "BOS & CT/JIT DONE\nMID" + vehicleNo + " moving to " + locationEnd + " for " + purposeOfTrip + "\nTO: " + toRank + " " + toFullName + "\nVC: " + vcRankFullName);
     }
     teledart.stop();
   }
@@ -26,10 +26,10 @@ class TelebotConnector {
     var teledart = TeleDart(botToken, Event(username!));
     teledart.start();
     if (vcRankFullName == ""){
-      teledart.sendMessage('-1001585228215', "MID" + vehicleNo + " arrived at " + locationEnd + "\nTO: " + toRank + " " + toFullName);
+      teledart.sendMessage('-1001585228215', "BOS & CT/JIT DONE\nMID" + vehicleNo + " arrived at " + locationEnd + "\nTO: " + toRank + " " + toFullName);
     }
     else{
-      teledart.sendMessage('-1001585228215', "MID" + vehicleNo + " arrived at " + locationEnd + "\nTO: " + toRank + " " + toFullName + "\nVC: " + vcRankFullName);
+      teledart.sendMessage('-1001585228215', "BOS & CT/JIT DONE\nMID" + vehicleNo + " arrived at " + locationEnd + "\nTO: " + toRank + " " + toFullName + "\nVC: " + vcRankFullName);
     }
     teledart.stop();
   }

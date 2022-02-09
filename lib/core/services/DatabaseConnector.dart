@@ -242,8 +242,10 @@ class DatabaseHandler {
   Future<void> createVehicle(
       String vehicleNo,
       String carModel,
+      String carType,
       String classType,
       String status,
+      String inUse,
       String lastAVIDate,
       String nextAVIDate,
       String lastWPTDate,
@@ -254,15 +256,19 @@ class DatabaseHandler {
         username: "LTCAppUser", password: "LTCuser123");
     await connection.open();
     var querystring =
-        'INSERT INTO Vehicles ("UUID", "vehicleNo", "carModel", "classType", "status", "lastAVIDate", "nextAVIDate", "lastWPTDate", "nextWPTDate", "additionalPlate", "additionalRemarks") '
+        'INSERT INTO Vehicles ("UUID", "vehicleNo", "carModel", "carType", "classType", "status", "inUse", "lastAVIDate", "nextAVIDate", "lastWPTDate", "nextWPTDate", "additionalPlate", "additionalRemarks") '
                 "VALUES (uuid_generate_v4(),'" +
             vehicleNo +
             "','" +
             carModel +
             "','" +
+            carType +
+            "','" +
             classType +
             "','" +
             status +
+            "','" +
+            inUse +
             "','" +
             lastAVIDate +
             "','" +
@@ -572,13 +578,21 @@ class DatabaseHandler {
     print("Query String: " + querystring);
     var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
+    // Get UUID to give Jovan
     var querystring2 =
         'SELECT "UUID" FROM logging WHERE "username"=' "'" + username + "' AND "'"date" = '"'" + date + "' AND "'"timeStart" = '"'" + timeStart + "';";
     print("Query String: " + querystring2);
     var results2 = await connection.query(querystring2);
     print("Database Result: " + results2.toString());
+    //Get Current Date and NextWPTDate for Vehicle
+    DateTime currentDateTime = DateTime.now();
+    var now = DateTime.parse(currentDateTime.toString()+'-08:00');
+    String lastWPTDate = now.day.toString().padLeft(2, '0') + "/" + now.month.toString().padLeft(2, '0') + "/" + now.year.toString();
+    var nextWPTDateTime = now.add(Duration(days: 7));
+    var nextWPTDate = nextWPTDateTime.day.toString().padLeft(2, '0') + "/" + nextWPTDateTime.month.toString().padLeft(2, '0') + "/" + nextWPTDateTime.year.toString();
+    //Update Vehicle In use and WPT Dates
     var querystring3 =
-        'UPDATE vehicles SET "inUse" = '"'true' WHERE "'"vehicleNo" = '"'" + vehicleNo + "';";
+        'UPDATE vehicles SET "inUse" = '"'true', "'"lastWPTDate" = '"'" + lastWPTDate + "', "'"nextWPTDate" = '"'" + nextWPTDate + "' WHERE "'"vehicleNo" = '"'" + vehicleNo + "';";
     print("Query String: " + querystring3);
     var results3 = await connection.query(querystring3);
     print("Database Result: " + results3.toString());
