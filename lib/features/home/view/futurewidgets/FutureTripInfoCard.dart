@@ -121,7 +121,7 @@ class FutureTripInfoCard extends ViewModelWidget<HomePageViewModel> {
               );
             case true:
               return Container(
-                height: 250,
+                height: 280,
                 padding: EdgeInsets.all(16),
                 margin: EdgeInsets.symmetric(horizontal: 16.0),
                 decoration: BoxDecoration(
@@ -140,7 +140,7 @@ class FutureTripInfoCard extends ViewModelWidget<HomePageViewModel> {
                             style: TextStyle(
                               color: darkTextColor,
                               fontFamily: 'Regular',
-                              fontSize: 16,
+                              fontSize: 20,
                             ),
                           ),
                         ),
@@ -168,34 +168,34 @@ class FutureTripInfoCard extends ViewModelWidget<HomePageViewModel> {
                                 Text(
                                   'Vehicle Number: ${snapshot.data![3]}',
                                   textAlign: TextAlign.left,
-                                  style: TextStyle(
+                                  style: GoogleFonts.roboto(
                                     color: darkTextColor,
-                                    fontFamily: 'Regular',
-                                    fontSize: 16,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w400,
                                   ),
                                 ),
                                 Text(
                                   'Trip Started at: ${snapshot.data![4]}',
-                                  style: TextStyle(
+                                  style: GoogleFonts.roboto(
                                     color: darkTextColor,
-                                    fontFamily: 'Regular',
-                                    fontSize: 16,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w400,
                                   ),
                                 ),
                                 Text(
                                   'Starting Odometer: ${snapshot.data![5]} ',
-                                  style: TextStyle(
+                                  style: GoogleFonts.roboto(
                                     color: darkTextColor,
-                                    fontFamily: 'Regular',
-                                    fontSize: 16,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w400,
                                   ),
                                 ),
                                 Text(
                                   'Trip Purpose: ${snapshot.data![7]}',
-                                  style: TextStyle(
+                                  style: GoogleFonts.roboto(
                                     color: darkTextColor,
-                                    fontFamily: 'Regular',
-                                    fontSize: 16,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w400,
                                   ),
                                 ),
                               ],

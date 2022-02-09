@@ -3,16 +3,10 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/core/config/Globals.dart';
-import 'package:ltcapp/features/home/view/futurewidgets/FullNameTextWidget.dart';
 import 'package:ltcapp/features/home/view/futurewidgets/FutureTripInfoCard.dart';
-import 'package:ltcapp/features/home/view/futurewidgets/NRICTextWidget.dart';
-import 'package:ltcapp/features/home/view/widgets/CampDropDownList.dart';
-import 'package:ltcapp/features/home/view/widgets/DateDropDownList.dart';
-import 'package:ltcapp/features/home/view/widgets/AfterLoginDrawer.dart';
 import 'package:ltcapp/features/home/view/widgets/MileageCard.dart';
 import 'package:ltcapp/features/home/view/widgets/TopContainer.dart';
 import 'package:ltcapp/features/home/viewmodel/HomePageViewModel.dart';
-import 'package:provider/provider.dart';
 import 'package:stacked/stacked.dart';
 
 class HomePage extends StatelessWidget {

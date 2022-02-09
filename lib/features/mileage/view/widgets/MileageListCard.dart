@@ -21,6 +21,9 @@ class MileageListCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       color: darkPrimary700,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12.0),
+      ),
       child: ListTile(
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

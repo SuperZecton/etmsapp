@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/core/config/Globals.dart';
 import 'package:ltcapp/features/mileage/view/widgets/MileageAppBar.dart';
+import 'package:ltcapp/features/mileage/view/widgets/MileageInfoCard.dart';
 import 'package:ltcapp/features/mileage/view/widgets/MileageListCard.dart';
 import 'package:ltcapp/features/mileage/viewmodel/MileageViewModel.dart';
 import 'package:provider/provider.dart';
@@ -26,18 +27,28 @@ class MileageMainPage extends StatelessWidget {
             ),
             centerTitle: true,
           ),
-          body: ListView.builder(
-            itemCount: model.dataReady ? model.data.length : 0,
-            itemBuilder: (context, index) {
-              final item = model.data[index];
-              return MileageListCard(
-                vehicleNo: item[0],
-                date: item[1],
-                startOdo: item[2],
-                endOdo: item[3],
-                mileage: item[4],
-              );
-            },
+          body: Column(
+            children: [
+              MileageInfoCard(),
+              Expanded(
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 10.0),
+                  child: ListView.builder(
+                    itemCount: model.dataReady ? model.data.length : 0,
+                    itemBuilder: (context, index) {
+                      final item = model.data[index];
+                      return MileageListCard(
+                        vehicleNo: item[0],
+                        date: item[1],
+                        startOdo: item[2],
+                        endOdo: item[3],
+                        mileage: item[4],
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ],
           ),
           floatingActionButton: FloatingActionButton.extended(
             onPressed: () => model.floatingButtonPress(context),
