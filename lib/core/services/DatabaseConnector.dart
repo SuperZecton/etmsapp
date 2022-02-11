@@ -596,6 +596,21 @@ class DatabaseHandler {
     print("Query String: " + querystring3);
     var results3 = await connection.query(querystring3);
     print("Database Result: " + results3.toString());
+    //Update driver inUse to true
+    var querystring4 =
+        'UPDATE users SET "inUse" = '"'true' WHERE "'"username" = '"'" + username + "';";
+    print("Query String: " + querystring4);
+    var results4 = await connection.query(querystring4);
+    print("Database Result: " + results4.toString());
+    //Update Veh Com inUse to true
+    if (vcRankFullName != ''){
+      var vcFullName = vcRankFullName.substring(vcRankFullName.split(' ')[0].length);
+      var querystring5 =
+          'UPDATE users SET "inUse" = '"'true' WHERE "'"fullName" = '"'" + vcFullName + "';";
+      print("Query String: " + querystring5);
+      var results5 = await connection.query(querystring5);
+      print("Database Result: " + results5.toString());
+    }
     var rawValue = results2.toString();
     var value = rawValue.substring(2, rawValue.length - 2);
     connection.close();
@@ -607,6 +622,8 @@ class DatabaseHandler {
     var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
         username: "LTCAppUser", password: "LTCuser123");
     await connection.open();
+    var querystring4point5;
+    var querystring5;
     var querystring = "UPDATE logging " +
         'SET "timeEnd" = ' "'" +
         timeEnd +
@@ -620,18 +637,69 @@ class DatabaseHandler {
     print("Query String: " + querystring);
     var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
+    //Get Vehicle Number and Class Type using UUID
     var querystring2 =
-        'SELECT "vehicleNo" FROM logging WHERE "UUID"='"'" + UUID + "';";
+        'SELECT "vehicleNo", "classType" FROM logging WHERE "UUID"='"'" + UUID + "';";
     print("Query String: " + querystring2);
     var results2 = await connection.query(querystring2);
-    print("Database Result: " + results2.toString());
-    var rawVehNo = results2.toString();
-    var vehNo = rawVehNo.substring(2, rawVehNo.length - 2);
+    print("Database Result: " + results2.toString()); // [[41556, 3]]
+    var vehNo = results2.toString().split(',')[0].substring(2);
+    var classType = results2.toString().split(',')[1].substring(1,2);
+    // Set inUse to false for Vehicles
     var querystring3 =
         'UPDATE vehicles SET "inUse" = '"'false' WHERE "'"vehicleNo" = '"'" + vehNo + "';";
     print("Query String: " + querystring3);
     var results3 = await connection.query(querystring3);
     print("Database Result: " + results3.toString());
+    //Get username from logging using UUID
+    var querystring4 =
+        'SELECT "username" FROM logging WHERE "UUID"='"'" + UUID + "';";
+    print("Query String: " + querystring4);
+    var results4 = await connection.query(querystring4);
+    print("Database Result: " + results4.toString());
+    var username = results4.toString().substring(2, results4.toString().length - 2);
+    //Get old mileage from users using username
+    if (classType == '3'){
+      querystring4point5 =
+          'SELECT "totalClass3Mileage" FROM logging WHERE "username"='"'" + username + "';";
+    }
+    else {
+      querystring4point5 =
+          'SELECT "totalClass4Mileage" FROM logging WHERE "username"='"'" + username + "';";
+    }
+    print("Query String: " + querystring4point5);
+    var results4point5 = await connection.query(querystring4point5);
+    print("Database Result: " + results4point5.toString());
+    var oldMileage = results4point5.toString().substring(2, results4point5.toString().length - 2);
+    //Update driver inUse to false and mileage update
+    if (classType == '3'){
+      querystring5 =
+          'UPDATE users SET "inUse" = '"'false', "'"totalClass3Mileage" = '"'" + (int.parse(oldMileage)+int.parse(mileage)).toString() + "' WHERE "'"username" = '"'" + username + "';";
+    }
+    else {
+      querystring5 =
+          'UPDATE users SET "inUse" = '"'false', "'"totalClass4Mileage" = '"'" + (int.parse(oldMileage)+int.parse(mileage)).toString() + "' WHERE "'"username" = '"'" + username + "';";
+    }
+    print("Query String: " + querystring5);
+    var results5 = await connection.query(querystring5);
+    print("Database Result: " + results5.toString());
+    //Get VC fullname from logging table
+    var querystring6 =
+        'SELECT "vcRankFullName" FROM logging WHERE "UUID"='"'" + UUID + "';";
+    print("Query String: " + querystring6);
+    var results6 = await connection.query(querystring6);
+    print("Database Result: " + results6.toString());
+    // if there is a Veh Com
+    if (results6.toString() != "[[]]"){
+      var vcRankFullName = results6.toString().substring(2, results6.toString().length - 2);
+      //Update Veh Com inUse to false
+      var vcFullName = vcRankFullName.substring(vcRankFullName.split(' ')[0].length);
+      var querystring7 =
+          'UPDATE users SET "inUse" = '"'false' WHERE "'"fullName" = '"'" + vcFullName + "';";
+      print("Query String: " + querystring7);
+      var results7 = await connection.query(querystring7);
+      print("Database Result: " + results7.toString());
+    }
     connection.close();
   }
 
@@ -748,7 +816,7 @@ class DatabaseHandler {
         username: "LTCAppUser", password: "LTCuser123");
     await connection.open();
     var querystring =
-        'SELECT "rank", "fullName" FROM users;';
+        'SELECT "rank", "fullName" FROM users WHERE "inUse" = '"'false"';';
     print("Query String: " + querystring);
     var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
