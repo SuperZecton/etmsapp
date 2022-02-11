@@ -445,15 +445,15 @@ class DatabaseHandler {
         }
       }
       else if (storingDate.length != 1) {
-        for (int i = 0; i < storingDate.length; i++) {
-          for (int j = 0; j < storingDate.length - i; j++) {
-            if (storingDate[j].compareTo(storingDate[j + 1]) < 0) {
-              DateTime temp = storingDate[j];
-              storingDate[j] = storingDate[j + 1];
-              storingDate[j + 1] = temp;
-              String temp1 = storingDateString[j];
-              storingDateString[j] = storingDateString[j + 1];
-              storingDateString[j + 1] = temp1;
+        for (int i = 0; i < storingDate.length - 1; i++) {
+          for (int j = 0; j < storingDate.length - i - 1; j++) {
+            if (storingDate[i].compareTo(storingDate[i + 1]) < 0) {
+              DateTime temp = storingDate[i];
+              storingDate[i] = storingDate[i + 1];
+              storingDate[i + 1] = temp;
+              String temp1 = storingDateString[i];
+              storingDateString[i] = storingDateString[i + 1];
+              storingDateString[i + 1] = temp1;
             }
           }
         }
@@ -485,10 +485,10 @@ class DatabaseHandler {
           });
           for (int x = 0; x < storingTime.length - 1; x++) {
             for (int y = 0; y < storingTime.length - x - 1; y++) {
-              if (storingTime[y].compareTo(storingTime[y + 1]) < 0) {
-                DateTime temp = storingTime[y];
-                storingTime[y] = storingTime[y + 1];
-                storingTime[y + 1] = temp;
+              if (storingTime[x].compareTo(storingTime[x + 1]) < 0) {
+                DateTime temp = storingTime[x];
+                storingTime[x] = storingTime[x + 1];
+                storingTime[x + 1] = temp;
               }
             }
           }
@@ -831,6 +831,80 @@ class DatabaseHandler {
     List<String> _returnList = finallist.map((string) => string.toString()).toList();
     connection.close();
     return _returnList;
+  }
+
+  Future<String> checkOngoingTrips(String username) async {
+    var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
+        username: "LTCAppUser", password: "LTCuser123");
+    await connection.open();
+    var UUID = "";
+    var querystring =
+        'SELECT "UUID" FROM Users WHERE'" username = '" + username + "', "'"odometerEnd" = '"'';";
+    print("Query String: " + querystring);
+    var results = await connection.query(querystring);
+    print("Database Result: " + results.toString());
+    if (results.toString() == "[[]]"){
+      UUID = results.toString().substring(2, results.toString().length - 2);
+      print("You have an Ongoing Trip");
+    }
+    else {
+      print("No Ongoing Trips");
+    }
+    connection.close();
+    return UUID;
+  }
+
+  Future<List<List<dynamic>>> getGreenFileData(String username) async {
+    var finallist = [[]];
+    var count = 0;
+    var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
+        username: "LTCAppUser", password: "LTCuser123");
+    await connection.open();
+    var querystring =
+        'SELECT "vehicleNo", "date", "odometerStart", "odometerEnd", "mileage", "classType" FROM logging WHERE "username" = '"'" +
+            username +
+            "' AND " + '"mileage" != ' + "'';";
+    print("Query String: " + querystring);
+    var results = await connection.query(querystring);
+    print("Database Result: " + results.toString());
+    results.forEach((rawRow) {
+      var row = rawRow.toString().substring(1, rawRow.toString().length - 1);
+      var innerList = row.split(", ");
+      finallist.add(innerList);
+      count = count + 1;
+    });
+    finallist.removeAt(0);
+    print("There are " + count.toString() + " mileage entries");
+    if (count == 1){
+    }
+    else if (count == 2){
+      var dateX = finallist[0][1].split('/');
+      var datetimeX = DateTime.utc(dateX[2],dateX[1],dateX[0]);
+      var dateY = finallist[1][1].split('/');
+      var datetimeY = DateTime.utc(dateY[2],dateY[1],dateY[0]);
+      if (datetimeX.compareTo(datetimeY) > 0){
+        var temp = finallist[0][1];
+        finallist[0][1] = finallist[1][1];
+        finallist[1][1] = temp;
+      }
+    }
+    else{
+      for (int x = 0; x < finallist.length - 1; x++){
+        for (int y = 0; y < finallist.length - x - 1; y ++){
+          var dateX = finallist[x][1].split('/');
+          var datetimeX = DateTime.utc(dateX[2],dateX[1],dateX[0]);
+          var dateY = finallist[x+1][1].split('/');
+          var datetimeY = DateTime.utc(dateY[2],dateY[1],dateY[0]);
+          if (datetimeX.compareTo(datetimeY) > 0){
+            var temp = finallist[0][1];
+            finallist[0][1] = finallist[1][1];
+            finallist[1][1] = temp;
+          }
+        }
+      }
+    }
+    connection.close();
+    return finallist;
   }
 
 }
