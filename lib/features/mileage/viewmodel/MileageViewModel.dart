@@ -31,6 +31,11 @@ class MileageViewModel extends FutureViewModel {
     }
   }
 
+  String _currentMonth = DateTime.now().month.toString();
+  String get currentMonth => _currentMonth;
+  String _currentYear = DateTime.now().year.toString();
+  String get currentYear => _currentYear;
+
   DateTime? _selectedDate;
   DateTime? get selectedDate => _selectedDate;
   static final initialDate = DateTime.now();
@@ -44,6 +49,8 @@ class MileageViewModel extends FutureViewModel {
     ).then((date) {
       if (date != null) {
         _selectedDate = date;
+        _currentMonth = date.month.toString();
+        _currentYear = date.year.toString();
         notifyListeners();
       }
     });

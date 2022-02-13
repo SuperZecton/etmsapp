@@ -12,11 +12,9 @@ class VehicleStartTripViewModel extends BaseViewModel {
 
   ///<----------- Start Trip Variables --------------> ///
   TextEditingController _startingOdometer = TextEditingController();
-  TextEditingController _purposeOfTrip = TextEditingController();
   TextEditingController _locationStart = TextEditingController();
   TextEditingController _locationEnd = TextEditingController();
   TextEditingController get startingOdometer => _startingOdometer;
-  TextEditingController get purposeOfTrip => _purposeOfTrip;
   TextEditingController get locationStart => _locationStart;
   TextEditingController get locationEnd => _locationEnd;
 
@@ -31,6 +29,16 @@ class VehicleStartTripViewModel extends BaseViewModel {
 
   String? _currentVCom;
   String? get currentVCom => _currentVCom;
+
+  String? _currentPurpose;
+  String? get currentPurpose => _currentPurpose;
+
+  List<String?> _purposeOfTrip = ["Ferry Personnel","FS", "FDC", "Maintenance/Top-up", "Training", "MUV Detail", "VIP Detail", "Boss Detail", "Send Vehicle"];
+  List<String?> get purposeOfTrip => _purposeOfTrip;
+  void purposeOfTripOnChanged(String value) async {
+    _currentPurpose = value;
+    notifyListeners();
+  }
 
 
   void carTypeDropDownOnChanged(CarType value) async {
@@ -66,7 +74,7 @@ class VehicleStartTripViewModel extends BaseViewModel {
     String _classType = await db.singleDataPull(
         "Vehicles", "vehicleNo", _currentVehicleNo!, "classType");
     String? _username = CurrentUser.instance.username;
-    if (_username != null) {
+    if (_username != null && _currentVehicleNo != null && _currentPurpose != null) {
       print("Starting trip..");
       String _currentTripID = await db.startTrip(
           _username,
@@ -76,7 +84,7 @@ class VehicleStartTripViewModel extends BaseViewModel {
           _startingOdometer.text,
           _locationStart.text,
           _locationEnd.text,
-          _purposeOfTrip.text,
+          _currentPurpose!,
           _classType,
       _currentVCom!);
       CurrentUser.instance.currentTripID = _currentTripID;
@@ -90,10 +98,11 @@ class VehicleStartTripViewModel extends BaseViewModel {
       String? _fullNameVC = _currentVCom;
 
       telebot.sendMovement(_currentVehicleNo!, _locationEnd.text,
-          _purposeOfTrip.text, _rankTO, _fullNameTO, _fullNameVC!);
+          _currentPurpose!, _rankTO, _fullNameTO, _fullNameVC!);
 
       Navigator.pushNamed(context, '/home');
     } else {
+
       print("Unsuccessful Submit, username null");
     }
   }

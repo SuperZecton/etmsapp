@@ -848,6 +848,7 @@ class DatabaseHandler {
       print("You have an Ongoing Trip");
     }
     else {
+      return "";
       print("No Ongoing Trips");
     }
     connection.close();

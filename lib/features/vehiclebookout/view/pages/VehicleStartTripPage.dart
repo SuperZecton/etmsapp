@@ -59,15 +59,12 @@ class VehicleStartTripPage extends StatelessWidget {
                           icon: FontAwesomeIcons.userFriends,
                           onChanged: (value) =>
                               model.vcDropDownOnChanged(value!)),
-                      VehicleEntryField(
-                        "Purpose of Trip",
-                        FontAwesomeIcons.luggageCart,
-                        model.purposeOfTrip,
-                        validationAction: (String? input) => input!
-                                .isValidName()
-                            ? null
-                            : "Purpose of Trip cannot have special characters",
-                      ),
+                      VehicleDropDownField<String?>(
+                          value: model.currentPurpose,
+                          values: model.purposeOfTrip,
+                          icon: FontAwesomeIcons.luggageCart,
+                          onChanged: (value) =>
+                              model.purposeOfTripOnChanged(value!)),
                       VehicleEntryField(
                           "Start odometer",
                           FontAwesomeIcons.tachometerAlt,

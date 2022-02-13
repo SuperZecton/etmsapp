@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ltcapp/core/widgets/FunctionMissingDialog.dart';
+import 'package:ltcapp/core/widgets/ErrorDialogs.dart';
 import 'package:ltcapp/features/login/view/widgets/PasswordEntryField.dart';
 import 'package:ltcapp/features/login/view/widgets/UsernameEntryField.dart';
 import 'package:ltcapp/features/login/viewmodel/LoginPageViewModel.dart';
@@ -257,7 +257,7 @@ class LoginPage extends StatelessWidget {
           Expanded(
             flex: 5,
             child: InkWell(
-              onTap: () => FunctionMissingDialog.functionMissingDialog(context),
+              onTap: () => Navigator.pushNamed(context, '/afterLogin'),
               child: Container(
                 decoration: BoxDecoration(
                   color: darkGreenAccent,

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/core/config/Globals.dart';
@@ -35,23 +34,14 @@ class MileageInfoCard extends ViewModelWidget<MileageViewModel> {
               Container(
                 padding: EdgeInsets.all(8.0),
                 decoration: BoxDecoration(
-                    color: darkPrimary500,
                     borderRadius: BorderRadius.circular(12.0)),
-                child: InkWell(
-                  onTap: () {
-                    Navigator.pushNamed(
-                      context,
-                      '/mileageMain',
-                    );
-                  },
-                  child: Text(
-                    "Show History",
-                    style: GoogleFonts.roboto(
-                      textStyle: Theme.of(context).textTheme.headline4,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                      color: darkTextColor,
-                    ),
+                child: Text(
+                  "${model.currentMonth}/${model.currentYear}",
+                  style: GoogleFonts.roboto(
+                    textStyle: Theme.of(context).textTheme.headline4,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                    color: darkTextColor,
                   ),
                 ),
               ),
@@ -67,7 +57,7 @@ class MileageInfoCard extends ViewModelWidget<MileageViewModel> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                     "hi",
+                      "Class 3:",
                       textAlign: TextAlign.left,
                       style: GoogleFonts.roboto(
                         textStyle: Theme.of(context).textTheme.headline4,
@@ -78,7 +68,7 @@ class MileageInfoCard extends ViewModelWidget<MileageViewModel> {
                     ),
                     SizedBox(height: 10),
                     Text(
-                    "",
+                      "Class 4",
                       textAlign: TextAlign.left,
                       style: GoogleFonts.roboto(
                         textStyle: Theme.of(context).textTheme.headline4,
