@@ -443,8 +443,7 @@ class DatabaseHandler {
             storingTime[1] = temp;
           }
         }
-      }
-      else if (storingDate.length != 1) {
+      } else if (storingDate.length != 1) {
         for (int i = 0; i < storingDate.length - 1; i++) {
           for (int j = 0; j < storingDate.length - i - 1; j++) {
             if (storingDate[i].compareTo(storingDate[i + 1]) < 0) {
@@ -579,34 +578,58 @@ class DatabaseHandler {
     var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
     // Get UUID to give Jovan
-    var querystring2 =
-        'SELECT "UUID" FROM logging WHERE "username"=' "'" + username + "' AND "'"date" = '"'" + date + "' AND "'"timeStart" = '"'" + timeStart + "';";
+    var querystring2 = 'SELECT "UUID" FROM logging WHERE "username"=' "'" +
+        username +
+        "' AND " '"date" = ' "'" +
+        date +
+        "' AND " '"timeStart" = ' "'" +
+        timeStart +
+        "';";
     print("Query String: " + querystring2);
     var results2 = await connection.query(querystring2);
     print("Database Result: " + results2.toString());
     //Get Current Date and NextWPTDate for Vehicle
     DateTime currentDateTime = DateTime.now();
-    var now = DateTime.parse(currentDateTime.toString()+'-08:00');
-    String lastWPTDate = now.day.toString().padLeft(2, '0') + "/" + now.month.toString().padLeft(2, '0') + "/" + now.year.toString();
+    var now = DateTime.parse(currentDateTime.toString() + '-08:00');
+    String lastWPTDate = now.day.toString().padLeft(2, '0') +
+        "/" +
+        now.month.toString().padLeft(2, '0') +
+        "/" +
+        now.year.toString();
     var nextWPTDateTime = now.add(Duration(days: 7));
-    var nextWPTDate = nextWPTDateTime.day.toString().padLeft(2, '0') + "/" + nextWPTDateTime.month.toString().padLeft(2, '0') + "/" + nextWPTDateTime.year.toString();
+    var nextWPTDate = nextWPTDateTime.day.toString().padLeft(2, '0') +
+        "/" +
+        nextWPTDateTime.month.toString().padLeft(2, '0') +
+        "/" +
+        nextWPTDateTime.year.toString();
     //Update Vehicle In use and WPT Dates
     var querystring3 =
-        'UPDATE vehicles SET "inUse" = '"'true', "'"lastWPTDate" = '"'" + lastWPTDate + "', "'"nextWPTDate" = '"'" + nextWPTDate + "' WHERE "'"vehicleNo" = '"'" + vehicleNo + "';";
+        'UPDATE vehicles SET "inUse" = ' "'true', " '"lastWPTDate" = ' "'" +
+            lastWPTDate +
+            "', " '"nextWPTDate" = ' "'" +
+            nextWPTDate +
+            "' WHERE " '"vehicleNo" = ' "'" +
+            vehicleNo +
+            "';";
     print("Query String: " + querystring3);
     var results3 = await connection.query(querystring3);
     print("Database Result: " + results3.toString());
     //Update driver inUse to true
     var querystring4 =
-        'UPDATE users SET "inUse" = '"'true' WHERE "'"username" = '"'" + username + "';";
+        'UPDATE users SET "inUse" = ' "'true' WHERE " '"username" = ' "'" +
+            username +
+            "';";
     print("Query String: " + querystring4);
     var results4 = await connection.query(querystring4);
     print("Database Result: " + results4.toString());
     //Update Veh Com inUse to true
-    if (vcRankFullName != ''){
-      var vcFullName = vcRankFullName.substring(vcRankFullName.split(' ')[0].length);
+    if (vcRankFullName != '') {
+      var vcFullName =
+          vcRankFullName.substring(vcRankFullName.split(' ')[0].length);
       var querystring5 =
-          'UPDATE users SET "inUse" = '"'true' WHERE "'"fullName" = '"'" + vcFullName + "';";
+          'UPDATE users SET "inUse" = ' "'true' WHERE " '"fullName" = ' "'" +
+              vcFullName +
+              "';";
       print("Query String: " + querystring5);
       var results5 = await connection.query(querystring5);
       print("Database Result: " + results5.toString());
@@ -631,7 +654,7 @@ class DatabaseHandler {
         odometerEnd +
         "', " '"mileage" = ' "'" +
         mileage.toString() +
-        "' WHERE " '"UUID" = '"'" +
+        "' WHERE " '"UUID" = ' "'" +
         UUID +
         "';";
     print("Query String: " + querystring);
@@ -639,63 +662,88 @@ class DatabaseHandler {
     print("Database Result: " + results.toString());
     //Get Vehicle Number and Class Type using UUID
     var querystring2 =
-        'SELECT "vehicleNo", "classType" FROM logging WHERE "UUID"='"'" + UUID + "';";
+        'SELECT "vehicleNo", "classType" FROM logging WHERE "UUID"=' "'" +
+            UUID +
+            "';";
     print("Query String: " + querystring2);
     var results2 = await connection.query(querystring2);
     print("Database Result: " + results2.toString()); // [[41556, 3]]
     var vehNo = results2.toString().split(',')[0].substring(2);
-    var classType = results2.toString().split(',')[1].substring(1,2);
+    var classType = results2.toString().split(',')[1].substring(1, 2);
     // Set inUse to false for Vehicles
     var querystring3 =
-        'UPDATE vehicles SET "inUse" = '"'false' WHERE "'"vehicleNo" = '"'" + vehNo + "';";
+        'UPDATE vehicles SET "inUse" = ' "'false' WHERE " '"vehicleNo" = ' "'" +
+            vehNo +
+            "';";
     print("Query String: " + querystring3);
     var results3 = await connection.query(querystring3);
     print("Database Result: " + results3.toString());
     //Get username from logging using UUID
     var querystring4 =
-        'SELECT "username" FROM logging WHERE "UUID"='"'" + UUID + "';";
+        'SELECT "username" FROM logging WHERE "UUID"=' "'" + UUID + "';";
     print("Query String: " + querystring4);
     var results4 = await connection.query(querystring4);
     print("Database Result: " + results4.toString());
-    var username = results4.toString().substring(2, results4.toString().length - 2);
+    var username =
+        results4.toString().substring(2, results4.toString().length - 2);
     //Get old mileage from users using username
-    if (classType == '3'){
+    if (classType == '3') {
       querystring4point5 =
-          'SELECT "totalClass3Mileage" FROM logging WHERE "username"='"'" + username + "';";
-    }
-    else {
+          'SELECT "totalClass3Mileage" FROM Users WHERE "username"=' "'" +
+              username +
+              "';";
+    } else {
       querystring4point5 =
-          'SELECT "totalClass4Mileage" FROM logging WHERE "username"='"'" + username + "';";
+          'SELECT "totalClass4Mileage" FROM Users WHERE "username"=' "'" +
+              username +
+              "';";
     }
     print("Query String: " + querystring4point5);
     var results4point5 = await connection.query(querystring4point5);
     print("Database Result: " + results4point5.toString());
-    var oldMileage = results4point5.toString().substring(2, results4point5.toString().length - 2);
+    var oldMileage = results4point5
+        .toString()
+        .substring(2, results4point5.toString().length - 2);
     //Update driver inUse to false and mileage update
-    if (classType == '3'){
-      querystring5 =
-          'UPDATE users SET "inUse" = '"'false', "'"totalClass3Mileage" = '"'" + (int.parse(oldMileage)+int.parse(mileage)).toString() + "' WHERE "'"username" = '"'" + username + "';";
-    }
-    else {
-      querystring5 =
-          'UPDATE users SET "inUse" = '"'false', "'"totalClass4Mileage" = '"'" + (int.parse(oldMileage)+int.parse(mileage)).toString() + "' WHERE "'"username" = '"'" + username + "';";
+    if (classType == '3') {
+      querystring5 = 'UPDATE users SET "inUse" = '
+              "'false', "
+              '"totalClass3Mileage" = '
+              "'" +
+          (int.parse(oldMileage) + int.parse(mileage)).toString() +
+          "' WHERE " '"username" = ' "'" +
+          username +
+          "';";
+    } else {
+      querystring5 = 'UPDATE users SET "inUse" = '
+              "'false', "
+              '"totalClass4Mileage" = '
+              "'" +
+          (int.parse(oldMileage) + int.parse(mileage)).toString() +
+          "' WHERE " '"username" = ' "'" +
+          username +
+          "';";
     }
     print("Query String: " + querystring5);
     var results5 = await connection.query(querystring5);
     print("Database Result: " + results5.toString());
     //Get VC fullname from logging table
     var querystring6 =
-        'SELECT "vcRankFullName" FROM logging WHERE "UUID"='"'" + UUID + "';";
+        'SELECT "vcRankFullName" FROM logging WHERE "UUID"=' "'" + UUID + "';";
     print("Query String: " + querystring6);
     var results6 = await connection.query(querystring6);
     print("Database Result: " + results6.toString());
     // if there is a Veh Com
-    if (results6.toString() != "[[]]"){
-      var vcRankFullName = results6.toString().substring(2, results6.toString().length - 2);
+    if (results6.toString() != "[[]]") {
+      var vcRankFullName =
+          results6.toString().substring(2, results6.toString().length - 2);
       //Update Veh Com inUse to false
-      var vcFullName = vcRankFullName.substring(vcRankFullName.split(' ')[0].length);
+      var vcFullName =
+          vcRankFullName.substring(vcRankFullName.split(' ')[0].length);
       var querystring7 =
-          'UPDATE users SET "inUse" = '"'false' WHERE "'"fullName" = '"'" + vcFullName + "';";
+          'UPDATE users SET "inUse" = ' "'false' WHERE " '"fullName" = ' "'" +
+              vcFullName +
+              "';";
       print("Query String: " + querystring7);
       var results7 = await connection.query(querystring7);
       print("Database Result: " + results7.toString());
@@ -771,7 +819,9 @@ class DatabaseHandler {
     var querystring =
         'SELECT "vehicleNo" FROM vehicles WHERE "carType" = ' "'" +
             carType +
-            "' AND " + '"inUse" = ' + "'false';";
+            "' AND " +
+            '"inUse" = ' +
+            "'false';";
     print("Query String: " + querystring);
     var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
@@ -791,9 +841,12 @@ class DatabaseHandler {
         username: "LTCAppUser", password: "LTCuser123");
     await connection.open();
     var querystring =
-        'SELECT "vehicleNo", "date", "odometerStart", "odometerEnd", "mileage" FROM logging WHERE "username" = '"'" +
+        'SELECT "vehicleNo", "date", "odometerStart", "odometerEnd", "mileage" FROM logging WHERE "username" = '
+                "'" +
             username +
-            "' AND " + '"mileage" != ' + "'';";
+            "' AND " +
+            '"mileage" != ' +
+            "'';";
     print("Query String: " + querystring);
     var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
@@ -816,7 +869,7 @@ class DatabaseHandler {
         username: "LTCAppUser", password: "LTCuser123");
     await connection.open();
     var querystring =
-        'SELECT "rank", "fullName" FROM users WHERE "inUse" = '"'false"';';
+        'SELECT "rank", "fullName" FROM users WHERE "inUse" = ' "'false'" ';';
     print("Query String: " + querystring);
     var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
@@ -828,7 +881,8 @@ class DatabaseHandler {
       count = count + 1;
     });
     print("There are " + count.toString() + " available Vehicle Commanders");
-    List<String> _returnList = finallist.map((string) => string.toString()).toList();
+    List<String> _returnList =
+        finallist.map((string) => string.toString()).toList();
     connection.close();
     return _returnList;
   }
@@ -838,18 +892,18 @@ class DatabaseHandler {
         username: "LTCAppUser", password: "LTCuser123");
     await connection.open();
     var UUID = "";
-    var querystring =
-        'SELECT "UUID" FROM Users WHERE'" username = '" + username + "', "'"odometerEnd" = '"'';";
+    var querystring = 'SELECT "UUID" FROM Logging WHERE' " username = '" +
+        username +
+        "' AND " '"odometerEnd" = ' "'';";
     print("Query String: " + querystring);
     var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
-    if (results.toString() == "[[]]"){
+    if (results.toString() == "[[]]") {
       UUID = results.toString().substring(2, results.toString().length - 2);
       print("You have an Ongoing Trip");
-    }
-    else {
-      return "";
+    } else {
       print("No Ongoing Trips");
+      return "";
     }
     connection.close();
     return UUID;
@@ -862,9 +916,12 @@ class DatabaseHandler {
         username: "LTCAppUser", password: "LTCuser123");
     await connection.open();
     var querystring =
-        'SELECT "vehicleNo", "date", "odometerStart", "odometerEnd", "mileage", "classType" FROM logging WHERE "username" = '"'" +
+        'SELECT "vehicleNo", "date", "odometerStart", "odometerEnd", "mileage", "classType" FROM logging WHERE "username" = '
+                "'" +
             username +
-            "' AND " + '"mileage" != ' + "'';";
+            "' AND " +
+            '"mileage" != ' +
+            "'';";
     print("Query String: " + querystring);
     var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
@@ -876,27 +933,25 @@ class DatabaseHandler {
     });
     finallist.removeAt(0);
     print("There are " + count.toString() + " mileage entries");
-    if (count == 1){
-    }
-    else if (count == 2){
+    if (count == 1) {
+    } else if (count == 2) {
       var dateX = finallist[0][1].split('/');
-      var datetimeX = DateTime.utc(dateX[2],dateX[1],dateX[0]);
+      var datetimeX = DateTime.utc(dateX[2], dateX[1], dateX[0]);
       var dateY = finallist[1][1].split('/');
-      var datetimeY = DateTime.utc(dateY[2],dateY[1],dateY[0]);
-      if (datetimeX.compareTo(datetimeY) > 0){
+      var datetimeY = DateTime.utc(dateY[2], dateY[1], dateY[0]);
+      if (datetimeX.compareTo(datetimeY) > 0) {
         var temp = finallist[0][1];
         finallist[0][1] = finallist[1][1];
         finallist[1][1] = temp;
       }
-    }
-    else{
-      for (int x = 0; x < finallist.length - 1; x++){
-        for (int y = 0; y < finallist.length - x - 1; y ++){
+    } else {
+      for (int x = 0; x < finallist.length - 1; x++) {
+        for (int y = 0; y < finallist.length - x - 1; y++) {
           var dateX = finallist[x][1].split('/');
-          var datetimeX = DateTime.utc(dateX[2],dateX[1],dateX[0]);
-          var dateY = finallist[x+1][1].split('/');
-          var datetimeY = DateTime.utc(dateY[2],dateY[1],dateY[0]);
-          if (datetimeX.compareTo(datetimeY) > 0){
+          var datetimeX = DateTime.utc(dateX[2], dateX[1], dateX[0]);
+          var dateY = finallist[x + 1][1].split('/');
+          var datetimeY = DateTime.utc(dateY[2], dateY[1], dateY[0]);
+          if (datetimeX.compareTo(datetimeY) > 0) {
             var temp = finallist[0][1];
             finallist[0][1] = finallist[1][1];
             finallist[1][1] = temp;
@@ -907,5 +962,4 @@ class DatabaseHandler {
     connection.close();
     return finallist;
   }
-
 }

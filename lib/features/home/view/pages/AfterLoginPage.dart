@@ -187,7 +187,7 @@ class AfterLoginPage extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Material(
-                                    color: Colors.yellowAccent,
+                                    color: Colors.orangeAccent,
                                     shape: CircleBorder(),
                                     child: Padding(
                                       padding: const EdgeInsets.all(16.0),

@@ -5,6 +5,7 @@ import 'package:ltcapp/core/config/Globals.dart';
 import 'package:ltcapp/features/mileage/view/widgets/MileageAppBar.dart';
 import 'package:ltcapp/features/mileage/view/widgets/MileageInfoCard.dart';
 import 'package:ltcapp/features/mileage/view/widgets/MileageListCard.dart';
+import 'package:ltcapp/features/mileage/view/widgets/MileageProgressIndicator.dart';
 import 'package:ltcapp/features/mileage/viewmodel/MileageViewModel.dart';
 import 'package:provider/provider.dart';
 import 'package:stacked/stacked.dart';
@@ -30,13 +31,14 @@ class MileageMainPage extends StatelessWidget {
           body: Column(
             children: [
               MileageInfoCard(),
+              MileageProgressIndicator(),
               Expanded(
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 10.0),
                   child: ListView.builder(
-                    itemCount: model.dataReady ? model.data.length : 0,
+                    itemCount: model.mileageList.isNotEmpty ? model.mileageList.length : 0,
                     itemBuilder: (context, index) {
-                      final item = model.data[index];
+                      final item = model.mileageList[index];
                       return MileageListCard(
                         vehicleNo: item[0],
                         date: item[1],

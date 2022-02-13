@@ -106,7 +106,7 @@ class HomePageViewModel extends MultipleFutureViewModel {
 
   Future<List<String?>> ensureCurrentTripData() async {
     String? _tripID = CurrentUser.instance.currentTripID;
-    if (_tripID != null) {
+    if (_tripID != null && _tripID.isEmpty != true ) {
       print("Ensuring Current Trip Data");
       List<dynamic> _dynList = await db.multiDataPullRow("Logging", "UUID", _tripID);
       List<String?> _dataList = _dynList.map((s) => s as String?).toList();
@@ -186,7 +186,7 @@ class HomePageViewModel extends MultipleFutureViewModel {
   }
 
   void startTripPush(BuildContext context) {
-    if(CurrentUser.instance.currentTripID != null){
+    if(CurrentUser.instance.currentTripID != null && CurrentUser.instance.currentTripID!.isNotEmpty == true){
       HomePageDialog.startTripDeniedDialog(context);
 
     } else {

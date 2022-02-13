@@ -60,6 +60,7 @@ class VehicleStartTripPage extends StatelessWidget {
                           onChanged: (value) =>
                               model.vcDropDownOnChanged(value!)),
                       VehicleDropDownField<String?>(
+                          hint: "Purpose of Trip",
                           value: model.currentPurpose,
                           values: model.purposeOfTrip,
                           icon: FontAwesomeIcons.luggageCart,

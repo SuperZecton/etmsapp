@@ -1,10 +1,8 @@
-
-
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/core/config/Globals.dart';
 import 'package:ltcapp/features/mileage/viewmodel/MileageViewModel.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:stacked/stacked.dart';
 
 class MileageProgressIndicator extends ViewModelWidget<MileageViewModel> {
@@ -13,7 +11,7 @@ class MileageProgressIndicator extends ViewModelWidget<MileageViewModel> {
   @override
   Widget build(BuildContext context, MileageViewModel model) {
     return Container(
-      height: 140,
+      height: 200,
       padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
       margin: EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
       decoration: BoxDecoration(
@@ -26,7 +24,7 @@ class MileageProgressIndicator extends ViewModelWidget<MileageViewModel> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "Progress Indicator",
+                "Bonus Progress",
                 style: GoogleFonts.roboto(
                   textStyle: Theme.of(context).textTheme.headline4,
                   fontSize: 24,
@@ -36,7 +34,38 @@ class MileageProgressIndicator extends ViewModelWidget<MileageViewModel> {
               ),
             ],
           ),
-          
+          Expanded(
+            flex: 2,
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 10.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Container(
+                    child: CircularPercentIndicator(
+                      radius: 60.0,
+                      lineWidth: 5.0,
+                      percent: model.bonusDecimal,
+                      center: Text("${model.bonusPercentage}%"),
+                      progressColor: Colors.green,
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.all(4.0),
+                    child: Column(
+                      children: [
+                        Text("Total Mileage: ${model.totalMileage.toString()}",
+                            style: GoogleFonts.roboto(
+                                color: darkTextColor,
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.w400)),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );
