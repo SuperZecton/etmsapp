@@ -136,7 +136,8 @@ class WelcomePage extends StatelessWidget {
       backgroundColor: Color(0xffC0C0C0),
       child: CircleAvatar(
         radius: 100,
-        backgroundImage: AssetImage('images/ltcbluelogo2.jpg'),
+        backgroundImage: AssetImage(
+            'images/appNoLogo.png',),
       ),
     );
   }
