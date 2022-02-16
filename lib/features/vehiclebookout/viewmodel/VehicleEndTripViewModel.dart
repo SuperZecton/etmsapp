@@ -45,7 +45,13 @@ class VehicleEndTripViewModel extends BaseViewModel {
       String? _toRank = await db.singleDataPull("Users", "username", _username, "rank");
       String? _toFullName = await db.singleDataPull("Users", "username", _username, "fullName");
       String? _vcRankFullName = await db.singleDataPull("Logging", "UUID", _tripID, "vcRankFullName");
-      telebot.endMovement(_vehicleNo, _locationEnd, _toRank, _toFullName, _vcRankFullName);
+      String? _additionalPlate = await db.singleDataPull("Vehicles", "vehicleNo", _vehicleNo, "additionalPlate");
+
+      if(_additionalPlate.isNotEmpty){
+        telebot.endMovement(_vehicleNo, _locationEnd, _toRank, _toFullName, _vcRankFullName, _additionalPlate);
+      } else{
+        telebot.endMovement(_vehicleNo, _locationEnd, _toRank, _toFullName, _vcRankFullName, _additionalPlate);
+      }
 
       Navigator.pushNamed(context, '/home');
     } else {

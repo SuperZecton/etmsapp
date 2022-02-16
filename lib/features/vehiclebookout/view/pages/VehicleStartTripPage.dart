@@ -5,6 +5,7 @@ import 'package:ltcapp/core/utils/Validators.dart';
 import 'package:ltcapp/features/registration/view/widgets/dropDownField.dart';
 import 'package:ltcapp/features/vehiclebookout/model/individual_vehicle.dart';
 import 'package:ltcapp/features/vehiclebookout/view/widgets/VehicleButton.dart';
+import 'package:ltcapp/features/vehiclebookout/view/widgets/VehicleCheckBox.dart';
 import 'package:ltcapp/features/vehiclebookout/view/widgets/VehicleDropDownField.dart';
 import 'package:ltcapp/features/vehiclebookout/view/widgets/VehicleEntryField.dart';
 import 'package:ltcapp/features/vehiclebookout/view/widgets/VehicleBookOutCard.dart';

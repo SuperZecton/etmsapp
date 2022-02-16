@@ -45,6 +45,7 @@ class VehicleStartTripViewModel extends BaseViewModel {
   void carTypeDropDownOnChanged(CarType value) async {
     _currentCarTypeValue = value;
     vehicleNumbers = await getVehicleNumbers(value);
+    vehicleNumbers.add("No VC");
     vehicleCommanders = await getVCom();
     _currentVehicleNo = null;
     notifyListeners();
@@ -58,6 +59,11 @@ class VehicleStartTripViewModel extends BaseViewModel {
   void vcDropDownOnChanged(String value){
     _currentVCom = value;
     notifyListeners();
+  }
+
+  void checkBoxOnChanged(bool? value){
+
+
   }
 
   void onStartTripPush(BuildContext context) async {
@@ -97,9 +103,15 @@ class VehicleStartTripViewModel extends BaseViewModel {
       String _fullNameTO =
           await db.singleDataPull("Users", "username", _username, "fullName");
       String? _fullNameVC = _currentVCom;
+      String? _additionalPlate = await db.singleDataPull("Vehicles", "vehicleNo", _currentVehicleNo!, "additionalPlate");
+      if(_additionalPlate.isNotEmpty){
+        telebot.sendMovement(_currentVehicleNo!, _locationEnd.text,
+          _currentPurpose!, _rankTO, _fullNameTO, _fullNameVC!, _additionalPlate);
+      } else{
+        telebot.sendMovement(_currentVehicleNo!, _locationEnd.text,
+            _currentPurpose!, _rankTO, _fullNameTO, _fullNameVC!, "");
+      }
 
-      telebot.sendMovement(_currentVehicleNo!, _locationEnd.text,
-          _currentPurpose!, _rankTO, _fullNameTO, _fullNameVC!);
 
       Navigator.pushNamed(context, '/home');
     } else {
