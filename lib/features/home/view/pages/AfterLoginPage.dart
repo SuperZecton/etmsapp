@@ -134,7 +134,7 @@ class AfterLoginPage extends StatelessWidget {
                         EdgeInsets.symmetric(horizontal: 20.0, vertical: 4.0),
                     padding: EdgeInsets.symmetric(horizontal: 10.0),
                     child: Text(
-                      'Every tasking is a mission. Drive safe, do not rush.',
+                      'Every tasking is a mission. Drive safe, do not rush. \nSafe always, Good to go!',
                       style: GoogleFonts.lato(
                           color: darkTextColor,
                           fontSize: 20,

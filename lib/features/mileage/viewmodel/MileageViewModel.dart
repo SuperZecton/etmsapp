@@ -7,46 +7,52 @@ import 'package:provider/provider.dart';
 import 'package:stacked/stacked.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class MileageViewModel extends FutureViewModel {
+class MileageViewModel extends MultipleFutureViewModel {
+  DatabaseHandler db = DatabaseHandler();
   //Input all the mileage getters and setters here
   //Database linkers will be in model folder
-  @override
-  Future<List<List<String>>> futureToRun() => getDataListFromDB();
+  static const String _MileageListDelayedFuture = "mileage";
+  static const String _BonusDelayedFuture = "bonus";
+  List<List<String>> get fetchedMileageList => dataMap![_MileageListDelayedFuture];
+  List<dynamic> get fetchedBonus => dataMap![_BonusDelayedFuture];
+  bool get fetchingMileageList => busy(_MileageListDelayedFuture);
+  bool get fetchingBonusList => busy(_BonusDelayedFuture);
 
-  Future<dynamic> initialise() async {
+  @override
+  Map<String, Future Function()> get futuresMap => {
+    _MileageListDelayedFuture: getDataListFromDB,
+    _BonusDelayedFuture: getBonusData,
+  };
+
+
+
+  ///Gets data needed for bonus calculations, including total class 3 and 4 mileages
+  ///0:class3  1:class4  2:total  3:decimal  4:percentage  5:tillnextbonus
+  Future<List<dynamic>> getBonusData() async {
+    List<dynamic> _returnList = [];
     String? _username = CurrentUser.instance.username;
     if (_username != null) {
       String _class3 = await db.singleDataPull(
           "Users", "username", _username, "totalClass3Mileage");
       String _class4 = await db.singleDataPull(
           "Users", "username", _username, "totalClass4Mileage");
-      class3Int = int.parse(_class3);
-      class4Int = int.parse(_class4);
-      _mileageList = await getDataListFromDB();
+      int _class3Int = int.parse(_class3);
+      int _class4Int = int.parse(_class4);
+      int _totalInt = _class3Int + _class4Int;
+      String _total = _totalInt.toString();
+      double _bonusDecimal = _totalInt / 3000;
+      double _math = _bonusDecimal * 100;
+      int _bonusPercentage = _math.floor();
+      int _leftTillBonusInt = 3000 - _totalInt;
+      String _leftTillBonus = _leftTillBonusInt.toString();
+      _returnList.addAll([_class3, _class4, _total, _bonusDecimal, _bonusPercentage, _leftTillBonus]);
+      return _returnList;
+    } else {
+      print("Username not found in getBonusData()");
+      return Future.error("Username not found");
     }
-  }
 
-  static List<List<String>> _mileageList = [[]];
-  List<List<String>> mileageList = _mileageList;
-  MileageViewModel() {
-    int _localMileage = class3Int + class4Int;
-    _totalMileage = _localMileage;
-    _bonusDecimal = _totalMileage / 3000;
-    double _math = _bonusDecimal * 100;
-    _bonusPercentage = _math.floor();
-    print(
-        "decimal $_bonusDecimal and percent $_bonusPercentage and class 3 is $class3Int");
   }
-
-  static int class3Int = 0;
-  static int class4Int = 0;
-  static double _bonusDecimal = 0.0;
-  double get bonusDecimal => _bonusDecimal;
-  static int _bonusPercentage = 0;
-  int get bonusPercentage => _bonusPercentage;
-  DatabaseHandler db = DatabaseHandler();
-  static int _totalMileage = 0;
-  int get totalMileage => _totalMileage;
   Future<List<List<String>>> getDataListFromDB() async {
     List<List<String>> _returnList = [];
     String? _username = CurrentUser.instance.username;

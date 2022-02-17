@@ -36,9 +36,9 @@ class MileageMainPage extends StatelessWidget {
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 10.0),
                   child: ListView.builder(
-                    itemCount: model.mileageList.isNotEmpty ? model.mileageList.length : 0,
+                    itemCount: model.fetchingMileageList ? 0 : model.fetchedMileageList.length,
                     itemBuilder: (context, index) {
-                      final item = model.mileageList[index];
+                      final item = model.fetchedMileageList[index];
                       return MileageListCard(
                         vehicleNo: item[0],
                         date: item[1],

@@ -45,8 +45,17 @@ class MileageProgressIndicator extends ViewModelWidget<MileageViewModel> {
                     child: CircularPercentIndicator(
                       radius: 60.0,
                       lineWidth: 5.0,
-                      percent: model.bonusDecimal,
-                      center: Text("${model.bonusPercentage}%"),
+                      percent:
+                          model.fetchingBonusList ? 0.0 : model.fetchedBonus[3],
+                      center: Text(
+                        model.fetchingBonusList
+                            ? "0.0%"
+                            : "${model.fetchedBonus[4]}%",
+                        style: GoogleFonts.roboto(
+                          fontSize: 14.0,
+                          color: darkTextColor,
+                        ),
+                      ),
                       progressColor: Colors.green,
                     ),
                   ),
@@ -54,11 +63,28 @@ class MileageProgressIndicator extends ViewModelWidget<MileageViewModel> {
                     padding: EdgeInsets.all(4.0),
                     child: Column(
                       children: [
-                        Text("Total Mileage: ${model.totalMileage.toString()}",
-                            style: GoogleFonts.roboto(
-                                color: darkTextColor,
-                                fontSize: 16.0,
-                                fontWeight: FontWeight.w400)),
+                        Container(
+                          padding: EdgeInsets.symmetric(vertical: 3.0),
+                          child: Text(
+                              model.fetchingBonusList
+                                  ? "Total Mileage not avail"
+                                  : "Total Mileage: ${model.fetchedBonus[2]}km",
+                              style: GoogleFonts.roboto(
+                                  color: darkTextColor,
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.w500)),
+                        ),
+                        Container(
+                          padding: EdgeInsets.symmetric(vertical: 3.0),
+                          child: Text(
+                              model.fetchingBonusList
+                                  ? "Leftover mileage not avail"
+                                  : "${model.fetchedBonus[5]}km left till bonus",
+                              style: GoogleFonts.roboto(
+                                  color: darkTextColor,
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.w500)),
+                        ),
                       ],
                     ),
                   )
