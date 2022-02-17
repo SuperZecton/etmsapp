@@ -50,7 +50,7 @@ class VehicleDropDownField<T> extends StatelessWidget {
                 hint,
                 style: GoogleFonts.roboto(
                   textStyle: Theme.of(context).textTheme.headline4,
-                  fontSize: 13,
+                  fontSize: 14,
                   fontWeight: FontWeight.w700,
                   color: darkTextColor,
                 ),
@@ -63,7 +63,7 @@ class VehicleDropDownField<T> extends StatelessWidget {
                     value.toString(),
                     style: GoogleFonts.roboto(
                       textStyle: Theme.of(context).textTheme.headline4,
-                      fontSize: 13,
+                      fontSize: 14,
                       fontWeight: FontWeight.w700,
                       color: darkTextColor,
                     ),

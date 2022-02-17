@@ -18,6 +18,7 @@ class VehicleStartTripPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<VehicleStartTripViewModel>.reactive(
         viewModelBuilder: () => VehicleStartTripViewModel(),
+        onModelReady: (model) => model.initialise(),
         builder: (context, model, child) {
           return Scaffold(
             appBar: AppBar(
@@ -68,13 +69,52 @@ class VehicleStartTripPage extends StatelessWidget {
                           onChanged: (value) =>
                               model.purposeOfTripOnChanged(value!)),
                       VehicleEntryField(
-                          "Start odometer",
-                          FontAwesomeIcons.tachometerAlt,
-                          model.startingOdometer),
-                      VehicleEntryField("Start Location",
-                          FontAwesomeIcons.mapMarkedAlt, model.locationStart),
-                      VehicleEntryField("End Location",
-                          FontAwesomeIcons.mapMarkedAlt, model.locationEnd),
+                        "Start odometer",
+                        FontAwesomeIcons.tachometerAlt,
+                        model.startingOdometer,
+                        validationAction: (String? input) =>
+                            input!.isValidNumber()
+                                ? null
+                                : "Please enter Numbers only",
+                      ),
+                      VehicleEntryField(
+                        "Start Location",
+                        FontAwesomeIcons.mapMarkedAlt,
+                        model.locationStart,
+                        validationAction: (String? input) =>
+                            input!.isValidLocation()
+                                ? null
+                                : "Please don't add special characters",
+                      ),
+                      VehicleEntryField(
+                        "End Location",
+                        FontAwesomeIcons.mapMarkedAlt,
+                        model.locationEnd,
+                        validationAction: (String? input) =>
+                            input!.isValidLocation()
+                                ? null
+                                : "Please don't add special characters",
+                      ),
+                      VehicleCheckBox(
+                        mainText: "Bos done?",
+                        value: model.bosDone,
+                        onChanged: (bool? value) => model.bosOnChanged(value!),
+                      ),
+                      VehicleCheckBox(
+                        mainText: "CT/JIT done?",
+                        value: model.ctJitDone,
+                        onChanged: (bool? value) =>
+                            model.ctJitOnChanged(value!),
+                      ),
+                      VehicleCheckBox(
+                        mainText: "MT-RAC done and counter-signed?",
+                        value: model.mtRacDone,
+                        onChanged: (bool? value) =>
+                            model.mtRacOnChanged(value!),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
                       VehicleButton(
                         "Submit",
                         onPressed: () => model.onStartTripPush(context),

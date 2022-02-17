@@ -15,14 +15,16 @@ class VehicleCheckBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(5),
-      margin: EdgeInsets.symmetric(vertical: 0, horizontal: 5),
+      padding: EdgeInsets.symmetric(horizontal: 10.0),
+      margin: EdgeInsets.symmetric(vertical: 2.0, horizontal: 0),
       child: CheckboxListTile(
+        activeColor: darkGreenAccent,
+        contentPadding: EdgeInsets.zero,
         title: Text(
           mainText,
           style: GoogleFonts.roboto(
             fontWeight: FontWeight.w400,
-            fontSize: 16.0,
+            fontSize: 18.0,
           ),
         ),
         value: value,

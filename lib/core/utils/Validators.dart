@@ -31,10 +31,26 @@ extension FrameValidator on String {
   }
 }
 
+extension LocationValidator on String {
+  bool isValidLocation() {
+    return RegExp(
+        r"^([\w\s]+)$")
+        .hasMatch(this);
+  }
+}
+
 extension PhoneNumberValidator on String {
   bool isValidPhoneNumber() {
     return RegExp(
         r"^([\+]?)([0-9]+)$")
+        .hasMatch(this);
+  }
+}
+
+extension NumberValidator on String {
+  bool isValidNumber() {
+    return RegExp(
+        r"^([0-9]+)$")
         .hasMatch(this);
   }
 }

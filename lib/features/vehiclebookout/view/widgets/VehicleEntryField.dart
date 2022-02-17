@@ -23,7 +23,7 @@ class VehicleEntryField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(5),
+      padding: EdgeInsets.symmetric(horizontal: 5, vertical: 2),
       margin: EdgeInsets.symmetric(vertical: 0, horizontal: 5),
       child: TextFormField(
         autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -45,7 +45,8 @@ class VehicleEntryField extends StatelessWidget {
             color: darkTextColor,
           ),
           labelText: mainText,
-          labelStyle: TextStyle(
+          labelStyle: GoogleFonts.roboto(
+            fontSize: 14.0,
             color: darkTextColor,
           ),
           helperStyle: TextStyle(
