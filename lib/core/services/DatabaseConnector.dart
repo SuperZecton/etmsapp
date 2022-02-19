@@ -962,4 +962,79 @@ class DatabaseHandler {
     connection.close();
     return finallist;
   }
+
+  Future<List<List<String>>> getWPTVehicles() async {
+    List<List<String>> finallist = [[]];
+    DateTime currentDateTime = DateTime.now();
+    var now = DateTime.parse(currentDateTime.toString() + '-08:00');
+    String lastWPTDate = now.day.toString().padLeft(2, '0') +
+        "/" +
+        now.month.toString().padLeft(2, '0') +
+        "/" +
+        now.year.toString();
+    var nextWPTDateTime = now.add(Duration(days: 7));
+    var nextWPTDate = nextWPTDateTime.day.toString().padLeft(2, '0') +
+        "/" +
+        nextWPTDateTime.month.toString().padLeft(2, '0') +
+        "/" +
+        nextWPTDateTime.year.toString();
+    var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
+        username: "LTCAppUser", password: "LTCuser123");
+    await connection.open();
+    var querystring =
+        'SELECT "vehicleNo" FROM vehicles WHERE "nextWPTDate" = '"'" + lastWPTDate + "';";
+    print("Query String: " + querystring);
+    var results = await connection.query(querystring);
+    print("Database Result: " + results.toString());
+    List<String> innerList = [];
+    var count = 0;
+    results.forEach((rawRow) {
+      var row = rawRow.toString().substring(1, rawRow.toString().length - 1);
+      innerList.add(row);
+      count = count + 1;
+    });
+    finallist.add(innerList);
+    print("There are " + count.toString() + " WPT1");
+    var querystring2 =
+        'SELECT "vehicleNo" FROM vehicles WHERE "nextWPTDate" = '"'" + nextWPTDate + "';";
+    print("Query String: " + querystring2);
+    var results2 = await connection.query(querystring2);
+    print("Database Result: " + results2.toString());
+    List<String> innerList2 = [];
+    var count2 = 0;
+    results2.forEach((rawRow) {
+      var row = rawRow.toString().substring(1, rawRow.toString().length - 1);
+      innerList2.add(row);
+      count2 = count2 + 1;
+    });
+    finallist.add(innerList2);
+    print("There are " + count2.toString() + " WPT1");
+    connection.close();
+    finallist.removeAt(0);
+    return finallist;
+  }
+
+  Future<List<List<String>>> getAllVehicles() async {
+    List<List<String>> finallist = [[]];
+    var count = 0;
+    var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
+        username: "LTCAppUser", password: "LTCuser123");
+    await connection.open();
+    var querystring =
+        'SELECT * FROM vehicles;';
+    print("Query String: " + querystring);
+    var results = await connection.query(querystring);
+    print("Database Result: " + results.toString());
+    results.forEach((rawRow) {
+      var row = rawRow.toString().substring(1, rawRow.toString().length - 1);
+      var innerList = row.split(", ");
+      finallist.add(innerList);
+      count = count + 1;
+    });
+    finallist.removeAt(0);
+    print("There are " + count.toString() + " vehicles");
+    connection.close();
+    return finallist;
+  }
+
 }
