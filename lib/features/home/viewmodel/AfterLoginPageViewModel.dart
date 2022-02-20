@@ -85,6 +85,10 @@ class AfterLoginViewModel extends MultipleFutureViewModel {
     Navigator.pushNamed(context, '/home');
   }
 
+  void maintenancePush(BuildContext context){
+    Navigator.pushNamed(context, '/maintenanceMain');
+  }
+
   void racFormURLPush() async {
     const url = "https://mtrac.ado.sg/login";
     if (await canLaunch(url)) {

@@ -236,6 +236,36 @@ class AfterLoginPage extends StatelessWidget {
                         onTap: () => model.TOPush(context),
                       ),
                       _buildTile(
+                          Padding(
+                            padding: const EdgeInsets.all(24.0),
+                            child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Material(
+                                      color: Colors.lightBlue,
+                                      shape: CircleBorder(),
+                                      child: Padding(
+                                        padding: EdgeInsets.all(16.0),
+                                        child: Icon(FontAwesomeIcons.wrench,
+                                            color: Colors.white, size: 30.0),
+                                      )),
+                                  Padding(
+                                      padding: EdgeInsets.only(bottom: 16.0)),
+                                  Text(
+                                    'Maintenance Section',
+                                    style: GoogleFonts.roboto(
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.w600,
+                                      color: darkTextColor,
+                                    ),
+                                  ),
+                                  //Text('For DTL/ ADTL',
+                                  //style: TextStyle(color: Colors.black45)),
+                                ]),
+                          ),
+                          onTap: () => model.maintenancePush(context)),
+                      _buildTile(
                         Padding(
                           padding: const EdgeInsets.all(24.0),
                           child: Column(
@@ -291,43 +321,6 @@ class AfterLoginPage extends StatelessWidget {
                                 Padding(padding: EdgeInsets.only(bottom: 16.0)),
                                 Text(
                                   'Training Section',
-                                  style: GoogleFonts.roboto(
-                                    fontSize: 22,
-                                    fontWeight: FontWeight.w600,
-                                    color: darkTextColor,
-                                  ),
-                                ),
-                                //Text('For DTL/ ADTL',
-                                //style: TextStyle(color: Colors.black45)),
-                              ]),
-                        ),
-                        onTap: () => showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              title: Text("Function Not Available Yet"),
-                            );
-                          },
-                        ),
-                      ),
-                      _buildTile(
-                        Padding(
-                          padding: const EdgeInsets.all(24.0),
-                          child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Material(
-                                    color: darkPrimary300,
-                                    shape: CircleBorder(),
-                                    child: Padding(
-                                      padding: EdgeInsets.all(16.0),
-                                      child: Icon(FontAwesomeIcons.wrench,
-                                          color: Colors.white, size: 30.0),
-                                    )),
-                                Padding(padding: EdgeInsets.only(bottom: 16.0)),
-                                Text(
-                                  'Maintenance Section',
                                   style: GoogleFonts.roboto(
                                     fontSize: 22,
                                     fontWeight: FontWeight.w600,

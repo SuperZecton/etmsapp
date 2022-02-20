@@ -4,6 +4,7 @@ import 'package:ltcapp/features/home/view/pages/AfterLoginPage.dart';
 import 'package:ltcapp/features/home/view/pages/HomePage.dart';
 import 'package:ltcapp/features/login/view/pages/LoginPage.dart';
 import 'package:ltcapp/features/login/view/pages/WelcomePage.dart';
+import 'package:ltcapp/features/maintenance/view/pages/MaintenanceMainPage.dart';
 import 'package:ltcapp/features/mileage/view/pages/MileageMainPage.dart';
 
 import 'package:ltcapp/features/registration/view/pages/EducationRegPage.dart';
@@ -40,6 +41,8 @@ class Routers {
         return MaterialPageRoute(builder: (_) => VehicleEndTripPage());
       case '/mileageMain':
         return MaterialPageRoute(builder: (_) => MileageMainPage());
+      case '/maintenanceMain':
+        return MaterialPageRoute(builder: (_) => MaintenanceMainPage());
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(
