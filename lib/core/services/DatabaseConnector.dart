@@ -972,7 +972,7 @@ class DatabaseHandler {
         now.month.toString().padLeft(2, '0') +
         "/" +
         now.year.toString();
-    var nextWPTDateTime = now.add(Duration(days: 7));
+    var nextWPTDateTime = now.add(Duration(days: -7));
     var nextWPTDate = nextWPTDateTime.day.toString().padLeft(2, '0') +
         "/" +
         nextWPTDateTime.month.toString().padLeft(2, '0') +
