@@ -944,6 +944,19 @@ class DatabaseHandler {
         finallist[0][1] = finallist[1][1];
         finallist[1][1] = temp;
       }
+      for (int x = 0; x < finallist.length; x++){
+        var dateX = finallist[0][1].split('/');
+        var dateY = finallist[1][1].split('/');
+        var vehNoX = finallist[0][0];
+        var vehNoY = finallist[1][0];
+        var endOdometer = finallist[0][3];
+        var startOdometer = finallist[1][2];
+        if (dateX == dateY && endOdometer == startOdometer && vehNoY == vehNoX){
+          finallist[0][3] = finallist[1][3];
+          finallist[0][4] = (int.parse(finallist[0][4]) + int.parse(finallist[1][4])).toString();
+          finallist.removeAt(1);
+        }
+      }
     } else {
       for (int x = 0; x < finallist.length - 1; x++) {
         for (int y = 0; y < finallist.length - x - 1; y++) {
@@ -955,6 +968,24 @@ class DatabaseHandler {
             var temp = finallist[0][1];
             finallist[0][1] = finallist[1][1];
             finallist[1][1] = temp;
+          }
+        }
+      }
+      for (int x = 0; x < finallist.length - 1; x++) {
+        for (int y = 0; y < finallist.length - x - 1; y++) {
+          var dateX = finallist[x][1].split('/');
+          var dateY = finallist[x + 1][1].split('/');
+          var vehNoX = finallist[x][0];
+          var vehNoY = finallist[x + 1][0];
+          var endOdometer = finallist[x][3];
+          var startOdometer = finallist[x + 1][2];
+          if (dateX == dateY && endOdometer == startOdometer &&
+              vehNoY == vehNoX) {
+            finallist[x][3] = finallist[x + 1][3];
+            finallist[x][4] =
+                (int.parse(finallist[x][4]) + int.parse(finallist[x + 1][4]))
+                    .toString();
+            finallist.removeAt(x + 1);
           }
         }
       }
