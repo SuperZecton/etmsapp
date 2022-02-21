@@ -1081,7 +1081,7 @@ class DatabaseHandler {
         now.year.toString();
     String currentTime = now.hour.toString().padLeft(2, '0') + now.minute.toString().padLeft(2, '0') + now.second.toString().padLeft(2, '0');
     var querystring =
-        'INSERT INTO RememberLogin ("UUID", "username", "location", "date", "time", "status") '
+        'INSERT INTO checkin ("UUID", "username", "location", "checkInDate", "checkInTime", "status") '
             "VALUES (uuid_generate_v4(),'" +
             username + "','" + location + "','" + currentDate + "','" + currentTime + "','" + status + "');";
     print("Query String: " + querystring);
