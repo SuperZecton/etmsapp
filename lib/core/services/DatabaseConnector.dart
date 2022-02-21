@@ -1090,4 +1090,24 @@ class DatabaseHandler {
     connection.close();
   }
 
+  Future<void> checkOut(String username) async {
+    var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
+        username: "LTCAppUser", password: "LTCuser123");
+    await connection.open();
+    DateTime currentDateTime = DateTime.now();
+    var now = DateTime.parse(currentDateTime.toString() + '-08:00');
+    String currentDate = now.day.toString().padLeft(2, '0') +
+        "/" +
+        now.month.toString().padLeft(2, '0') +
+        "/" +
+        now.year.toString();
+    String currentTime = now.hour.toString().padLeft(2, '0') + now.minute.toString().padLeft(2, '0') + now.second.toString().padLeft(2, '0');
+    var querystring = "UPDATE checkin" + ' SET "checkOutDate" = ' + "'" + currentDate + "', " + '"checkOutTime" = ' + "'" + currentTime + "' WHERE " + '"checkOutTime" = ' + "'' AND " + '"username" = ' + "'" + username + "';";
+    print("Query String: " + querystring);
+    var results = await connection.query(querystring);
+    print("Database Result: " + results.toString());
+    connection.close();
+  }
+
+
 }
