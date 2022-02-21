@@ -48,10 +48,19 @@ class MaintenanceMainPage extends StatelessWidget {
                 ),
               ],
             ),
+            bottomNavigationBar: BottomNavigationBar(
+                currentIndex: 0,
+                backgroundColor: darkBackgroundColor,
+                items: [
+                  BottomNavigationBarItem(
+                      icon: Icon(FontAwesomeIcons.borderAll), label: "Total"),
+                  BottomNavigationBarItem(
+                      icon: Icon(FontAwesomeIcons.square), label: "WPT"),
+                ]),
             floatingActionButton: FloatingActionButton.extended(
               onPressed: () => model.floatingButtonPress(context),
               backgroundColor: darkGreenAccent,
-              label: Text('Search Vehicle'),
+              label: Text('Search'),
               icon: Icon(FontAwesomeIcons.search),
             ),
           );
