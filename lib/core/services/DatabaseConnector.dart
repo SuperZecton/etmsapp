@@ -1109,5 +1109,72 @@ class DatabaseHandler {
     connection.close();
   }
 
+  Future<List<List<String>>> getParadeState() async {
+    List<List<String>> finallist = [[]];
+    List<String> userlist = [];
+    var count = 0;
+    var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
+        username: "LTCAppUser", password: "LTCuser123");
+    await connection.open();
+    DateTime currentDateTime = DateTime.now();
+    var now = DateTime.parse(currentDateTime.toString() + '-08:00');
+    String currentDate = now.day.toString().padLeft(2, '0') +
+        "/" +
+        now.month.toString().padLeft(2, '0') +
+        "/" +
+        now.year.toString();
+    String currentTime = now.hour.toString().padLeft(2, '0') + now.minute.toString().padLeft(2, '0') + now.second.toString().padLeft(2, '0');
+    // Get those that check in
+    var querystring =
+        'SELECT "username", "location", "status" FROM checkin WHERE "checkInDate" = ' + "'" + currentDate + "'" + ';';
+    print("Query String: " + querystring);
+    var results = await connection.query(querystring);
+    print("Database Result: " + results.toString());
+    results.forEach((rawRow) {
+      var row = rawRow.toString().substring(1, rawRow.toString().length - 1);
+      var innerList = row.split(", ");
+      finallist.add(innerList);
+      count = count + 1;
+    });
+    finallist.removeAt(0);
+    print("There are " + count.toString() + " men that Checked In Today");
+    // Get those that have not check out
+    count = 0;
+    var querystring2 =
+        'SELECT "username", "location", "status" FROM checkin WHERE "checkInDate" != ' + "''" + ' AND "checkOutDate" = ' + "''" + ';';
+    print("Query String: " + querystring2);
+    var results2 = await connection.query(querystring2);
+    print("Database Result: " + results2.toString());
+    results2.forEach((rawRow) {
+      var row = rawRow.toString().substring(1, rawRow.toString().length - 1);
+      var innerList = row.split(", ");
+      finallist.add(innerList);
+      count = count + 1;
+    });
+    print("There are " + count.toString() + " men that have not Checked Out (Stay In)");
+    // Get those that never check in
+    var querystring3 =
+        'SELECT "username" FROM users;';
+    print("Query String: " + querystring3);
+    var results3 = await connection.query(querystring3);
+    print("Database Result: " + results3.toString());
+    results3.forEach((rawRow) {
+      var row = rawRow.toString().substring(1, rawRow.toString().length - 1);
+      userlist.add(row);
+    });
+    for (int x = 0; x < userlist.length; x++){
+      bool checkedIn = false;
+      for (int y = 0; y < finallist.length; y++){
+        if (finallist[y][0] == userlist[x]){
+         checkedIn = true;
+        }
+        if (checkedIn == false){
+          finallist.add([userlist[x],"",""]);
+        }
+      }
+    }
+    connection.close();
+    return finallist;
+  }
 
 }
