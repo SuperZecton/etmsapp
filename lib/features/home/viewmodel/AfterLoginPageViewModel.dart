@@ -98,14 +98,8 @@ class AfterLoginViewModel extends MultipleFutureViewModel {
     }
   }
 
-  void safeEntryURLPush() async {
-    const url =
-        "https://docs.google.com/forms/d/e/1FAIpQLSfOG1IHwj2B9zXGpRrpjdb5quiKBEmhyUF3-QvhQdS0o2C60Q/viewform";
-    if (await canLaunch(url)) {
-      launch(url, forceWebView: true, enableJavaScript: true);
-    } else {
-      throw "Error launching $url";
-    }
+  void checkInPush(BuildContext context) {
+      Navigator.pushNamed(context, '/checkInOut');
   }
 
 

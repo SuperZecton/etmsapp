@@ -168,7 +168,7 @@ class AfterLoginPage extends StatelessWidget {
                                     )),
                                 Padding(padding: EdgeInsets.only(bottom: 16.0)),
                                 Text(
-                                  'Book in/Book out',
+                                  'Check In',
                                   style: GoogleFonts.roboto(
                                     fontSize: 22,
                                     fontWeight: FontWeight.w600,
@@ -177,7 +177,7 @@ class AfterLoginPage extends StatelessWidget {
                                 ),
                               ]),
                         ),
-                        onTap: () => model.safeEntryURLPush(),
+                        onTap: () => model.checkInPush(context),
                       ),
                       _buildTile(
                         Padding(
