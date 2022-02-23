@@ -1177,4 +1177,48 @@ class DatabaseHandler {
     return finallist;
   }
 
+  Future<String> checkCheckedIn(String username) async {
+    var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
+        username: "LTCAppUser", password: "LTCuser123");
+    await connection.open();
+    var checkInDate = "";
+    var querystring = 'SELECT "checkInDate" FROM checkin WHERE' " username = '" +
+        username +
+        "' AND " + '"checkOutDate" = ' + "'';";
+    print("Query String: " + querystring);
+    var results = await connection.query(querystring);
+    print("Database Result: " + results.toString());
+    if (results.toString() == "[[]]") {
+      print("You have Checked Out / Not Checked In");
+    } else {
+      checkInDate = results.toString().substring(2, results.toString().length - 2);
+      print("You have not Checked Out");
+    }
+    connection.close();
+    return checkInDate;
+  }
+
+  Future<void> changeAVIDate(String vehicleNo) async {
+    // In PostgreSQL, use " (double quotes) for Columns Eg. "Username"
+    // use ' (apostrophe) for Values Eg. 'elephant123'
+    // End PostgreSQL Query with ;
+
+    var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
+        username: "LTCAppUser", password: "LTCuser123");
+    await connection.open();
+    DateTime currentDateTime = DateTime.now();
+    var now = DateTime.parse(currentDateTime.toString() + '-08:00');
+    String currentDate = now.day.toString().padLeft(2, '0') +
+        "/" +
+        now.month.toString().padLeft(2, '0') +
+        "/" +
+        now.year.toString();
+    var querystring =
+        'SELECT "carType" FROM vehicles WHERE' " vehicleNo = '" + vehicleNo + "';";
+    print("Query String: " + querystring);
+    var results = await connection.query(querystring);
+    print("Database Result: " + results.toString());
+    connection.close();
+  }
+
 }
