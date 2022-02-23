@@ -7,11 +7,12 @@ import 'dart:async';
 import 'package:path/path.dart';
 import 'dart:convert';
 import 'package:postgres/postgres.dart';
+import 'package:ltcapp/core/utils/DateAndTimeGetter.dart';
 //import 'package:dart_mssql/dart_mssql.dart';
 
 class DatabaseHandler {
   DatabaseHandler();
-
+  DateAndTime dt = DateAndTime();
   Future<void> DBFunctionTemplate(String value) async {
     // In PostgreSQL, use " (double quotes) for Columns Eg. "Username"
     // use ' (apostrophe) for Values Eg. 'elephant123'
@@ -1072,6 +1073,7 @@ class DatabaseHandler {
     var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
         username: "LTCAppUser", password: "LTCuser123");
     await connection.open();
+    var querystring = "";
     DateTime currentDateTime = DateTime.now();
     var now = DateTime.parse(currentDateTime.toString() + '-08:00');
     String currentDate = now.day.toString().padLeft(2, '0') +
@@ -1080,10 +1082,18 @@ class DatabaseHandler {
         "/" +
         now.year.toString();
     String currentTime = now.hour.toString().padLeft(2, '0') + now.minute.toString().padLeft(2, '0') + now.second.toString().padLeft(2, '0');
-    var querystring =
-        'INSERT INTO checkin ("UUID", "username", "location", "checkInDate", "checkInTime", "status") '
-            "VALUES (uuid_generate_v4(),'" +
-            username + "','" + location + "','" + currentDate + "','" + currentTime + "','" + status + "');";
+    if (status == "OFF" && status == "LEAVE" && status == "MC" && status == "MA" && status == "RSO"){
+      querystring =
+          'INSERT INTO checkin ("UUID", "username", "location", "checkInDate", "checkInTime", "status", "checkOutDate", "checkOutTime") '
+              "VALUES (uuid_generate_v4(),'" +
+              username + "','" + location + "','" + currentDate + "','" + currentTime + "','" + status + "','" + currentDate + "','" + "235959" + "');";
+    }
+    else {
+      querystring =
+          'INSERT INTO checkin ("UUID", "username", "location", "checkInDate", "checkInTime", "status") '
+              "VALUES (uuid_generate_v4(),'" +
+              username + "','" + location + "','" + currentDate + "','" + currentTime + "','" + status + "');";
+    }
     print("Query String: " + querystring);
     var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
@@ -1189,7 +1199,18 @@ class DatabaseHandler {
     var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
     if (results.toString() == "[[]]") {
-      print("You have Checked Out / Not Checked In");
+      var querystring2 = 'SELECT "checkInDate" FROM checkin WHERE' " username = '" +
+          username +
+          "' AND " + '"checkInDate" = ' + "'" + dt.getCurrentDate() + "';";
+      print("Query String: " + querystring2);
+      var results2 = await connection.query(querystring2);
+      print("Database Result: " + results2.toString());
+      if (results2.toString() == "[[]]"){
+        print("You have Not Checked In");
+      }
+      else{
+        print("You have Checked Out for the day");
+      }
     } else {
       checkInDate = results.toString().substring(2, results.toString().length - 2);
       print("You have not Checked Out");

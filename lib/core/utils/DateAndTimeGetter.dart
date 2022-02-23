@@ -61,5 +61,13 @@ class DateAndTime
     return now;
   }
 
+  String getDisplayCurrentTime()
+  {
+    DateTime currentDateTime = DateTime.now();
+    var now = DateTime.parse(currentDateTime.toString() + '-08:00');
+    String currentTime = now.hour.toString().padLeft(2, '0') + ":" + now.minute.toString().padLeft(2, '0');
+    return currentTime;
+  }
+
   DateAndTime._internal();
 }
