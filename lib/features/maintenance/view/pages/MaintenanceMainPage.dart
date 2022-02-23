@@ -41,7 +41,10 @@ class MaintenanceMainPage extends StatelessWidget {
                             status: item[5],
                             nextAVIDate: item[8],
                             nextWPTDate: item[10],
-                            additionalPlate: item[11]);
+                            additionalPlate: item[11], onEdit: (context) {
+
+                        },);
+
                       },
                     ),
                   ),
