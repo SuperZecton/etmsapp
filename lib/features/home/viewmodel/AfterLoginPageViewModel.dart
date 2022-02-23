@@ -111,7 +111,7 @@ class AfterLoginViewModel extends MultipleFutureViewModel {
           break;
         case 'CheckedOut':
           {
-            print("checked out");
+            Navigator.pushNamed(context, '/checkStatus');
           }
           break;
         case 'NotCheckedOut':

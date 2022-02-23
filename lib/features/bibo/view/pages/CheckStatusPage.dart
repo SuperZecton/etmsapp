@@ -9,7 +9,7 @@ import 'package:ltcapp/features/bibo/viewmodel/CheckInViewModel.dart';
 import 'package:ltcapp/features/bibo/viewmodel/CheckOutViewModel.dart';
 import 'package:stacked/stacked.dart';
 
-class CheckOutPage extends StatelessWidget {
+class CheckStatusPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<CheckStatusViewModel>.reactive(

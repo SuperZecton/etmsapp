@@ -1090,9 +1090,9 @@ class DatabaseHandler {
     }
     else {
       querystring =
-          'INSERT INTO checkin ("UUID", "username", "location", "checkInDate", "checkInTime", "status") '
+          'INSERT INTO checkin ("UUID", "username", "location", "checkInDate", "checkInTime", "status", "checkOutDate", "checkOutTime") '
               "VALUES (uuid_generate_v4(),'" +
-              username + "','" + location + "','" + currentDate + "','" + currentTime + "','" + status + "');";
+              username + "','" + location + "','" + currentDate + "','" + currentTime + "','" + status + "','','');";
     }
     print("Query String: " + querystring);
     var results = await connection.query(querystring);
@@ -1204,7 +1204,6 @@ class DatabaseHandler {
           "' AND " + '"checkInDate" = ' + "'" + dt.getCurrentDate() + "';";
       print("Query String: " + querystring2);
       var results2 = await connection.query(querystring2);
-      print("Database Result: " + results2.toString());
       print("Database Result: " + results2.toString());
       if (results2.toString() == "[]"){
         result = "NotCheckedIn";

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ltcapp/features/bibo/view/pages/CheckInPage.dart';
 import 'package:ltcapp/features/bibo/view/pages/CheckOutPage.dart';
+import 'package:ltcapp/features/bibo/view/pages/CheckStatusPage.dart';
 import 'package:ltcapp/features/home/view/pages/AfterLoginPage.dart';
 import 'package:ltcapp/features/home/view/pages/HomePage.dart';
 import 'package:ltcapp/features/login/view/pages/LoginPage.dart';
@@ -38,6 +39,8 @@ class Routers {
         return MaterialPageRoute(builder: (_) => CheckInPage());
       case '/checkOut':
         return MaterialPageRoute(builder: (_) => CheckOutPage());
+      case '/checkStatus':
+        return MaterialPageRoute(builder: (_) => CheckStatusPage());
       case '/vehicleStartTrip':
         return MaterialPageRoute(builder: (_) => VehicleStartTripPage());
       case '/vehicleEndTrip':
