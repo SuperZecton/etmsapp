@@ -177,7 +177,7 @@ class AfterLoginPage extends StatelessWidget {
                                 ),
                               ]),
                         ),
-                        onTap: () => model.checkInPush(context),
+                        onTap: () => model.checkInOutPush(context),
                       ),
                       _buildTile(
                         Padding(

@@ -98,8 +98,9 @@ class AfterLoginViewModel extends MultipleFutureViewModel {
     }
   }
 
-  void checkInPush(BuildContext context) {
-      Navigator.pushNamed(context, '/checkInOut');
+  void checkInOutPush(BuildContext context) {
+    ///Insert logic here
+      Navigator.pushNamed(context, '/checkIn');
   }
 
 

@@ -28,23 +28,6 @@ class AdminPage extends StatelessWidget {
                 Expanded(
                   child: Container(
                     padding: EdgeInsets.symmetric(horizontal: 10.0),
-                    child: ListView.builder(
-                      itemCount: model.fetchingAllList
-                          ? 0
-                          : model.fetchedAllList.length,
-                      itemBuilder: (context, index) {
-                        final item = model.fetchedAllList[index];
-                        return MaintenanceVehCard(
-                            vehicleNo: item[1],
-                            carModel: item[2],
-                            carType: item[3],
-                            classType: item[4],
-                            status: item[5],
-                            nextAVIDate: item[8],
-                            nextWPTDate: item[10],
-                            additionalPlate: item[11]);
-                      },
-                    ),
                   ),
                 ),
               ],

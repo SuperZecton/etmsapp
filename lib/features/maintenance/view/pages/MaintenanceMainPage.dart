@@ -16,6 +16,7 @@ class MaintenanceMainPage extends StatelessWidget {
           return Scaffold(
             backgroundColor: Theme.of(context).backgroundColor,
             appBar: AppBar(
+              backgroundColor: darkGreenAccent,
               title: Text(
                 "Maintenance Section",
                 style: GoogleFonts.roboto(color: darkTextColor, fontSize: 24.0),
@@ -24,6 +25,7 @@ class MaintenanceMainPage extends StatelessWidget {
             ),
             body: Column(
               children: [
+                SizedBox(height:10),
                 Expanded(
                   child: Container(
                     padding: EdgeInsets.symmetric(horizontal: 10.0),
@@ -42,6 +44,7 @@ class MaintenanceMainPage extends StatelessWidget {
                             nextAVIDate: item[8],
                             nextWPTDate: item[10],
                             additionalPlate: item[11], onEdit: (context) {
+                              ///Todo edit function
 
                         },);
 

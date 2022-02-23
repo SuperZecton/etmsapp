@@ -2,7 +2,7 @@
 import 'package:intl/intl.dart';
 import 'package:stacked/stacked.dart';
 
-class CheckInOutViewModel extends BaseViewModel {
+class CheckOutViewModel extends BaseViewModel {
 
   static String _formattedTime = DateFormat("jm").format(DateTime.now().toLocal());
   String get formattedTime => _formattedTime;
