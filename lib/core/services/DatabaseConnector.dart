@@ -1234,12 +1234,15 @@ class DatabaseHandler {
         "/" +
         now.year.toString();
     var querystring =
-        'SELECT "carType" FROM vehicles WHERE' " vehicleNo = '" + vehicleNo + "';";
+        'SELECT "carType" FROM vehicles WHERE' " vehicleNo = '" + vehicleNo +
+            "';";
     print("Query String: " + querystring);
     var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
-    var carType = results.toString().substring(2, results.toString().length - 2);
-    if (carType == "Grade 2" && carType == "Grade 3" && carType == "OUV"){
+    var carType = results.toString().substring(2, results
+        .toString()
+        .length - 2);
+    if (carType == "Grade 2" && carType == "Grade 3" && carType == "OUV") {
       var nextAVIDateTime = new DateTime(now.year, now.month + 12, now.day);
       var nextAVIDate = nextAVIDateTime.day.toString().padLeft(2, '0') +
           "/" +
@@ -1247,9 +1250,11 @@ class DatabaseHandler {
           "/" +
           nextAVIDateTime.year.toString();
       querystring2 =
-          'UPDATE vehicles SET "lastAVIDate" = ' + "'" + currentDate + "'" + '"nextAVIDate" = ' + "'" + nextAVIDate + "' WHERE " '"vehicleNo" = ' "'" + vehicleNo + "';";
+          'UPDATE vehicles SET "lastAVIDate" = ' + "'" + currentDate + "'" +
+              '"nextAVIDate" = ' + "'" + nextAVIDate +
+              "' WHERE " '"vehicleNo" = ' "'" + vehicleNo + "';";
     }
-    else{
+    else {
       var nextAVIDateTime = new DateTime(now.year, now.month + 6, now.day);
       var nextAVIDate = nextAVIDateTime.day.toString().padLeft(2, '0') +
           "/" +
@@ -1257,11 +1262,26 @@ class DatabaseHandler {
           "/" +
           nextAVIDateTime.year.toString();
       querystring2 =
-          'UPDATE vehicles SET "lastAVIDate" = ' + "'" + currentDate + "'" + '"nextAVIDate" = ' + "'" + nextAVIDate + "' WHERE " '"vehicleNo" = ' "'" + vehicleNo + "';";
+          'UPDATE vehicles SET "lastAVIDate" = ' + "'" + currentDate + "'" +
+              '"nextAVIDate" = ' + "'" + nextAVIDate +
+              "' WHERE " '"vehicleNo" = ' "'" + vehicleNo + "';";
     }
     print("Query String: " + querystring2);
     var results2 = await connection.query(querystring2);
     print("Database Result: " + results2.toString());
+    connection.close();
+  }
+
+  Future<void> createIncidentReport(String username, String vehicleNo, String date, String time, String reportType, String report) async {
+    var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
+        username: "LTCAppUser", password: "LTCuser123");
+    await connection.open();
+    var querystring = 'INSERT INTO checkin ("UUID", "username", "vehicleNo", "date", "time", "reportType", "report") '
+        "VALUES (uuid_generate_v4(),'" +
+        username + "','" + vehicleNo + "','" + date + "','" + time + "','" + reportType + "','" + report + "');";
+    print("Query String: " + querystring);
+    var results = await connection.query(querystring);
+    print("Database Result: " + results.toString());
     connection.close();
   }
 

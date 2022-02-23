@@ -39,4 +39,13 @@ class TelebotConnector {
     }
     teledart.stop();
   }
+
+  Future<void> sendIncidentReport(String fullName, String vehicleNo, String date, String time, String reportType, String report) async {
+    var botToken = "5269781876:AAFh-XytRqwAroOE2lpDA4FyaWfQqkkTUzg";
+    var username = (await Telegram(botToken).getMe()).username;
+    var teledart = TeleDart(botToken, Event(username!));
+    teledart.start();
+    teledart.sendMessage('-1001585228215', date + " " + time + "\nDriver: " + fullName + "\nVehicle: " + vehicleNo + "\nIncident Type: " + reportType + "\n" + report);
+    teledart.stop();
+  }
 }
