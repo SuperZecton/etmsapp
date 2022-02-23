@@ -1082,7 +1082,7 @@ class DatabaseHandler {
         "/" +
         now.year.toString();
     String currentTime = now.hour.toString().padLeft(2, '0') + now.minute.toString().padLeft(2, '0') + now.second.toString().padLeft(2, '0');
-    if (status == "OFF" && status == "LEAVE" && status == "MC" && status == "MA" && status == "RSO"){
+    if (status == "OFF" || status == "LEAVE" || status == "MC" || status == "MA" || status == "RSO"){
       querystring =
           'INSERT INTO checkin ("UUID", "username", "location", "checkInDate", "checkInTime", "status", "checkOutDate", "checkOutTime") '
               "VALUES (uuid_generate_v4(),'" +
@@ -1191,32 +1191,35 @@ class DatabaseHandler {
     var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
         username: "LTCAppUser", password: "LTCuser123");
     await connection.open();
-    var checkInDate = "";
+    var result = "";
     var querystring = 'SELECT "checkInDate" FROM checkin WHERE' " username = '" +
         username +
         "' AND " + '"checkOutDate" = ' + "'';";
     print("Query String: " + querystring);
     var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
-    if (results.toString() == "[[]]") {
+    if (results.toString() == "[]") {
       var querystring2 = 'SELECT "checkInDate" FROM checkin WHERE' " username = '" +
           username +
           "' AND " + '"checkInDate" = ' + "'" + dt.getCurrentDate() + "';";
       print("Query String: " + querystring2);
       var results2 = await connection.query(querystring2);
       print("Database Result: " + results2.toString());
-      if (results2.toString() == "[[]]"){
+      print("Database Result: " + results2.toString());
+      if (results2.toString() == "[]"){
+        result = "NotCheckedIn";
         print("You have Not Checked In");
       }
       else{
+        result = "CheckedOut";
         print("You have Checked Out for the day");
       }
     } else {
-      checkInDate = results.toString().substring(2, results.toString().length - 2);
+      result = "NotCheckedOut";
       print("You have not Checked Out");
     }
     connection.close();
-    return checkInDate;
+    return result;
   }
 
   Future<void> changeAVIDate(String vehicleNo) async {

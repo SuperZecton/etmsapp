@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ltcapp/core/config/Globals.dart';
 import 'package:intl/intl.dart';
+import 'package:ltcapp/features/bibo/view/widgets/CheckStatusCard.dart';
+import 'package:ltcapp/features/bibo/viewmodel/CheckStatusViewModel.dart';
 import 'package:ltcapp/features/bibo/viewmodel/CheckInViewModel.dart';
 import 'package:ltcapp/features/bibo/viewmodel/CheckOutViewModel.dart';
 import 'package:stacked/stacked.dart';
@@ -10,15 +12,15 @@ import 'package:stacked/stacked.dart';
 class CheckOutPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<CheckOutViewModel>.reactive(
-      viewModelBuilder: ()=> CheckOutViewModel(),
+    return ViewModelBuilder<CheckStatusViewModel>.reactive(
+      viewModelBuilder: ()=> CheckStatusViewModel(),
       builder: (context, model, child){
         return Scaffold(
           backgroundColor: Theme.of(context).backgroundColor,
           appBar: AppBar(
             automaticallyImplyLeading: false,
             title: Text(
-              "Check Out",
+              "Current Status",
               style: TextStyle(color: Colors.black),
             ),
             centerTitle: true,
@@ -39,6 +41,7 @@ class CheckOutPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  CheckInStatusCard(),
                 ],
               ),
             ),
@@ -49,25 +52,4 @@ class CheckOutPage extends StatelessWidget {
     );
   }
 
-  Widget _bookOutButton(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      child: InkWell(
-        onTap: () {},
-        child: Container(
-          width: MediaQuery.of(context).size.width * 0.5,
-          padding: EdgeInsets.symmetric(vertical: 13),
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(5)),
-            color: Colors.blue,
-          ),
-          child: Text(
-            'Book Out',
-            style: TextStyle(fontSize: 20, color: Colors.white),
-          ),
-        ),
-      ),
-    );
-  }
 }

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:ltcapp/core/services/CurrentSession.dart';
 import 'package:ltcapp/core/services/DatabaseConnector.dart';
@@ -6,7 +5,7 @@ import 'package:stacked/stacked.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AfterLoginViewModel extends MultipleFutureViewModel {
-  AfterLoginViewModel(){
+  AfterLoginViewModel() {
     DateTime currentDateTime = DateTime.now();
     var now = DateTime.parse(currentDateTime.toString() + '-08:00');
     this._currentDate = now.day.toString().padLeft(2, '0') +
@@ -14,7 +13,6 @@ class AfterLoginViewModel extends MultipleFutureViewModel {
         now.month.toString().padLeft(2, '0') +
         "/" +
         now.year.toString();
-
   }
   String? _currentDate;
   String? get currentDate => _currentDate;
@@ -34,39 +32,42 @@ class AfterLoginViewModel extends MultipleFutureViewModel {
   bool get fetchingRank => busy(_rankDelayedFuture);
   @override
   Map<String, Future Function()> get futuresMap => {
-    _nameDelayedFuture: getNameFromDB,
-    _nricDelayedFuture: getNRICFromDB,
-    _vocationDelayedFuture: getVocationFromDB,
-    _rankDelayedFuture: getRankFromDB,
-
-  };
+        _nameDelayedFuture: getNameFromDB,
+        _nricDelayedFuture: getNRICFromDB,
+        _vocationDelayedFuture: getVocationFromDB,
+        _rankDelayedFuture: getRankFromDB,
+      };
   Future<String> getNameFromDB() async {
     String? _username = CurrentUser.instance.username;
-    if(_username != null) {
+    if (_username != null) {
       return db.singleDataPull("Users", "username", _username, "fullName");
     } else {
       return Future.error("Error");
     }
   }
+
   Future<String> getNRICFromDB() async {
     String? _username = CurrentUser.instance.username;
-    if(_username != null) {
-      return db.singleDataPull("Users", "username", _username, "nricLast4Digits");
+    if (_username != null) {
+      return db.singleDataPull(
+          "Users", "username", _username, "nricLast4Digits");
     } else {
       return Future.error("Error");
     }
   }
+
   Future<String> getVocationFromDB() async {
     String? _username = CurrentUser.instance.username;
-    if(_username != null) {
+    if (_username != null) {
       return db.singleDataPull("Users", "username", _username, "vocationType");
     } else {
       return Future.error("Error");
     }
   }
+
   Future<String> getRankFromDB() async {
     String? _username = CurrentUser.instance.username;
-    if(_username != null) {
+    if (_username != null) {
       return db.singleDataPull("Users", "username", _username, "rank");
     } else {
       return Future.error("Error");
@@ -80,12 +81,11 @@ class AfterLoginViewModel extends MultipleFutureViewModel {
     notifyListeners();
   }
 
-
-  void TOPush(BuildContext context){
+  void TOPush(BuildContext context) {
     Navigator.pushNamed(context, '/home');
   }
 
-  void maintenancePush(BuildContext context){
+  void maintenancePush(BuildContext context) {
     Navigator.pushNamed(context, '/maintenanceMain');
   }
 
@@ -98,11 +98,33 @@ class AfterLoginViewModel extends MultipleFutureViewModel {
     }
   }
 
-  void checkInOutPush(BuildContext context) {
+  void checkInOutPush(BuildContext context) async {
     ///Insert logic here
-      Navigator.pushNamed(context, '/checkIn');
+    String? _username = CurrentUser.instance.username;
+    if (_username != null) {
+      String? currentStatus = await db.checkCheckedIn(_username);
+      switch (currentStatus) {
+        case 'NotCheckedIn':
+          {
+            Navigator.pushNamed(context, '/checkIn');
+          }
+          break;
+        case 'CheckedOut':
+          {
+            print("checked out");
+          }
+          break;
+        case 'NotCheckedOut':
+          {
+            Navigator.pushNamed(context, '/checkOut');
+          }
+          break;
+        default: {
+          print("Check In Push Error");
+        } break;
+
+    }
+    }
+
   }
-
-
-
 }
