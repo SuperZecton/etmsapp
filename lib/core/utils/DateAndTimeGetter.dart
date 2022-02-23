@@ -5,16 +5,60 @@ class DateAndTime
   {
     return _singleton;
   }
-  String Date(DateTime dt)
+  String dateTimeToDate(DateTime dt)
   {
-    String date = dt.day.toString() + dt.month.toString() + dt.year.toString();
-    return date;
+    var now = dt;
+    String currentDate = now.day.toString().padLeft(2, '0') +
+        "/" +
+        now.month.toString().padLeft(2, '0') +
+        "/" +
+        now.year.toString();
+    return currentDate;
   }
 
-  String Time(DateTime dt)
+  String dateTimeToTime(DateTime dt)
   {
-    String time = dt.hour.toString() + dt.minute.toString() + dt.second.toString();
-    return time;
+    var now = dt;
+    String currentTime = now.hour.toString().padLeft(2, '0') + now.minute.toString().padLeft(2, '0') + now.second.toString().padLeft(2, '0');
+    return currentTime;
+  }
+
+  String getCurrentTime()
+  {
+    DateTime currentDateTime = DateTime.now();
+    var now = DateTime.parse(currentDateTime.toString() + '-08:00');
+    String currentTime = now.hour.toString().padLeft(2, '0') + now.minute.toString().padLeft(2, '0') + now.second.toString().padLeft(2, '0');
+    return currentTime;
+  }
+
+  String getCurrentDate()
+  {
+    DateTime currentDateTime = DateTime.now();
+    var now = DateTime.parse(currentDateTime.toString() + '-08:00');
+    String currentDate = now.day.toString().padLeft(2, '0') +
+        "/" +
+        now.month.toString().padLeft(2, '0') +
+        "/" +
+        now.year.toString();
+    return currentDate;
+  }
+
+  DateTime dateAndTimetoDateTime(String date, String time)
+  {
+    var rawdate = date.split('/');
+    var datetime = DateTime.utc(
+        int.parse(rawdate[2]),
+        int.parse(rawdate[1]),
+        int.parse(rawdate[0]),
+        int.parse(time.substring(0, time.length - 4)),
+        int.parse(time.substring(2, time.length - 2)),
+        int.parse(time.substring(4, time.length)));
+    return datetime;
+  }
+
+  DateTime getGMT(DateTime dt) {
+    var now = DateTime.parse(dt.toString() + '-08:00');
+    return now;
   }
 
   DateAndTime._internal();
