@@ -4,20 +4,23 @@ import 'package:ltcapp/core/services/DatabaseConnector.dart';
 import 'package:stacked/stacked.dart';
 
 class AdminViewModel extends MultipleFutureViewModel {
+
+
+
   DatabaseHandler db = DatabaseHandler();
-  static const String _AllVehicleListDelayedFuture = "all";
-  List<List<String>> get fetchedAllList => dataMap![_AllVehicleListDelayedFuture];
-  bool get fetchingAllList => busy(_AllVehicleListDelayedFuture);
+  static const String _ParadeStateDelayedFuture = "paradeState";
+  List<List<String>> get fetchedParadeState=> dataMap![_ParadeStateDelayedFuture];
+  bool get fetchingParadeState => busy(_ParadeStateDelayedFuture);
 
   @override
   Map<String, Future Function()> get futuresMap => {
-    _AllVehicleListDelayedFuture: getAllVehicles,
+    _ParadeStateDelayedFuture: getParadeState,
   };
 
 
-  Future<List<List<String>>> getAllVehicles() async {
-    List<List<String>> _list = await db.getAllVehicles();
-    print(_list);
+  Future<List<List<String>>> getParadeState() async {
+    List<List<String>> _list = await db.getParadeState();
+    print("List of parade state is $_list");
     return _list;
   }
 

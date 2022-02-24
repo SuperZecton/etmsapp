@@ -18,7 +18,7 @@ class AdminPage extends StatelessWidget {
             backgroundColor: Theme.of(context).backgroundColor,
             appBar: AppBar(
               title: Text(
-                "Maintenance Section",
+                "Parade State",
                 style: GoogleFonts.roboto(color: darkTextColor, fontSize: 24.0),
               ),
               centerTitle: true,
@@ -31,12 +31,6 @@ class AdminPage extends StatelessWidget {
                   ),
                 ),
               ],
-            ),
-            floatingActionButton: FloatingActionButton.extended(
-              onPressed: () => model.floatingButtonPress(context),
-              backgroundColor: darkGreenAccent,
-              label: Text('Search Vehicle'),
-              icon: Icon(FontAwesomeIcons.search),
             ),
           );
         });

@@ -98,6 +98,9 @@ class AfterLoginViewModel extends MultipleFutureViewModel {
     }
   }
 
+  void adminPush(BuildContext context){
+    Navigator.pushNamed(context, '/admin');
+  }
   void checkInOutPush(BuildContext context) async {
     ///Insert logic here
     String? _username = CurrentUser.instance.username;

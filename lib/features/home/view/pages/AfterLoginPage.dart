@@ -273,7 +273,7 @@ class AfterLoginPage extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Material(
-                                    color: darkPrimary300,
+                                    color: Colors.deepPurpleAccent,
                                     shape: CircleBorder(),
                                     child: Padding(
                                       padding: EdgeInsets.all(16.0),
@@ -289,18 +289,9 @@ class AfterLoginPage extends StatelessWidget {
                                     color: darkTextColor,
                                   ),
                                 ),
-                                //Text('For DTL/ ADTL',
-                                //style: TextStyle(color: Colors.black45)),
                               ]),
                         ),
-                        onTap: () => showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              title: Text("Function Not Available Yet"),
-                            );
-                          },
-                        ),
+                        onTap: () => model.adminPush(context),
                       ),
                       _buildTile(
                         Padding(

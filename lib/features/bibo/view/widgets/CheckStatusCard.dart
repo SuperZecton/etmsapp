@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ltcapp/core/config/Globals.dart';
+import 'package:ltcapp/features/bibo/viewmodel/CheckStatusViewModel.dart';
 
 class CheckInStatusCard extends StatelessWidget {
   const CheckInStatusCard({Key? key}) : super(key: key);
@@ -78,4 +79,8 @@ class CheckInStatusCard extends StatelessWidget {
       ),
     );
   }
+
+
+
+
 }

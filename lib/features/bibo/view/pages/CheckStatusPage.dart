@@ -42,6 +42,7 @@ class CheckStatusPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   CheckInStatusCard(),
+                  _backButton(context, model),
                 ],
               ),
             ),
@@ -51,5 +52,28 @@ class CheckStatusPage extends StatelessWidget {
 
     );
   }
+  Widget _backButton(BuildContext context, CheckStatusViewModel model) {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      padding: EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+      child: InkWell(
+        onTap: () => model.backPush(context),
+        child: Container(
+          width: MediaQuery.of(context).size.width * 0.5,
+          padding: EdgeInsets.symmetric(vertical: 13),
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(24)),
+            color: darkGreenAccent,
+          ),
+          child: Text(
+            'Back to home',
+            style: TextStyle(fontSize: 20, color: Colors.white),
+          ),
+        ),
+      ),
+    );
+  }
+
 
 }
