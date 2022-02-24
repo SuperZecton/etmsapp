@@ -1295,6 +1295,8 @@ class DatabaseHandler {
     var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
     List<String> finallist = results.toString().substring(2, results.toString().length - 2).split(", ");
+    finallist[1] = dt.convertDBTimetoTime(finallist[1]);
+    finallist[5] = dt.convertDBTimetoTime(finallist[5]);
     connection.close();
     return finallist;
   }
