@@ -26,7 +26,7 @@ class DateAndTime
   String getCurrentTime()
   {
     DateTime currentDateTime = DateTime.now();
-    var now = DateTime.parse(currentDateTime.toString() + '-08:00');
+    var now = DateTime.parse(currentDateTime.toString());
     String currentTime = now.hour.toString().padLeft(2, '0') + now.minute.toString().padLeft(2, '0') + now.second.toString().padLeft(2, '0');
     return currentTime;
   }
@@ -34,7 +34,7 @@ class DateAndTime
   String getCurrentDate()
   {
     DateTime currentDateTime = DateTime.now();
-    var now = DateTime.parse(currentDateTime.toString() + '-08:00');
+    var now = DateTime.parse(currentDateTime.toString());
     String currentDate = now.day.toString().padLeft(2, '0') +
         "/" +
         now.month.toString().padLeft(2, '0') +
@@ -57,14 +57,14 @@ class DateAndTime
   }
 
   DateTime getGMT(DateTime dt) {
-    var now = DateTime.parse(dt.toString() + '-08:00');
+    var now = DateTime.parse(dt.toString());
     return now;
   }
 
   String getDisplayCurrentTime()
   {
     DateTime currentDateTime = DateTime.now();
-    var now = DateTime.parse(currentDateTime.toString() + '-08:00');
+    var now = DateTime.parse(currentDateTime.toString());
     String currentTime = now.hour.toString().padLeft(2, '0') + ":" + now.minute.toString().padLeft(2, '0');
     return currentTime;
 
