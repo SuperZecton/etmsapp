@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/core/config/Globals.dart';
 import 'package:intl/intl.dart';
+import 'package:ltcapp/features/admin/view/widgets/ParadeStateCard.dart';
 import 'package:ltcapp/features/admin/viewmodel/AdminViewModel.dart';
 import 'package:ltcapp/features/maintenance/view/widgets/MaintenanceVehCard.dart';
 import 'package:ltcapp/features/maintenance/viewmodel/MaintenanceMainViewModel.dart';
@@ -28,6 +29,19 @@ class AdminPage extends StatelessWidget {
                 Expanded(
                   child: Container(
                     padding: EdgeInsets.symmetric(horizontal: 10.0),
+                    child: ListView.builder(
+                      itemCount: model.fetchingParadeState
+                          ? 0
+                          : model.fetchedParadeState.length,
+                      itemBuilder: (context, index) {
+                        final item = model.fetchedParadeState[index];
+                        return ParadeStateCard(
+                          username: item[0],
+                          location: item[1],
+                          status: item[2],
+                        );
+                      },
+                    ),
                   ),
                 ),
               ],
