@@ -1178,9 +1178,9 @@ class DatabaseHandler {
         if (finallist[y][0] == userlist[x]){
          checkedIn = true;
         }
-        if (checkedIn == false){
-          finallist.add([userlist[x],"",""]);
-        }
+      }
+      if (checkedIn == false){
+        finallist.add([userlist[x],"",""]);
       }
     }
     connection.close();
