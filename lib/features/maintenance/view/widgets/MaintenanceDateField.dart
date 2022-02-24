@@ -8,26 +8,25 @@ import 'package:ltcapp/features/registration/viewmodel/DatePickerNotifier.dart';
 import 'package:provider/provider.dart';
 import 'package:stacked/stacked.dart';
 
-class MaintenanceDateField extends ViewModelWidget<MaintenanceReportViewModel> {
+class MaintenanceDateField extends StatelessWidget {
   const MaintenanceDateField(this.mainText, this.icon, this.controller,
-      {Key? key, this.helperText = ""})
+      {Key? key, this.helperText = "", required this.onTap})
       : super(key: key);
   final IconData icon;
   final TextEditingController controller;
   final String mainText;
   final String helperText;
+  final void Function() onTap;
 
   @override
-  Widget build(BuildContext context, MaintenanceReportViewModel model) {
+  Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(5),
       margin: EdgeInsets.symmetric(vertical: 0, horizontal: 5),
       child: TextFormField(
         readOnly: true,
         controller: controller,
-        onTap: () {
-          model.selectDate(context, controller);
-        },
+        onTap: onTap,
         cursorColor: Colors.grey,
         style: GoogleFonts.roboto(
           textStyle: Theme.of(context).textTheme.headline4,

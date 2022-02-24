@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/core/config/Globals.dart';
 import 'package:intl/intl.dart';
+import 'package:ltcapp/features/maintenance/view/widgets/EditAlertDialog.dart';
 import 'package:ltcapp/features/maintenance/view/widgets/MaintenanceVehCard.dart';
 import 'package:ltcapp/features/maintenance/viewmodel/MaintenanceMainViewModel.dart';
 import 'package:ltcapp/features/maintenance/viewmodel/MaintenanceVehicleViewModel.dart';
@@ -34,9 +35,6 @@ class MaintenanceVehiclePage extends StatelessWidget {
                         nextAVIDate: item[8],
                         nextWPTDate: item[10],
                         additionalPlate: item[11],
-                        onEdit: (context) {
-                          ///Todo edit function
-                        },
                       );
                     },
                   ),

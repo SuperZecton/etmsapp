@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/core/config/Globals.dart';
 import 'package:intl/intl.dart';
+import 'package:ltcapp/features/admin/view/widgets/CurrentStrengthCard.dart';
 import 'package:ltcapp/features/admin/view/widgets/ParadeStateCard.dart';
 import 'package:ltcapp/features/admin/viewmodel/AdminMainViewModel.dart';
 import 'package:ltcapp/features/admin/viewmodel/ParadeStateViewModel.dart';
@@ -36,6 +37,8 @@ class AdminMainPage extends StatelessWidget {
                   SizedBox(
                     height: 40,
                   ),
+                  CurrentStrengthCard(),
+                  SizedBox(height: 20,),
                   StaggeredGridView.count(
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,

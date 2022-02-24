@@ -58,9 +58,19 @@ class ParadeStateCard extends StatelessWidget {
         controlAffinity: ListTileControlAffinity.leading,
         children: <Widget>[
           ListTile(
-            title: Text(
-              "Edit status",
-              style: GoogleFonts.roboto(fontSize: 16, color: darkTextColor),
+            title: InkWell(
+              onTap: () => showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: Text("Function Not Available Yet"),
+                  );
+                },
+              ),
+              child: Text(
+                "Edit status",
+                style: GoogleFonts.roboto(fontSize: 16, color: darkTextColor),
+              ),
             ),
           ),
         ],

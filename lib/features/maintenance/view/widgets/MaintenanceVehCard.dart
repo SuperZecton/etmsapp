@@ -15,7 +15,6 @@ class MaintenanceVehCard extends StatelessWidget {
     required this.nextAVIDate,
     required this.nextWPTDate,
     required this.additionalPlate,
-    required this.onEdit,
   }) : super(key: key);
 
   final String vehicleNo;
@@ -26,91 +25,81 @@ class MaintenanceVehCard extends StatelessWidget {
   final String nextAVIDate;
   final String nextWPTDate;
   final String additionalPlate;
-  final void Function(BuildContext) onEdit;
   @override
   Widget build(BuildContext context) {
-    return Slidable(
-      startActionPane: ActionPane(
-        motion: const BehindMotion(),
-      children: [
-        SlidableAction(onPressed: onEdit, icon: FontAwesomeIcons.pen, label: 'Edit'),
-      ],
+    return Card(
+      color: darkPrimary700,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12.0),
       ),
-
-      child: Card(
-        color: darkPrimary700,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12.0),
+      child: ExpansionTile(
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              vehicleNo,
+              style: GoogleFonts.roboto(
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+                color: darkTextColor,
+              ),
+            ),
+            Text(
+              carType,
+              style: GoogleFonts.roboto(
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+                color: darkTextColor,
+              ),
+            ),
+          ],
         ),
-        child: ExpansionTile(
-          title: Row(
+        subtitle: Container(
+          padding: EdgeInsets.symmetric(vertical: 2.0),
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                vehicleNo,
+                "$carModel",
                 style: GoogleFonts.roboto(
-                  fontSize: 18,
+                  fontSize: 16,
                   fontWeight: FontWeight.w600,
                   color: darkTextColor,
                 ),
               ),
               Text(
-                carType,
+                "$status",
                 style: GoogleFonts.roboto(
-                  fontSize: 18,
+                  fontSize: 16,
                   fontWeight: FontWeight.w600,
                   color: darkTextColor,
                 ),
               ),
             ],
           ),
-          subtitle: Container(
-            padding: EdgeInsets.symmetric(vertical: 2.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        ),
+        controlAffinity: ListTileControlAffinity.leading,
+        children: <Widget>[
+          ListTile(
+            title: Text(
+              "Class $classType $additionalPlate",
+              style: GoogleFonts.roboto(fontSize: 16, color: darkTextColor),
+            ),
+            subtitle: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "$carModel",
-                  style: GoogleFonts.roboto(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: darkTextColor,
-                  ),
+                  "Next WPT due in: $nextWPTDate",
+                  style: GoogleFonts.roboto(fontSize: 16, color: darkTextColor),
                 ),
                 Text(
-                  "$status",
-                  style: GoogleFonts.roboto(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: darkTextColor,
-                  ),
+                  "Next AVI Date: $nextAVIDate",
+                  style: GoogleFonts.roboto(fontSize: 16, color: darkTextColor),
                 ),
               ],
             ),
           ),
-          controlAffinity: ListTileControlAffinity.leading,
-          children: <Widget>[
-            ListTile(
-              title: Text(
-                "Class $classType $additionalPlate",
-                style: GoogleFonts.roboto(fontSize: 16, color: darkTextColor),
-              ),
-              subtitle: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Next WPT due in: $nextWPTDate",
-                    style: GoogleFonts.roboto(fontSize: 16, color: darkTextColor),
-                  ),
-                  Text(
-                    "Next AVI Date: $nextAVIDate",
-                    style: GoogleFonts.roboto(fontSize: 16, color: darkTextColor),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
+        ],
       ),
     );
   }

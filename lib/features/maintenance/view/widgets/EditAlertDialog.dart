@@ -1,79 +1,74 @@
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-class EditAlertDialog {
-  void showEditAlertDialog(BuildContext context) {
-    TextEditingController _emailController = new TextEditingController();
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        final emailField = TextFormField(
-          controller: _emailController,
-          keyboardType: TextInputType.emailAddress,
-          style: TextStyle(
-            color: Colors.black,
-          ),
-          decoration: InputDecoration(
-            hintText: 'something@example.com',
-            labelText: 'Account Email to Reset',
-            labelStyle: TextStyle(
-              color: Colors.black,
-            ),
-            hintStyle: TextStyle(
-              color: Colors.black,
-            ),
-          ),
-        );
+class EditAlertDialog extends StatelessWidget {
+  const EditAlertDialog({Key? key, required this.civiPlate, required this.aviDate, required this.vehicleHolding, required this.onPressed}) : super(key: key);
 
-        return CustomAlertDialog(
-          content: Container(
-            width: MediaQuery.of(context).size.width / 1.3,
-            height: MediaQuery.of(context).size.height / 4,
-            decoration: new BoxDecoration(
-              shape: BoxShape.rectangle,
-              color: const Color(0xFFFFFF),
-              borderRadius: new BorderRadius.all(new Radius.circular(32.0)),
+  final TextEditingController civiPlate;
+  final TextEditingController aviDate;
+  final TextEditingController vehicleHolding;
+  final Function() onPressed;
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: Text(
+        'Dialog Title',
+        style: GoogleFonts.roboto(
+          fontSize: 22.0,
+          fontWeight: FontWeight.w500,
+        ),
+        textAlign: TextAlign.center,
+      ),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12.0),
+      ),
+      actions: <Widget>[
+        TextButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          child: Text('Cancel'.toUpperCase()),
+        ),
+        TextButton(
+          onPressed: onPressed,
+          child: Text('OK'.toUpperCase()),
+        ),
+      ],
+      content: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            TextField(
+              maxLength: 10,
+              controller: civiPlate,
+              keyboardType: TextInputType.phone,
+              decoration: InputDecoration(
+                labelText: 'Change Civilian Plate',
+              ),
+              textInputAction: TextInputAction.next,
+
             ),
-            child: new Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                emailField,
-                MaterialButton(
-                  onPressed: () async {
-                    await FirebaseAuth.instance
-                        .sendPasswordResetEmail(email: _emailController.text);
-                    Navigator.of(context).pop();
-                  },
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height/12,
-                    padding: EdgeInsets.all(15.0),
-                    child: Material(
-                        color: Colors.green,
-                        borderRadius: BorderRadius.circular(25.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Text(
-                              'Reset',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18.0,
-                                fontFamily: 'helvetica_neue_light',
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ],
-                        )
-                    ),
-                  ),
-                ),
-              ],
+            TextField(
+              keyboardType: TextInputType.emailAddress,
+              controller: aviDate,
+              decoration: InputDecoration(
+                labelText: 'Edit avi date',
+              ),
+              textInputAction: TextInputAction.next,
             ),
-          ),
-        );
-      },
+            TextField(
+              keyboardType: TextInputType.emailAddress,
+              controller: vehicleHolding,
+              decoration: InputDecoration(
+                labelText: 'Edit vehicle holding',
+              ),
+              textInputAction: TextInputAction.next,
+            ),
+          ],
+        ),
+      ),
     );
   }
-
 }

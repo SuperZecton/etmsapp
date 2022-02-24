@@ -23,9 +23,22 @@ class MaintenanceVehicleViewModel extends MultipleFutureViewModel {
   }
 
 
-  void floatingButtonPress(BuildContext context) {}
 
 
+
+
+
+  TextEditingController _civiPlate = TextEditingController();
+  TextEditingController _aviDate= TextEditingController();
+  TextEditingController _vehicleHolding = TextEditingController();
+  TextEditingController get civiPlate => _civiPlate;
+  TextEditingController get aviDate => _aviDate;
+  TextEditingController get vehicleHolding => _vehicleHolding;
+
+  onEditSubmit(BuildContext context, String vehicleNo){
+
+
+  }
 
 
 
