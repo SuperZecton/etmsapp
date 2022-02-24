@@ -13,18 +13,20 @@ class MaintenanceWPTViewModel extends MultipleFutureViewModel {
   Map<String, Future Function()> get futuresMap => {
     _WPTVehicleListDelayedFuture: getWPTVehicles,
   };
-
+  ///TODO SPLIT WPT 1 AND 2
 
   Future<List<List<String>>> getWPTVehicles() async {
     List<List<String>> _list = await db.getWPTVehicles();
     print(_list);
-    if(_list == [[], []]){
+    _wptLength = _list[0].length + _list[1].length;
+    if(_list[0].length == 0 && _list[1].length == 0){
       _isWPTEmpty = true;
       print("WPT IS EMPTY: ${_isWPTEmpty.toString()}");
     }
     return _list;
   }
-
+  int _wptLength = 0;
+  int get wptLength => _wptLength;
   bool _isWPTEmpty = false;
   bool get isWPTEmpty => _isWPTEmpty;
   void floatingButtonPress(BuildContext context) {}

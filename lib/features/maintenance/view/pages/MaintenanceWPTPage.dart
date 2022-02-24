@@ -24,11 +24,11 @@ class MaintenanceWPTPage extends StatelessWidget {
                     child: ListView.builder(
                       itemCount: model.fetchingWPT || model.isWPTEmpty
                           ? 0
-                          : model.fetchedWPT.length,
+                          : model.wptLength,
                       itemBuilder: (context, index) {
-                        final item = model.fetchedWPT[index];
+                        final item = model.fetchedWPT[0][index];
                         return MaintenanceWPTCard(
-                          vehicleNo: item[1], onEdit: (context) {
+                          vehicleNo: item, onEdit: (context) {
                           ///Todo edit function
 
                         },);

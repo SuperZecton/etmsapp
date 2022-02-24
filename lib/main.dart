@@ -29,8 +29,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   //setupLocator();
   ///Debugging nonsense
-  String stuff = await db.singleDataPull("Vehicles", "vehicleNo", "86", "additionalPlate");
-  print(stuff);
+  db.editSingleDataEntry("Vehicles", "vehicleNo", "40945", "nextWPTDate", "25/02/2022");
+  db.editSingleDataEntry("Vehicles", "vehicleNo", "58", "nextWPTDate", "25/02/2022");
   DeviceUUID deviceID = DeviceUUID();
   String _uuid = await deviceID.getUUID();
   print('Device ID is >> $_uuid' );
