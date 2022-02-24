@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/core/config/Globals.dart';
 import 'package:intl/intl.dart';
+import 'package:ltcapp/features/maintenance/view/pages/MaintenanceReportPage.dart';
 import 'package:ltcapp/features/maintenance/view/pages/MaintenanceVehiclePage.dart';
 import 'package:ltcapp/features/maintenance/view/pages/MaintenanceWPTPage.dart';
 import 'package:ltcapp/features/maintenance/view/widgets/MaintenanceVehCard.dart';
@@ -36,13 +37,9 @@ class MaintenanceMainPage extends StatelessWidget {
                       icon: Icon(FontAwesomeIcons.borderAll), label: "Total"),
                   BottomNavigationBarItem(
                       icon: Icon(FontAwesomeIcons.square), label: "WPT"),
+                  BottomNavigationBarItem(
+                      icon: Icon(FontAwesomeIcons.flag), label: "Report"),
                 ]),
-            floatingActionButton: FloatingActionButton.extended(
-              onPressed: () => model.floatingButtonPress(context),
-              backgroundColor: darkGreenAccent,
-              label: Text('Search'),
-              icon: Icon(FontAwesomeIcons.search),
-            ),
           );
         });
   }
@@ -56,6 +53,9 @@ class MaintenanceMainPage extends StatelessWidget {
           break;
         case 1:
           _viewCache[index] = MaintenanceWPTPage();
+          break;
+        case 2:
+          _viewCache[index] = MaintenanceReportPage();
           break;
       }
     }

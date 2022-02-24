@@ -1276,7 +1276,7 @@ class DatabaseHandler {
     var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
         username: "LTCAppUser", password: "LTCuser123");
     await connection.open();
-    var querystring = 'INSERT INTO checkin ("UUID", "username", "vehicleNo", "date", "time", "reportType", "report") '
+    var querystring = 'INSERT INTO incidentReport ("UUID", "username", "vehicleNo", "date", "time", "reportType", "report") '
         "VALUES (uuid_generate_v4(),'" +
         username + "','" + vehicleNo + "','" + date + "','" + time + "','" + reportType + "','" + report + "');";
     print("Query String: " + querystring);
