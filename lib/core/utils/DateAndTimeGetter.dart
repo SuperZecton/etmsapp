@@ -70,5 +70,9 @@ class DateAndTime
 
   }
 
+  String convertDBTimetoTime(String time){
+    return time.substring(0, 2) + ":" + time.substring(2, 4);
+  }
+
   DateAndTime._internal();
 }

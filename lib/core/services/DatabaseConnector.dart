@@ -1285,4 +1285,18 @@ class DatabaseHandler {
     connection.close();
   }
 
+  Future<List<String>> checkStatus(String username) async {
+    var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
+        username: "LTCAppUser", password: "LTCuser123");
+    await connection.open();
+    var querystring =
+        'SELECT "checkInDate", "checkInTime", "location", "status", "checkOutDate", "checkOutTime" FROM checkin WHERE' " username = '" + username + "';";
+    print("Query String: " + querystring);
+    var results = await connection.query(querystring);
+    print("Database Result: " + results.toString());
+    List<String> finallist = results.toString().substring(2, results.toString().length - 2).split(", ");
+    connection.close();
+    return finallist;
+  }
+
 }
