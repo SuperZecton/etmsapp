@@ -4,16 +4,16 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/core/config/Globals.dart';
 import 'package:intl/intl.dart';
 import 'package:ltcapp/features/admin/view/widgets/ParadeStateCard.dart';
-import 'package:ltcapp/features/admin/viewmodel/AdminViewModel.dart';
+import 'package:ltcapp/features/admin/viewmodel/ParadeStateViewModel.dart';
 import 'package:ltcapp/features/maintenance/view/widgets/MaintenanceVehCard.dart';
 import 'package:ltcapp/features/maintenance/viewmodel/MaintenanceMainViewModel.dart';
 import 'package:stacked/stacked.dart';
 
-class AdminPage extends StatelessWidget {
+class ParadeStatePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<AdminViewModel>.reactive(
-        viewModelBuilder: () => AdminViewModel(),
+    return ViewModelBuilder<ParadeStateViewModel>.reactive(
+        viewModelBuilder: () => ParadeStateViewModel(),
         builder: (context, model, child) {
           return Scaffold(
             backgroundColor: Theme.of(context).backgroundColor,

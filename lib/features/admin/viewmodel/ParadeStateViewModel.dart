@@ -4,7 +4,7 @@ import 'package:ltcapp/core/services/CurrentSession.dart';
 import 'package:ltcapp/core/services/DatabaseConnector.dart';
 import 'package:stacked/stacked.dart';
 
-class AdminViewModel extends MultipleFutureViewModel {
+class ParadeStateViewModel extends MultipleFutureViewModel {
 
 
 

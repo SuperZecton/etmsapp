@@ -99,7 +99,7 @@ class AfterLoginViewModel extends MultipleFutureViewModel {
   }
 
   void adminPush(BuildContext context){
-    Navigator.pushNamed(context, '/admin');
+    Navigator.pushNamed(context, '/adminMain');
   }
   void checkInOutPush(BuildContext context) async {
     ///Insert logic here

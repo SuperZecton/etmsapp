@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ltcapp/features/admin/view/pages/AdminPage.dart';
+import 'package:ltcapp/features/admin/view/pages/AdminMainPage.dart';
+import 'package:ltcapp/features/admin/view/pages/ParadeStatePage.dart';
 import 'package:ltcapp/features/bibo/view/pages/CheckInPage.dart';
 import 'package:ltcapp/features/bibo/view/pages/CheckOutPage.dart';
 import 'package:ltcapp/features/bibo/view/pages/CheckStatusPage.dart';
@@ -50,8 +51,10 @@ class Routers {
         return MaterialPageRoute(builder: (_) => MileageMainPage());
       case '/maintenanceMain':
         return MaterialPageRoute(builder: (_) => MaintenanceMainPage());
-      case '/admin':
-        return MaterialPageRoute(builder: (_) => AdminPage());
+      case '/adminMain':
+        return MaterialPageRoute(builder: (_) => AdminMainPage());
+      case '/adminParadeState':
+        return MaterialPageRoute(builder: (_) => ParadeStatePage());
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(
