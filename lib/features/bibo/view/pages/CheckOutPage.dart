@@ -1,9 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ltcapp/core/config/Globals.dart';
 import 'package:intl/intl.dart';
+import 'package:ltcapp/features/bibo/view/widgets/CheckStatusCard.dart';
 import 'package:ltcapp/features/bibo/viewmodel/CheckInViewModel.dart';
 import 'package:ltcapp/features/bibo/viewmodel/CheckOutViewModel.dart';
 import 'package:stacked/stacked.dart';
@@ -12,8 +12,8 @@ class CheckOutPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<CheckOutViewModel>.reactive(
-      viewModelBuilder: ()=> CheckOutViewModel(),
-      builder: (context, model, child){
+      viewModelBuilder: () => CheckOutViewModel(),
+      builder: (context, model, child) {
         return Scaffold(
           backgroundColor: Theme.of(context).backgroundColor,
           appBar: AppBar(
@@ -36,45 +36,24 @@ class CheckOutPage extends StatelessWidget {
           ),
           body: SingleChildScrollView(
             child: Container(
-             width: MediaQuery.of(context).size.width,
+              width: MediaQuery.of(context).size.width,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
-                    padding:
-                    EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
-                    margin:
-                    EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
-                    decoration: BoxDecoration(
-                      color: darkPrimary700,
-                      borderRadius: BorderRadius.circular(12.0),
-                    ),
-                    child: Column(
-                      children: [
-                        Text(
-                          "${model.localTime}",
-                          style: GoogleFonts.roboto(
-                            textStyle: Theme.of(context).textTheme.headline4,
-                            fontSize: 42,
-                            fontWeight: FontWeight.w800,
-                            color: darkTextColor,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            "${model.localDate}",
-                            style: GoogleFonts.roboto(
-                              textStyle: Theme.of(context).textTheme.headline4,
-                              fontSize: 38,
-                              fontWeight: FontWeight.w800,
-                              color: darkTextColor,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                  CheckInStatusCard(
+                    checkInTime: model.fetchingStatus
+                        ? ''
+                        : model.fetchedStatus[1].toString(),
+                    checkInDate: model.fetchingStatus
+                        ? ''
+                        : model.fetchedStatus[0].toString(),
+                    location: model.fetchingStatus
+                        ? ''
+                        : model.fetchedStatus[2].toString(),
+                    status: model.fetchingStatus
+                        ? ''
+                        : model.fetchedStatus[3].toString(),
                   ),
                   _bookOutButton(context, model),
                 ],
@@ -83,12 +62,12 @@ class CheckOutPage extends StatelessWidget {
           ),
         );
       },
-
     );
   }
 
   Widget _bookOutButton(BuildContext context, CheckOutViewModel model) {
     return Container(
+      width: MediaQuery.of(context).size.width,
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: InkWell(
         onTap: () => model.onSubmit(context),
@@ -97,11 +76,11 @@ class CheckOutPage extends StatelessWidget {
           padding: EdgeInsets.symmetric(vertical: 13),
           alignment: Alignment.center,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(5)),
+            borderRadius: BorderRadius.all(Radius.circular(24)),
             color: darkGreenAccent,
           ),
           child: Text(
-            'Book Out',
+            'Check Out',
             style: TextStyle(fontSize: 20, color: Colors.white),
           ),
         ),

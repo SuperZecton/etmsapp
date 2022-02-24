@@ -5,20 +5,34 @@ import 'package:ltcapp/core/services/DatabaseConnector.dart';
 import 'package:ltcapp/core/utils/DateAndTimeGetter.dart';
 import 'package:stacked/stacked.dart';
 
-class CheckOutViewModel extends BaseViewModel {
-  CheckOutViewModel(){
-    String _date = dt.getCurrentDate();
-    String _time = dt.getDisplayCurrentTime();
-    _localDate = _date;
-    _localTime = _time;
-  }
+class CheckOutViewModel extends MultipleFutureViewModel {
   DateAndTime dt = DateAndTime();
   DatabaseHandler db = DatabaseHandler();
+  static const String _StatusDelayedFuture = "status";
+  List<String> get fetchedStatus => dataMap![_StatusDelayedFuture];
+  bool get fetchingStatus => busy(_StatusDelayedFuture);
+
+  @override
+  Map<String, Future Function()> get futuresMap => {
+    _StatusDelayedFuture: getStatus
+  };
+
+  Future<List<String>> getStatus() async {
+    String? _username = CurrentUser.instance.username;
+    if (_username != null ){
+      String _nric = await db.singleDataPull("Users", "username", _username , "nricLast4Digits");
+      List<String> _list = await db.checkStatus(_username);
+      _list.add(_nric);
+      print(_list);
+      return _list;
+    } else {
+      return Future.error("Cannot find");
+    }
+
+
+  }
+
   ///Variable Initializers
-  String? _localDate;
-  String? _localTime;
-  String? get localDate => _localDate;
-  String? get localTime => _localTime;
 
   void onSubmit(BuildContext context) {
     String? _username = CurrentUser.instance.username;

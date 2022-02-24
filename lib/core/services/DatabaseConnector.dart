@@ -1291,11 +1291,11 @@ class DatabaseHandler {
     await connection.open();
     var querystring2;
     var querystring =
-        'SELECT ""checkOutDate" FROM checkin WHERE' " username = '" + username + "'" + ' AND "checkInDate" = '+ "'" + dt.getCurrentDate() + "';";
+        'SELECT "checkOutDate" FROM checkin WHERE' " username = '" + username + "'" + ' AND "checkInDate" = '+ "'" + dt.getCurrentDate() + "';";
     print("Query String: " + querystring);
     var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
-    if (results.toString() == "[]"){
+    if (results.toString() == "[[]]"){
       querystring2 =
           'SELECT "checkInDate", "checkInTime", "location", "status" FROM checkin WHERE' " username = '" + username + "'" + ' AND "checkInDate" = '+ "'" + dt.getCurrentDate() + "';";
     }
