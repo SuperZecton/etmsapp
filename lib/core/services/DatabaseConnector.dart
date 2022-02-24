@@ -1148,10 +1148,10 @@ class DatabaseHandler {
     });
     finallist.removeAt(0);
     print("There are " + count.toString() + " men that Checked In Today");
-    // Get those that have not check out
+    // Get those that have not check out and did not check in today
     count = 0;
     var querystring2 =
-        'SELECT "username", "location", "status" FROM checkin WHERE "checkInDate" != ' + "''" + ' AND "checkOutDate" = ' + "''" + ';';
+        'SELECT "username", "location", "status" FROM checkin WHERE ("checkInDate" != ' + "'' AND " + '"checkInDate" = ' + "''" + ') AND "checkOutDate" = ' + "''" + ';';
     print("Query String: " + querystring2);
     var results2 = await connection.query(querystring2);
     print("Database Result: " + results2.toString());
@@ -1289,12 +1289,24 @@ class DatabaseHandler {
     var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
         username: "LTCAppUser", password: "LTCuser123");
     await connection.open();
+    var querystring2;
     var querystring =
-        'SELECT "checkInDate", "checkInTime", "location", "status", "checkOutDate", "checkOutTime" FROM checkin WHERE' " username = '" + username + "'" + ' AND "checkInDate" = '+ "'" + dt.getCurrentDate() + "';";
+        'SELECT ""checkOutDate" FROM checkin WHERE' " username = '" + username + "'" + ' AND "checkInDate" = '+ "'" + dt.getCurrentDate() + "';";
     print("Query String: " + querystring);
     var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
-    List<String> finallist = results.toString().substring(2, results.toString().length - 2).split(", ");
+    if (results.toString() == "[]"){
+      querystring2 =
+          'SELECT "checkInDate", "checkInTime", "location", "status" FROM checkin WHERE' " username = '" + username + "'" + ' AND "checkInDate" = '+ "'" + dt.getCurrentDate() + "';";
+    }
+    else{
+      querystring2 =
+          'SELECT "checkInDate", "checkInTime", "location", "status", "checkOutDate", "checkOutTime" FROM checkin WHERE' " username = '" + username + "'" + ' AND "checkInDate" = '+ "'" + dt.getCurrentDate() + "';";
+    }
+    print("Query String: " + querystring2);
+    var results2 = await connection.query(querystring2);
+    print("Database Result: " + results2.toString());
+    List<String> finallist = results2.toString().substring(2, results2.toString().length - 2).split(", ");
     if (finallist.length == 6){
       finallist[5] = dt.convertDBTimetoTime(finallist[5]);
     }
