@@ -1299,4 +1299,31 @@ class DatabaseHandler {
     return finallist;
   }
 
+  Future<bool> checkOffPass(String username) async {
+    var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
+        username: "LTCAppUser", password: "LTCuser123");
+    await connection.open();
+    var querystring = 'SELECT "remarks" FROM checkin WHERE "username" = ' "'" + username + "' AND " + '"checkInDate" = ' + "'" + dt.getCurrentDate() + "' AND " + '"status" = ' + "'OFF';";
+    print("Query String: " + querystring);
+    var results = await connection.query(querystring);
+    print("Database Result: " + results.toString());
+    connection.close();
+    if (results.toString() != "[]") {
+      return true; // Signed
+    } else {
+      return false; // Not Signed
+    }
+  }
+
+  Future<void> signOffPass(String username) async {
+    var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
+        username: "LTCAppUser", password: "LTCuser123");
+    await connection.open();
+    var querystring = 'UPDATE checkin SET "remarks" = ' + "'OFF'" +' WHERE "username" = ' "'" + username + "' AND " + '"checkInDate" = ' + "'" + dt.getCurrentDate() + "' AND " + '"status" = ' + "'OFF';";
+    print("Query String: " + querystring);
+    var results = await connection.query(querystring);
+    print("Database Result: " + results.toString());
+    connection.close();
+  }
+
 }
