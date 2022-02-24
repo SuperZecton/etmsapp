@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ltcapp/core/config/Globals.dart';
@@ -13,14 +12,14 @@ class CheckStatusPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<CheckStatusViewModel>.reactive(
-      viewModelBuilder: ()=> CheckStatusViewModel(),
-      builder: (context, model, child){
+      viewModelBuilder: () => CheckStatusViewModel(),
+      builder: (context, model, child) {
         return Scaffold(
           backgroundColor: Theme.of(context).backgroundColor,
           appBar: AppBar(
             automaticallyImplyLeading: false,
             title: Text(
-              "Current Status",
+              "",
               style: TextStyle(color: Colors.black),
             ),
             centerTitle: true,
@@ -41,7 +40,15 @@ class CheckStatusPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  CheckInStatusCard(),
+                  CheckInStatusCard(
+                    checkInTime: model.fetchingStatus ? '' : model.fetchedStatus[1].toString(),
+                    checkInDate:  model.fetchingStatus ? '' : model.fetchedStatus[0].toString(),
+                    location:  model.fetchingStatus ? '' : model.fetchedStatus[2].toString(),
+                    status:  model.fetchingStatus ? '' : model.fetchedStatus[3].toString(),
+                    checkOutDate:  model.fetchingStatus ? '' : model.fetchedStatus[4].toString(),
+                    checkOutTime:  model.fetchingStatus ? '' : model.fetchedStatus[5].toString(),
+                    nric:  model.fetchingStatus ? '' : model.fetchedStatus[6].toString(),
+                  ),
                   _backButton(context, model),
                 ],
               ),
@@ -49,9 +56,9 @@ class CheckStatusPage extends StatelessWidget {
           ),
         );
       },
-
     );
   }
+
   Widget _backButton(BuildContext context, CheckStatusViewModel model) {
     return Container(
       width: MediaQuery.of(context).size.width,
@@ -74,6 +81,4 @@ class CheckStatusPage extends StatelessWidget {
       ),
     );
   }
-
-
 }
