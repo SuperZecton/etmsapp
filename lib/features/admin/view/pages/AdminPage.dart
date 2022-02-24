@@ -36,7 +36,7 @@ class AdminPage extends StatelessWidget {
                       itemBuilder: (context, index) {
                         final item = model.fetchedParadeState[index];
                         return ParadeStateCard(
-                          username: item[0],
+                          username: item[3],
                           location: item[1],
                           status: item[2],
                         );

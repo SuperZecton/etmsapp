@@ -12,18 +12,18 @@ class CheckInStatusCard extends StatelessWidget {
       required this.checkInTime,
       required this.location,
       required this.status,
-      required this.checkOutDate,
-      required this.checkOutTime,
-      required this.nric})
+      this.checkOutDate,
+      this.checkOutTime,
+      this.nric})
       : super(key: key);
 
   final String checkInDate;
   final String checkInTime;
-  final String checkOutDate;
-  final String checkOutTime;
+  final String? checkOutDate;
+  final String? checkOutTime;
   final String location;
   final String status;
-  final String nric;
+  final String? nric;
 
   @override
   Widget build(BuildContext context) {

@@ -17,6 +17,7 @@ class MaintenanceMainViewModel extends MultipleFutureViewModel {
 
   Future<List<List<String>>> getAllVehicles() async {
     List<List<String>> _list = await db.getAllVehicles();
+
     print(_list);
     return _list;
   }
