@@ -591,7 +591,7 @@ class DatabaseHandler {
     print("Database Result: " + results2.toString());
     //Get Current Date and NextWPTDate for Vehicle
     DateTime currentDateTime = DateTime.now();
-    var now = DateTime.parse(currentDateTime.toString() + '-08:00');
+    var now = DateTime.parse(currentDateTime.toString());
     String lastWPTDate = now.day.toString().padLeft(2, '0') +
         "/" +
         now.month.toString().padLeft(2, '0') +
@@ -945,16 +945,20 @@ class DatabaseHandler {
         finallist[0][1] = finallist[1][1];
         finallist[1][1] = temp;
       }
-      for (int x = 0; x < finallist.length; x++){
+      for (int x = 0; x < finallist.length; x++) {
         var dateX = finallist[0][1].split('/');
         var dateY = finallist[1][1].split('/');
         var vehNoX = finallist[0][0];
         var vehNoY = finallist[1][0];
         var endOdometer = finallist[0][3];
         var startOdometer = finallist[1][2];
-        if (dateX == dateY && endOdometer == startOdometer && vehNoY == vehNoX){
+        if (dateX == dateY &&
+            endOdometer == startOdometer &&
+            vehNoY == vehNoX) {
           finallist[0][3] = finallist[1][3];
-          finallist[0][4] = (int.parse(finallist[0][4]) + int.parse(finallist[1][4])).toString();
+          finallist[0][4] =
+              (int.parse(finallist[0][4]) + int.parse(finallist[1][4]))
+                  .toString();
           finallist.removeAt(1);
         }
       }
@@ -980,7 +984,8 @@ class DatabaseHandler {
           var vehNoY = finallist[x + 1][0];
           var endOdometer = finallist[x][3];
           var startOdometer = finallist[x + 1][2];
-          if (dateX == dateY && endOdometer == startOdometer &&
+          if (dateX == dateY &&
+              endOdometer == startOdometer &&
               vehNoY == vehNoX) {
             finallist[x][3] = finallist[x + 1][3];
             finallist[x][4] =
@@ -998,7 +1003,7 @@ class DatabaseHandler {
   Future<List<List<String>>> getWPTVehicles() async {
     List<List<String>> finallist = [[]];
     DateTime currentDateTime = DateTime.now();
-    var now = DateTime.parse(currentDateTime.toString() + '-08:00');
+    var now = DateTime.parse(currentDateTime.toString());
     String lastWPTDate = now.day.toString().padLeft(2, '0') +
         "/" +
         now.month.toString().padLeft(2, '0') +
@@ -1014,7 +1019,9 @@ class DatabaseHandler {
         username: "LTCAppUser", password: "LTCuser123");
     await connection.open();
     var querystring =
-        'SELECT "vehicleNo" FROM vehicles WHERE "nextWPTDate" = '"'" + lastWPTDate + "';";
+        'SELECT "vehicleNo" FROM vehicles WHERE "nextWPTDate" = ' "'" +
+            lastWPTDate +
+            "';";
     print("Query String: " + querystring);
     var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
@@ -1028,7 +1035,9 @@ class DatabaseHandler {
     finallist.add(innerList);
     print("There are " + count.toString() + " WPT1");
     var querystring2 =
-        'SELECT "vehicleNo" FROM vehicles WHERE "nextWPTDate" = '"'" + nextWPTDate + "';";
+        'SELECT "vehicleNo" FROM vehicles WHERE "nextWPTDate" = ' "'" +
+            nextWPTDate +
+            "';";
     print("Query String: " + querystring2);
     var results2 = await connection.query(querystring2);
     print("Database Result: " + results2.toString());
@@ -1052,8 +1061,7 @@ class DatabaseHandler {
     var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
         username: "LTCAppUser", password: "LTCuser123");
     await connection.open();
-    var querystring =
-        'SELECT * FROM vehicles;';
+    var querystring = 'SELECT * FROM vehicles;';
     print("Query String: " + querystring);
     var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
@@ -1069,30 +1077,58 @@ class DatabaseHandler {
     return finallist;
   }
 
-  Future<void> createCheckInEntry(String username, String location, String status) async {
+  Future<void> createCheckInEntry(
+      String username, String location, String status) async {
     var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
         username: "LTCAppUser", password: "LTCuser123");
     await connection.open();
     var querystring = "";
     DateTime currentDateTime = DateTime.now();
-    var now = DateTime.parse(currentDateTime.toString() + '-08:00');
+    var now = DateTime.parse(currentDateTime.toString());
     String currentDate = now.day.toString().padLeft(2, '0') +
         "/" +
         now.month.toString().padLeft(2, '0') +
         "/" +
         now.year.toString();
-    String currentTime = now.hour.toString().padLeft(2, '0') + now.minute.toString().padLeft(2, '0') + now.second.toString().padLeft(2, '0');
-    if (status == "OFF" || status == "LEAVE" || status == "MC" || status == "MA" || status == "RSO"){
+    String currentTime = now.hour.toString().padLeft(2, '0') +
+        now.minute.toString().padLeft(2, '0') +
+        now.second.toString().padLeft(2, '0');
+    if (status == "OFF" ||
+        status == "LEAVE" ||
+        status == "MC" ||
+        status == "MA" ||
+        status == "RSO") {
       querystring =
           'INSERT INTO checkin ("UUID", "username", "location", "checkInDate", "checkInTime", "status", "checkOutDate", "checkOutTime") '
-              "VALUES (uuid_generate_v4(),'" +
-              username + "','" + location + "','" + currentDate + "','" + currentTime + "','" + status + "','" + currentDate + "','" + "235959" + "');";
-    }
-    else {
+                  "VALUES (uuid_generate_v4(),'" +
+              username +
+              "','" +
+              location +
+              "','" +
+              currentDate +
+              "','" +
+              currentTime +
+              "','" +
+              status +
+              "','" +
+              currentDate +
+              "','" +
+              "235959" +
+              "');";
+    } else {
       querystring =
           'INSERT INTO checkin ("UUID", "username", "location", "checkInDate", "checkInTime", "status", "checkOutDate", "checkOutTime") '
-              "VALUES (uuid_generate_v4(),'" +
-              username + "','" + location + "','" + currentDate + "','" + currentTime + "','" + status + "','','');";
+                  "VALUES (uuid_generate_v4(),'" +
+              username +
+              "','" +
+              location +
+              "','" +
+              currentDate +
+              "','" +
+              currentTime +
+              "','" +
+              status +
+              "','','');";
     }
     print("Query String: " + querystring);
     var results = await connection.query(querystring);
@@ -1105,14 +1141,30 @@ class DatabaseHandler {
         username: "LTCAppUser", password: "LTCuser123");
     await connection.open();
     DateTime currentDateTime = DateTime.now();
-    var now = DateTime.parse(currentDateTime.toString() + '-08:00');
+    var now = DateTime.parse(currentDateTime.toString());
     String currentDate = now.day.toString().padLeft(2, '0') +
         "/" +
         now.month.toString().padLeft(2, '0') +
         "/" +
         now.year.toString();
-    String currentTime = now.hour.toString().padLeft(2, '0') + now.minute.toString().padLeft(2, '0') + now.second.toString().padLeft(2, '0');
-    var querystring = "UPDATE checkin" + ' SET "checkOutDate" = ' + "'" + currentDate + "', " + '"checkOutTime" = ' + "'" + currentTime + "' WHERE " + '"checkOutTime" = ' + "'' AND " + '"username" = ' + "'" + username + "';";
+    String currentTime = now.hour.toString().padLeft(2, '0') +
+        now.minute.toString().padLeft(2, '0') +
+        now.second.toString().padLeft(2, '0');
+    var querystring = "UPDATE checkin" +
+        ' SET "checkOutDate" = ' +
+        "'" +
+        currentDate +
+        "', " +
+        '"checkOutTime" = ' +
+        "'" +
+        currentTime +
+        "' WHERE " +
+        '"checkOutTime" = ' +
+        "'' AND " +
+        '"username" = ' +
+        "'" +
+        username +
+        "';";
     print("Query String: " + querystring);
     var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
@@ -1127,16 +1179,22 @@ class DatabaseHandler {
         username: "LTCAppUser", password: "LTCuser123");
     await connection.open();
     DateTime currentDateTime = DateTime.now();
-    var now = DateTime.parse(currentDateTime.toString() + '-08:00');
+    var now = DateTime.parse(currentDateTime.toString());
     String currentDate = now.day.toString().padLeft(2, '0') +
         "/" +
         now.month.toString().padLeft(2, '0') +
         "/" +
         now.year.toString();
-    String currentTime = now.hour.toString().padLeft(2, '0') + now.minute.toString().padLeft(2, '0') + now.second.toString().padLeft(2, '0');
+    String currentTime = now.hour.toString().padLeft(2, '0') +
+        now.minute.toString().padLeft(2, '0') +
+        now.second.toString().padLeft(2, '0');
     // Get those that check in
     var querystring =
-        'SELECT "username", "location", "status" FROM checkin WHERE "checkInDate" = ' + "'" + currentDate + "'" + ';';
+        'SELECT "username", "location", "status" FROM checkin WHERE "checkInDate" = ' +
+            "'" +
+            currentDate +
+            "'" +
+            ';';
     print("Query String: " + querystring);
     var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
@@ -1151,7 +1209,13 @@ class DatabaseHandler {
     // Get those that have not check out and did not check in today
     count = 0;
     var querystring2 =
-        'SELECT "username", "location", "status" FROM checkin WHERE ("checkInDate" != ' + "'' AND " + '"checkInDate" = ' + "''" + ') AND "checkOutDate" = ' + "''" + ';';
+        'SELECT "username", "location", "status" FROM checkin WHERE ("checkInDate" != ' +
+            "'' AND " +
+            '"checkInDate" = ' +
+            "''" +
+            ') AND "checkOutDate" = ' +
+            "''" +
+            ';';
     print("Query String: " + querystring2);
     var results2 = await connection.query(querystring2);
     print("Database Result: " + results2.toString());
@@ -1161,10 +1225,11 @@ class DatabaseHandler {
       finallist.add(innerList);
       count = count + 1;
     });
-    print("There are " + count.toString() + " men that have not Checked Out (Stay In)");
+    print("There are " +
+        count.toString() +
+        " men that have not Checked Out (Stay In)");
     // Get those that never check in
-    var querystring3 =
-        'SELECT "username" FROM users;';
+    var querystring3 = 'SELECT "username" FROM users;';
     print("Query String: " + querystring3);
     var results3 = await connection.query(querystring3);
     print("Database Result: " + results3.toString());
@@ -1172,15 +1237,15 @@ class DatabaseHandler {
       var row = rawRow.toString().substring(1, rawRow.toString().length - 1);
       userlist.add(row);
     });
-    for (int x = 0; x < userlist.length; x++){
+    for (int x = 0; x < userlist.length; x++) {
       bool checkedIn = false;
-      for (int y = 0; y < finallist.length; y++){
-        if (finallist[y][0] == userlist[x]){
-         checkedIn = true;
+      for (int y = 0; y < finallist.length; y++) {
+        if (finallist[y][0] == userlist[x]) {
+          checkedIn = true;
         }
       }
-      if (checkedIn == false){
-        finallist.add([userlist[x],"",""]);
+      if (checkedIn == false) {
+        finallist.add([userlist[x], "", ""]);
       }
     }
     connection.close();
@@ -1192,24 +1257,31 @@ class DatabaseHandler {
         username: "LTCAppUser", password: "LTCuser123");
     await connection.open();
     var result = "";
-    var querystring = 'SELECT "checkInDate" FROM checkin WHERE' " username = '" +
-        username +
-        "' AND " + '"checkOutDate" = ' + "'';";
+    var querystring =
+        'SELECT "checkInDate" FROM checkin WHERE' " username = '" +
+            username +
+            "' AND " +
+            '"checkOutDate" = ' +
+            "'';";
     print("Query String: " + querystring);
     var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
     if (results.toString() == "[]") {
-      var querystring2 = 'SELECT "checkInDate" FROM checkin WHERE' " username = '" +
-          username +
-          "' AND " + '"checkInDate" = ' + "'" + dt.getCurrentDate() + "';";
+      var querystring2 =
+          'SELECT "checkInDate" FROM checkin WHERE' " username = '" +
+              username +
+              "' AND " +
+              '"checkInDate" = ' +
+              "'" +
+              dt.getCurrentDate() +
+              "';";
       print("Query String: " + querystring2);
       var results2 = await connection.query(querystring2);
       print("Database Result: " + results2.toString());
-      if (results2.toString() == "[]"){
+      if (results2.toString() == "[]") {
         result = "NotCheckedIn";
         print("You have Not Checked In");
-      }
-      else{
+      } else {
         result = "CheckedOut";
         print("You have Checked Out for the day");
       }
@@ -1227,21 +1299,20 @@ class DatabaseHandler {
     await connection.open();
     var querystring2;
     DateTime currentDateTime = DateTime.now();
-    var now = DateTime.parse(currentDateTime.toString() + '-08:00');
+    var now = DateTime.parse(currentDateTime.toString());
     String currentDate = now.day.toString().padLeft(2, '0') +
         "/" +
         now.month.toString().padLeft(2, '0') +
         "/" +
         now.year.toString();
-    var querystring =
-        'SELECT "carType" FROM vehicles WHERE' " vehicleNo = '" + vehicleNo +
-            "';";
+    var querystring = 'SELECT "carType" FROM vehicles WHERE' " vehicleNo = '" +
+        vehicleNo +
+        "';";
     print("Query String: " + querystring);
     var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
-    var carType = results.toString().substring(2, results
-        .toString()
-        .length - 2);
+    var carType =
+        results.toString().substring(2, results.toString().length - 2);
     if (carType == "Grade 2" && carType == "Grade 3" && carType == "OUV") {
       var nextAVIDateTime = new DateTime(now.year, now.month + 12, now.day);
       var nextAVIDate = nextAVIDateTime.day.toString().padLeft(2, '0') +
@@ -1249,22 +1320,33 @@ class DatabaseHandler {
           nextAVIDateTime.month.toString().padLeft(2, '0') +
           "/" +
           nextAVIDateTime.year.toString();
-      querystring2 =
-          'UPDATE vehicles SET "lastAVIDate" = ' + "'" + currentDate + "'" +
-              '"nextAVIDate" = ' + "'" + nextAVIDate +
-              "' WHERE " '"vehicleNo" = ' "'" + vehicleNo + "';";
-    }
-    else {
+      querystring2 = 'UPDATE vehicles SET "lastAVIDate" = ' +
+          "'" +
+          currentDate +
+          "'" +
+          '"nextAVIDate" = ' +
+          "'" +
+          nextAVIDate +
+          "' WHERE " '"vehicleNo" = ' "'" +
+          vehicleNo +
+          "';";
+    } else {
       var nextAVIDateTime = new DateTime(now.year, now.month + 6, now.day);
       var nextAVIDate = nextAVIDateTime.day.toString().padLeft(2, '0') +
           "/" +
           nextAVIDateTime.month.toString().padLeft(2, '0') +
           "/" +
           nextAVIDateTime.year.toString();
-      querystring2 =
-          'UPDATE vehicles SET "lastAVIDate" = ' + "'" + currentDate + "'" +
-              '"nextAVIDate" = ' + "'" + nextAVIDate +
-              "' WHERE " '"vehicleNo" = ' "'" + vehicleNo + "';";
+      querystring2 = 'UPDATE vehicles SET "lastAVIDate" = ' +
+          "'" +
+          currentDate +
+          "'" +
+          '"nextAVIDate" = ' +
+          "'" +
+          nextAVIDate +
+          "' WHERE " '"vehicleNo" = ' "'" +
+          vehicleNo +
+          "';";
     }
     print("Query String: " + querystring2);
     var results2 = await connection.query(querystring2);
@@ -1272,13 +1354,26 @@ class DatabaseHandler {
     connection.close();
   }
 
-  Future<void> createIncidentReport(String username, String vehicleNo, String date, String time, String reportType, String report) async {
+  Future<void> createIncidentReport(String username, String vehicleNo,
+      String date, String time, String reportType, String report) async {
     var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
         username: "LTCAppUser", password: "LTCuser123");
     await connection.open();
-    var querystring = 'INSERT INTO incidentReport ("UUID", "username", "vehicleNo", "date", "time", "reportType", "report") '
-        "VALUES (uuid_generate_v4(),'" +
-        username + "','" + vehicleNo + "','" + date + "','" + time + "','" + reportType + "','" + report + "');";
+    var querystring =
+        'INSERT INTO incidentReport ("UUID", "username", "vehicleNo", "date", "time", "reportType", "report") '
+                "VALUES (uuid_generate_v4(),'" +
+            username +
+            "','" +
+            vehicleNo +
+            "','" +
+            date +
+            "','" +
+            time +
+            "','" +
+            reportType +
+            "','" +
+            report +
+            "');";
     print("Query String: " + querystring);
     var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
@@ -1291,23 +1386,45 @@ class DatabaseHandler {
     await connection.open();
     var querystring2;
     var querystring =
-        'SELECT "checkOutDate" FROM checkin WHERE' " username = '" + username + "'" + ' AND "checkInDate" = '+ "'" + dt.getCurrentDate() + "';";
+        'SELECT "checkOutDate" FROM checkin WHERE' " username = '" +
+            username +
+            "'" +
+            ' AND "checkInDate" = ' +
+            "'" +
+            dt.getCurrentDate() +
+            "';";
     print("Query String: " + querystring);
     var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
-    if (results.toString() == "[[]]"){
+    if (results.toString() == "[[]]") {
       querystring2 =
-          'SELECT "checkInDate", "checkInTime", "location", "status" FROM checkin WHERE' " username = '" + username + "'" + ' AND "checkInDate" = '+ "'" + dt.getCurrentDate() + "';";
-    }
-    else{
+          'SELECT "checkInDate", "checkInTime", "location", "status" FROM checkin WHERE'
+                  " username = '" +
+              username +
+              "'" +
+              ' AND "checkInDate" = ' +
+              "'" +
+              dt.getCurrentDate() +
+              "';";
+    } else {
       querystring2 =
-          'SELECT "checkInDate", "checkInTime", "location", "status", "checkOutDate", "checkOutTime" FROM checkin WHERE' " username = '" + username + "'" + ' AND "checkInDate" = '+ "'" + dt.getCurrentDate() + "';";
+          'SELECT "checkInDate", "checkInTime", "location", "status", "checkOutDate", "checkOutTime" FROM checkin WHERE'
+                  " username = '" +
+              username +
+              "'" +
+              ' AND "checkInDate" = ' +
+              "'" +
+              dt.getCurrentDate() +
+              "';";
     }
     print("Query String: " + querystring2);
     var results2 = await connection.query(querystring2);
     print("Database Result: " + results2.toString());
-    List<String> finallist = results2.toString().substring(2, results2.toString().length - 2).split(", ");
-    if (finallist.length == 6){
+    List<String> finallist = results2
+        .toString()
+        .substring(2, results2.toString().length - 2)
+        .split(", ");
+    if (finallist.length == 6) {
       finallist[5] = dt.convertDBTimetoTime(finallist[5]);
     }
     finallist[1] = dt.convertDBTimetoTime(finallist[1]);
@@ -1319,7 +1436,15 @@ class DatabaseHandler {
     var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
         username: "LTCAppUser", password: "LTCuser123");
     await connection.open();
-    var querystring = 'SELECT "remarks" FROM checkin WHERE "username" = ' "'" + username + "' AND " + '"checkInDate" = ' + "'" + dt.getCurrentDate() + "' AND " + '"status" = ' + "'OFF';";
+    var querystring = 'SELECT "remarks" FROM checkin WHERE "username" = ' "'" +
+        username +
+        "' AND " +
+        '"checkInDate" = ' +
+        "'" +
+        dt.getCurrentDate() +
+        "' AND " +
+        '"status" = ' +
+        "'OFF';";
     print("Query String: " + querystring);
     var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
@@ -1335,11 +1460,20 @@ class DatabaseHandler {
     var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
         username: "LTCAppUser", password: "LTCuser123");
     await connection.open();
-    var querystring = 'UPDATE checkin SET "remarks" = ' + "'OFF'" +' WHERE "username" = ' "'" + username + "' AND " + '"checkInDate" = ' + "'" + dt.getCurrentDate() + "' AND " + '"status" = ' + "'OFF';";
+    var querystring = 'UPDATE checkin SET "remarks" = ' +
+        "'OFF'" +
+        ' WHERE "username" = ' "'" +
+        username +
+        "' AND " +
+        '"checkInDate" = ' +
+        "'" +
+        dt.getCurrentDate() +
+        "' AND " +
+        '"status" = ' +
+        "'OFF';";
     print("Query String: " + querystring);
     var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
     connection.close();
   }
-
 }
