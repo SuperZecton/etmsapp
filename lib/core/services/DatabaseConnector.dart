@@ -1290,7 +1290,7 @@ class DatabaseHandler {
         username: "LTCAppUser", password: "LTCuser123");
     await connection.open();
     var querystring =
-        'SELECT "checkInDate", "checkInTime", "location", "status", "checkOutDate", "checkOutTime" FROM checkin WHERE' " username = '" + username + "';";
+        'SELECT "checkInDate", "checkInTime", "location", "status", "checkOutDate", "checkOutTime" FROM checkin WHERE' " username = '" + username + "'" + ' AND "checkInDate" = '+ "'" + dt.getCurrentDate() + "';";
     print("Query String: " + querystring);
     var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
