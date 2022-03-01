@@ -14,6 +14,7 @@ import 'package:ltcapp/core/services/DatabaseConnector.dart';
 import 'package:ltcapp/core/services/TelebotConnector.dart';
 import 'package:provider/provider.dart';
 import 'package:ltcapp/core/config/Router.dart';
+import 'package:ltcapp/core/services/Hash.dart';
 
 import 'core/config/ThemeClass.dart';
 import 'core/services/Permissions.dart';
@@ -26,14 +27,14 @@ void main() async {
   DatabaseHandler db = DatabaseHandler();
   TelebotConnector telebot = new TelebotConnector();
   ExcelHandler excelHandler = new ExcelHandler();
+  Hash hash = new Hash();
   WidgetsFlutterBinding.ensureInitialized();
   //setupLocator();
   ///Debugging nonsense
-  db.editSingleDataEntry("Vehicles", "vehicleNo", "40945", "nextWPTDate", "25/02/2022");
-  db.editSingleDataEntry("Vehicles", "vehicleNo", "58", "nextWPTDate", "25/02/2022");
   DeviceUUID deviceID = DeviceUUID();
   String _uuid = await deviceID.getUUID();
   print('Device ID is >> $_uuid' );
+  print(hash.getHash("pass1234"));
   CurrentUser.instance.deviceID = _uuid;
   runApp(MyApp());
 }
