@@ -59,7 +59,7 @@ class WelcomePage extends StatelessWidget {
                   SizedBox(
                     height: 20,
                   ),
-                  _signUpButton(context),
+                  _signUpButton(context, model),
                   SizedBox(
                     height: 30,
                   ),
@@ -73,17 +73,9 @@ class WelcomePage extends StatelessWidget {
     );
   }
 
-  Widget _signUpButton(BuildContext context) {
+  Widget _signUpButton(BuildContext context, WelcomePageViewModel model) {
     return InkWell(
-      onTap: () => Navigator.pushNamed(context, '/signUp'),
-      /*showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  title: Text("Function Not Available Yet"),
-                );
-              });*/
-
+      onTap: () => model.registrationPush(context),
       child: Container(
         width: MediaQuery.of(context).size.width,
         padding: EdgeInsets.symmetric(vertical: 13),
@@ -119,7 +111,7 @@ class WelcomePage extends StatelessWidget {
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
-        text: 'Welcome to Light Transport Company',
+        text: 'Welcome to 1TPT',
         style: GoogleFonts.lato(
           textStyle: Theme.of(context).textTheme.headline4,
           fontSize: 25,
@@ -137,7 +129,8 @@ class WelcomePage extends StatelessWidget {
       child: CircleAvatar(
         radius: 100,
         backgroundImage: AssetImage(
-            'images/appNoLogo.png',),
+          'images/appNoLogo.png',
+        ),
       ),
     );
   }

@@ -1,4 +1,5 @@
 
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:ltcapp/core/services/CurrentSession.dart';
 import 'package:ltcapp/features/login/model/UUIDGetter.dart';
@@ -9,4 +10,13 @@ class WelcomePageViewModel extends BaseViewModel {
     Navigator.pushNamed(context, '/login');
   }
 
+  void registrationPush(BuildContext context){
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Function Not Available Yet"),
+          );
+        });
+  }
 }
