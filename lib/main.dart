@@ -27,14 +27,12 @@ void main() async {
   DatabaseHandler db = DatabaseHandler();
   TelebotConnector telebot = new TelebotConnector();
   ExcelHandler excelHandler = new ExcelHandler();
-  Hash hash = new Hash();
   WidgetsFlutterBinding.ensureInitialized();
   //setupLocator();
   ///Debugging nonsense
   DeviceUUID deviceID = DeviceUUID();
   String _uuid = await deviceID.getUUID();
   print('Device ID is >> $_uuid' );
-  print(hash.getHash("pass1234"));
   CurrentUser.instance.deviceID = _uuid;
   runApp(MyApp());
 }
