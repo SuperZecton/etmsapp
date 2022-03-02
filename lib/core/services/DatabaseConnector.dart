@@ -52,60 +52,29 @@ class DatabaseHandler {
       String rank,
       String fullName,
       String nricLast4Digits,
-      String fullHomeAddress,
       String handphoneNumber,
-      String homephoneNumber,
       String personalEmail,
-      String dateOfBirth,
       String dateOfEnlistment,
       String dateOfORD,
       String dateOfPostIn,
       String pesType,
-      String religion,
-      String race,
-      String bloodGroup,
-      String drugAllergy,
-      String foodAllergy,
-      String NOKDetailFullName,
-      String NOKDetailContactNumber,
-      String NOKDetailFullAddress,
       String vocationType,
       String stayInStayOut,
-      String medicalConditions,
-      String trainingFrame,
-      String trainingPeriod,
-      String passAttempts,
-      String militaryLicenseNo,
-      String militaryLicenseType,
-      String militaryLicenseDateOfIssue,
-      String LTCTraining,
       String drivingCategory,
-      String educationLevel,
-      String streamCourseName,
-      String ccaOptional,
-      String schName,
-      String hobbiesInterest,
-      String civilianLicenseType,
-      String civilianLicenseNumber,
-      String civilianLicenseDateOfIssue,
-      String hasDoneDefensiveCourse,
-      String hasPersonalVehicle,
-      String personalVehiclePlateNumber,
-      String tShirtSize,
-      String no3SizeUpperTorso,
-      String no3SizeWaist,
-      String no3SizeShoes,
       String username,
       String password,
       String permissionsLevel,
       String totalClass3Mileage,
       String totalClass4Mileage,
-      String remarks) async {
+      String remarks,
+      String inUse,
+      String vcPackage,
+      String chatID) async {
     var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
         username: "LTCAppUser", password: "LTCuser123");
     await connection.open();
     var querystring =
-        'INSERT INTO Users ("UUID", "rank", "fullName", "nricLast4Digits", "fullHomeAddress", "handphoneNumber", "homephoneNumber", "personalEmail", "dateOfBirth", "dateOfEnlistment", "dateOfORD", "dateOfPostIn", "pesType", "religion", "race", "bloodGroup", "drugAllergy", "foodAllergy", "NOKDetailFullName", "NOKDetailContactNumber", "NOKDetailFullAddress", "vocationType", "stayInStayOut", "medicalConditions", "trainingFrame", "trainingPeriod", "passAttempts", "militaryLicenseNo", "militaryLicenseType", "militaryLicenseDateOfIssue", "LTCTraining", "drivingCategory", "educationLevel", "streamCourseName", "ccaOptional", "schName", "hobbiesInterest", "civilianLicenseType", "civilianLicenseNumber", "civilianLicenseDateOfIssue", "hasDoneDefensiveCourse", "hasPersonalVehicle", "personalVehiclePlateNumber", "tShirtSize", "no3SizeUpperTorso", "no3SizeWaist", "no3SizeShoes", "username", "password", "permissionLevel", "totalClass3Mileage", "totalClass4Mileage", "remarks") '
+        'INSERT INTO Users ("UUID", "rank", "fullName", "nricLast4Digits", "handphoneNumber", "personalEmail", "dateOfEnlistment", "dateOfORD", "dateOfPostIn", "pesType", "vocationType", "stayInStayOut", "drivingCategory", "username", "password", "permissionLevel", "totalClass3Mileage", "totalClass4Mileage", "remarks", "inUse", "vcPackage", "chatID") '
                 "VALUES (uuid_generate_v4(),'" +
             rank +
             "','" +
@@ -113,15 +82,9 @@ class DatabaseHandler {
             "','" +
             nricLast4Digits +
             "','" +
-            fullHomeAddress +
-            "','" +
             handphoneNumber +
             "','" +
-            homephoneNumber +
-            "','" +
             personalEmail +
-            "','" +
-            dateOfBirth +
             "','" +
             dateOfEnlistment +
             "','" +
@@ -131,73 +94,11 @@ class DatabaseHandler {
             "','" +
             pesType +
             "','" +
-            religion +
-            "','" +
-            race +
-            "','" +
-            bloodGroup +
-            "','" +
-            drugAllergy +
-            "','" +
-            foodAllergy +
-            "','" +
-            NOKDetailFullName +
-            "','" +
-            NOKDetailContactNumber +
-            "','" +
-            NOKDetailFullAddress +
-            "','" +
             vocationType +
             "','" +
             stayInStayOut +
             "','" +
-            medicalConditions +
-            "','" +
-            trainingFrame +
-            "','" +
-            trainingPeriod +
-            "','" +
-            passAttempts +
-            "','" +
-            militaryLicenseNo +
-            "','" +
-            militaryLicenseType +
-            "','" +
-            militaryLicenseDateOfIssue +
-            "','" +
-            LTCTraining +
-            "','" +
             drivingCategory +
-            "','" +
-            educationLevel +
-            "','" +
-            streamCourseName +
-            "','" +
-            ccaOptional +
-            "','" +
-            schName +
-            "','" +
-            hobbiesInterest +
-            "','" +
-            civilianLicenseType +
-            "','" +
-            civilianLicenseNumber +
-            "','" +
-            civilianLicenseDateOfIssue +
-            "','" +
-            hasDoneDefensiveCourse +
-            "','" +
-            hasPersonalVehicle +
-            "','" +
-            personalVehiclePlateNumber +
-            "','" +
-            tShirtSize +
-            "','" +
-            no3SizeUpperTorso +
-            "','" +
-            no3SizeWaist +
-            "','" +
-            no3SizeShoes +
             "','" +
             username +
             "','" +
@@ -210,6 +111,12 @@ class DatabaseHandler {
             totalClass4Mileage +
             "','" +
             remarks +
+            "','" +
+            inUse +
+            "','" +
+            vcPackage +
+            "','" +
+            chatID +
             "');";
     print("Query String: " + querystring);
     var results = await connection.query(querystring);

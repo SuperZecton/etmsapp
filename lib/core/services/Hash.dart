@@ -1,4 +1,4 @@
-
+import 'package:crypto/crypto.dart';
 class Hash{
 
 
