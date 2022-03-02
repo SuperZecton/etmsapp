@@ -8,11 +8,13 @@ import 'package:path/path.dart';
 import 'dart:convert';
 import 'package:postgres/postgres.dart';
 import 'package:ltcapp/core/utils/DateAndTimeGetter.dart';
+import 'package:ltcapp/core/services/Hash.dart';
 //import 'package:dart_mssql/dart_mssql.dart';
 
 class DatabaseHandler {
   DatabaseHandler();
   DateAndTime dt = DateAndTime();
+  Hash hash = new Hash();
   Future<void> DBFunctionTemplate(String value) async {
     // In PostgreSQL, use " (double quotes) for Columns Eg. "Username"
     // use ' (apostrophe) for Values Eg. 'elephant123'
@@ -41,7 +43,7 @@ class DatabaseHandler {
     var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
     connection.close();
-    if (results.toString() == "[[" + pass + "]]") {
+    if (results.toString() == "[[" + hash.getHash(pass) + "]]") {
       return true;
     } else {
       return false;
@@ -102,7 +104,7 @@ class DatabaseHandler {
             "','" +
             username +
             "','" +
-            password +
+            hash.getHash(password) +
             "','" +
             permissionsLevel +
             "','" +
@@ -259,7 +261,7 @@ class DatabaseHandler {
               "','" +
               username +
               "','" +
-              password +
+              hash.getHash(password) +
               "','" +
               date +
               "','" +
