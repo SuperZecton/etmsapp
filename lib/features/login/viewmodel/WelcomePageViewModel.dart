@@ -11,12 +11,6 @@ class WelcomePageViewModel extends BaseViewModel {
   }
 
   void registrationPush(BuildContext context){
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text("Function Not Available Yet"),
-          );
-        });
+    Navigator.pushNamed(context, '/signUp');
   }
 }

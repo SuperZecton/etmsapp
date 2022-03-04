@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:ltcapp/core/widgets/ErrorDialogs.dart';
 import 'package:ltcapp/features/login/view/widgets/PasswordEntryField.dart';
 import 'package:ltcapp/features/login/view/widgets/UsernameEntryField.dart';
@@ -45,7 +46,7 @@ class LoginPage extends StatelessWidget {
                               PasswordEntryField(),
                             ],
                           ),
-                          SizedBox(height: 20),
+                          SizedBox(height: 30),
                           _submitButton(context, model),
                           Container(
                             padding: EdgeInsets.symmetric(vertical: 10),
@@ -56,8 +57,6 @@ class LoginPage extends StatelessWidget {
                                     fontSize: 14,
                                     fontWeight: FontWeight.w500)),
                           ),
-                          _divider(),
-                          _singPassButton(context),
                           SizedBox(height: height * .055),
                           _createAccountLabel(context),
                         ],

@@ -145,9 +145,6 @@ class SignUpPage extends StatelessWidget {
                           isPassword: true,
                         ),
                         RegistrationTextField(
-                            "Home Address", Icons.home, model.addressController,
-                            helperText: "Blk No, Street, Floor, Postal Code"),
-                        RegistrationTextField(
                           "Phone Number",
                           Icons.phone_android,
                           model.numberController,
@@ -156,17 +153,6 @@ class SignUpPage extends StatelessWidget {
                                   ? null
                                   : "Enter a valid number",
                         ),
-                        RegistrationTextField(
-                          "Home Number",
-                          Icons.phone,
-                          model.homeNumberController,
-                          validationAction: (String? input) =>
-                              input!.isValidPhoneNumber()
-                                  ? null
-                                  : "Enter a valid number",
-                        ),
-                        DateTextField("Date of Birth",
-                            FontAwesomeIcons.calendar, model.dobController),
                         DateTextField("Date of Enlistment",
                             FontAwesomeIcons.calendarAlt, model.doeController),
                         DateTextField("ORD Date", Icons.calendar_today,
@@ -185,44 +171,6 @@ class SignUpPage extends StatelessWidget {
                         ),
                         Consumer<RegistrationViewModel>(
                           builder: (context, vm, child) =>
-                              DropDownField<RaceType?>(
-                                  hint: "Race",
-                                  values: RaceType.getValues(),
-                                  value: vm.currentRaceValue,
-                                  icon: Icons.recent_actors,
-                                  onChanged: (value) =>
-                                      vm.raceDropDownOnChanged(value!)),
-                        ),
-                        Consumer<RegistrationViewModel>(
-                          builder: (context, vm, child) =>
-                              DropDownField<ReligionType?>(
-                                  hint: "Religion",
-                                  values: ReligionType.getValues(),
-                                  value: vm.currentReligionValue,
-                                  icon: FontAwesomeIcons.syringe,
-                                  onChanged: (value) =>
-                                      vm.religionDropDownOnChanged(value!)),
-                        ),
-                        Consumer<RegistrationViewModel>(
-                          builder: (context, vm, child) =>
-                              DropDownField<BloodType?>(
-                                  hint: "Blood Group",
-                                  values: BloodType.getValues(),
-                                  value: vm.currentBloodValue,
-                                  icon: Icons.fitness_center,
-                                  onChanged: (value) =>
-                                      vm.bloodDropDownOnChanged(value!)),
-                        ),
-                        RegistrationTextField(
-                            "Drug Allergy",
-                            FontAwesomeIcons.tablets,
-                            model.drugAllergyController),
-                        RegistrationTextField(
-                            "Food Allergy",
-                            FontAwesomeIcons.hamburger,
-                            model.foodAllergyController),
-                        Consumer<RegistrationViewModel>(
-                          builder: (context, vm, child) =>
                               DropDownField<VocationType?>(
                                   hint: "Vocation",
                                   values: VocationType.getValues(),
@@ -230,48 +178,6 @@ class SignUpPage extends StatelessWidget {
                                   icon: FontAwesomeIcons.briefcase,
                                   onChanged: (value) =>
                                       vm.vocationDropDownOnChanged(value!)),
-                        ),
-                        RegistrationTextField(
-                            "Medical Condition",
-                            FontAwesomeIcons.hospitalUser,
-                            model.medicalConditionController),
-                        SizedBox(height: 20),
-                        RichText(
-                          textAlign: TextAlign.center,
-                          text: TextSpan(
-                            text: 'Next of Kin',
-                            style: GoogleFonts.roboto(
-                              textStyle: Theme.of(context).textTheme.headline4,
-                              fontSize: 24,
-                              fontWeight: FontWeight.w700,
-                              color: Color(0xffffffff),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 20),
-                        RegistrationTextField(
-                          "Next of Kin Name",
-                          FontAwesomeIcons.userFriends,
-                          model.nokController,
-                          validationAction: (String? input) => input!
-                                  .isValidName()
-                              ? null
-                              : "Name cannot have numbers or special characters",
-                        ),
-                        RegistrationTextField(
-                          "Next of Kin Address",
-                          FontAwesomeIcons.addressBook,
-                          model.nokAddressController,
-                          helperText: "Blk No, Street, Floor, Postal Code",
-                        ),
-                        RegistrationTextField(
-                          "Next of Kin Number",
-                          FontAwesomeIcons.phone,
-                          model.nokNumberController,
-                          validationAction: (String? input) =>
-                              input!.isValidPhoneNumber()
-                                  ? null
-                                  : "Enter a valid number",
                         ),
                         SizedBox(
                           height: 20,

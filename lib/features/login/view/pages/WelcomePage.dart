@@ -129,7 +129,7 @@ class WelcomePage extends StatelessWidget {
       child: CircleAvatar(
         radius: 100,
         backgroundImage: AssetImage(
-          'images/appNoLogo.png',
+          'images/ETMSLogo.jpg',
         ),
       ),
     );
