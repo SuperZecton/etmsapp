@@ -1240,7 +1240,11 @@ class DatabaseHandler {
           vehicleNo +
           "';";
     } else {
-      var nextAVIDateTime = new DateTime(now.year, now.month + 6, now.day);
+      var nextAVIDateTime;
+      if (now.day == 31){
+        nextAVIDateTime = new DateTime(now.year, now.month + 6, 30);
+      }
+      nextAVIDateTime = new DateTime(now.year, now.month + 6, now.day);
       var nextAVIDate = nextAVIDateTime.day.toString().padLeft(2, '0') +
           "/" +
           nextAVIDateTime.month.toString().padLeft(2, '0') +
