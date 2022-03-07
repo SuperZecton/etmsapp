@@ -46,6 +46,12 @@ class ParadeStatePage extends StatelessWidget {
                 ),
               ],
             ),
+            floatingActionButton: FloatingActionButton.extended(
+              onPressed: () => model.sendParadeState(context),
+              backgroundColor: darkGreenAccent,
+              label: Text('Send Parade State'),
+              icon: Icon(FontAwesomeIcons.calendarWeek),
+            ),
           );
         });
   }

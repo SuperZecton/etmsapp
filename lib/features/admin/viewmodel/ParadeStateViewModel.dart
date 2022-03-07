@@ -34,5 +34,8 @@ class ParadeStateViewModel extends MultipleFutureViewModel {
   }
 
 
-  void floatingButtonPress(BuildContext context) {}
+  void sendParadeState(BuildContext context) {
+    ///Damon TODO for button
+    ///
+  }
 }
