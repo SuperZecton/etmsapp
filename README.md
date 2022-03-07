@@ -54,7 +54,7 @@ Widgets come in two types, either a global widget which can be found under core/
 Global widgets will come with parameters you can fill out and can be used universally, while local widgets will typically extend ViewModelWidget.
 The difference is that local widgets have specific bindings to the view model, usually to get and display data from the db.
 
-####ViewModelWidget
+#### ViewModelWidget
 ```sh
 class LocalWidget extends ViewModelWidget<ViewModel> {
     Widget build(BuildContext context, ViewModel model){
@@ -79,9 +79,19 @@ return ViewModelBuilder<AfterLoginViewModel>.reactive(
 ### MultipleFutureViewModel
 Use this view model if you need to get data from the db and display it.
 
-
+```sh
+static const String _DataDelayedFuture = "data";
+List<dynamic> get fetchedData => dataMap![_DataDelayedFuture];
+bool get fetchingDataList => busy(_DataDelayedFuture);
+@override
+Map<String, Future Function()> get futuresMap => {
+_DataDelayedFuture: getBonusData,
+};
+```
+When displaying data from this VM into the page, make sure to use null checks on fetchedData to display a default value if db doesnt connect or value is null.
 
 
 #### Project Credits
-App Created by Damon and Jovan
-Additional help by Aaron, Darren, Hizai, Junaid, Gregory
+Main Developers: Damon Lim, Jovan Tan
+Developers: Aaron Bernardo, Darren Teh
+QA and testing: Hizai, Junaid, Gregory How
