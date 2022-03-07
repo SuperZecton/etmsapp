@@ -26,11 +26,18 @@ class MaintenanceReportPage extends StatelessWidget {
                 SizedBox(height: 20),
                 MaintenanceEntryField(
                     "Vehicle No.", FontAwesomeIcons.carCrash, model.vehicleNo),
-                MaintenanceDateField("Date of Incident", FontAwesomeIcons.calendarWeek, model.date, onTap: () =>
-                  model.selectDate(context, model.date),
+                MaintenanceDateField(
+                  "Date of Incident",
+                  FontAwesomeIcons.calendarWeek,
+                  model.date,
+                  onTap: () => model.selectDate(context, model.date),
                 ),
-                MaintenanceEntryField(
-                    "Time of Incident", FontAwesomeIcons.clock, model.time, helperText: "HH:MM",),
+                MaintenanceDateField(
+                  "Time of Incident",
+                  FontAwesomeIcons.clock,
+                  model.time,
+                  onTap: () => model.selectTime(context, model.time),
+                ),
                 MaintenanceDropDownField<String?>(
                     hint: "Report Type",
                     icon: FontAwesomeIcons.flag,

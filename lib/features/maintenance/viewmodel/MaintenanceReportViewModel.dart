@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:ltcapp/core/services/CurrentSession.dart';
@@ -52,18 +51,15 @@ class MaintenanceReportViewModel extends BaseViewModel {
           _time.text, _currentReportType.toString(), _report.text);
       tele.sendIncidentReport(_fullName, _vehicleNo.text, _date.text,
           _time.text, _currentReportType.toString(), _report.text);
-      Navigator.pushNamed(context,"/afterLogin");
+      Navigator.pushNamed(context, "/afterLogin");
     } else {
       ErrorDialogs.normalAlertDialog(
           context, "Missing Fields", "Please fill out all required fields");
     }
   }
 
-
-
-  String selectedDate = "";
-
-  Future<void> selectDate(BuildContext context, TextEditingController controller) async {
+  Future<void> selectDate(
+      BuildContext context, TextEditingController controller) async {
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
@@ -71,11 +67,28 @@ class MaintenanceReportViewModel extends BaseViewModel {
       lastDate: DateTime(2030),
     );
     if (picked != null && picked != DateTime.now()) {
-      selectedDate = DateFormat.yMd("en_US").format(picked);
-      controller.text = selectedDate;
+      controller.text = DateFormat.yMd("en_US").format(picked);
       notifyListeners();
     }
   }
 
-
+  Future<void> selectTime(
+      BuildContext context, TextEditingController controller) async {
+    final TimeOfDay? selectedTime24Hour = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.fromDateTime(DateTime.now()),
+      builder: (BuildContext context, Widget? child) {
+        return MediaQuery(
+          data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
+          child: child!,
+        );
+      },
+    );
+    if (selectedTime24Hour != null) {
+      controller.text = selectedTime24Hour.hour.toString() +
+          ":" +
+          selectedTime24Hour.minute.toString();
+      notifyListeners();
+    }
+  }
 }

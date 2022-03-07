@@ -20,22 +20,34 @@ class MaintenanceEditPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<MaintenanceEditViewModel>.reactive(
         viewModelBuilder: () => MaintenanceEditViewModel(),
+        onModelReady: (model) => model.initialise(),
         builder: (context, model, child) {
           return SingleChildScrollView(
             child: Column(
               children: [
                 SizedBox(height: 20),
+                MaintenanceDropDownField<String?>(
+                    hint: "Vehicle No.",
+                    icon: FontAwesomeIcons.carAlt,
+                    value: model.currentVehicleNo,
+                    values: model.totalVehicles,
+                    onChanged: (value) => model.vehicleOnChanged(value!)),
+                MaintenanceDateField(
+                    "AVI Date", FontAwesomeIcons.calendarWeek, model.aviDate,
+                    onTap: () => model.selectDate(context, model.aviDate)),
                 MaintenanceEntryField(
-                    "Vehicle No.", FontAwesomeIcons.car, model.vehicleNo),
-                MaintenanceDateField("AVI Date", FontAwesomeIcons.calendarWeek, model.aviDate, onTap: ()=> model.selectDate(context, model.aviDate)),
-                MaintenanceEntryField(
-                    "Civilian Plate", FontAwesomeIcons.sign, model.civiPlate, helperText: "Leave Blank if none",),
+                  "Civilian Plate",
+                  FontAwesomeIcons.sign,
+                  model.civiPlate,
+                  helperText: "Leave Blank if none",
+                ),
                 MaintenanceDropDownField<String?>(
                     hint: "Vehicle Holding",
                     icon: FontAwesomeIcons.carAlt,
                     value: model.currentVehicleHolding,
                     values: model.vehicleHolding,
-                    onChanged: (value) => model.vehicleHoldingOnChanged(value!)),
+                    onChanged: (value) =>
+                        model.vehicleHoldingOnChanged(value!)),
                 SizedBox(height: 20),
                 InkWell(
                   onTap: () => model.submitPush(context),

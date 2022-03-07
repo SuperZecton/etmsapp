@@ -90,7 +90,7 @@ class AfterLoginViewModel extends MultipleFutureViewModel {
   }
 
   void racFormURLPush() async {
-    const url = "https://mtrac.ado.sg/login";
+    const url = "https://mtrac.ternary.digital/login";
     if (await canLaunch(url)) {
       launch(url, enableJavaScript: true);
     } else {
@@ -101,6 +101,7 @@ class AfterLoginViewModel extends MultipleFutureViewModel {
   void adminPush(BuildContext context){
     Navigator.pushNamed(context, '/adminMain');
   }
+
   void checkInOutPush(BuildContext context) async {
     ///Insert logic here
     String? _username = CurrentUser.instance.username;
