@@ -997,7 +997,7 @@ class DatabaseHandler {
     print("Query String: " + querystring0);
     var results0 = await connection.query(querystring0);
     print("Database Result: " + results0.toString());
-    var rank = results0.toString().substring(2, results0.toString().length - 2)
+    var rank = results0.toString().substring(2, results0.toString().length - 2);
     DateTime currentDateTime = DateTime.now();
     var now = DateTime.parse(currentDateTime.toString());
     String currentDate = now.day.toString().padLeft(2, '0') +
