@@ -24,7 +24,7 @@ class DatabaseHandler {
         username: "LTCAppUser", password: "LTCuser123");
     await connection.open();
     var querystring =
-        'SELECT "fullName" FROM Users WHERE' " username = '" + value + "';";
+        'SELECT "rank" FROM Users WHERE' " username = '" + value + "';";
     print("Query String: " + querystring);
     var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
@@ -992,6 +992,12 @@ class DatabaseHandler {
         username: "LTCAppUser", password: "LTCuser123");
     await connection.open();
     var querystring = "";
+    var querystring0 =
+        'SELECT "rank" FROM Users WHERE' " username = '" + username + "';";
+    print("Query String: " + querystring0);
+    var results0 = await connection.query(querystring0);
+    print("Database Result: " + results0.toString());
+    var rank = results0.toString().substring(2, results0.toString().length - 2)
     DateTime currentDateTime = DateTime.now();
     var now = DateTime.parse(currentDateTime.toString());
     String currentDate = now.day.toString().padLeft(2, '0') +
@@ -1008,8 +1014,10 @@ class DatabaseHandler {
         status == "MA" ||
         status == "RSO") {
       querystring =
-          'INSERT INTO checkin ("UUID", "username", "location", "checkInDate", "checkInTime", "status", "checkOutDate", "checkOutTime") '
+          'INSERT INTO checkin ("UUID", "rank", "username", "location", "checkInDate", "checkInTime", "status", "checkOutDate", "checkOutTime") '
                   "VALUES (uuid_generate_v4(),'" +
+              rank +
+              "','" +
               username +
               "','" +
               location +
@@ -1026,8 +1034,10 @@ class DatabaseHandler {
               "');";
     } else {
       querystring =
-          'INSERT INTO checkin ("UUID", "username", "location", "checkInDate", "checkInTime", "status", "checkOutDate", "checkOutTime") '
+          'INSERT INTO checkin ("UUID", "rank", "username", "location", "checkInDate", "checkInTime", "status", "checkOutDate", "checkOutTime") '
                   "VALUES (uuid_generate_v4(),'" +
+              rank +
+              "','" +
               username +
               "','" +
               location +
