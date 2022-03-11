@@ -124,7 +124,7 @@ class AfterLoginViewModel extends MultipleFutureViewModel {
           }
           break;
         default: {
-          print("Check In Push Error");
+          Navigator.pushNamed(context, '/checkOut');
         } break;
 
     }
