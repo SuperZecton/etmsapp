@@ -11,11 +11,7 @@ import 'package:ltcapp/features/login/view/pages/LoginPage.dart';
 import 'package:ltcapp/features/login/view/pages/WelcomePage.dart';
 import 'package:ltcapp/features/maintenance/view/pages/MaintenanceMainPage.dart';
 import 'package:ltcapp/features/mileage/view/pages/MileageMainPage.dart';
-
-import 'package:ltcapp/features/registration/view/pages/EducationRegPage.dart';
-import 'package:ltcapp/features/registration/view/pages/OtherInfoRegPage.dart';
 import 'package:ltcapp/features/registration/view/pages/SignupPage.dart';
-import 'package:ltcapp/features/registration/view/pages/TrainingRegPage.dart';
 import 'package:ltcapp/features/vehiclebookout/view/pages/VehicleEndTripPage.dart';
 import 'package:ltcapp/features/vehiclebookout/view/pages/VehicleStartTripPage.dart';
 
@@ -34,12 +30,6 @@ class Routers {
         return MaterialPageRoute(builder: (_) => SettingsPage());
       case '/signUp':
         return MaterialPageRoute(builder: (_) => SignUpPage());
-      case '/trainingReg':
-        return MaterialPageRoute(builder: (_) => TrainingRegistrationPage());
-      case '/educationReg':
-        return MaterialPageRoute(builder: (_) => EducationRegistrationPage());
-      case '/otherReg':
-        return MaterialPageRoute(builder: (_) => OtherInfoRegistrationPage());
       case '/checkIn':
         return MaterialPageRoute(builder: (_) => CheckInPage());
       case '/checkOut':
