@@ -14,18 +14,23 @@ class AfterLoginDrawer extends ViewModelWidget<AfterLoginViewModel> {
       child: Drawer(
         child: ListView(
           children: <Widget>[
-            SizedBox(height: 40.0,),
+            SizedBox(
+              height: 40.0,
+            ),
             ListTile(
               leading: Icon(FontAwesomeIcons.clock),
               title: Text('ORD Counter'),
             ),
             ListTile(
-              leading: Icon(Icons.calendar_today),
-              title: Text('Work Profile'),
+              leading: Icon(FontAwesomeIcons.userCircle),
+              title: Text('App Settings'),
+              onTap: () => model.onSettingsTap(context),
             ),
             ListTile(
-              leading: Icon(FontAwesomeIcons.userCircle),
-              title: Text('Personal Info'),
+              leading: Icon(FontAwesomeIcons.arrowLeft),
+              title: Text('Log out'),
+              onTap: () => model.onLogOutTap(context),
+
             ),
           ],
         ),

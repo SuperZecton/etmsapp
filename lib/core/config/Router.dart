@@ -6,6 +6,7 @@ import 'package:ltcapp/features/bibo/view/pages/CheckOutPage.dart';
 import 'package:ltcapp/features/bibo/view/pages/CheckStatusPage.dart';
 import 'package:ltcapp/features/home/view/pages/AfterLoginPage.dart';
 import 'package:ltcapp/features/home/view/pages/HomePage.dart';
+import 'package:ltcapp/features/home/view/pages/SettingsPage.dart';
 import 'package:ltcapp/features/login/view/pages/LoginPage.dart';
 import 'package:ltcapp/features/login/view/pages/WelcomePage.dart';
 import 'package:ltcapp/features/maintenance/view/pages/MaintenanceMainPage.dart';
@@ -29,6 +30,8 @@ class Routers {
         return MaterialPageRoute(builder: (_) => AfterLoginPage());
       case '/home':
         return MaterialPageRoute(builder: (_) => HomePage());
+      case '/settings':
+        return MaterialPageRoute(builder: (_) => SettingsPage());
       case '/signUp':
         return MaterialPageRoute(builder: (_) => SignUpPage());
       case '/trainingReg':

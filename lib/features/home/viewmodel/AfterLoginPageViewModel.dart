@@ -98,8 +98,27 @@ class AfterLoginViewModel extends MultipleFutureViewModel {
     }
   }
 
+
+
+
   void adminPush(BuildContext context){
     Navigator.pushNamed(context, '/adminMain');
+  }
+
+  void onSettingsTap(BuildContext context) {
+    Navigator.pushNamed(context, '/settings');
+  }
+  void onLogOutTap(BuildContext context) async {
+    String? user = CurrentUser.instance.username;
+    if (user != null) {
+      String? rememberLogin = await db.singleDataPull("Users", "username", user, "rememberlogin");
+      if (rememberLogin == "true"){
+        db.editSingleDataEntry("Users", "username", user, "rememberlogin", "false");
+      }
+      Navigator.pushNamed(context, '/login');
+    }
+
+
   }
 
   void checkInOutPush(BuildContext context) async {
