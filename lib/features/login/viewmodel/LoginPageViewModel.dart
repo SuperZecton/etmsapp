@@ -27,11 +27,12 @@ class LoginPageViewModel extends BaseViewModel {
     List<dynamic> _loginEntry;
     if (_futureEntry.isNotEmpty) {
       ///Input logic for page skip to after login page
-      print("Login entry is successful");
+
       _loginEntry = _futureEntry;
       bool loginCredentials =
           await db.verifyLoginCreds(_loginEntry[0], _loginEntry[1]);
       if (loginCredentials == true) {
+        print("Login entry is successful");
         String? rememberLoginBool = await db.singleDataPull(
             "Users", "username", _loginEntry[0], "rememberlogin");
         if (rememberLoginBool == "true") {

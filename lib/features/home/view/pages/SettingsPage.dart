@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ltcapp/features/home/viewmodel/SettingsViewModel.dart';
 import 'package:settings_ui/settings_ui.dart';
 import 'package:stacked/stacked.dart';
@@ -11,15 +12,18 @@ class SettingsPage extends StatelessWidget {
         viewModelBuilder: () => SettingsViewModel(),
         builder: (context, model, child) {
           return Scaffold(
-            appBar: AppBar(),
+            appBar: AppBar(
+              title: Text("Settings"),
+              centerTitle: true,
+            ),
             body: SettingsList(
               sections: [
                 SettingsSection(tiles:<SettingsTile>[
                   SettingsTile.switchTile(
                     enabled: true,
                     onToggle: (value) => model.onStayLoggedInTap(value),
-                    initialValue: model.fetchingStayLoggedIn ? false : model.fetchedStayLoggedIn,
-                    leading: Icon(Icons.format_paint),
+                    initialValue: model.loggedInBool,
+                    leading: Icon(FontAwesomeIcons.key),
                     title: Text('Stay Logged in'),
                   ),
                 ],),
