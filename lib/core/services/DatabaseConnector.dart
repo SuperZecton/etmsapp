@@ -1014,7 +1014,7 @@ class DatabaseHandler {
         status == "MA" ||
         status == "RSO") {
       querystring =
-          'INSERT INTO checkin ("UUID", "rank", "username", "location", "checkInDate", "checkInTime", "status", "checkOutDate", "checkOutTime") '
+          'INSERT INTO checkin ("UUID", "rank", "username", "location", "checkInDate", "checkInTime", "status", "checkOutDate", "checkOutTime","remarks") '
                   "VALUES (uuid_generate_v4(),'" +
               rank +
               "','" +
@@ -1031,10 +1031,10 @@ class DatabaseHandler {
               currentDate +
               "','" +
               "235959" +
-              "');";
+              "','');";
     } else {
       querystring =
-          'INSERT INTO checkin ("UUID", "rank", "username", "location", "checkInDate", "checkInTime", "status", "checkOutDate", "checkOutTime") '
+          'INSERT INTO checkin ("UUID", "rank", "username", "location", "checkInDate", "checkInTime", "status", "checkOutDate", "checkOutTime", "remarks") '
                   "VALUES (uuid_generate_v4(),'" +
               rank +
               "','" +
@@ -1047,7 +1047,7 @@ class DatabaseHandler {
               currentTime +
               "','" +
               status +
-              "','','');";
+              "','','','');";
     }
     print("Query String: " + querystring);
     var results = await connection.query(querystring);
