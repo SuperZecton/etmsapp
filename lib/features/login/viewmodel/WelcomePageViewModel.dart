@@ -7,6 +7,7 @@ import 'package:stacked/stacked.dart';
 
 class WelcomePageViewModel extends BaseViewModel {
   void loginPush(BuildContext context){
+    ///AfterLogin logic here
     Navigator.pushNamed(context, '/login');
   }
 

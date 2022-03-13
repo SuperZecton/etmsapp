@@ -45,7 +45,7 @@ class MileageViewModel extends MultipleFutureViewModel {
       double _bonusDecimal = _remainder / 3000;
       double _math = _bonusDecimal * 100;
       int _bonusPercentage = _math.floor();
-      int _leftTillBonusInt = 3000 - _remainder;
+      int _leftTillBonusInt = 3000 - _remainder ;
       String _leftTillBonus = _leftTillBonusInt.toString();
       _returnList.addAll([_class3, _class4, _total, _bonusDecimal, _bonusPercentage, _leftTillBonus]);
       return _returnList;

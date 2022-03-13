@@ -20,7 +20,7 @@ class LoginPage extends StatelessWidget {
     final height = MediaQuery.of(context).size.height;
     return ViewModelBuilder<LoginPageViewModel>.reactive(
         viewModelBuilder: () => LoginPageViewModel(),
-        onModelReady: (viewModel) => viewModel.initialise(),
+        onModelReady: (viewModel) => viewModel.initialise(context),
         builder: (context, model, child) {
           return Scaffold(
             body: Container(

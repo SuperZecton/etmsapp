@@ -12,18 +12,16 @@ import 'package:ltcapp/features/login/view/widgets/LoginFailDialog.dart';
 import 'package:stacked/stacked.dart';
 
 class LoginPageViewModel extends BaseViewModel {
-  void initialise() {
-    findRememberedAccount();
+  void initialise(BuildContext context) {
+    findRememberedAccount(context);
     notifyListeners();
   }
-
-
 
   DeviceUUID deviceID = new DeviceUUID();
   String _deviceID = CurrentUser.instance.deviceID!;
   DatabaseHandler db = DatabaseHandler();
 
-  Future findRememberedAccount() async {
+  Future findRememberedAccount(BuildContext context) async {
     List<dynamic> _futureEntry = await db.findLoginEntry(_deviceID);
     print("login entry is " + _futureEntry.toString());
     List<dynamic> _loginEntry;
@@ -33,12 +31,30 @@ class LoginPageViewModel extends BaseViewModel {
       usernameController.text = _loginEntry[0];
       passwordController.text = _loginEntry[1];
     } else {
+      ///Input logic for page skip to after login page
       print("Login entry is successful");
       _loginEntry = _futureEntry;
-      usernameController.text = _loginEntry[0];
-      passwordController.text = _loginEntry[1];
-      print('Remembered user is ' + usernameController.text + ' and remembered pass is ' + passwordController.text);
-      notifyListeners();
+      bool loginCredentials = await db.verifyLoginCreds(_loginEntry[0], _loginEntry[1]);
+      if (loginCredentials == true){
+        CurrentUser.instance.username = _loginEntry[0];
+        CurrentUser.instance.password = _loginEntry[1];
+        String _currentTripID = await db.checkOngoingTrips(user);
+        CurrentUser.instance.currentTripID = _currentTripID;
+        DateTime currentDateTime = DateTime.now();
+        var now = DateTime.parse(currentDateTime.toString());
+        String _date = now.day.toString().padLeft(2, '0') + "/" + now.month.toString().padLeft(2, '0') + "/" + now.year.toString();
+        String _time = now.hour.toString().padLeft(2, '0') + now.minute.toString().padLeft(2, '0') + now.second.toString().padLeft(2, '0');
+        await db.checkAndCreateLoginEntry(_deviceID, _loginEntry[0], _loginEntry[1], _date, _time);
+
+        ///Push to Home page
+        Navigator.pushNamed(context, '/afterLogin');
+        notifyListeners();
+      } else {
+        LoginFailDialog.loginFailDialog(context);
+        print("Login failed");
+      }
+
+
     }
   }
 
@@ -49,8 +65,8 @@ class LoginPageViewModel extends BaseViewModel {
   String get password => passwordController.text;
 
   Future verifyLoginData(BuildContext context) async {
-    bool loginCredentials;
-    loginCredentials = await db.verifyLoginCreds(user, password);
+    bool loginCredentials = await db.verifyLoginCreds(user, password);
+
 
     if (loginCredentials == true) {
       /// Sets global user
