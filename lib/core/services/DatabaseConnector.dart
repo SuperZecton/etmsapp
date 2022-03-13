@@ -1319,15 +1319,14 @@ class DatabaseHandler {
     print("Query String: " + querystring);
     var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
-    if (results.toString() == "[[]]") {
+    if (results.toString() == "[]") {
       querystring2 =
           'SELECT "checkInDate", "checkInTime", "location", "status" FROM checkin WHERE'
                   " username = '" +
               username +
               "'" +
-              ' AND "checkInDate" = ' +
+              ' AND "checkOutDate" = ' +
               "'" +
-              dt.getCurrentDate() +
               "';";
     } else {
       querystring2 =
