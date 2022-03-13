@@ -86,7 +86,7 @@ class SignUpPage extends StatelessWidget {
                           Icons.perm_identity_rounded,
                           model.nameController,
                           validationAction: (String? input) => input!
-                              .isValidName()
+                                  .isValidName()
                               ? null
                               : "Name cannot have numbers or special characters",
                         ),
@@ -118,10 +118,8 @@ class SignUpPage extends StatelessWidget {
                                 maxLength: 4,
                               ),
                             ),
-
                           ],
                         ),
-
                         RegistrationTextField(
                           "Email Address",
                           Icons.alternate_email,
@@ -140,9 +138,17 @@ class SignUpPage extends StatelessWidget {
                         ),
                         RegistrationTextField(
                           "Password",
-                          FontAwesomeIcons.key,
+                          Icons.key,
                           model.passwordController,
                           isPassword: true,
+                        ),
+                        RegistrationTextField(
+                          "Confirm Password",
+                          Icons.key_outlined,
+                          model.confirmPasswordController,
+                          isPassword: true,
+                          validationAction: (String? input) =>
+                              model.confirmPasswordValidation(input),
                         ),
                         RegistrationTextField(
                           "Phone Number",
@@ -159,6 +165,36 @@ class SignUpPage extends StatelessWidget {
                             model.ordController),
                         DateTextField("Date of posting", Icons.calendar_today,
                             model.dopController),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: RegistrationTextField(
+                                "Class 3 Mileage",
+                                Icons.assessment,
+                                model.nricController,
+                                validationAction: (String? input) =>
+                                    input!.isValidNumber()
+                                        ? null
+                                        : "Numbers only",
+                              ),
+                            ),
+                            Expanded(
+                              child: RegistrationTextField(
+                                "Class 4 Mileage",
+                                Icons.assessment,
+                                model.nricController,
+                                validationAction: (String? input) =>
+                                    input!.isValidNumber()
+                                        ? null
+                                        : "Numbers only",
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
                         Consumer<RegistrationViewModel>(
                           builder: (context, vm, child) =>
                               DropDownField<PESType?>(

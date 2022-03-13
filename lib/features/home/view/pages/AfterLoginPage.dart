@@ -350,7 +350,7 @@ class AfterLoginPage extends StatelessWidget {
 
   Widget _buildTile(Widget child, {Function()? onTap}) {
     return Material(
-        elevation: 12.0,
+        elevation: 20.0,
         borderRadius: BorderRadius.circular(12.0),
         child: Container(
           decoration: BoxDecoration(

@@ -200,7 +200,8 @@ class HomePage extends StatelessWidget {
                         ),
                         onTap: () => model.shroFormURLPush(),
                       ),
-                      _buildTile(
+                      ///DTL Report
+                      /*_buildTile(
                         Padding(
                           padding: const EdgeInsets.all(24.0),
                           child: Column(
@@ -232,12 +233,12 @@ class HomePage extends StatelessWidget {
                         ),
                         onTap: () => Navigator.pushNamed(
                             context, '/maintainencesdfiyhgsdfuhi'),
-                      ),
+                      ),*/
                     ],
                     staggeredTiles: [
                       StaggeredTile.extent(1, 190.0),
                       StaggeredTile.extent(1, 190.0),
-                      StaggeredTile.extent(2, 190.0),
+                      //StaggeredTile.extent(2, 190.0),
                     ],
                   ),
                 ],
@@ -249,11 +250,11 @@ class HomePage extends StatelessWidget {
 
   Widget _buildTile(Widget child, {Function()? onTap}) {
     return Material(
-        elevation: 12.0,
+        elevation: 20.0,
         borderRadius: BorderRadius.circular(12.0),
         child: Container(
           decoration: BoxDecoration(
-              color: darkPrimary500,
+              color: darkPrimary600,
               border: Border.all(
                 color: darkPrimary700,
                 width: 2,
