@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ltcapp/features/admin/view/pages/AdminMainPage.dart';
+import 'package:ltcapp/features/admin/view/pages/OffPassPage.dart';
 import 'package:ltcapp/features/admin/view/pages/ParadeStatePage.dart';
 import 'package:ltcapp/features/bibo/view/pages/CheckInPage.dart';
 import 'package:ltcapp/features/bibo/view/pages/CheckOutPage.dart';
@@ -48,6 +49,8 @@ class Routers {
         return MaterialPageRoute(builder: (_) => AdminMainPage());
       case '/adminParadeState':
         return MaterialPageRoute(builder: (_) => ParadeStatePage());
+      case '/adminOffPass':
+        return MaterialPageRoute(builder: (_) => OffPassPage());
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(

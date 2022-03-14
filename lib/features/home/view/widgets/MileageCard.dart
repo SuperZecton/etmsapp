@@ -66,7 +66,7 @@ class MileageCard extends ViewModelWidget<HomePageViewModel> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      model.fetchingClass3 ? "Class 3" : "Class 3: ${model.fetchedClass3}",
+                      model.fetchingClass3 || model.fetchedClass3.isEmpty ? "Class 3" : "Class 3: ${model.fetchedClass3}",
                       textAlign: TextAlign.left,
                       style: GoogleFonts.roboto(
                         textStyle: Theme.of(context).textTheme.headline4,
@@ -77,7 +77,7 @@ class MileageCard extends ViewModelWidget<HomePageViewModel> {
                     ),
                     SizedBox(height: 10),
                     Text(
-                      model.fetchingClass4 ? "Class 4" : "Class 4: ${model.fetchedClass4}",
+                      model.fetchingClass4 || model.fetchedClass4.isEmpty ? "Class 4" : "Class 4: ${model.fetchedClass4}",
                       textAlign: TextAlign.left,
                       style: GoogleFonts.roboto(
                         textStyle: Theme.of(context).textTheme.headline4,

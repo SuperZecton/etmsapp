@@ -106,14 +106,7 @@ class AdminMainPage extends StatelessWidget {
                                 ),
                               ]),
                         ),
-                        onTap: () => showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              title: Text("Function Not Available Yet"),
-                            );
-                          },
-                        ),
+                        onTap: () => model.onOffPassPush(context),
                       ),
 
                     ],
@@ -137,7 +130,7 @@ class AdminMainPage extends StatelessWidget {
         borderRadius: BorderRadius.circular(12.0),
         child: Container(
           decoration: BoxDecoration(
-              color: darkPrimary500,
+              color: darkPrimary600,
               border: Border.all(
                 color: darkPrimary700,
                 width: 2,

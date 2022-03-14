@@ -9,6 +9,7 @@ import 'package:ltcapp/core/services/CurrentSession.dart';
 import 'package:ltcapp/core/config/Globals.dart';
 import 'package:ltcapp/features/login/model/UUIDGetter.dart';
 import 'package:ltcapp/features/login/view/widgets/LoginFailDialog.dart';
+import 'package:ltcapp/features/login/view/widgets/LoginLoadingDialog.dart';
 import 'package:stacked/stacked.dart';
 
 class LoginPageViewModel extends BaseViewModel {
@@ -36,6 +37,7 @@ class LoginPageViewModel extends BaseViewModel {
         String? rememberLoginBool = await db.singleDataPull(
             "Users", "username", _loginEntry[0], "rememberlogin");
         if (rememberLoginBool == "true") {
+          LoginLoadingDialog.loginLoadingDialog(context);
           CurrentUser.instance.username = _loginEntry[0];
           CurrentUser.instance.password = _loginEntry[1];
           String _currentTripID = await db.checkOngoingTrips(user);

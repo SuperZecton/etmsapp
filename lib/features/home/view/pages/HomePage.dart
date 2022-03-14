@@ -96,7 +96,7 @@ class HomePage extends StatelessWidget {
                                   Container(
                                     padding: EdgeInsets.only(right: 10.0),
                                     child: Text(
-                                      model.fetchingNRIC ? '': model.fetchedNRIC.toString(),
+                                      model.fetchingNRIC || model.fetchedNRIC.isEmpty ? '': model.fetchedNRIC.toString(),
                                       textAlign: TextAlign.left,
                                       style: TextStyle(
                                         fontSize: 16.0,

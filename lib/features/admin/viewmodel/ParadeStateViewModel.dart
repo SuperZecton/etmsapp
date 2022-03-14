@@ -23,10 +23,10 @@ class ParadeStateViewModel extends MultipleFutureViewModel {
     List<List<String>> _list = await db.getParadeState();
     for(int i=0; i< _list.length; i++){
       String _localUser = _list[i][0];
-      String rank = await db.singleDataPull("Users", "username", _localUser, "rank");
-      String fullName = await db.singleDataPull("Users", "username", _localUser, "fullName");
-      String appendedName = rank + " " + fullName;
-      _list[i].add(appendedName);
+      String _rank = await db.singleDataPull("Users", "username", _localUser, "rank");
+      String _fullName = await db.singleDataPull("Users", "username", _localUser, "fullName");
+      String _appendedName = _rank + " " + _fullName;
+      _list[i].add(_appendedName);
       print(_list);
     }
     print("List of parade state is $_list");

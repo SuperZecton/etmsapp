@@ -29,7 +29,11 @@ class AdminMainViewModel extends MultipleFutureViewModel {
     return _strength;
   }
 
-  void onOffPush(BuildContext context) {}
+  void onOffPassPush(BuildContext context) {
+    ///Implement Permission check here
+    Navigator.pushNamed(context, '/adminOffPass');
+
+  }
 
   void onParadePush(BuildContext context) {
     Navigator.pushNamed(context, '/adminParadeState');

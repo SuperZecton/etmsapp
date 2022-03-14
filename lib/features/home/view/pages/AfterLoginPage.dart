@@ -84,7 +84,7 @@ class AfterLoginPage extends StatelessWidget {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          model.fetchingNRIC
+                                          model.fetchingNRIC || model.fetchedNRIC.isEmpty
                                               ? ''
                                               : "${model.fetchedNRIC.toString()}  ",
                                           textAlign: TextAlign.left,
@@ -95,7 +95,7 @@ class AfterLoginPage extends StatelessWidget {
                                           ),
                                         ),
                                         Text(
-                                          model.fetchingVocation
+                                          model.fetchingVocation || model.fetchedVocation.isEmpty
                                               ? ''
                                               : model.fetchedVocation
                                                   .toString(),
