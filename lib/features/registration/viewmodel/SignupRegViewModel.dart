@@ -94,7 +94,6 @@ class RegistrationViewModel extends BaseViewModel {
             currentPESValue.toString();
         RegistrationService.instance.currentVocationValue =
             currentVocationValue.toString();
-
         db.createUserAccount(
             RegistrationService.instance.currentRankValue!,
             RegistrationService.instance.name!,
@@ -111,8 +110,8 @@ class RegistrationViewModel extends BaseViewModel {
             RegistrationService.instance.username!,
             RegistrationService.instance.password!,
             '0',
-            '0', //class 3 mileage
-            '0', //class 4 mileage
+            _class3MileageController.text, //class 3 mileage
+            _class4MileageController.text, //class 4 mileage
             '0',
             '0',
             '0',
