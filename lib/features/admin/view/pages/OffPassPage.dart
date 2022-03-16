@@ -41,6 +41,7 @@ class OffPassPage extends StatelessWidget {
                           username: item[3],
                           location: item[1],
                           status: item[2],
+                          onTap: () => model.onTap(context, item[0]),
                         );
                       },
                     ),

@@ -10,11 +10,13 @@ class OffPassCard extends StatelessWidget {
     required this.username,
     required this.location,
     required this.status,
+    required this.onTap,
   }) : super(key: key);
 
   final String username;
   final String location;
   final String status;
+  final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -59,14 +61,7 @@ class OffPassCard extends StatelessWidget {
         children: <Widget>[
           ListTile(
             title: InkWell(
-              onTap: () => showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    title: Text("Sign Off Pass here"),
-                  );
-                },
-              ),
+              onTap: onTap,
               child: Text(
                 "Sign Off Pass",
                 style: GoogleFonts.roboto(fontSize: 16, color: darkTextColor),

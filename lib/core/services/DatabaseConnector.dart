@@ -808,12 +808,13 @@ class DatabaseHandler {
     print("Query String: " + querystring);
     var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
+
     if (results.toString() == "[]") {
-      UUID = "";
-      print("You have an Ongoing Trip");
+      UUID = results.toString().substring(1, results.toString().length - 1);
+      print("Trip ongoing");
     } else if (results.toString() == "[[]]") {
-      UUID = "";
-      print("You have an Ongoing Trip");
+      UUID = results.toString().substring(2, results.toString().length - 2);
+      print("Trip ongoing");
     } else {
       print("No Ongoing Trips");
       return "";

@@ -39,6 +39,9 @@ class ParadeStatePage extends StatelessWidget {
                           username: item[3],
                           location: item[1],
                           status: item[2],
+                          value: model.statusValue,
+                          values: model.statusList,
+                          onChanged: (value) => model.onEditStatus(value, item[0]),
                         );
                       },
                     ),
