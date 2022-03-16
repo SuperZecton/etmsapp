@@ -1185,7 +1185,7 @@ class DatabaseHandler {
     print("Query String: " + querystring);
     var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
-    if (results.toString() == "[]") {
+    if (results.toString() == "[]" || results.toString() == "[[]]") {
       var querystring2 =
           'SELECT "checkInDate" FROM checkin WHERE' " username = '" +
               username +
@@ -1197,7 +1197,7 @@ class DatabaseHandler {
       print("Query String: " + querystring2);
       var results2 = await connection.query(querystring2);
       print("Database Result: " + results2.toString());
-      if (results2.toString() == "[]") {
+      if (results2.toString() == "[]" || results.toString() == "[[]]") {
         result = "NotCheckedIn";
         print("You have Not Checked In");
       } else {
@@ -1319,7 +1319,7 @@ class DatabaseHandler {
     print("Query String: " + querystring);
     var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
-    if (results.toString() == "[]") {
+    if (results.toString() == "[]" || results.toString() == "[[]]") {
       querystring2 =
           'SELECT "checkInDate", "checkInTime", "location", "status" FROM checkin WHERE'
                   " username = '" +
