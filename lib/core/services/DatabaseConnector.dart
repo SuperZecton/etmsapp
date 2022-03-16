@@ -288,7 +288,7 @@ class DatabaseHandler {
     print("Query String: " + querystring);
     var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
-    if (results.toString() == "[]") {
+    if (results.toString() == "[]" || results.toString() == "[[]]") {
       print("No Entry with match Device Identifier");
       print("Can't find UUID");
       return [];
@@ -808,7 +808,7 @@ class DatabaseHandler {
     print("Query String: " + querystring);
     var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
-    if (results.toString() == "[[]]") {
+    if (results.toString() == "[]" || results.toString() == "[[]]") {
       UUID = results.toString().substring(2, results.toString().length - 2);
       print("You have an Ongoing Trip");
     } else {
@@ -1197,7 +1197,7 @@ class DatabaseHandler {
       print("Query String: " + querystring2);
       var results2 = await connection.query(querystring2);
       print("Database Result: " + results2.toString());
-      if (results2.toString() == "[]" || results.toString() == "[[]]") {
+      if (results2.toString() == "[]" || results2.toString() == "[[]]") {
         result = "NotCheckedIn";
         print("You have Not Checked In");
       } else {
