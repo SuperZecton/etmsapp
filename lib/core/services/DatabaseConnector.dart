@@ -808,8 +808,11 @@ class DatabaseHandler {
     print("Query String: " + querystring);
     var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
-    if (results.toString() == "[]" || results.toString() == "[[]]") {
-      UUID = results.toString().substring(2, results.toString().length - 2);
+    if (results.toString() == "[]") {
+      UUID = "";
+      print("You have an Ongoing Trip");
+    } else if (results.toString() == "[[]]") {
+      UUID = "";
       print("You have an Ongoing Trip");
     } else {
       print("No Ongoing Trips");
@@ -1251,7 +1254,7 @@ class DatabaseHandler {
           "';";
     } else {
       var nextAVIDateTime;
-      if (now.day == 31){
+      if (now.day == 31) {
         nextAVIDateTime = new DateTime(now.year, now.month + 6, 30);
       }
       nextAVIDateTime = new DateTime(now.year, now.month + 6, now.day);

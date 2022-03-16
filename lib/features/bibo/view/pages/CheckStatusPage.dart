@@ -19,8 +19,8 @@ class CheckStatusPage extends StatelessWidget {
           appBar: AppBar(
             automaticallyImplyLeading: false,
             title: Text(
-              "",
-              style: TextStyle(color: Colors.black),
+              "You have checked out",
+              style: TextStyle(color: darkTextColor),
             ),
             centerTitle: true,
             leading: GestureDetector(

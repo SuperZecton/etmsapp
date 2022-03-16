@@ -85,8 +85,13 @@ class LoginPageViewModel extends BaseViewModel {
     if (loginCredentials == true) {
       /// Sets global user
       CurrentUser.instance.username = user;
-      String _currentTripID = await db.checkOngoingTrips(user);
-      CurrentUser.instance.currentTripID = _currentTripID;
+      ///Check if there is current trip
+      bool? isCurrentTrip;
+      if(CurrentUser.instance.currentTripID == null || CurrentUser.instance.currentTripID!.isEmpty){
+        String _currentTripID = await db.checkOngoingTrips(user);
+        CurrentUser.instance.currentTripID = _currentTripID;
+
+      }
       DateTime currentDateTime = DateTime.now();
       var now = DateTime.parse(currentDateTime.toString());
       String _date = now.day.toString().padLeft(2, '0') +

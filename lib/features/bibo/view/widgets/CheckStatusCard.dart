@@ -41,7 +41,7 @@ class CheckInStatusCard extends StatelessWidget {
                 AppBar(
                   leading: Icon(Icons.verified_user),
                   elevation: 0,
-                  title: Text("Status"),
+                  title: Text("Current Status"),
                   backgroundColor: darkGreenAccent,
                   centerTitle: true,
                   actions: <Widget>[
@@ -65,9 +65,9 @@ class CheckInStatusCard extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             Text(
-                              "$checkInTime",
+                              "Checked in: $checkInTime",
                               style: GoogleFonts.roboto(
-                                fontSize: 32,
+                                fontSize: 28,
                                 color: darkTextColor,
                                 fontWeight: FontWeight.w400,
                               ),
