@@ -160,13 +160,15 @@ class DatabaseHandler {
       String nextAVIDate,
       String lastWPTDate,
       String nextWPTDate,
+      String lastPMMonth,
+      String nextPMMonth,
       String additionalPlate,
       String additionalRemarks) async {
     var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
         username: "LTCAppUser", password: "LTCuser123");
     await connection.open();
     var querystring =
-        'INSERT INTO Vehicles ("UUID", "vehicleNo", "carModel", "carType", "classType", "status", "inUse", "lastAVIDate", "nextAVIDate", "lastWPTDate", "nextWPTDate", "additionalPlate", "additionalRemarks") '
+        'INSERT INTO Vehicles ("UUID", "vehicleNo", "carModel", "carType", "classType", "status", "inUse", "lastAVIDate", "nextAVIDate", "lastWPTDate", "nextWPTDate", "additionalPlate", "additionalRemarks", "lastPMMonth", "nextPMMonth") '
                 "VALUES (uuid_generate_v4(),'" +
             vehicleNo +
             "','" +
@@ -187,6 +189,10 @@ class DatabaseHandler {
             lastWPTDate +
             "','" +
             nextWPTDate +
+            "','" +
+            lastPMMonth +
+            "','" +
+            nextPMMonth +
             "','" +
             additionalPlate +
             "','" +
