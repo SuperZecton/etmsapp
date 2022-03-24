@@ -1242,7 +1242,7 @@ class DatabaseHandler {
     print("Database Result: " + results.toString());
     var carType =
         results.toString().substring(2, results.toString().length - 2);
-    if (carType == "Grade 2" && carType == "Grade 3" && carType == "OUV") {
+    if (carType == "Grade 2" || carType == "Grade 3" || carType == "OUV") {
       var nextAVIDateTime = new DateTime(now.year, now.month + 12, now.day);
       var nextAVIDate = nextAVIDateTime.day.toString().padLeft(2, '0') +
           "/" +
@@ -1408,4 +1408,64 @@ class DatabaseHandler {
     print("Database Result: " + results.toString());
     connection.close();
   }
+
+  Future<void> changePMMonth(String vehicleNo) async {
+    var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
+        username: "LTCAppUser", password: "LTCuser123");
+    await connection.open();
+    var querystring2;
+    var nextMonth;
+    var now = DateTime.now();
+    String currentMonth = now.month.toString();
+    var querystring = 'SELECT "carType" FROM vehicles WHERE' " vehicleNo = '" +
+        vehicleNo +
+        "';";
+    print("Query String: " + querystring);
+    var results = await connection.query(querystring);
+    print("Database Result: " + results.toString());
+    var carType =
+    results.toString().substring(2, results.toString().length - 2);
+    if (carType == "Grade 3" || carType == "GP Car") {
+      if ((int.parse(currentMonth) + 6) > 12){
+        nextMonth = int.parse(currentMonth) - 6;
+      }
+      else {
+        nextMonth = int.parse(currentMonth) + 6;
+      }
+    }
+    else if (carType == "CLR") {
+      if ((int.parse(currentMonth) + 5) > 12){
+        nextMonth = int.parse(currentMonth) - 7;
+      }
+      else {
+        nextMonth = int.parse(currentMonth) + 5;
+      }
+    }
+    else if (carType == "OUV") {
+      if ((int.parse(currentMonth) + 3) > 12){
+        nextMonth = int.parse(currentMonth) - 9;
+      }
+      else {
+        nextMonth = int.parse(currentMonth) + 3;
+      }
+    }
+    else {
+      nextMonth = int.parse(currentMonth);
+    }
+    querystring2 = 'UPDATE vehicles SET "lastPMMonth" = ' +
+        "'" +
+        currentMonth +
+        "'" +
+        '"nextPMMonth" = ' +
+        "'" +
+        nextMonth.toString() +
+        "' WHERE " '"vehicleNo" = ' "'" +
+        vehicleNo +
+        "';";
+    print("Query String: " + querystring2);
+    var results2 = await connection.query(querystring2);
+    print("Database Result: " + results2.toString());
+    connection.close();
+  }
+
 }
