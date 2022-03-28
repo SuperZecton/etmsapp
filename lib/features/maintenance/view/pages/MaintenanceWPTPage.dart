@@ -60,6 +60,25 @@ class MaintenanceWPTPage extends StatelessWidget {
                   ),
                 ),
               ),
+              Expanded(
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 10.0),
+                  child: ListView.builder(
+                    itemCount: model.fetchingWPT || model.isWPT2Empty
+                        ? 0
+                        : model.wptLength,
+                    itemBuilder: (context, index) {
+                      final item = model.fetchedWPT[1][index];
+                      return MaintenanceWPTCard(
+                        vehicleNo: item,
+                        onEdit: (context) {
+                          ///Todo edit function
+                        },
+                      );
+                    },
+                  ),
+                ),
+              ),
             ],
           );
         });

@@ -928,7 +928,7 @@ class DatabaseHandler {
         now.month.toString().padLeft(2, '0') +
         "/" +
         now.year.toString();
-    var nextWPTDateTime = now.add(Duration(days: -7));
+    var nextWPTDateTime = now.add(Duration(days: 7));
     var nextWPTDate = nextWPTDateTime.day.toString().padLeft(2, '0') +
         "/" +
         nextWPTDateTime.month.toString().padLeft(2, '0') +
@@ -968,7 +968,7 @@ class DatabaseHandler {
       count2 = count2 + 1;
     });
     finallist.add(innerList2);
-    print("There are " + count2.toString() + " WPT1");
+    print("There are " + count2.toString() + " WPT2");
     connection.close();
     finallist.removeAt(0);
     return finallist;
@@ -1409,13 +1409,17 @@ class DatabaseHandler {
     connection.close();
   }
 
-  Future<void> changePMMonth(String vehicleNo) async {
+  Future<void> changePMMonth(String vehicleNo,String givenDate) async {
     var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
         username: "LTCAppUser", password: "LTCuser123");
     await connection.open();
     var querystring2;
     var nextMonth;
     var now = DateTime.now();
+    if (givenDate != ""){
+      var regenDate = givenDate.split("/")[2] + givenDate.split("/")[1] + givenDate.split("/")[0];
+      now = DateTime.parse(regenDate);
+    }
     String currentMonth = now.month.toString();
     var querystring = 'SELECT "carType" FROM vehicles WHERE' " vehicleNo = '" +
         vehicleNo +

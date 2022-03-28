@@ -19,9 +19,14 @@ class MaintenanceWPTViewModel extends MultipleFutureViewModel {
     List<List<String>> _list = await db.getWPTVehicles();
     print(_list);
     _wptLength = _list[0].length + _list[1].length;
-    if(_list[0].length == 0 && _list[1].length == 0){
+    print("There are " + _list[0].length.toString() + " WPT 1 and " + _list[1].length.toString() + " WPT 2");
+    if(_list[0].length == 0){
       _isWPTEmpty = true;
-      print("WPT IS EMPTY: ${_isWPTEmpty.toString()}");
+      print("WPT1 IS EMPTY: ${_isWPTEmpty.toString()}");
+    }
+    if(_list[1].length == 0){
+      _isWPT2Empty = true;
+      print("WPT2 IS EMPTY: ${_isWPT2Empty.toString()}");
     }
     return _list;
   }
@@ -29,6 +34,8 @@ class MaintenanceWPTViewModel extends MultipleFutureViewModel {
   int get wptLength => _wptLength;
   bool _isWPTEmpty = false;
   bool get isWPTEmpty => _isWPTEmpty;
+  bool _isWPT2Empty = false;
+  bool get isWPT2Empty => _isWPT2Empty;
   void floatingButtonPress(BuildContext context) {}
 
 
