@@ -174,10 +174,12 @@ class HomePageViewModel extends MultipleFutureViewModel {
     notifyListeners();
   }
 
+  //https://docs.google.com/forms/d/e/1FAIpQLSdaPpHhO8dO2qnyLonsLO41b1eTDfZdkwzmBksOQKbLNrgcTg/viewform
+  //Teh's old google Form
 
   void shroFormURLPush() async {
     const url =
-        "https://docs.google.com/forms/d/e/1FAIpQLSdaPpHhO8dO2qnyLonsLO41b1eTDfZdkwzmBksOQKbLNrgcTg/viewform";
+        "https://app.sync.gov.sg/";
     if (await canLaunch(url)) {
       launch(url, forceWebView: true, enableJavaScript: true);
     } else {

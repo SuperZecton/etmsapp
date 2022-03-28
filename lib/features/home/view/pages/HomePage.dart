@@ -187,7 +187,7 @@ class HomePage extends StatelessWidget {
                                     )),
                                 Padding(padding: EdgeInsets.only(bottom: 16.0)),
                                 Text(
-                                  'SHRO Forms',
+                                  'Update ART',
                                   style: GoogleFonts.roboto(
                                     fontSize: 22,
                                     fontWeight: FontWeight.w600,
