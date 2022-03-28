@@ -181,7 +181,7 @@ class HomePageViewModel extends MultipleFutureViewModel {
     const url =
         "https://app.sync.gov.sg/";
     if (await canLaunch(url)) {
-      launch(url, forceWebView: true, enableJavaScript: true);
+      launch(url, enableJavaScript: true);
     } else {
       throw "Error launching $url";
     }
