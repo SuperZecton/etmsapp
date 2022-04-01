@@ -35,6 +35,9 @@ class MaintenanceEditPage extends StatelessWidget {
                 MaintenanceDateField(
                     "AVI Date", FontAwesomeIcons.calendarWeek, model.aviDate,
                     onTap: () => model.selectDate(context, model.aviDate)),
+                MaintenanceDateField(
+                    "WP Date", FontAwesomeIcons.calendarWeek, model.pmDate,
+                    onTap: () => model.selectDate(context, model.pmDate)),
                 MaintenanceEntryField(
                   "Civilian Plate",
                   FontAwesomeIcons.sign,

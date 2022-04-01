@@ -21,8 +21,10 @@ class MaintenanceEditViewModel extends BaseViewModel {
 
   TextEditingController _aviDate = TextEditingController();
   TextEditingController _civiPlate = TextEditingController();
+  TextEditingController _pmDate = TextEditingController();
   TextEditingController get aviDate => _aviDate;
   TextEditingController get civiPlate => _civiPlate;
+  TextEditingController get pmDate => _pmDate;
 
   List<String> _vehicleHolding = [
     "In BPC",
@@ -55,7 +57,11 @@ class MaintenanceEditViewModel extends BaseViewModel {
   void submitPush(BuildContext context) async {
     if (_currentVehicleNo != null) {
       if (_aviDate.text.isNotEmpty) {
-        db.changeAVIDate(_currentVehicleNo!);
+        db.changeAVIDate(_currentVehicleNo!, _aviDate.text);
+      }
+      if (_pmDate.text.isNotEmpty) {
+        print(_pmDate.text); //Currently MM/DD/YYYY
+        db.changePMMonth(_currentVehicleNo!, _pmDate.text);
       }
       if (_currentVehicleHolding.toString().isNotEmpty &&
           _currentVehicleHolding != null) {
@@ -75,6 +81,7 @@ class MaintenanceEditViewModel extends BaseViewModel {
 
   ///Date picker logic
   String selectedDate = "";
+  String convertedDate = "";
   Future<void> selectDate(
       BuildContext context, TextEditingController controller) async {
     final DateTime? picked = await showDatePicker(
@@ -85,7 +92,8 @@ class MaintenanceEditViewModel extends BaseViewModel {
     );
     if (picked != null && picked != DateTime.now()) {
       selectedDate = DateFormat.yMd("en_US").format(picked);
-      controller.text = selectedDate;
+      convertedDate = selectedDate.split("/")[1].padLeft(2, '0') + "/" + selectedDate.split("/")[0].padLeft(2, '0') + "/" + selectedDate.split("/")[2];
+      controller.text = convertedDate;
       notifyListeners();
     }
   }
