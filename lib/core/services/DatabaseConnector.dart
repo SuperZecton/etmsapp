@@ -1475,7 +1475,7 @@ class DatabaseHandler {
     connection.close();
   }
 
-  Future<void> createDetail(String dateOfDetail, String typeOfDetail,
+  Future<void> createDetail(String dateOfDetail, String typeOfDetail, String LTCorBPC,
       String rank, String fullName, String carPlate, String additionalPlate,
       String reportTo, String vehicleCommander, String timeDepart, String timeRTU) async {
     var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
@@ -1487,7 +1487,7 @@ class DatabaseHandler {
     print("Database Result: " + results.toString());
     var maskedNRIC = "XXXXX" + results.toString().substring(2, results.toString().length - 2);
     var querystring2 =
-        'INSERT INTO incidentReport ("UUID", "dateOfIndent", "dateOfDetail", "typeOfDetail", "rank", "fullName", "maskedNRIC", "carPlate", "additionalPlate", "reportTo", "vehicleCommander", "timeDepart", "timeRTU") '
+        'INSERT INTO incidentReport ("UUID", "dateOfIndent", "dateOfDetail", "typeOfDetail", "LTCorBPC", "rank", "fullName", "maskedNRIC", "carPlate", "additionalPlate", "reportTo", "vehicleCommander", "timeDepart", "timeRTU") '
             "VALUES (uuid_generate_v4(),'" +
             dt.getCurrentDate() +
             "','" +
