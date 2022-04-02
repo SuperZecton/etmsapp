@@ -301,6 +301,34 @@ class AfterLoginPage extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Material(
+                                    color: Colors.green,
+                                    shape: CircleBorder(),
+                                    child: Padding(
+                                      padding: EdgeInsets.all(16.0),
+                                      child: Icon(FontAwesomeIcons.book,
+                                          color: Colors.white, size: 30.0),
+                                    )),
+                                Padding(padding: EdgeInsets.only(bottom: 16.0)),
+                                Text(
+                                  'Detailing Section',
+                                  style: GoogleFonts.roboto(
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.w600,
+                                    color: darkTextColor,
+                                  ),
+                                ),
+                              ]),
+                        ),
+                        onTap: () => model.detailingPush(context),
+                      ),
+                      _buildTile(
+                        Padding(
+                          padding: const EdgeInsets.all(24.0),
+                          child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Material(
                                     color: darkPrimary300,
                                     shape: CircleBorder(),
                                     child: Container(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ltcapp/features/detailing/view/pages/DetailingMainPage.dart';
 import 'package:ltcapp/features/admin/view/pages/AdminMainPage.dart';
 import 'package:ltcapp/features/admin/view/pages/OffPassPage.dart';
 import 'package:ltcapp/features/admin/view/pages/ParadeStatePage.dart';
@@ -45,6 +46,8 @@ class Routers {
         return MaterialPageRoute(builder: (_) => MileageMainPage());
       case '/maintenanceMain':
         return MaterialPageRoute(builder: (_) => MaintenanceMainPage());
+      case '/detailingMain':
+        return MaterialPageRoute(builder: (_) => DetailingMainPage());
       case '/adminMain':
         return MaterialPageRoute(builder: (_) => AdminMainPage());
       case '/adminParadeState':
