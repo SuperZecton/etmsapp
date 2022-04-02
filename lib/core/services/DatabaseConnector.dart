@@ -1475,4 +1475,48 @@ class DatabaseHandler {
     connection.close();
   }
 
+  Future<void> createDetail(String dateOfDetail, String typeOfDetail,
+      String rank, String fullName, String carPlate, String additionalPlate,
+      String reportTo, String vehicleCommander, String timeDepart, String timeRTU) async {
+    var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
+        username: "LTCAppUser", password: "LTCuser123");
+    await connection.open();
+    var querystring = 'SELECT "nricLast4Digits" FROM users WHERE "fullName" = '"'" + fullName + "';";
+    print("Query String: " + querystring);
+    var results = await connection.query(querystring);
+    print("Database Result: " + results.toString());
+    var maskedNRIC = "XXXXX" + results.toString().substring(2, results.toString().length - 2);
+    var querystring2 =
+        'INSERT INTO incidentReport ("UUID", "dateOfIndent", "dateOfDetail", "typeOfDetail", "rank", "fullName", "maskedNRIC", "carPlate", "additionalPlate", "reportTo", "vehicleCommander", "timeDepart", "timeRTU") '
+            "VALUES (uuid_generate_v4(),'" +
+            dt.getCurrentDate() +
+            "','" +
+            dateOfDetail +
+            "','" +
+            typeOfDetail +
+            "','" +
+            rank +
+            "','" +
+            fullName +
+            "','" +
+            maskedNRIC +
+            "','" +
+            carPlate +
+            "','" +
+            additionalPlate +
+            "','" +
+            reportTo +
+            "','" +
+            vehicleCommander +
+            "','" +
+            timeDepart +
+            "','" +
+            timeRTU +
+            "');";
+    print("Query String: " + querystring2);
+    var results2 = await connection.query(querystring2);
+    print("Database Result: " + results2.toString());
+    connection.close();
+  }
+
 }
