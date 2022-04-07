@@ -31,7 +31,7 @@ class DetailingMainViewModel extends MultipleFutureViewModel {
   }
 
   void onParadePush(BuildContext context) {
-    Navigator.pushNamed(context, '/adminParadeState');
+    Navigator.pushNamed(context, '/detailingAddDetail');
   }
 
   void floatingButtonPress(BuildContext context) {}
