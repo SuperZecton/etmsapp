@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ltcapp/core/services/ExcelConnector.dart';
+import 'package:ltcapp/core/utils/DateAndTimeGetter.dart';
 import 'package:ltcapp/core/utils/locator.dart';
 import 'package:ltcapp/features/home/viewmodel/HomePageViewModel.dart';
 import 'package:ltcapp/core/services/CurrentSession.dart';
@@ -27,6 +28,7 @@ void main() async {
   DatabaseHandler db = DatabaseHandler();
   TelebotConnector telebot = new TelebotConnector();
   ExcelHandler excelHandler = new ExcelHandler();
+  DateAndTime dt = DateAndTime();
   WidgetsFlutterBinding.ensureInitialized();
   //setupLocator();
   ///Debugging nonsense

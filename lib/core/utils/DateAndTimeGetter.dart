@@ -74,5 +74,11 @@ class DateAndTime
     return time.substring(0, 2) + ":" + time.substring(2, 4);
   }
 
+  int daysBetween(DateTime from, DateTime to) {
+    from = DateTime(from.year, from.month, from.day);
+    to = DateTime(to.year, to.month, to.day);
+    return (to.difference(from).inHours / 24).round();
+  }
+
   DateAndTime._internal();
 }

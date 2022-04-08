@@ -69,7 +69,7 @@ class AfterLoginPage extends StatelessWidget {
                                     child: Text(
                                       model.fetchingName && model.fetchingRank
                                           ? 'Welcome'
-                                          : 'Welcome ${model.fetchedRank.toString()} ${model.fetchedName.toString()}',
+                                          : 'Welcome ${model.fetchedRank.toString()} ${model.fetchedName.split(" ")[0].toString()}',
                                       textAlign: TextAlign.left,
                                       style: GoogleFonts.roboto(
                                         fontSize: 24,

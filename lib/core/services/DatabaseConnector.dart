@@ -803,6 +803,31 @@ class DatabaseHandler {
     return _returnList;
   }
 
+  Future<List<String>> getAllUsers() async {
+    var finallist = [];
+    var count = 0;
+    var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
+        username: "LTCAppUser", password: "LTCuser123");
+    await connection.open();
+    var querystring =
+        'SELECT "rank", "fullName" FROM users;';
+    print("Query String: " + querystring);
+    var results = await connection.query(querystring);
+    print("Database Result: " + results.toString());
+    results.forEach((rawRow) {
+      var row = rawRow.toString().substring(1, rawRow.toString().length - 1);
+      var innerList = row.split(", ");
+      var rankName = innerList[0] + " " + innerList[1];
+      finallist.add(rankName);
+      count = count + 1;
+    });
+    print("There are " + count.toString() + " Drivers");
+    List<String> _returnList =
+    finallist.map((string) => string.toString()).toList();
+    connection.close();
+    return _returnList;
+  }
+
   Future<String> checkOngoingTrips(String username) async {
     var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
         username: "LTCAppUser", password: "LTCuser123");
@@ -1487,13 +1512,15 @@ class DatabaseHandler {
     print("Database Result: " + results.toString());
     var maskedNRIC = "XXXXX" + results.toString().substring(2, results.toString().length - 2);
     var querystring2 =
-        'INSERT INTO incidentReport ("UUID", "dateOfIndent", "dateOfDetail", "typeOfDetail", "LTCorBPC", "rank", "fullName", "maskedNRIC", "carPlate", "additionalPlate", "reportTo", "vehicleCommander", "timeDepart", "timeRTU") '
+        'INSERT INTO detailing ("UUID", "dateOfIndent", "dateOfDetail", "typeOfDetail", "LTCorBPC", "rank", "fullName", "maskedNRIC", "carPlate", "additionalPlate", "reportTo", "vehicleCommander", "timeDepart", "timeRTU") '
             "VALUES (uuid_generate_v4(),'" +
             dt.getCurrentDate() +
             "','" +
             dateOfDetail +
             "','" +
             typeOfDetail +
+            "','" +
+            LTCorBPC +
             "','" +
             rank +
             "','" +

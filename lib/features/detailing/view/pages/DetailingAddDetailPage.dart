@@ -31,30 +31,44 @@ class DetailingAddDetailPage extends StatelessWidget {
               height: MediaQuery.of(context).size.height,
               child: SingleChildScrollView(
                 child: Form(
-                  key: model.startTripKey,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       SizedBox(height: 30),
                       DetailingDateField(
-                          "Date of Detail", FontAwesomeIcons.calendarWeek, model.detailDate,
-                          onTap: () => model.selectDate(context, model.detailDate)),
-                      DetailingDropDownField<CarType?>(
+                          "Start Date of Detail", FontAwesomeIcons.calendarWeek, model.startDetailDate,
+                          onTap: () => model.selectDate(context, model.startDetailDate)),
+                      DetailingDateField(
+                          "End Date of Detail", FontAwesomeIcons.calendarWeek, model.endDetailDate,
+                          onTap: () => model.selectDate(context, model.endDetailDate)),
+                      DetailingDropDownField<DetailType?>(
                           hint: "Type Of Detail",
-                          values: CarType.getValues(),
-                          value: model.currentCarValue,
-                          icon: FontAwesomeIcons.truckPickup,
+                          values: DetailType.getValues(),
+                          value: model.currentDetailType,
+                          icon: FontAwesomeIcons.atlas,
                           onChanged: (value) =>
-                              model.carTypeDropDownOnChanged(value!)),
+                              model.detailTypeDropDownOnChanged(value!)),
+                      DetailingEntryField(
+                        "Training / Detail Name (Leave Blank if None)",
+                        FontAwesomeIcons.clipboardList,
+                        model.trainingDetailName,
+                      ),
                       SizedBox(height: 5),
                       DetailingDropDownField<String?>(
-                          hint: "Vehicle Number",
-                          values: model.vehicleNumbers,
-                          value: model.currentVehicleNo,
-                          icon: FontAwesomeIcons.carAlt,
+                          hint: "LTC or BPC",
+                          values: model.LTCorBPC,
+                          value: model.currentLTCorBPC,
+                          icon: FontAwesomeIcons.home,
                           onChanged: (value) =>
-                              model.vehicleNoDropDownOnChanged(value!)),
+                              model.LTCorBPCDropDownOnChanged(value!)),
+                      DetailingDropDownField<String?>(
+                          hint: "Driver",
+                          values: model.transportOperator,
+                          value: model.currentTransportOperator,
+                          icon: FontAwesomeIcons.user,
+                          onChanged: (value) =>
+                              model.transportOperatorDropDownOnChanged(value!)),
                       DetailingDropDownField<String?>(
                           hint: "Vehicle Commander",
                           values: model.vehicleCommanders,
@@ -62,46 +76,58 @@ class DetailingAddDetailPage extends StatelessWidget {
                           icon: FontAwesomeIcons.userFriends,
                           onChanged: (value) =>
                               model.vcDropDownOnChanged(value!)),
-                      DetailingDropDownField<String?>(
-                          hint: "Purpose of Trip",
-                          value: model.currentPurpose,
-                          values: model.purposeOfTrip,
-                          icon: FontAwesomeIcons.luggageCart,
+                      DetailingDropDownField<CarType?>(
+                          hint: "Car Type",
+                          values: CarType.getValues(),
+                          value: model.currentCarValue,
+                          icon: FontAwesomeIcons.truckPickup,
                           onChanged: (value) =>
-                              model.purposeOfTripOnChanged(value!)),
+                              model.carTypeDropDownOnChanged(value!)),
+                      DetailingDropDownField<String?>(
+                          hint: "Vehicle Number",
+                          values: model.vehicleNumbers,
+                          value: model.currentVehicleNo,
+                          icon: FontAwesomeIcons.clipboard,
+                          onChanged: (value) =>
+                              model.vehicleNoDropDownOnChanged(value!)),
                       DetailingEntryField(
-                        "Start odometer",
-                        FontAwesomeIcons.tachometerAlt,
-                        model.startingOdometer,
+                        "Civilian Plate",
+                        FontAwesomeIcons.clipboardList,
+                        model.civilianPlate,
+                      ),
+                      DetailingEntryField(
+                        "Report To",
+                        FontAwesomeIcons.mapMarkedAlt,
+                        model.reportTo,
+                        validationAction: (String? input) =>
+                        input!.isValidLocation()
+                            ? null
+                            : "Please don't add special characters",
+                      ),
+                      DetailingEntryField(
+                        "Depart Time",
+                        FontAwesomeIcons.solidClock,
+                        model.timeDepart,
                         validationAction: (String? input) =>
                             input!.isValidNumber()
                                 ? null
                                 : "Please enter Numbers only",
                       ),
                       DetailingEntryField(
-                        "Start Location",
-                        FontAwesomeIcons.mapMarkedAlt,
-                        model.locationStart,
+                        "RTU Time",
+                        FontAwesomeIcons.clock,
+                        model.timeRTU,
                         validationAction: (String? input) =>
-                            input!.isValidLocation()
-                                ? null
-                                : "Please don't add special characters",
-                      ),
-                      DetailingEntryField(
-                        "End Location",
-                        FontAwesomeIcons.mapMarkedAlt,
-                        model.locationEnd,
-                        validationAction: (String? input) =>
-                            input!.isValidLocation()
-                                ? null
-                                : "Please don't add special characters",
+                        input!.isValidNumber()
+                            ? null
+                            : "Please enter Numbers only",
                       ),
                       SizedBox(
                         height: 20,
                       ),
                       DetailingButton(
-                        "Submit",
-                        onPressed: () => model.onStartTripPush(context),
+                        "Add Detail",
+                        onPressed: () => model.onAddDetailPush(context),
                       ),
                     ],
                   ),

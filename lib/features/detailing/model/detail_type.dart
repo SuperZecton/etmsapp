@@ -33,3 +33,24 @@ class VehClassType
   static List<VehClassType> getValues() => list;
 }
 
+class DetailType
+{
+  final value;
+  const DetailType._internal(this.value);
+  toString() => '$value';
+  /// Add Type of Details Here
+  static const MPFS = const DetailType._internal("MP FERRY SERVICE");
+  static const NFS = const DetailType._internal("NIGHT FERRY SERVICE");
+  static const NFSDTL = const DetailType._internal("NFS (DTL COVER)");
+  static const BPCDuty = const DetailType._internal("BPC DUTY VEHICLE");
+  static const LTCDuty = const DetailType._internal("LTC DUTY VEHICLE");
+  static const MOVehicle = const DetailType._internal("MO VEHICLE");
+  static const VIP = const DetailType._internal("VIP DETAIL");
+  static const Dispatch = const DetailType._internal("DISPATCH");
+  static const Training = const DetailType._internal("TRAINING");
+  static const DSP = const DetailType._internal("DSP");
+  static const DST = const DetailType._internal("DST");
+
+  static List<DetailType> list = [MPFS, NFS, NFSDTL, BPCDuty, LTCDuty, MOVehicle, VIP, Dispatch, Training, DSP, DST];
+  static List<DetailType> getValues() => list;
+}
