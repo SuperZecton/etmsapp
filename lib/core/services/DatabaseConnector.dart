@@ -1506,13 +1506,23 @@ class DatabaseHandler {
     var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
         username: "LTCAppUser", password: "LTCuser123");
     await connection.open();
+
+    /// Masked NRIC
     var querystring = 'SELECT "nricLast4Digits" FROM users WHERE "fullName" = '"'" + fullName + "';";
     print("Query String: " + querystring);
     var results = await connection.query(querystring);
     print("Database Result: " + results.toString());
     var maskedNRIC = "XXXXX" + results.toString().substring(2, results.toString().length - 2);
-    var querystring2 =
-        'INSERT INTO detailing ("UUID", "dateOfIndent", "dateOfDetail", "typeOfDetail", "LTCorBPC", "rank", "fullName", "maskedNRIC", "carPlate", "additionalPlate", "reportTo", "vehicleCommander", "timeDepart", "timeRTU") '
+
+    /// Phone Number
+    var querystring2 = 'SELECT "handphoneNumber" FROM users WHERE "fullName" = '"'" + fullName + "';";
+    print("Query String: " + querystring2);
+    var results2 = await connection.query(querystring2);
+    print("Database Result: " + results2.toString());
+    var phoneNumber = "XXXXX" + results2.toString().substring(2, results.toString().length - 2);
+
+    var querystring3 =
+        'INSERT INTO detailing ("UUID", "dateOfIndent", "dateOfDetail", "typeOfDetail", "LTCorBPC", "rank", "fullName", "maskedNRIC", "phoneNumber", "carPlate", "additionalPlate", "reportTo", "vehicleCommander", "timeDepart", "timeRTU") '
             "VALUES (uuid_generate_v4(),'" +
             dt.getCurrentDate() +
             "','" +
@@ -1528,6 +1538,8 @@ class DatabaseHandler {
             "','" +
             maskedNRIC +
             "','" +
+            phoneNumber +
+            "','" +
             carPlate +
             "','" +
             additionalPlate +
@@ -1540,9 +1552,9 @@ class DatabaseHandler {
             "','" +
             timeRTU +
             "');";
-    print("Query String: " + querystring2);
-    var results2 = await connection.query(querystring2);
-    print("Database Result: " + results2.toString());
+    print("Query String: " + querystring3);
+    var results3 = await connection.query(querystring3);
+    print("Database Result: " + results3.toString());
     connection.close();
   }
 

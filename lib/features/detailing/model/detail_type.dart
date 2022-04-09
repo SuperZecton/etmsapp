@@ -50,7 +50,8 @@ class DetailType
   static const Training = const DetailType._internal("TRAINING");
   static const DSP = const DetailType._internal("DSP");
   static const DST = const DetailType._internal("DST");
+  static const DMI = const DetailType._internal("DMI");
 
-  static List<DetailType> list = [MPFS, NFS, NFSDTL, BPCDuty, LTCDuty, MOVehicle, VIP, Dispatch, Training, DSP, DST];
+  static List<DetailType> list = [MPFS, NFS, NFSDTL, BPCDuty, LTCDuty, MOVehicle, VIP, Dispatch, Training, DSP, DST, DMI];
   static List<DetailType> getValues() => list;
 }
