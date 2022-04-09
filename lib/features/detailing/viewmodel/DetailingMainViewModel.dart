@@ -6,28 +6,28 @@ import 'package:stacked/stacked.dart';
 
 class DetailingMainViewModel extends MultipleFutureViewModel {
   DatabaseHandler db = DatabaseHandler();
-  static const String _StrengthDelayedFuture = "strength";
-  List<String> get fetchedStrength => dataMap![_StrengthDelayedFuture];
-  bool get fetchingStrength => busy(_StrengthDelayedFuture);
+  static const String _detailsInLTCFuture = "ltc";
+  static const String _detailsInBPCFuture = "bpc";
+  String get fetchedDetailsInLTC => dataMap![_detailsInLTCFuture];
+  bool get fetchingDetailsInLTC => busy(_detailsInLTCFuture);
+  String get fetchedDetailsInBPC => dataMap![_detailsInBPCFuture];
+  bool get fetchingDetailsInBPC => busy(_detailsInBPCFuture);
 
   @override
 
   Map<String, Future Function()> get futuresMap => {
-        _StrengthDelayedFuture: getStrength,
+        _detailsInLTCFuture: getDetailLTC,
+        _detailsInBPCFuture: getDetailBPC,
       };
 
-  Future<List<String>> getStrength() async {
-    List<List<String>> _list = await db.getParadeState();
-    int _currentStrength = 0;
-    int _totalStrength = _list.length;
-    List<String> _strength = [];
-    for (int i = 0; i < _list.length; i++) {
-      if (_list[i][1].isNotEmpty && _list[i][1].length != 0) {
-        _currentStrength++;
-      }
-    }
-    _strength.addAll([_currentStrength.toString(), _totalStrength.toString()]);
-    return _strength;
+  Future<String> getDetailLTC() async {
+    String _totalLTCDetails = await db.getDetailsInLTC();
+    return _totalLTCDetails;
+  }
+
+  Future<String> getDetailBPC() async {
+    String _totalBPCDetails = await db.getDetailsInBPC();
+    return _totalBPCDetails;
   }
 
   void onParadePush(BuildContext context) {

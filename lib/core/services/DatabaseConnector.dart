@@ -1558,4 +1558,59 @@ class DatabaseHandler {
     connection.close();
   }
 
+  Future<String> getDetailsInLTC() async {
+    var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
+        username: "LTCAppUser", password: "LTCuser123");
+    await connection.open();
+    var finalString;
+    var querystring =
+        'SELECT "fullName" FROM detailing WHERE "dateOfDetail"'" = '" +
+            dt.getCurrentTime() +
+            "' AND " +
+            '"LTCorBPC" = ' +
+            "'LTC';";
+    print("Query String: " + querystring);
+    var results = await connection.query(querystring);
+    print("Database Result: " + results.toString());
+    if (results.toString() == "[]" || results.toString() == "[[]]") {
+      finalString = "0";
+    }
+    else {
+      results.forEach((row) {
+        finalString = int.parse(finalString) + 1;
+      });
+      finalString = finalString.toString();
+    }
+    connection.close();
+    return finalString;
+  }
+
+  Future<String> getDetailsInBPC() async {
+    var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
+        username: "LTCAppUser", password: "LTCuser123");
+    await connection.open();
+    var finalString;
+    var querystring =
+        'SELECT "fullName" FROM detailing WHERE "dateOfDetail"'" = '" +
+            dt.getCurrentTime() +
+            "' AND " +
+            '"LTCorBPC" = ' +
+            "'BPC';";
+    print("Query String: " + querystring);
+    var results = await connection.query(querystring);
+    print("Database Result: " + results.toString());
+    if (results.toString() == "[]" || results.toString() == "[[]]") {
+      finalString = "0";
+    }
+    else {
+      results.forEach((row) {
+        finalString = int.parse(finalString) + 1;
+      });
+      finalString = finalString.toString();
+    }
+    connection.close();
+    return finalString;
+  }
+
+
 }

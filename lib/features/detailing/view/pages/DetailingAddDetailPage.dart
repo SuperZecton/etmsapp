@@ -99,10 +99,6 @@ class DetailingAddDetailPage extends StatelessWidget {
                         "Report To",
                         FontAwesomeIcons.mapMarkedAlt,
                         model.reportTo,
-                        validationAction: (String? input) =>
-                        input!.isValidLocation()
-                            ? null
-                            : "Please don't add special characters",
                       ),
                       DetailingEntryField(
                         "Depart Time",

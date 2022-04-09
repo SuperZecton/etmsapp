@@ -44,7 +44,7 @@ class DetailListCard extends ViewModelWidget<DetailingMainViewModel> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      model.fetchingStrength? "Current Strength:" : "Current Strength: ${model.fetchedStrength[0]}",
+                      model.fetchingDetailsInLTC? "Details In LTC:" : "Details In LTC: ${model.fetchedDetailsInLTC}",
                       textAlign: TextAlign.left,
                       style: GoogleFonts.roboto(
                         textStyle: Theme.of(context).textTheme.headline4,
@@ -55,7 +55,7 @@ class DetailListCard extends ViewModelWidget<DetailingMainViewModel> {
                     ),
                     SizedBox(height: 10),
                     Text(
-                      model.fetchingStrength ? "Total Strength" : "Total Strength: ${model.fetchedStrength[1]}",
+                      model.fetchingDetailsInBPC? "Details In BPC:" : "Details In BPC: ${model.fetchedDetailsInBPC}",
                       textAlign: TextAlign.left,
                       style: GoogleFonts.roboto(
                         textStyle: Theme.of(context).textTheme.headline4,
