@@ -77,7 +77,6 @@ class DetailingMainPage extends StatelessWidget {
                                 //style: TextStyle(color: Colors.black45)),
                               ]),
                         ),
-                        onTap: () => model.onParadePush(context),
                       ), // COPY PASTE FROM HERE IF NEED
                     ],
                     staggeredTiles: [

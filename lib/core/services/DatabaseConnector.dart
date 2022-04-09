@@ -1562,10 +1562,10 @@ class DatabaseHandler {
     var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
         username: "LTCAppUser", password: "LTCuser123");
     await connection.open();
-    var finalString;
+    var finalString = "0";
     var querystring =
-        'SELECT "fullName" FROM detailing WHERE "dateOfDetail"'" = '" +
-            dt.getCurrentTime() +
+        'SELECT "rank" FROM detailing WHERE "dateOfDetail"'" = '" +
+            dt.getCurrentDate() +
             "' AND " +
             '"LTCorBPC" = ' +
             "'LTC';";
@@ -1576,10 +1576,11 @@ class DatabaseHandler {
       finalString = "0";
     }
     else {
+      var count = 0;
       results.forEach((row) {
-        finalString = int.parse(finalString) + 1;
+        count = count + 1;
       });
-      finalString = finalString.toString();
+      finalString = count.toString();
     }
     connection.close();
     return finalString;
@@ -1589,10 +1590,10 @@ class DatabaseHandler {
     var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
         username: "LTCAppUser", password: "LTCuser123");
     await connection.open();
-    var finalString;
+    var finalString = "0";
     var querystring =
-        'SELECT "fullName" FROM detailing WHERE "dateOfDetail"'" = '" +
-            dt.getCurrentTime() +
+        'SELECT "rank" FROM detailing WHERE "dateOfDetail"'" = '" +
+            dt.getCurrentDate() +
             "' AND " +
             '"LTCorBPC" = ' +
             "'BPC';";
@@ -1603,10 +1604,11 @@ class DatabaseHandler {
       finalString = "0";
     }
     else {
+      var count = 0;
       results.forEach((row) {
-        finalString = int.parse(finalString) + 1;
+        count = count + 1;
       });
-      finalString = finalString.toString();
+      finalString = count.toString();
     }
     connection.close();
     return finalString;
