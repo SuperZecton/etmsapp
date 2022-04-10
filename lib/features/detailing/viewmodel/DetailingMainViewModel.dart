@@ -30,7 +30,7 @@ class DetailingMainViewModel extends MultipleFutureViewModel {
     return _totalBPCDetails;
   }
 
-  void onParadePush(BuildContext context) {
+  void onAddDetailPush(BuildContext context) {
     Navigator.pushNamed(context, '/detailingAddDetail');
   }
 
