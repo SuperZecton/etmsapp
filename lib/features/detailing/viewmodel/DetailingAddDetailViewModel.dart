@@ -71,10 +71,24 @@ class DetailingAddDetailViewModel extends BaseViewModel {
     else if (value.toString() == "BPC DUTY VEHICLE") {
       _currentLTCorBPC = "BPC";
       reportTo.text = "STANDBY TILL FURTHER INSTRUCTIONS";
+      _timeDepart.text = "0730";
+      _timeRTU.text = "0729";
+    }
+    else if (value.toString() == "DSP") {
+      _currentLTCorBPC = "BPC";
+      reportTo.text = "DSP Detail";
     }
     else if (value.toString() == "LTC DUTY VEHICLE") {
       _currentLTCorBPC = "LTC";
       reportTo.text = "STANDBY TILL FURTHER INSTRUCTIONS";
+      _timeDepart.text = "0730";
+      _timeRTU.text = "0729";
+    }
+    else if (value.toString() == "MO VEHICLE") {
+      _currentLTCorBPC = "LTC";
+      reportTo.text = "STANDBY TILL FURTHER INSTRUCTIONS";
+      _timeDepart.text = "0730";
+      _timeRTU.text = "0729";
     }
     else{
       _currentLTCorBPC = "LTC";

@@ -1519,7 +1519,7 @@ class DatabaseHandler {
     print("Query String: " + querystring2);
     var results2 = await connection.query(querystring2);
     print("Database Result: " + results2.toString());
-    var phoneNumber = "XXXXX" + results2.toString().substring(2, results.toString().length - 2);
+    var phoneNumber = results2.toString().substring(2, results2.toString().length - 2);
 
     var querystring3 =
         'INSERT INTO detailing ("UUID", "dateOfIndent", "dateOfDetail", "typeOfDetail", "LTCorBPC", "rank", "fullName", "maskedNRIC", "phoneNumber", "carPlate", "additionalPlate", "reportTo", "vehicleCommander", "timeDepart", "timeRTU") '
