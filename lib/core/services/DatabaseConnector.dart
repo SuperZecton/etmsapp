@@ -72,6 +72,9 @@ class DatabaseHandler {
       String inUse,
       String vcPackage,
       String chatID) async {
+    dateOfEnlistment = dateOfEnlistment.split("/")[0].padLeft(2, "0") + "/" + dateOfEnlistment.split("/")[1].padLeft(2, "0") + "/" + dateOfEnlistment.split("/")[2];
+    dateOfORD = dateOfORD.split("/")[0].padLeft(2, "0") + "/" + dateOfORD.split("/")[1].padLeft(2, "0") + "/" + dateOfORD.split("/")[2];
+    dateOfPostIn = dateOfPostIn.split("/")[0].padLeft(2, "0") + "/" + dateOfPostIn.split("/")[1].padLeft(2, "0") + "/" + dateOfPostIn.split("/")[2];
     var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
         username: "LTCAppUser", password: "LTCuser123");
     await connection.open();
