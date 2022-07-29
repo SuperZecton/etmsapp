@@ -72,6 +72,9 @@ class DatabaseHandler {
       String inUse,
       String vcPackage,
       String chatID) async {
+    dateOfEnlistment = dateOfEnlistment.split("/")[0].padLeft(2, "0") + "/" + dateOfEnlistment.split("/")[1].padLeft(2, "0") + "/" + dateOfEnlistment.split("/")[2];
+    dateOfORD = dateOfORD.split("/")[0].padLeft(2, "0") + "/" + dateOfORD.split("/")[1].padLeft(2, "0") + "/" + dateOfORD.split("/")[2];
+    dateOfPostIn = dateOfPostIn.split("/")[0].padLeft(2, "0") + "/" + dateOfPostIn.split("/")[1].padLeft(2, "0") + "/" + dateOfPostIn.split("/")[2];
     var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
         username: "LTCAppUser", password: "LTCuser123");
     await connection.open();
@@ -803,6 +806,31 @@ class DatabaseHandler {
     return _returnList;
   }
 
+  Future<List<String>> getAllUsers() async {
+    var finallist = [];
+    var count = 0;
+    var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
+        username: "LTCAppUser", password: "LTCuser123");
+    await connection.open();
+    var querystring =
+        'SELECT "rank", "fullName" FROM users;';
+    print("Query String: " + querystring);
+    var results = await connection.query(querystring);
+    print("Database Result: " + results.toString());
+    results.forEach((rawRow) {
+      var row = rawRow.toString().substring(1, rawRow.toString().length - 1);
+      var innerList = row.split(", ");
+      var rankName = innerList[0] + " " + innerList[1];
+      finallist.add(rankName);
+      count = count + 1;
+    });
+    print("There are " + count.toString() + " Drivers");
+    List<String> _returnList =
+    finallist.map((string) => string.toString()).toList();
+    connection.close();
+    return _returnList;
+  }
+
   Future<String> checkOngoingTrips(String username) async {
     var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
         username: "LTCAppUser", password: "LTCuser123");
@@ -1474,5 +1502,120 @@ class DatabaseHandler {
     print("Database Result: " + results2.toString());
     connection.close();
   }
+
+  Future<void> createDetail(String dateOfDetail, String typeOfDetail, String LTCorBPC,
+      String rank, String fullName, String carPlate, String additionalPlate,
+      String reportTo, String vehicleCommander, String timeDepart, String timeRTU) async {
+    var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
+        username: "LTCAppUser", password: "LTCuser123");
+    await connection.open();
+
+    /// Masked NRIC
+    var querystring = 'SELECT "nricLast4Digits" FROM users WHERE "fullName" = '"'" + fullName + "';";
+    print("Query String: " + querystring);
+    var results = await connection.query(querystring);
+    print("Database Result: " + results.toString());
+    var maskedNRIC = "XXXXX" + results.toString().substring(2, results.toString().length - 2);
+
+    /// Phone Number
+    var querystring2 = 'SELECT "handphoneNumber" FROM users WHERE "fullName" = '"'" + fullName + "';";
+    print("Query String: " + querystring2);
+    var results2 = await connection.query(querystring2);
+    print("Database Result: " + results2.toString());
+    var phoneNumber = results2.toString().substring(2, results2.toString().length - 2);
+
+    var querystring3 =
+        'INSERT INTO detailing ("UUID", "dateOfIndent", "dateOfDetail", "typeOfDetail", "LTCorBPC", "rank", "fullName", "maskedNRIC", "phoneNumber", "carPlate", "additionalPlate", "reportTo", "vehicleCommander", "timeDepart", "timeRTU") '
+            "VALUES (uuid_generate_v4(),'" +
+            dt.getCurrentDate() +
+            "','" +
+            dateOfDetail +
+            "','" +
+            typeOfDetail +
+            "','" +
+            LTCorBPC +
+            "','" +
+            rank +
+            "','" +
+            fullName +
+            "','" +
+            maskedNRIC +
+            "','" +
+            phoneNumber +
+            "','" +
+            carPlate +
+            "','" +
+            additionalPlate +
+            "','" +
+            reportTo +
+            "','" +
+            vehicleCommander +
+            "','" +
+            timeDepart +
+            "','" +
+            timeRTU +
+            "');";
+    print("Query String: " + querystring3);
+    var results3 = await connection.query(querystring3);
+    print("Database Result: " + results3.toString());
+    connection.close();
+  }
+
+  Future<String> getDetailsInLTC() async {
+    var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
+        username: "LTCAppUser", password: "LTCuser123");
+    await connection.open();
+    var finalString = "0";
+    var querystring =
+        'SELECT "rank" FROM detailing WHERE "dateOfDetail"'" = '" +
+            dt.getCurrentDate() +
+            "' AND " +
+            '"LTCorBPC" = ' +
+            "'LTC';";
+    print("Query String: " + querystring);
+    var results = await connection.query(querystring);
+    print("Database Result: " + results.toString());
+    if (results.toString() == "[]" || results.toString() == "[[]]") {
+      finalString = "0";
+    }
+    else {
+      var count = 0;
+      results.forEach((row) {
+        count = count + 1;
+      });
+      finalString = count.toString();
+    }
+    connection.close();
+    return finalString;
+  }
+
+  Future<String> getDetailsInBPC() async {
+    var connection = new PostgreSQLConnection("116.89.31.147", 5667, "LTC",
+        username: "LTCAppUser", password: "LTCuser123");
+    await connection.open();
+    var finalString = "0";
+    var querystring =
+        'SELECT "rank" FROM detailing WHERE "dateOfDetail"'" = '" +
+            dt.getCurrentDate() +
+            "' AND " +
+            '"LTCorBPC" = ' +
+            "'BPC';";
+    print("Query String: " + querystring);
+    var results = await connection.query(querystring);
+    print("Database Result: " + results.toString());
+    if (results.toString() == "[]" || results.toString() == "[[]]") {
+      finalString = "0";
+    }
+    else {
+      var count = 0;
+      results.forEach((row) {
+        count = count + 1;
+      });
+      finalString = count.toString();
+    }
+    connection.close();
+    return finalString;
+  }
+
 
 }

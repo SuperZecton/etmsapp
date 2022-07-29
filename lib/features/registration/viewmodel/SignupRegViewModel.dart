@@ -112,9 +112,9 @@ class RegistrationViewModel extends BaseViewModel {
             '0',
             _class3MileageController.text, //class 3 mileage
             _class4MileageController.text, //class 4 mileage
-            '0',
-            '0',
-            '0',
+            '',
+            'false',
+            'false',
             '');
         showDialog(
             context: context,

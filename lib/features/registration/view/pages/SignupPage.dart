@@ -172,7 +172,7 @@ class SignUpPage extends StatelessWidget {
                               child: RegistrationTextField(
                                 "Class 3 Mileage",
                                 Icons.assessment,
-                                model.nricController,
+                                model.class3MileageController,
                                 validationAction: (String? input) =>
                                     input!.isValidNumber()
                                         ? null
@@ -183,7 +183,7 @@ class SignUpPage extends StatelessWidget {
                               child: RegistrationTextField(
                                 "Class 4 Mileage",
                                 Icons.assessment,
-                                model.nricController,
+                                model.class4MileageController,
                                 validationAction: (String? input) =>
                                     input!.isValidNumber()
                                         ? null
